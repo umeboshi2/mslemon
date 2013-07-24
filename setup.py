@@ -3,6 +3,11 @@ import sys, os
 
 version = '0.0'
 
+requires = [
+    'trumpet>=0.1.1dev', # pull from github
+    ]
+
+
 setup(name='mslemon',
       version=version,
       description="Miss Lemon",
@@ -17,9 +22,11 @@ PhoneSlips and NoteTaking""",
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          # -*- Extra requirements: -*-
-      ],
+      install_requires=requires,
+      dependency_links=[
+        'https://github.com/umeboshi2/trumpet/archive/master.tar.gz#egg=trumpet-0.1.1dev',
+        'https://github.com/umeboshi2/hubby/archive/master.tar.gz#egg=hubby-0.0dev',
+        ],
       entry_points="""
       # -*- Entry points: -*-
       """,
