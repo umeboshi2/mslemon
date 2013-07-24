@@ -29,5 +29,11 @@ PhoneSlips and NoteTaking""",
         ],
       entry_points="""
       # -*- Entry points: -*-
+      [paste.app_factory]
+      main = mslemon:main
+      [fanstatic.libraries]
+      mslemon_lib = mslemon.resources:library
+      mslemon_css = mslemon.resources:css
+      mslemon_js = mslemon.resources:js
       """,
       )

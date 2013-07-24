@@ -1,0 +1,76 @@
+from datetime import datetime, date
+
+from docutils.core import publish_parts
+
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound
+from pyramid.security import authenticated_userid
+from pyramid.renderers import render
+from pyramid.response import Response
+
+import colander
+import deform
+
+from trumpet.views.menus import BaseMenu
+from trumpet.views.base import BaseViewer
+
+        
+class MainViewer(BaseViewer):
+    def __init__(self, request):
+        super(MainViewer, self).__init__(request)
+        self.route = self.request.matched_route.name
+        if self.route == 'home':
+            self.main_view()
+            return
+        if self.route == 'main':
+            self.context = self.request.matchdict['context']
+
+
+        # make dispatch table
+        self._cntxt_meth = dict(
+            main=self.main_view,
+            viewevent=self.view_event,
+            viewvenue=self.view_venue,
+            viewdayevents=self.view_events_for_day,
+            exportevent=self.export_event,
+            )
+
+        if self.context in self._cntxt_meth:
+            self._cntxt_meth[self.context]()
+        else:
+            msg = 'Undefined Context: %s' % self.context
+            self.layout.content = '<b>%s</b>' % msg
+
+            
+    def main_view(self):
+        #template = 'goout:templates/main-page.mako'
+        #env = dict(dates=dates, dc=dc, dformat=dformat)
+        #content = render(template, env, request=self.request)
+        content = "Main Page"
+        self.layout.content = content
+        self.layout.subheader = 'Ms. Lemon'
+        # debug below
+        #self.layout.footer = str(dir(self.layout.resources))
+        #from mslemon.resources import mainscreen
+        #mainscreen.need()
+        self.layout.resources.mainscreen.need()
+        
+    def view_event(self):
+        pass
+    
+        
+    def export_event(self):
+        pass
+    
+        
+    
+    def view_venue(self):
+        pass
+
+    def view_events_for_day(self):
+        pass
+    
+
+
+        
+
+
