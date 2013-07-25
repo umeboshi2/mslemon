@@ -12,13 +12,14 @@ from trumpet.models.base import DBSession
 from trumpet.models.sitecontent import SiteImage
 
 from trumpet.views.base import NotFound
-from trumpet.views.base import BaseViewer, make_main_menu
+#from trumpet.views.base import BaseViewer, make_main_menu
 from trumpet.views.menus import BaseMenu
 
 import colander
 import deform
 
 
+from mslemon.views.base import AdminViewer, make_main_menu
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
@@ -36,7 +37,7 @@ def prepare_main_data(request):
     layout.ctx_menu = menu
 
 
-class MainViewer(BaseViewer):
+class MainViewer(AdminViewer):
     def __init__(self, request):
         super(MainViewer, self).__init__(request)
         prepare_main_data(request)

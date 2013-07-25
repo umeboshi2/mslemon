@@ -53,7 +53,13 @@ class MainViewer(BaseViewer):
         content = "Main Page"
         self.layout.content = content
         self.layout.subheader = 'Ms. Lemon'
-        #self.layout.resources.mainscreen.need()
+        self.layout.resources.maincalendar.need()
+        self.layout.resources.cornsilk.need()
+        
+        template = 'mslemon:templates/mainview-calendar.mako'
+        env = {}
+        content = self.render(template, env)
+        self.layout.content = content
         
     def view_event(self):
         pass

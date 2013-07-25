@@ -58,3 +58,9 @@ class BaseViewer(TrumpetViewer):
             self.css.need()
         return super(BaseViewer, self).__call__()
 
+
+class AdminViewer(BaseViewer):
+    def __init__(self, request):
+        super(AdminViewer, self).__init__(request)
+        self.css = self.layout.resources.admin_screen
+        

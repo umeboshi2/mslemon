@@ -4,11 +4,10 @@ from sqlalchemy import engine_from_config
 from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
-from trumpet.config.admin import configure_admin
 
 from mslemon.security import make_authn_authz_policies, authenticate
 from mslemon.models.base import DBSession, Base
-
+from mslemon.config.admin import configure_admin
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -90,6 +89,14 @@ def main(global_config, **settings):
                     layout='base')
     ##################################
 
+    ##################################
+    # Misc. Views
+    ##################################
+    config.add_route('blob', '/blob/{filetype}/{id}')
+    config.add_view('mslemon.views.blob.BlobViewer', route_name='blob',
+                    renderer='string',
+                    layout='base')
+    
     # wrap app with Fanstatic
     app = config.make_wsgi_app()
     from fanstatic import Fanstatic

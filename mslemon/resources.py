@@ -13,10 +13,12 @@ js = Library('mslemon_js', 'static/js')
 favicon = Resource(library, 'favicon.ico')
 
 main_screen = Resource(css, 'mainscreen.css')
+admin_screen = Resource(css, 'adminscreen.css')
 
 class StaticResources(TrumpetResources):
     main_screen = main_screen
-
+    admin_screen = admin_screen
+    
     # override trumpet favicon
     favicon = favicon
     

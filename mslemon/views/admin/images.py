@@ -13,8 +13,9 @@ from trumpet.resources import MemoryTmpStore
 from trumpet.managers.admin.images import ImageManager
 
 from trumpet.views.base import NotFound
-from trumpet.views.base import BaseViewer, make_main_menu
 from trumpet.views.menus import BaseMenu
+
+from mslemon.views.base import AdminViewer, make_main_menu
 
 import colander
 import deform
@@ -48,7 +49,7 @@ class AddImageSchema(colander.Schema):
     
     
         
-class ImageManagementViewer(BaseViewer):
+class ImageManagementViewer(AdminViewer):
     def __init__(self, request):
         super(ImageManagementViewer, self).__init__(request)
         prepare_main_data(self.request)

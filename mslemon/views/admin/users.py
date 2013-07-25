@@ -16,13 +16,13 @@ from trumpet.models.usergroup import UserGroup
 
 
 from trumpet.views.base import NotFound
-from trumpet.views.base import BaseViewer, make_main_menu
 from trumpet.views.menus import BaseMenu
 
 from trumpet.managers.admin.users import UserManager
 
 from trumpet.security import encrypt_password
 
+from mslemon.views.base import AdminViewer, make_main_menu
 
 import colander
 import deform
@@ -80,7 +80,7 @@ class AddtoGroupSchema(colander.Schema):
         )
 
     
-class UserManagementViewer(BaseViewer):
+class UserManagementViewer(AdminViewer):
     def __init__(self, request):
         super(UserManagementViewer, self).__init__(request)
         prepare_main_data(self.request)
