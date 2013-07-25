@@ -48,10 +48,6 @@ class MainViewer(BaseViewer):
         content = "Main Page"
         self.layout.content = content
         self.layout.subheader = 'Ms. Lemon'
-        # debug below
-        #self.layout.footer = str(dir(self.layout.resources))
-        #from mslemon.resources import mainscreen
-        #mainscreen.need()
         self.layout.resources.mainscreen.need()
         
     def view_event(self):

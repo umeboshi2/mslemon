@@ -10,4 +10,3 @@ library = Library('mslemon_lib', 'static')
 css = Library('mslemon_css', 'static/css')
 js = Library('mslemon_js', 'static/js')
 
-mainscreen = Resource(css, 'mainscreen.css', depends=[fc_css])
