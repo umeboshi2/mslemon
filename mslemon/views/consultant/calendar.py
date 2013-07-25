@@ -33,8 +33,8 @@ class AddEventSchema(colander.Schema):
 def prepare_main_layout(request):
     prepare_base_layout(request)
     layout = request.layout_manager.layout
-    layout.title = 'Seneca'
-    layout.header = 'Seneca'
+    layout.title = 'Calendar'
+    layout.header = 'Calendar'
     layout.subheader = 'Calendar Area'
     
 

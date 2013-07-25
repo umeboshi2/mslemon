@@ -4,7 +4,8 @@ from trumpet.config.base import add_view
 viewers = dict(contacts='ContactViewer',
                clients='ClientViewer',
                calendar='CalendarViewer',
-               tickets='TicketViewer')
+               tickets='TicketViewer',
+               phone='PhoneCallViewer',)
 
 def configure_consultant(config, rootpath='/consult', permission='consultant'):
     config.add_route('consult', rootpath)
@@ -13,7 +14,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     renderer=basetemplate,
                     layout='base',
                     permission=permission)
-    for route in ['contacts', 'clients', 'calendar', 'tickets']:
+    for route in ['contacts', 'clients', 'calendar', 'tickets', 'phone']:
         route_name = 'consult_%s' % route
         config.add_route(route_name,
                          '%s/%s/{context}/{id}' % (rootpath, route))

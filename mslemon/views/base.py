@@ -42,9 +42,8 @@ def make_ctx_menu(request):
         menu.append_new_entry('Sign In', login_url)
     if 'user' in request.session:
         user = request.session['user']
-        if 'admin' in user.groups:
-            url = request.route_url('admin', context='main')
-            menu.append_new_entry('admin', url)
+        url = request.route_url('consult')
+        menu.append_new_entry('Consultant', url)
     return menu
     
 class BaseViewer(TrumpetViewer):

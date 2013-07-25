@@ -124,6 +124,29 @@ class TicketCurrentStatus(Base):
     created = Column(DateTime)
     last_change = Column(DateTime)
     status = Column(Integer, ForeignKey('ticket_status_types.id'))
+
+
+
+class PhoneCall(Base):
+    __tablename__ = 'phone_calls'
+    id = Column(Integer, primary_key=True)
+    caller = Column(UnicodeText)
+    received = Column(DateTime)
+    text = Column(UnicodeText)
+    callee = Column(Integer, ForeignKey('users.id'), nullable=False)
+    number = Column(UnicodeText)
+
+class ContactCall(Base):
+    __tablename__ = 'contact_phone_calls'
+    contact_id = Column(Integer, ForeignKey('contacts.id'), primary_key=True)
+    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+
+class ClientCall(Base):
+    __tablename__ = 'client_phone_calls'
+    client_id = Column(Integer, ForeignKey('clients.id'), primary_key=True)
+    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    
+    
     
 
 # relationships    
