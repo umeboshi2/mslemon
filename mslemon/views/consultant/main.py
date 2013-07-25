@@ -1,7 +1,7 @@
-from trumpet.views.base import prepare_layout
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import prepare_layout
+from mslemon.views.base import BaseViewer
 
-from trumpet.views.consultant.base import prepare_base_layout
+from mslemon.views.consultant.base import prepare_base_layout
 
 def prepare_main_layout(request):
     prepare_base_layout(request)
@@ -19,7 +19,7 @@ class MainViewer(BaseViewer):
         prepare_main_layout(self.request)
         self.layout.resources.fancybox.need()
         self.layout.resources.fullcalendar.need()
-        template = 'trumpet:templates/consult/main-view.mako'
+        template = 'mslemon:templates/consult/main-view.mako'
         env = dict()
         content = self.render(template, env)
         from haberdashery.resources import maincalendar

@@ -1,15 +1,15 @@
 import colander
 import deform
 
-from trumpet.views.base import prepare_layout
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import prepare_layout
+from mslemon.views.base import BaseViewer
 from trumpet.views.base import render_rst
 
-from trumpet.managers.consultant.tickets import TicketManager
-from trumpet.managers.consultant.clients import ClientManager
-from trumpet.managers.consultant.contacts import ContactManager
+from mslemon.managers.consultant.tickets import TicketManager
+from mslemon.managers.consultant.clients import ClientManager
+from mslemon.managers.consultant.contacts import ContactManager
 
-from trumpet.views.consultant.base import prepare_base_layout
+from mslemon.views.consultant.base import prepare_base_layout
 
 
 def deferred_choices(node, kw):
@@ -85,7 +85,7 @@ class TicketViewer(BaseViewer):
     def list_tickets(self):
         tickets = self.tickets.all()
         env = dict(tickets=tickets, tm=self.tickets)
-        template = 'trumpet:templates/consult/listtickets.mako'
+        template = 'mslemon:templates/consult/listtickets.mako'
         self.layout.content = self.render(template, env)
         
 
@@ -118,7 +118,7 @@ class TicketViewer(BaseViewer):
             
                            
     def view_ticket(self):
-        template = 'trumpet:templates/consult/viewticket.mako'
+        template = 'mslemon:templates/consult/viewticket.mako'
         id = int(self.request.matchdict['id'])
         ticket = self.tickets.query().get(id)
         env = dict(ticket=ticket, tm=self.tickets, rst=render_rst)
@@ -153,7 +153,7 @@ class TicketViewer(BaseViewer):
         self.layout.subheader = 'Add a Ticket'
 
     def ticket_calendar(self):
-        template = 'trumpet:templates/consult/calendar-main.mako'
+        template = 'mslemon:templates/consult/calendar-main.mako'
         env = dict()
         self.layout.content = self.render(template, env)
         from haberdashery.resources import ticket_calendar

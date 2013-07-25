@@ -8,6 +8,7 @@ from trumpet.config.base import basetemplate, configure_base_layout
 from mslemon.security import make_authn_authz_policies, authenticate
 from mslemon.models.base import DBSession, Base
 from mslemon.config.admin import configure_admin
+from mslemon.config.main import configure_consultant
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -27,9 +28,9 @@ def main(global_config, **settings):
     # bind objects to engine
     Base.metadata.bind = engine
     if settings.get('db.populate', False):
+        from mslemon.models.main import populate
         Base.metadata.create_all(engine)
         #initialize_sql(engine)
-        from trumpet.models.usergroup import populate
         populate()
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
@@ -38,6 +39,7 @@ def main(global_config, **settings):
     authn_policy, authz_policy = make_authn_authz_policies(
         secret, cookie, callback=authenticate,
         timeout=timeout)
+    # create config object
     config = Configurator(settings=settings,
                           root_factory=root_factory,
                           request_factory=request_factory,
@@ -48,6 +50,7 @@ def main(global_config, **settings):
 
     configure_base_layout(config)
     configure_admin(config)
+    configure_consultant(config)
     config.add_static_view('static',
                            'mslemon:static', cache_max_age=3600)
     ##################################

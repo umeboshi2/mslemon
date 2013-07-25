@@ -9,13 +9,13 @@ from sqlalchemy.exc import IntegrityError
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 
-from trumpet.views.base import prepare_layout
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import prepare_layout
+from mslemon.views.base import BaseViewer
 
 
-from trumpet.managers.consultant.contacts import ContactManager
+from mslemon.managers.consultant.contacts import ContactManager
 
-from trumpet.views.consultant.base import prepare_base_layout
+from mslemon.views.consultant.base import prepare_base_layout
 
 phone_re = '\((?P<areacode>[1-9][0-9][0-9])\)-(?P<prefix>[0-9][0-9][0-9])-(?P<suffix>[0-9][0-9][0-9][0-9])'
 letters = string.ascii_letters[26:]
@@ -42,7 +42,7 @@ class FragViewer(BaseViewer):
         q = q.order_by(Contact.lastname)
         contacts = q.all()
         env = dict(contacts=contacts)
-        template = 'trumpet:templates/consult/contact-list.mako'
+        template = 'mslemon:templates/consult/contact-list.mako'
         self.response = self.render(template, env)
         
         

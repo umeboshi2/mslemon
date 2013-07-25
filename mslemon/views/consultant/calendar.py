@@ -1,14 +1,14 @@
 import colander
 import deform
 
-from trumpet.views.base import prepare_layout
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import prepare_layout
+from mslemon.views.base import BaseViewer
 
 
-from trumpet.managers.consultant.clients import ClientManager
-from trumpet.managers.consultant.contacts import ContactManager
+from mslemon.managers.consultant.clients import ClientManager
+from mslemon.managers.consultant.contacts import ContactManager
 
-from trumpet.views.consultant.base import prepare_base_layout
+from mslemon.views.consultant.base import prepare_base_layout
 
 
 def deferred_choices(node, kw):
@@ -57,7 +57,7 @@ class CalendarViewer(BaseViewer):
         self.dispatch()
 
     def list_events(self):
-        template = 'trumpet:templates/consult/calendar-main.mako'
+        template = 'mslemon:templates/consult/calendar-main.mako'
         env = dict()
         self.layout.content = self.render(template, env)
         from haberdashery.resources import maincalendar

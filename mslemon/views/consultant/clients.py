@@ -1,14 +1,14 @@
 import colander
 import deform
 
-from trumpet.views.base import prepare_layout
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import prepare_layout
+from mslemon.views.base import BaseViewer
 
 
-from trumpet.managers.consultant.clients import ClientManager
-from trumpet.managers.consultant.contacts import ContactManager
+from mslemon.managers.consultant.clients import ClientManager
+from mslemon.managers.consultant.contacts import ContactManager
 
-from trumpet.views.consultant.base import prepare_base_layout
+from mslemon.views.consultant.base import prepare_base_layout
 
 
 def deferred_choices(node, kw):
@@ -74,7 +74,7 @@ class ClientViewer(BaseViewer):
     def list_clients(self):
         clients = self.clients.all()
         env = dict(clients=clients)
-        template = 'trumpet:templates/consult/listclients.mako'
+        template = 'mslemon:templates/consult/listclients.mako'
         self.layout.content = self.render(template, env)
         
     def _make_form(self):

@@ -9,13 +9,13 @@ from sqlalchemy.exc import IntegrityError
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 
-from trumpet.views.base import prepare_layout
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import prepare_layout
+from mslemon.views.base import BaseViewer
 
 
-from trumpet.managers.consultant.contacts import ContactManager
+from mslemon.managers.consultant.contacts import ContactManager
 
-from trumpet.views.consultant.base import prepare_base_layout
+from mslemon.views.consultant.base import prepare_base_layout
 from haberdashery.resources import list_contacts
 
 phone_re = '\((?P<areacode>[1-9][0-9][0-9])\)-(?P<prefix>[0-9][0-9][0-9])-(?P<suffix>[0-9][0-9][0-9][0-9])'
@@ -125,7 +125,7 @@ class ContactViewer(BaseViewer):
     def list_contacts(self):
         contacts = self.contacts.all()
         env = dict(contacts=contacts, letters=letters)
-        template = 'trumpet:templates/consult/listcontacts.mako'
+        template = 'mslemon:templates/consult/listcontacts.mako'
         list_contacts.need()
         self.layout.content = self.render(template, env)
         
@@ -221,7 +221,7 @@ class ContactViewer(BaseViewer):
         id = self.request.matchdict['id']
         c = self.contacts.get(id)
         env = dict(c=c)
-        template = 'trumpet:templates/consult/viewcontact.mako'
+        template = 'mslemon:templates/consult/viewcontact.mako'
         self.layout.content = self.render(template, env)
 
     def export_contact(self):
@@ -249,7 +249,7 @@ class ContactViewer(BaseViewer):
 
     def import_contact(self):
         env = dict()
-        template = 'trumpet:templates/consult/importcontacts.mako'
+        template = 'mslemon:templates/consult/importcontacts.mako'
         self.layout.content = self.render(template, env)
         
 

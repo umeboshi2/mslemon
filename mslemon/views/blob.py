@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pyramid.response import Response
 
-from trumpet.models.sitecontent import SiteImage
+from mslemon.models.sitecontent import SiteImage
 
 
 class BlobViewer(object):

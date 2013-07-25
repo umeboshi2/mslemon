@@ -1,6 +1,6 @@
-from trumpet.views.base import BaseViewer
+from mslemon.views.base import BaseViewer
 
-from trumpet.managers.consultant.tickets import TicketManager
+from mslemon.managers.consultant.tickets import TicketManager
 
 
 class JSONViewer(BaseViewer):

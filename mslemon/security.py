@@ -6,8 +6,7 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from sqlalchemy.orm.exc import NoResultFound
 
-from trumpet.models.base import DBSession
-from trumpet.models.usergroup import User, Password
+from mslemon.models.usergroup import User, Password
 
 
 def make_salt(id=5, length=10):
@@ -34,7 +33,7 @@ def check_password(encrypted, password):
 
 def authenticate(userid, request):
     print "called authenticate", request.params
-    dbsession = DBSession()
+    dbsession = request.db
     user = None
     try:
         user = dbsession.query(User).filter_by(username=userid).one()

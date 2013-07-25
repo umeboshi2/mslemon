@@ -10,12 +10,12 @@ from pyramid.renderers import render
 
 from trumpet.resources import MemoryTmpStore
 
-from trumpet.managers.admin.images import ImageManager
 
 from trumpet.views.base import NotFound
 from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import AdminViewer, make_main_menu
+from mslemon.managers.admin.images import ImageManager
 
 import colander
 import deform
