@@ -48,7 +48,7 @@ class Contact(Base):
     lastname = Column(Unicode(50))
     email = Column(Unicode(50), unique=True)
     phone = Column(Unicode(20))
-    users = relationship('User')
+    #users = relationship('User')
     
     def __init__(self, firstname='', lastname='', email='', phone=''):
         if firstname:

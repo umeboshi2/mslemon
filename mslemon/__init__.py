@@ -4,6 +4,7 @@ from sqlalchemy import engine_from_config
 from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
+from trumpet.config.admin import configure_admin
 
 from mslemon.security import make_authn_authz_policies, authenticate
 from mslemon.models.base import DBSession, Base
@@ -28,7 +29,9 @@ def main(global_config, **settings):
     Base.metadata.bind = engine
     if settings.get('db.populate', False):
         Base.metadata.create_all(engine)
-        initialize_sql(engine)
+        #initialize_sql(engine)
+        from trumpet.models.usergroup import populate
+        populate()
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
     cookie = settings['%s.authn.cookie' % appname]
@@ -45,6 +48,7 @@ def main(global_config, **settings):
     config.set_session_factory(session_factory)
 
     configure_base_layout(config)
+    configure_admin(config)
     config.add_static_view('static',
                            'mslemon:static', cache_max_age=3600)
     ##################################
@@ -63,15 +67,16 @@ def main(global_config, **settings):
     ##################################
     # Login Views
     ##################################
+    login_viewer = 'mslemon.views.login.LoginViewer'
     config.add_route('login', '/login')
-    config.add_view('trumpet.views.login.LoginViewer',
+    config.add_view(login_viewer,
                     renderer=basetemplate,
                     layout='base',
                     route_name='login')
     
     
     config.add_route('logout', '/logout')
-    config.add_view('trumpet.views.login.LoginViewer',
+    config.add_view(login_viewer,
                     renderer=basetemplate,
                     layout='base',
                     route_name='logout')
@@ -79,9 +84,9 @@ def main(global_config, **settings):
     
     # Handle HTTPForbidden errors with a
     # redirect to a login page.
-    config.add_view('trumpet.views.login.LoginViewer',
+    config.add_view(login_viewer,
                     context='pyramid.httpexceptions.HTTPForbidden',
-                    renderer='trumpet:templates/base.mako',
+                    renderer=basetemplate,
                     layout='base')
     ##################################
 

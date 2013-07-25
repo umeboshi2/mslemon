@@ -13,17 +13,22 @@ import deform
 from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import BaseViewer
-        
+from mslemon.views.base import make_main_menu, make_ctx_menu
+
 class MainViewer(BaseViewer):
     def __init__(self, request):
         super(MainViewer, self).__init__(request)
         self.route = self.request.matched_route.name
+        self.layout.main_menu = make_main_menu(self.request).render()
+        self.layout.ctx_menu = make_ctx_menu(self.request).output()
+
+        # begin dispatch
         if self.route == 'home':
             self.main_view()
             return
         if self.route == 'main':
             self.context = self.request.matchdict['context']
-
+        
 
         # make dispatch table
         self._cntxt_meth = dict(
