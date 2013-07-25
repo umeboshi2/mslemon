@@ -11,8 +11,8 @@ import colander
 import deform
 
 from trumpet.views.menus import BaseMenu
-from trumpet.views.base import BaseViewer
 
+from mslemon.views.base import BaseViewer
         
 class MainViewer(BaseViewer):
     def __init__(self, request):
@@ -48,7 +48,7 @@ class MainViewer(BaseViewer):
         content = "Main Page"
         self.layout.content = content
         self.layout.subheader = 'Ms. Lemon'
-        self.layout.resources.mainscreen.need()
+        #self.layout.resources.mainscreen.need()
         
     def view_event(self):
         pass

@@ -4,8 +4,9 @@ from sqlalchemy import engine_from_config
 from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
-from trumpet.models.base import DBSession, Base
+
 from mslemon.security import make_authn_authz_policies, authenticate
+from mslemon.models.base import DBSession, Base
 
 
 def main(global_config, **settings):
@@ -42,27 +43,23 @@ def main(global_config, **settings):
                           authorization_policy=authz_policy)
     session_factory = session_factory_from_settings(settings)
     config.set_session_factory(session_factory)
+
     configure_base_layout(config)
-    #config.add_static_view('staic',
-    #                       'goout:static', cache_max_age=3600)
-    #configure_base_layout(config)
-    #configure_help_layout(config)
-    # home route
+    config.add_static_view('static',
+                           'mslemon:static', cache_max_age=3600)
+    ##################################
+    # Main Views
+    ##################################
     config.add_route('home', '/')
     config.add_view('mslemon.views.main.MainViewer',
                     layout='base',
                     renderer=basetemplate,
                     route_name='home')
-    #config.add_view('goout.views.main.MainViewer',
-    #                layout='base',
-    #                renderer=basetemplate,
-    #                route_name='home')
-    #config.add_route('main', '/main/{context}/{id}')
-    #config.add_view('goout.views.main.MainViewer',
-    #                renderer=basetemplate,
-    #                layout='base',
-    #                route_name='main')
-    
+    config.add_route('main', '/main/{context}/{id}')
+    config.add_view('mslemon.views.main.MainViewer',
+                    layout='base',
+                    renderer=basetemplate,
+                    route_name='main')
     ##################################
     # Login Views
     ##################################

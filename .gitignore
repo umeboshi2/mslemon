@@ -41,6 +41,6 @@ nosetests.xml
 
 # my development cruft
 .sass-cache
-seneca.sqlite
+mslemon.sqlite
 data/
 
