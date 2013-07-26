@@ -11,6 +11,8 @@ from mslemon.managers.consultant.contacts import ContactManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 
+from mslemon.models.usergroup import User
+
 
 def deferred_choices(node, kw):
     choices = kw['choices']
@@ -21,38 +23,29 @@ def make_select_widget(choices):
 
 
 class TakePhoneCallSchema(colander.Schema):
-    pass
-
-
-class OpenTicketSchema(colander.Schema):
-    title = colander.SchemaNode(
+    caller = colander.SchemaNode(
         colander.String(),
-        title='Title',
+        title='Caller',
         )
-    client = colander.SchemaNode(
+    callee = colander.SchemaNode(
         colander.Integer(),
-        title='Client',
+        title='Called for',
         widget=deferred_choices,
         )
-    description = colander.SchemaNode(
+    number = colander.SchemaNode(
         colander.String(),
-        title='Description',
+        title='Call Back Number',
+        widget=deform.widget.TextInputWidget(mask='(999)-999-9999',
+                                      mask_placeholder='0'),
+        )
+    text = colander.SchemaNode(
+        colander.String(),
+        title='Text',
         widget=deform.widget.TextAreaWidget(rows=10, cols=60),
         missing=colander.null,
         )
-
-class UpdateTicketSchema(colander.Schema):
-    status = colander.SchemaNode(
-        colander.Integer(),
-        title='New Status',
-        widget=deferred_choices,
-        )
-    reason = colander.SchemaNode(
-        colander.String(),
-        title='Reason',
-        widget=deform.widget.TextAreaWidget(rows=10, cols=60),
-        )
     
+
 
 def prepare_main_layout(request):
     prepare_base_layout(request)
@@ -83,7 +76,15 @@ class PhoneCallViewer(BaseViewer):
         self.dispatch()
 
     def take_call(self):
-        self.layout.content = 'Take a phone call.'
+        schema = TakePhoneCallSchema()
+        users = self.request.db.query(User).all()
+        choices = [(u.id, u.username) for u in users]
+        schema['callee'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        rendered = form.render()
+        self.layout.content = rendered
+        
     
     def list_calls(self):
         self.layout.content = 'List the calls here.'
