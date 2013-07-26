@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import colander
 import deform
 
@@ -12,6 +14,7 @@ from mslemon.managers.consultant.contacts import ContactManager
 from mslemon.views.consultant.base import prepare_base_layout
 
 from mslemon.models.usergroup import User
+from mslemon.managers.consultant.phone import PhoneCallManager
 
 
 def deferred_choices(node, kw):
@@ -44,6 +47,11 @@ class TakePhoneCallSchema(colander.Schema):
         widget=deform.widget.TextAreaWidget(rows=10, cols=60),
         missing=colander.null,
         )
+    received = colander.SchemaNode(
+        colander.DateTime(),
+        title='Call received',
+        widget=deform.widget.DateTimeInputWidget(),
+        )
     
 
 
@@ -59,11 +67,13 @@ class PhoneCallViewer(BaseViewer):
     def __init__(self, request):
         super(PhoneCallViewer, self).__init__(request)
         prepare_main_layout(self.request)
+        self.phonecalls = PhoneCallManager(self.request.db)
         
         self._dispatch_table = dict(
             list=self.list_calls,
             add=self.take_call,
-            phonecal=self.phone_calendar,)
+            phonecal=self.phone_calendar,
+            viewcall=self.view_call,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -75,6 +85,22 @@ class PhoneCallViewer(BaseViewer):
         
         self.dispatch()
 
+    def _take_call_form_submitted(self, form):
+        controls = self.request.POST.items()
+        self.layout.subheader = "Phone call all submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        fields = ['caller', 'callee', 'text', 'received', 'number']
+        fields = ['received', 'caller', 'number', 'text', 'callee']
+        values = tuple([data[f] for f in fields])
+        pcall = self.phonecalls.new_call(*values)
+        self.layout.subheader = "Phone Call taken: %s" % pcall
+        
+        
+    
     def take_call(self):
         schema = TakePhoneCallSchema()
         users = self.request.db.query(User).all()
@@ -82,15 +108,34 @@ class PhoneCallViewer(BaseViewer):
         schema['callee'].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
-        rendered = form.render()
-        self.layout.content = rendered
+        self.layout.resources.azure3.need()
+        if 'submit' in self.request.POST:
+            self._take_call_form_submitted(form)
+        else:
+            formdata = dict(received=datetime.now())
+            rendered = form.render(formdata)
+            self.layout.content = rendered
+        self.layout.footer = 'take a phone call............'
         
     
     def list_calls(self):
         self.layout.content = 'List the calls here.'
 
+    def view_call(self):
+        id = int(self.request.matchdict['id'])
+        pcall = self.phonecalls.get(id)
+        template = 'mslemon:templates/consult/viewphonecall.mako'
+        rst = str
+        env = dict(pcall=pcall, rst=rst)
+        content = self.render(template, env)
+        self.layout.content = content
+        
+    
     def phone_calendar(self):
-        self.layout.content = '<div id="maincalendar"></div>'
-        self.layout.resources.maincalendar.need()
+        template = 'mslemon:templates/consult/calendar-phone.mako'
+        env = {}
+        content = self.render(template, env)
+        self.layout.content = content
+        self.layout.resources.phone_calendar.need()
         self.layout.resources.cornsilk.need()
         

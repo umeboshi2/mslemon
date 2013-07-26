@@ -5,9 +5,9 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
 
 
-from trumpet.models.consultant import Client
-from trumpet.models.consultant import TicketStatusType, TicketStatus
-from trumpet.models.consultant import TicketCurrentStatus, Ticket
+from mslemon.models.consultant import Client
+from mslemon.models.consultant import TicketStatusType, TicketStatus
+from mslemon.models.consultant import TicketCurrentStatus, Ticket
 
 
 class StatusTypeManager(object):
@@ -80,8 +80,6 @@ class TicketManager(object):
             cstatus.status = status_id
             cstatus = self.session.merge(cstatus)
         return self.session.merge(status)
-    
-    
 
     def all(self):
         return self.query().all()
