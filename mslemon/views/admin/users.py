@@ -168,8 +168,12 @@ class UserManagementViewer(AdminViewer):
             msg = 'added user %s to group %s' % (user.username, g.name)
             self.layout.content = msg
             return {}
+        env = dict(user=user, form=form.render())
+        template = 'mslemon:templates/view-user.mako'
+        content = self.render(template, env)
+        #self.layout.content = 'View the darned user %s' % form.render()
+        self.layout.content = content
         
-        self.layout.content = 'View the darned user %s' % form.render()
 
     
     def list_groups(self):

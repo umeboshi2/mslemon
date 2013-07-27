@@ -1,0 +1,43 @@
+
+/*-------- Phone Call Management ----------*/
+//@import "partials/action-button";
+
+.phonecall-header {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.phonecall-update-phonecall {
+    @include action-button;
+}
+
+
+
+
+/*-------- Phonecall List ----------*/
+
+.phonecalls-list-header {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    font-size: 1.5em;
+}
+.phonecalls-list-list {
+    background: $basecolor4;
+    padding: 0.3em;
+}
+.phonecalls-list-entry {
+    background: $basecolor4;
+    margin: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: $basecolor2;
+    padding: 0.3em;
+}
+.phonecalls-list-entry-status {
+    float: right;
+}
+.phonecalls-list-entry-content {
+}

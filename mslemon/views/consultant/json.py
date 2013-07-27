@@ -51,9 +51,11 @@ class JSONViewer(BaseViewer):
     
 
     def get_phone_calls(self):
-        start_ts = self.request.GET['start']
-        end_ts = self.request.GET['end']
-        calls = self.pcm.get_calls_range_ts(start_ts, end_ts)
+        start = self.request.GET['start']
+        end = self.request.GET['end']
+        user_id = self.request.session['user'].id
+        calls = self.pcm.get_calls_for_user(
+            user_id, start, end, timestamps=True)
         clist = []
         for pcall in calls:
             pcdata = self.serialize_phone_call_for_calendar(pcall)

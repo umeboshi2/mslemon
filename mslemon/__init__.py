@@ -29,9 +29,11 @@ def main(global_config, **settings):
     Base.metadata.bind = engine
     if settings.get('db.populate', False):
         from mslemon.models.main import populate
+        from mslemon.models.consultant import populate_ticket_status
         Base.metadata.create_all(engine)
         #initialize_sql(engine)
         populate()
+        #populate_ticket_status()
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
     cookie = settings['%s.authn.cookie' % appname]

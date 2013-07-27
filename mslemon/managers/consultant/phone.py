@@ -32,15 +32,21 @@ class PhoneCallManager(object):
         query.filter(PhoneCall.received <= end)
         return query
     
-    def get_calls_range(self, start, end):
-        "start, end are datetime objects"
+    def get_calls_range(self, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
         q = self.query()
         q = self._range_filter(q, start, end)
         return q.all()
 
     def get_calls_range_ts(self, start, end):
-        "start, end are timestamps"
-        start, end = convert_range_to_datetime(start, end)
-        return self.get_calls_range(start, end)
+        return self.get_calls_range(start, end, timestamps=True)
     
-    
+    def get_calls_for_user(self, user_id, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.query().filter_by(callee=user_id)
+        q = self._range_filter(q, start, end)
+        return q.all()
+        
+        
