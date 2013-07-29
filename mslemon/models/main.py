@@ -35,6 +35,7 @@ def make_test_data(session):
     users = ['thor', 'zeus', 'loki']
     id_count = 1 # admin is already 1
     manager_group_id = 4 # magic number
+    # add users
     try:
         with transaction.manager:
             for uname in users:
@@ -48,5 +49,46 @@ def make_test_data(session):
                 db.add(ug)
     except IntegrityError:
         transaction.abort()
+    from mslemon.models.consultant import PhoneCall
+    count = db.query(PhoneCall).count()
+    if count < 20:
+        callers = ['James T. Kirk', 'Alfred Hitchcock',
+                   'Johnny Dupree', 'George DeCoux']
+        numbers = ['(234)-234-2354',
+                   '(234)-345-3556',
+                   '(601)-555-1212',]
+        msgs = ['This is a message', 'This is another message',
+                'There has been a change in plans',
+                'Something important happened',
+                'Please call back soon',]
+        from mslemon.managers.consultant.phone import PhoneCallManager
+        from datetime import datetime, timedelta
+        import random
+        ten_minutes = timedelta(minutes=10)
+        one_hour = timedelta(hours=1)
+        tdiffs = [ one_hour, - one_hour,
+                   2*one_hour, -2*one_hour,
+                   3*one_hour, -3*one_hour,
+                   ten_minutes, -ten_minutes,
+                   2*ten_minutes, -2*ten_minutes,
+                   3*ten_minutes, -3*ten_minutes]
+        now = datetime.now()
+        pcm = PhoneCallManager(db)
+        try:
+            with transaction.manager:
+                for ignore in range(10):
+                    ctime = now + random.choice(tdiffs) + random.choice(tdiffs)
+                    caller = random.choice(callers)
+                    number = random.choice(numbers)
+                    msg = random.choice(msgs)
+                    pcm.new_call(ctime, caller, number, msg, 2, 3)
+                for ignore in range(10):
+                    ctime = now + random.choice(tdiffs) + random.choice(tdiffs)
+                    caller = random.choice(callers)
+                    number = random.choice(numbers)
+                    msg = random.choice(msgs)
+                    pcm.new_call(ctime, caller, number, msg, 3, 2)
+        except IntegrityError:
+            transaction.abort()
         
             

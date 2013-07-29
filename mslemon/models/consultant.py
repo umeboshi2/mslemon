@@ -137,11 +137,30 @@ class PhoneCall(Base):
     callee = Column(Integer, ForeignKey('users.id'), nullable=False)
     received_by = Column(Integer, ForeignKey('users.id'), nullable=False)
     
-class Phone_CallTicket(Base):
+class PhoneCallStatusType(Base): 
+    __tablename__ = 'phonecall_status_types'
+    id = Column(Integer, primary_key=True)
+    name = Column(Unicode(50), unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+class PhoneCallStatus(Base):
+    __tablename__ = 'phonecall_status'
+    id = Column(Integer, primary_key=True)
+    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    status = Column(Integer, ForeignKey('phonecall_status_types.id'),
+                    nullable=False)
+    reason = Column(UnicodeText)
+    changed = Column(DateTime)
+    changed_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    
+    
+class PhoneCallTicket(Base):
     __tablename__ = 'phonecall_tickets'
     call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
     ticket_id = Column(Integer, ForeignKey('tickets.id'), primary_key=True)
-    
+
 class ContactCall(Base):
     __tablename__ = 'contact_phone_calls'
     contact_id = Column(Integer, ForeignKey('contacts.id'), primary_key=True)
@@ -174,9 +193,25 @@ def populate_ticket_status():
               'writing code',
               'waiting client',
               'closed']
-    with transaction.manager:
-        for status in tslist:
-            ts = TicketStatusType(status)
-            session.add(ts)
-            
+    try:
+        with transaction.manager:
+            for status in tslist:
+                ts = TicketStatusType(status)
+                session.add(ts)
+    except IntegrityError:
+        transaction.abort()
+        
 
+def populate_phonecall_status():
+    session = DBSession()
+    pcslist = ['opened',
+              'pending',
+              'closed']
+    try:
+        with transaction.manager:
+            for status in pcslist:
+                pcs = PhoneCallStatusType(status)
+                session.add(pcs)
+    except IntegrityError:
+        transaction.abort()
+    

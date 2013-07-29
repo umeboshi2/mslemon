@@ -143,7 +143,8 @@ class PhoneCallViewer(BaseViewer):
         pcall = self.phonecalls.get(id)
         template = 'mslemon:templates/consult/viewphonecall.mako'
         rst = render_rst
-        env = dict(pcall=pcall, rst=rst)
+        db = self.request.db
+        env = dict(pcall=pcall, rst=rst, db=db, User=User)
         content = self.render(template, env)
         self.layout.content = content
         
