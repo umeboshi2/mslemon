@@ -51,7 +51,9 @@ class BaseViewer(TrumpetViewer):
         super(BaseViewer, self).__init__(request)
         prepare_layout(self.layout)
         self.css = self.layout.resources.main_screen
-
+        #skey = 'mslemon.admin.admin_username'
+        #self.admin_username = self.request.registry.settings[skey]
+        
     def __call__(self):
         if hasattr(self, 'css'):
             self.css.need()

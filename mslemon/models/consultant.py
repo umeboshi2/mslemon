@@ -130,12 +130,18 @@ class TicketCurrentStatus(Base):
 class PhoneCall(Base):
     __tablename__ = 'phone_calls'
     id = Column(Integer, primary_key=True)
-    caller = Column(UnicodeText)
     received = Column(DateTime)
+    caller = Column(UnicodeText)
+    number = Column(UnicodeText)
     text = Column(UnicodeText)
     callee = Column(Integer, ForeignKey('users.id'), nullable=False)
-    number = Column(UnicodeText)
-
+    received_by = Column(Integer, ForeignKey('users.id'), nullable=False)
+    
+class Phone_CallTicket(Base):
+    __tablename__ = 'phonecall_tickets'
+    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    ticket_id = Column(Integer, ForeignKey('tickets.id'), primary_key=True)
+    
 class ContactCall(Base):
     __tablename__ = 'contact_phone_calls'
     contact_id = Column(Integer, ForeignKey('contacts.id'), primary_key=True)

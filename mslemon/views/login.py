@@ -59,7 +59,7 @@ class LoginViewer(BaseViewer):
         elif self.route == 'login':
             self.login_view()
         else:
-            self.login_view()
+            self.reauthenticate_view()
     
             
     def _base_form_view(self, formdata=None):
@@ -99,6 +99,15 @@ class LoginViewer(BaseViewer):
         else:
             self._base_form_view()
 
+    def reauthenticate_view(self):
+        self.layout.header = "Session Expired"
+        self.layout.title = self.layout.header
+        self.layout.subheader = "Please authenticate or log out."
+        if 'login' in self.request.params:
+            self._login_submitted()
+        else:
+            self._base_form_view()
+        
     def logout_view(self):
         headers = forget(self.request)
         if 'user' in self.request.session:

@@ -4,7 +4,7 @@
   $(document).ready(function() {
     var rnow, thour;
     rnow = new Date();
-    thour = rnow.getHours() - 4;
+    thour = rnow.getHours() - 2;
     return $('#phone-calendar').fullCalendar({
       header: {
         left: 'month, agendaWeek, agendaDay',
@@ -13,7 +13,8 @@
       theme: true,
       eventSources: [
         {
-          url: '/consult/json/phonecal/calls'
+          url: '/consult/json/phonecal/calls',
+          color: '#8B8878'
         }
       ],
       editable: false,

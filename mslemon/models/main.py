@@ -1,3 +1,5 @@
+import transaction
+
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import Unicode
@@ -6,6 +8,7 @@ from sqlalchemy import ForeignKey
 
 
 from sqlalchemy.orm import relationship
+from sqlalchemy.exc import IntegrityError
 
 from mslemon.models.base import Base, DBSession
 
@@ -24,3 +27,26 @@ class LoginHistory(Base):
 populate = mslemon.models.usergroup.populate
 
 
+def make_test_data(session):
+    from trumpet.security import encrypt_password
+    from mslemon.models.usergroup import User, Group, UserGroup
+    from mslemon.models.usergroup import Password
+    db = session
+    users = ['thor', 'zeus', 'loki']
+    id_count = 1 # admin is already 1
+    manager_group_id = 4 # magic number
+    try:
+        with transaction.manager:
+            for uname in users:
+                id_count += 1
+                user = User(uname)
+                password = encrypt_password('p22wd')
+                db.add(user)
+                pw = Password(id_count, password)
+                db.add(pw)
+                ug = UserGroup(manager_group_id, id_count)
+                db.add(ug)
+    except IntegrityError:
+        transaction.abort()
+        
+            

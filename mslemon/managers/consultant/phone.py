@@ -14,7 +14,8 @@ class PhoneCallManager(object):
     def get(self, id):
         return self.query().get(id)
 
-    def new_call(self, received, caller, number, text, callee):
+    def new_call(self, received, caller, number,
+                 text, callee, received_by):
         with transaction.manager:
             pc = PhoneCall()
             pc.received = received
@@ -22,6 +23,7 @@ class PhoneCallManager(object):
             pc.number = number
             pc.text = text
             pc.callee = callee
+            pc.received_by = received_by
             self.session.add(pc)
             #pc = self.session.merge(pc)
         return self.session.merge(pc)
@@ -48,5 +50,10 @@ class PhoneCallManager(object):
         q = self.query().filter_by(callee=user_id)
         q = self._range_filter(q, start, end)
         return q.all()
-        
+
+    def get_all_calls_for_user(self, user_id):
+        q = self.query().filter_by(received_by=user_id)
+        return q.all()
+    
+    
         

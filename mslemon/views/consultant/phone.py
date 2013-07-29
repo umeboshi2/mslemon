@@ -70,19 +70,21 @@ class PhoneCallViewer(BaseViewer):
         self.phonecalls = PhoneCallManager(self.request.db)
         
         self._dispatch_table = dict(
-            list=self.list_calls,
+            list=self.phone_calendar,
+            takencalls=self.list_taken_calls,
             add=self.take_call,
-            phonecal=self.phone_calendar,
             viewcall=self.view_call,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
+        user_id = self.request.session['user'].id
+        url = self.url(context='takencalls', id=user_id)
+        label = "Calls I've taken"
+        self.layout.ctx_menu.append_new_entry(label, url)
+        
         url = self.url(context='add', id='somebody')
         self.layout.ctx_menu.append_new_entry("Take Call", url)
 
-        url = self.url(context='phonecal', id='today')
-        self.layout.ctx_menu.append_new_entry("Phone Calendar", url)
-        
         self.dispatch()
 
     def _take_call_form_submitted(self, form):
@@ -95,7 +97,9 @@ class PhoneCallViewer(BaseViewer):
             return
         fields = ['caller', 'callee', 'text', 'received', 'number']
         fields = ['received', 'caller', 'number', 'text', 'callee']
-        values = tuple([data[f] for f in fields])
+        values = [data[f] for f in fields]
+        received_by = self.request.session['user'].id
+        values.append(received_by)
         pcall = self.phonecalls.new_call(*values)
         self.layout.subheader = "Phone Call taken: %s" % pcall
         
@@ -104,7 +108,10 @@ class PhoneCallViewer(BaseViewer):
     def take_call(self):
         schema = TakePhoneCallSchema()
         users = self.request.db.query(User).all()
-        choices = [(u.id, u.username) for u in users]
+        skey = 'mslemon.admin.admin_username'
+        admin_username = self.request.registry.settings.get(skey, 'admin')
+        choices = [(u.id, u.username) \
+                       for u in users if u.username != admin_username]
         schema['callee'].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
@@ -119,7 +126,17 @@ class PhoneCallViewer(BaseViewer):
         
     
     def list_calls(self):
-        self.layout.content = 'List the calls here.'
+        pass
+
+    def list_taken_calls(self):
+        user_id = self.request.session['user'].id
+        calls = self.phonecalls.get_all_calls_for_user(user_id)
+        content = 'User_id: %d-----<pre>%s</pre>' % (user_id, calls)
+        env = dict(calls=calls)
+        template = 'mslemon:templates/consult/listphonecalls.mako'
+        content = self.render(template, env)
+        self.layout.content = content
+        
 
     def view_call(self):
         id = int(self.request.matchdict['id'])

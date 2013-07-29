@@ -6,7 +6,7 @@ main_view = 'mslemon.views.admin.main.MainViewer'
 
 def configure_admin(config, rootpath='/admin', permission='admin'):
     config.add_route('admin', rootpath)
-    add_view(config, main_view, 'admin')
+    add_view(config, main_view, 'admin', permission=permission)
     config.add_route('admin_images', '%s/images/{context}/{id}' % rootpath)
     add_view(config, 'mslemon.views.admin.images.ImageManagementViewer',
              'admin_images', permission=permission)

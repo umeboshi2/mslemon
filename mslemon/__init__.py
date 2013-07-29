@@ -19,6 +19,8 @@ def main(global_config, **settings):
     root_factory = 'trumpet.resources.RootGroupFactory'
     # alchemy request provides .db method
     request_factory = 'trumpet.request.AlchemyRequest'
+    # get admin username
+    admin_username = settings.get('mslemon.admin.admin_username', 'admin')
     # create db engine
     engine = engine_from_config(settings, 'sqlalchemy.')
     # setup db.sessionmaker
@@ -30,10 +32,13 @@ def main(global_config, **settings):
     if settings.get('db.populate', False):
         from mslemon.models.main import populate
         from mslemon.models.consultant import populate_ticket_status
+        from mslemon.models.main import make_test_data
         Base.metadata.create_all(engine)
         #initialize_sql(engine)
-        populate()
+        populate(admin_username)
         #populate_ticket_status()
+        make_test_data(DBSession)
+        
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
     cookie = settings['%s.authn.cookie' % appname]

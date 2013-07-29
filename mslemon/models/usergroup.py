@@ -74,11 +74,11 @@ def populate_groups():
             session.add(group)
 
 
-def populate_users():
+def populate_users(admin_username):
     from trumpet.security import encrypt_password
     session = DBSession()
     with transaction.manager:
-        users = ['admin']
+        users = [admin_username]
         # Using id_count to presume
         # the user's id, which should work
         # when filling an empty database.
@@ -94,19 +94,24 @@ def populate_users():
 def populate_usergroups():
     session = DBSession()
     with transaction.manager:
-        users = [(1, 1)]  # admin
-        admins = [(2, 1)]  # admin
+        users = [(1, 1)]  # admin user should be 1
+        admins = [(2, 1)]  # admin user should be 1
         all = users + admins
         for gid, uid in all:
             row = UserGroup(gid, uid)
             session.add(row)
 
 
-def populate():
-    popfuns = [populate_groups, populate_users,
-               populate_usergroups]
-    for pfun in popfuns:
-        try:
-            pfun()
-        except IntegrityError:
-            transaction.abort()
+def populate(admin_username):
+    try:
+        populate_groups()
+    except IntegrityError:
+        transaction.abort()
+    try:
+        populate_users(admin_username)
+    except IntegrityError:
+        transaction.abort()
+    try:
+        populate_usergroups()
+    except IntegrityError:
+        transaction.abort()

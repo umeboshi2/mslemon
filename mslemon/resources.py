@@ -1,4 +1,4 @@
-#from pyramid.security import Allow, Everyone, Authenticated
+from pyramid.security import Allow, Everyone, Authenticated
 from fanstatic import Library, Resource
 
 from haberdashery.resources import jqueryui, fc_css
@@ -28,3 +28,23 @@ class StaticResources(TrumpetResources):
 
     phone_calendar = phone_calendar
     
+
+# the acl entries are allow/deny, group, permission
+class RootGroupFactory(object):
+    __name__ = ""
+    __acl__ = [
+        (Allow, Everyone, 'public'),
+        (Allow, Authenticated, 'user'),
+        (Allow, 'manager', 'manage'),
+        (Allow, 'admin', ('admin', 'manage')),
+        (Allow, 'manager', ('wiki_add', 'wiki_edit')),
+        (Allow, 'admin', ('wiki_add', 'wiki_edit')),
+        (Allow, 'manager', 'consultant'),
+        (Allow, 'admin', 'consultant'),
+        ]
+
+    def __init__(self, request):
+        # comment
+        pass
+
+
