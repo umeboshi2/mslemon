@@ -21,13 +21,16 @@
 	</div>
 	<% status = pcm.stypes.get(c.status).name %>
 	<% chng_by = db.query(User).get(c.changed_by_id).username %>
+	<% handler = db.query(User).get(c.handler).username %>
 	<% msg = '%s(%s)' % (status, chng_by) %>
+	<% handle_msg = 'This call is being handled by %s' % handler %>
 	<div class="phonecall-status-entry-changed">
 	  ${msg}
 	</div>
 	<div class="phonecall-status-entry-reason">
 	  ${rst(c.reason)|n}
 	</div>
+	${handle_msg}
       </div>
     </div>
     %endfor
