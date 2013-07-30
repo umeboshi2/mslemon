@@ -52,6 +52,10 @@ class JSONViewer(BaseViewer):
                     end=cstatus.last_change.isoformat(),
                     title=title,
                     url=viewcall)
+        if status == 'pending':
+            data['color'] = 'blue'
+        if cstatus.phone_call.callee != cstatus.handler:
+            data['color'] = 'red'
         return data
                     
     def serialize_phone_call_for_calendar(self, pcall):
@@ -65,6 +69,10 @@ class JSONViewer(BaseViewer):
                     end=pcall.received.isoformat(),
                     title=title,
                     url=viewcall)
+        if status == 'pending':
+            data['color'] = 'blue'
+        if pcall.callee != pcall.status[0].handler:
+            data['color'] = 'red'
         return data
 
     def _get_start_end_userid(self):
