@@ -49,8 +49,11 @@ def make_test_data(session):
                 db.add(ug)
     except IntegrityError:
         transaction.abort()
+    import logging
+    log = logging.getLogger(__name__)
     from mslemon.models.consultant import PhoneCall
     count = db.query(PhoneCall).count()
+    log.info("phone call count is %s" % count)
     if count < 20:
         callers = ['James T. Kirk', 'Alfred Hitchcock',
                    'Johnny Dupree', 'George DeCoux']

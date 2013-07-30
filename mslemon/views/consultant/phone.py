@@ -53,7 +53,24 @@ class TakePhoneCallSchema(colander.Schema):
         widget=deform.widget.DateTimeInputWidget(),
         )
     
-
+class UpdatePhoneCallSchema(colander.Schema):
+    status = colander.SchemaNode(
+        colander.Integer(),
+        title='New Status',
+        widget=deferred_choices,
+        )
+    handler = colander.SchemaNode(
+        colander.Integer(),
+        title='Handler',
+        widget=deferred_choices,
+        )
+    reason = colander.SchemaNode(
+        colander.String(),
+        title='Reason',
+        widget=deform.widget.TextAreaWidget(rows=10, cols=60),
+        )
+    
+    
 
 def prepare_main_layout(request):
     prepare_base_layout(request)
@@ -156,4 +173,40 @@ class PhoneCallViewer(BaseViewer):
         self.layout.content = content
         self.layout.resources.phone_calendar.need()
         self.layout.resources.cornsilk.need()
+
+    def update_call(self):
+        call_id = int(self.request.matchdict['id'])
+        schema = UpdatePhoneCallSchema()
+        clist = self.phonecalls.stypes.all()
+        choices = [(c.id, c.name) for c in clist]
+        schema['status'].widget = make_select_widget(choices)
+        users = self.request.db.query(User).all()
+        skey = 'mslemon.admin.admin_username'
+        admin_username = self.request.registry.settings.get(skey, 'admin')
+        choices = [(u.id, u.username) \
+                       for u in users if u.username != admin_username]
+        schema['handler'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        if 'submit' in self.request.POST:
+            controls = self.request.POST.items()
+            self.layout.subheader = 'Phone Call Update Submitted'
+            try:
+                data = form.validate(controls)
+            except deform.ValidationFailure, e:
+                self.layout.content = e.render()
+                return
+            user_id = self.request.session['user'].id
+            reason = data['reason']
+            handler = int(data['handler'])
+            status_id = int(data['status'])
+            status = self.phonecalls.update_call(call_id, user_id,
+                                                 status_id, reason,
+                                                 handler)
+            content = '<p>Ticket updated.</p>'
+            self.layout.content = content
+            return
+        
+                          
+        
         

@@ -148,14 +148,23 @@ class PhoneCallStatusType(Base):
 class PhoneCallStatus(Base):
     __tablename__ = 'phonecall_status'
     id = Column(Integer, primary_key=True)
-    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    call_id = Column(Integer, ForeignKey('phone_calls.id'), nullable=False)
     status = Column(Integer, ForeignKey('phonecall_status_types.id'),
                     nullable=False)
     reason = Column(UnicodeText)
     changed = Column(DateTime)
     changed_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    handler = Column(Integer, ForeignKey('users.id'), nullable=False)
     
-    
+class PhoneCallCurrentStatus(Base):
+    __tablename__ = 'phonecall_current_status'
+    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    created = Column(DateTime)
+    last_change = Column(DateTime)
+    status = Column(Integer, ForeignKey('phonecall_status_types.id'))
+    handler = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+
 class PhoneCallTicket(Base):
     __tablename__ = 'phonecall_tickets'
     call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
