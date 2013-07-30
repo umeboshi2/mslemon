@@ -10,6 +10,28 @@
   <div class="phonecall-description">
     ${rst(pcall.text)|n}
   </div>
+  <div class="phonecall-history">
+    %for pcstatus in pcall.history:
+    <div class="phonecall-status-entry">
+      <div class="phonecall-status-entry-content">
+	<% c = pcstatus %>
+	<div class="phonecall-status-entry-changedate">
+	  <% format = '%a %H:%M       -----       %d %B, %Y' %>
+	  ${c.changed.strftime(format)}
+	</div>
+	<% status = pcm.stypes.get(c.status).name %>
+	<% chng_by = db.query(User).get(c.changed_by_id).username %>
+	<% msg = '%s(%s)' % (status, chng_by) %>
+	<div class="phonecall-status-entry-changed">
+	  ${msg}
+	</div>
+	<div class="phonecall-status-entry-reason">
+	  ${rst(c.reason)|n}
+	</div>
+      </div>
+    </div>
+    %endfor
+  </div>
   <div class="phonecall-update-phonecall">
     <% kw = dict(context='updatephonecall', id=pcall.id) %>
     <% url = request.route_url('consult_phone', **kw) %>

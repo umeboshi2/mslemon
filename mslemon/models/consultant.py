@@ -188,7 +188,11 @@ Ticket.history = relationship(TicketStatus, order_by=TicketStatus.changed)
 TicketStatus.user = relationship(User)
 TicketCurrentStatus.ticket = relationship(Ticket)
 
+PhoneCall.history = relationship(PhoneCallStatus,
+                                 order_by=PhoneCallStatus.changed)
+PhoneCall.status = relationship(PhoneCallCurrentStatus)
 
+PhoneCallCurrentStatus.phone_call = relationship(PhoneCall)
 
 # populate db
 

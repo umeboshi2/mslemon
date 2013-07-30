@@ -101,10 +101,15 @@ class PhoneCallManager(object):
     
     def _range_filter(self, query, start, end):
         # start, end are datetime objects
-        query.filter(PhoneCall.received >= start)
-        query.filter(PhoneCall.received <= end)
+        query = query.filter(PhoneCall.received >= start)
+        query = query.filter(PhoneCall.received <= end)
         return query
-    
+
+    def _last_change_range(self, query, start, end):
+        query = query.filter(PhoneCallCurrentStatus.last_change >= start)
+        query = query.filter(PhoneCallCurrentStatus.last_change <= end)
+        return query
+
     def get_calls_range(self, start, end, timestamps=False):
         if timestamps:
             start, end = convert_range_to_datetime(start, end)
@@ -116,15 +121,41 @@ class PhoneCallManager(object):
         return self.get_calls_range(start, end, timestamps=True)
     
     def get_calls_for_user(self, user_id, start, end, timestamps=False):
+        closed_id = self.stypes.get_id('closed')
         if timestamps:
             start, end = convert_range_to_datetime(start, end)
         q = self.query().filter_by(callee=user_id)
         q = self._range_filter(q, start, end)
-        return q.all()
+        #q = q.filter(PhoneCallCurrentStatus.status != closed_id)
+        calls = [c for c in q.all() if c.status[0].status != closed_id]
+        return calls
+    
 
     def get_all_calls_for_user(self, user_id):
         q = self.query().filter_by(received_by=user_id)
         return q.all()
     
+    def get_open_and_pending_calls(self,
+                                   user_id, start, end, timestamps=False):
+        closed_id = self.stypes.get_id('closed')
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(PhoneCallCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = self._last_change_range(q, start, end)
+        q = q.filter(PhoneCallCurrentStatus.status != closed_id)
+        return q.all()
+
+    def get_closed_calls(self,
+                         user_id, start, end, timestamps=False):
+        closed_id = self.stypes.get_id('closed')
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(PhoneCallCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = self._last_change_range(q, start, end)
+        q = q.filter(PhoneCallCurrentStatus.status == closed_id)
+        return q.all()
+        
     
         

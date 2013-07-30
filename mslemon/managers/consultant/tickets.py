@@ -102,8 +102,8 @@ class TicketManager(object):
 
     def _range_filter(self, query, start, end):
         "start and end are datetime objects"
-        query.filter(TicketCurrentStatus.last_change >= start)
-        query.filter(TicketCurrentStatus.last_change <= end)
+        query = query.filter(TicketCurrentStatus.last_change >= start)
+        query = query.filter(TicketCurrentStatus.last_change <= end)
         return query
     
     def get_current_status_range(self, start, end):

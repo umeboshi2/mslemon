@@ -41,3 +41,39 @@
 }
 .phonecalls-list-entry-content {
 }
+
+
+/******************************************************************/
+
+/*-------- Ticket Management ----------*/
+//@import "partials/action-button";
+
+.phonecall-header {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.phonecall-update-ticket {
+    @include action-button;
+}
+
+
+
+.phonecall-status-entry {
+    background: $basecolor4;
+    margin: 0.5em;
+}
+
+
+.phonecall-status-entry-changedate {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.phonecall-status-entry-reason {
+    font-size: 0.8em;
+}
+
+

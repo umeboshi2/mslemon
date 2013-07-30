@@ -16,6 +16,13 @@ main_screen = Resource(css, 'mainscreen.css')
 admin_screen = Resource(css, 'adminscreen.css')
 
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
+phone_calendar_received = Resource(js, 'phone-calendar-received.js',
+                                   depends=[fc_css])
+phone_calendar_assigned = Resource(js, 'phone-calendar-assigned.js',
+                                   depends=[fc_css])
+
+phone_calendar_closed = Resource(js, 'phone-calendar-closed.js',
+                                 depends=[fc_css])
 
 
 class StaticResources(TrumpetResources):
@@ -27,6 +34,9 @@ class StaticResources(TrumpetResources):
     
 
     phone_calendar = phone_calendar
+    phone_calendar_received = phone_calendar_received
+    phone_calendar_assigned = phone_calendar_assigned
+    phone_calendar_closed = phone_calendar_closed
     
 
 # the acl entries are allow/deny, group, permission

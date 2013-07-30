@@ -52,7 +52,14 @@ class TakePhoneCallSchema(colander.Schema):
         title='Call received',
         widget=deform.widget.DateTimeInputWidget(),
         )
-    
+
+
+reason_description = """\
+You can instruct another user to handle the phone call by
+ changing the handler of this call and typing the instructions
+ in this area.
+"""
+
 class UpdatePhoneCallSchema(colander.Schema):
     status = colander.SchemaNode(
         colander.Integer(),
@@ -63,10 +70,12 @@ class UpdatePhoneCallSchema(colander.Schema):
         colander.Integer(),
         title='Handler',
         widget=deferred_choices,
+        description='This is the user that will handle this call',
         )
     reason = colander.SchemaNode(
         colander.String(),
         title='Reason',
+        description=reason_description,
         widget=deform.widget.TextAreaWidget(rows=10, cols=60),
         )
     
@@ -87,9 +96,12 @@ class PhoneCallViewer(BaseViewer):
         self.phonecalls = PhoneCallManager(self.request.db)
         
         self._dispatch_table = dict(
-            list=self.phone_calendar,
+            list=self.received_calls_calendar,
+            assignedcalls=self.assigned_calls_calendar,
+            closedcalls=self.closed_calls_calendar,
             takencalls=self.list_taken_calls,
             add=self.take_call,
+            updatephonecall=self.update_call,
             viewcall=self.view_call,)
         self.context = self.request.matchdict['context']
         self._view = self.context
@@ -98,10 +110,21 @@ class PhoneCallViewer(BaseViewer):
         url = self.url(context='takencalls', id=user_id)
         label = "Calls I've taken"
         self.layout.ctx_menu.append_new_entry(label, url)
+
+        url = self.url(context='assignedcalls', id=user_id)
+        label = "Assigned Calls"
+        self.layout.ctx_menu.append_new_entry(label, url)
         
         url = self.url(context='add', id='somebody')
         self.layout.ctx_menu.append_new_entry("Take Call", url)
 
+        url = self.url(context='closedcalls', id=user_id)
+        label = "Closed Calls"
+        self.layout.ctx_menu.append_new_entry(label, url)
+
+        button = '<div id="take-call-button" class="action-button">Take Call</div>'
+        self.layout.widgetbox = button
+        
         self.dispatch()
 
     def _take_call_form_submitted(self, form):
@@ -161,7 +184,8 @@ class PhoneCallViewer(BaseViewer):
         template = 'mslemon:templates/consult/viewphonecall.mako'
         rst = render_rst
         db = self.request.db
-        env = dict(pcall=pcall, rst=rst, db=db, User=User)
+        pcm = self.phonecalls
+        env = dict(pcall=pcall, rst=rst, db=db, User=User, pcm=pcm)
         content = self.render(template, env)
         self.layout.content = content
         
@@ -174,11 +198,35 @@ class PhoneCallViewer(BaseViewer):
         self.layout.resources.phone_calendar.need()
         self.layout.resources.cornsilk.need()
 
+    def received_calls_calendar(self):
+        template = 'mslemon:templates/consult/calendar-phone.mako'
+        env = {}
+        content = self.render(template, env)
+        self.layout.content = content
+        self.layout.resources.phone_calendar_received.need()
+        self.layout.resources.cornsilk.need()
+
+    def assigned_calls_calendar(self):
+        template = 'mslemon:templates/consult/calendar-phone.mako'
+        env = {}
+        content = self.render(template, env)
+        self.layout.content = content
+        self.layout.resources.phone_calendar_assigned.need()
+        self.layout.resources.cornsilk.need()
+
+    def closed_calls_calendar(self):
+        template = 'mslemon:templates/consult/calendar-phone.mako'
+        env = {}
+        content = self.render(template, env)
+        self.layout.content = content
+        self.layout.resources.phone_calendar_closed.need()
+        self.layout.resources.cornsilk.need()
+        
     def update_call(self):
         call_id = int(self.request.matchdict['id'])
         schema = UpdatePhoneCallSchema()
         clist = self.phonecalls.stypes.all()
-        choices = [(c.id, c.name) for c in clist]
+        choices = [(c.id, c.name) for c in clist if c.name != 'opened']
         schema['status'].widget = make_select_widget(choices)
         users = self.request.db.query(User).all()
         skey = 'mslemon.admin.admin_username'
@@ -206,6 +254,11 @@ class PhoneCallViewer(BaseViewer):
             content = '<p>Ticket updated.</p>'
             self.layout.content = content
             return
+        status = self.phonecalls.status(call_id)
+        formdata = dict(handler=status.handler)
+        self.layout.content = form.render(formdata)
+        self.layout.subheader = 'Update status of phone call'
+        
         
                           
         
