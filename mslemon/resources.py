@@ -15,6 +15,8 @@ favicon = Resource(library, 'favicon.ico')
 main_screen = Resource(css, 'mainscreen.css')
 admin_screen = Resource(css, 'adminscreen.css')
 
+
+take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
 phone_calendar_received = Resource(js, 'phone-calendar-received.js',
                                    depends=[fc_css])
@@ -33,6 +35,7 @@ class StaticResources(TrumpetResources):
     favicon = favicon
     
 
+    take_call_button = take_call_button
     phone_calendar = phone_calendar
     phone_calendar_received = phone_calendar_received
     phone_calendar_assigned = phone_calendar_assigned

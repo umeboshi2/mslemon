@@ -44,10 +44,13 @@ class JSONViewer(BaseViewer):
         viewcall = self.request.route_url('consult_phone',
                                           context='viewcall',
                                           id=cstatus.call_id)
+        status = self.pcm.stypes.get(cstatus.status).name
+        caller = cstatus.phone_call.caller
+        title = '%s(%s)' % (caller, status)
         data = dict(id=cstatus.call_id,
                     start=cstatus.last_change.isoformat(),
                     end=cstatus.last_change.isoformat(),
-                    title=cstatus.phone_call.caller,
+                    title=title,
                     url=viewcall)
         return data
                     
@@ -55,10 +58,12 @@ class JSONViewer(BaseViewer):
         viewcall = self.request.route_url('consult_phone',
                                           context='viewcall',
                                           id=pcall.id)
+        status = self.pcm.stypes.get(pcall.status[0].status).name
+        title = '%s(%s)' % (pcall.caller, status)
         data = dict(id=pcall.id,
                     start=pcall.received.isoformat(),
                     end=pcall.received.isoformat(),
-                    title=pcall.caller,
+                    title=title,
                     url=viewcall)
         return data
 
