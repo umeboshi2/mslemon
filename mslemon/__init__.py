@@ -16,7 +16,7 @@ def main(global_config, **settings):
     # set app name
     appname = 'mslemon'
     # need to use goout root factory for ACL
-    root_factory = 'trumpet.resources.RootGroupFactory'
+    root_factory = 'mslemon.resources.RootGroupFactory'
     # alchemy request provides .db method
     request_factory = 'trumpet.request.AlchemyRequest'
     # get admin username
@@ -39,7 +39,7 @@ def main(global_config, **settings):
         populate(admin_username)
         populate_ticket_status()
         populate_phonecall_status()
-        make_test_data(DBSession)
+        #make_test_data(DBSession)
         
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
@@ -108,6 +108,18 @@ def main(global_config, **settings):
     config.add_view('mslemon.views.blob.BlobViewer', route_name='blob',
                     renderer='string',
                     layout='base')
+    ##################################
+    # Views for Users
+    ##################################
+    config.add_route('user', '/user/{context}')
+    config.add_view('mslemon.views.userview.MainViewer',
+                    route_name='user',
+                    renderer=basetemplate,
+                    layout='base',
+                    permission='user')
+    
+    ##################################
+    
     
     # wrap app with Fanstatic
     app = config.make_wsgi_app()

@@ -19,7 +19,10 @@ class JSONViewer(BaseViewer):
             ticketcal=self.get_ticket_calendar_status,
             receivedcalls=self.get_received_phone_calls,
             assignedcalls=self.get_assigned_phone_calls,
-            closedcalls=self.get_closed_phone_calls,)
+            delegatedcalls=self.get_delegated_calls,
+            closedcalls=self.get_closed_phone_calls,
+            unreadcalls=self.get_newly_opened_calls,
+            pendingcalls=self.get_pending_calls,)
 
         # dispatch context request
         if self.context in self._cntxt_meth:
@@ -46,7 +49,7 @@ class JSONViewer(BaseViewer):
                                           id=cstatus.call_id)
         status = self.pcm.stypes.get(cstatus.status).name
         caller = cstatus.phone_call.caller
-        title = '%s(%s)' % (caller, status)
+        title = '%s(%s)\n%s' % (caller, status, cstatus.phone_call.text[:30])
         data = dict(id=cstatus.call_id,
                     start=cstatus.last_change.isoformat(),
                     end=cstatus.last_change.isoformat(),
@@ -63,7 +66,7 @@ class JSONViewer(BaseViewer):
                                           context='viewcall',
                                           id=pcall.id)
         status = self.pcm.stypes.get(pcall.status[0].status).name
-        title = '%s(%s)' % (pcall.caller, status)
+        title = '%s(%s)\n%s' % (pcall.caller, status, pcall.text[:30])
         data = dict(id=pcall.id,
                     start=pcall.received.isoformat(),
                     end=pcall.received.isoformat(),
@@ -110,6 +113,37 @@ class JSONViewer(BaseViewer):
             pcdata = self.serialize_phone_call_current_status(pcall)
             clist.append(pcdata)
         self.response = clist
+
+    def get_newly_opened_calls(self):
+        start, end, user_id = self._get_start_end_userid()
+        calls = self.pcm.get_newly_opened_calls(
+            user_id, start, end, timestamps=True)
+        clist = []
+        for pcall in calls:
+            pcdata = self.serialize_phone_call_current_status(pcall)
+            clist.append(pcdata)
+        self.response = clist
+
+    def get_pending_calls(self):
+        start, end, user_id = self._get_start_end_userid()
+        calls = self.pcm.get_pending_calls(
+            user_id, start, end, timestamps=True)
+        clist = []
+        for pcall in calls:
+            pcdata = self.serialize_phone_call_current_status(pcall)
+            clist.append(pcdata)
+        self.response = clist
+        
+    def get_delegated_calls(self):
+        start, end, user_id = self._get_start_end_userid()
+        calls = self.pcm.get_delegated_calls(
+            user_id, start, end, timestamps=True)
+        clist = []
+        for pcall in calls:
+            pcdata = self.serialize_phone_call_current_status(pcall)
+            clist.append(pcdata)
+        self.response = clist
+        
 
         
     def get_ticket_calendar_status(self):

@@ -2,6 +2,16 @@
 /*-------- Phone Call Management ----------*/
 //@import "partials/action-button";
 
+.phone-main-view-button-bar {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    border-style: solid;
+    border-width: 0.3em;
+    border-color: $basecolor2;
+}
+
+
 .phonecall-header {
     background: $menu-header-bg-color;
     color: $menu-header-text-color;

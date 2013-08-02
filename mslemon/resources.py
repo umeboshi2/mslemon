@@ -17,6 +17,8 @@ admin_screen = Resource(css, 'adminscreen.css')
 
 
 take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])
+main_phone_view = Resource(js, 'main-phone-view.js', depends=[jqueryui])
+
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
 phone_calendar_received = Resource(js, 'phone-calendar-received.js',
                                    depends=[fc_css])
@@ -36,6 +38,8 @@ class StaticResources(TrumpetResources):
     
 
     take_call_button = take_call_button
+    main_phone_view = main_phone_view
+    
     phone_calendar = phone_calendar
     phone_calendar_received = phone_calendar_received
     phone_calendar_assigned = phone_calendar_assigned
@@ -48,12 +52,9 @@ class RootGroupFactory(object):
     __acl__ = [
         (Allow, Everyone, 'public'),
         (Allow, Authenticated, 'user'),
+        (Allow, Authenticated, 'consultant'),
         (Allow, 'manager', 'manage'),
         (Allow, 'admin', ('admin', 'manage')),
-        (Allow, 'manager', ('wiki_add', 'wiki_edit')),
-        (Allow, 'admin', ('wiki_add', 'wiki_edit')),
-        (Allow, 'manager', 'consultant'),
-        (Allow, 'admin', 'consultant'),
         ]
 
     def __init__(self, request):

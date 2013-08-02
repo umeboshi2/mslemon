@@ -146,16 +146,40 @@ class PhoneCallManager(object):
         q = q.filter(PhoneCallCurrentStatus.status != closed_id)
         return q.all()
 
-    def get_closed_calls(self,
-                         user_id, start, end, timestamps=False):
-        closed_id = self.stypes.get_id('closed')
+    def _get_by_status_id(self,
+                          user_id, start, end, timestamps, status):
+        status_id = self.stypes.get_id(status)
         if timestamps:
             start, end = convert_range_to_datetime(start, end)
         q = self.session.query(PhoneCallCurrentStatus)
         q = q.filter_by(handler=user_id)
         q = self._last_change_range(q, start, end)
-        q = q.filter(PhoneCallCurrentStatus.status == closed_id)
+        q = q.filter(PhoneCallCurrentStatus.status == status_id)
         return q.all()
-        
     
-        
+    
+    def get_closed_calls(self,
+                         user_id, start, end, timestamps=False):
+        return self._get_by_status_id(
+            user_id, start, end, timestamps, 'closed')
+
+    def get_newly_opened_calls(self,
+                               user_id, start, end, timestamps=False):
+        return self._get_by_status_id(
+            user_id, start, end, timestamps, 'opened')
+
+    def get_pending_calls(self,
+                          user_id, start, end, timestamps=False):
+        return self._get_by_status_id(
+            user_id, start, end, timestamps, 'pending')
+
+    def get_delegated_calls(self, user_id, start, end, timestamps=False):
+        status_id = self.stypes.get_id('pending')
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(PhoneCallCurrentStatus)
+        q = self._last_change_range(q, start, end)
+        q = q.filter(PhoneCallCurrentStatus.status == status_id)
+        q = q.filter(PhoneCallCurrentStatus.handler != user_id)
+        return [r for r in q if r.phone_call.callee == user_id]
+

@@ -27,7 +27,8 @@ class FragViewer(BaseViewer):
         self.contacts = ContactManager(self.request.db)
         
         self._dispatch_table = dict(
-            contactlist=self.list_contacts,)
+            contactlist=self.list_contacts,
+            receivedcallscalendar=self.received_calls_calendar,)
         self.context = self.request.matchdict['context']
         self._view = self.context
         #self.response = "NOTHING HAPPENED"
@@ -44,5 +45,15 @@ class FragViewer(BaseViewer):
         env = dict(contacts=contacts)
         template = 'mslemon:templates/consult/contact-list.mako'
         self.response = self.render(template, env)
+
+    def received_calls_calendar(self):
+        template = 'mslemon:templates/consult/calendar-phone.mako'
+        default_view = 'agendaDay'
+        event_source = self.request.route_url(
+            'consult_json', context='receivedcalls', id='calls')
+        env = dict(default_view=default_view,
+                   event_source=event_source,)
+        content = self.render(template, env)
+        self.response = content
         
         

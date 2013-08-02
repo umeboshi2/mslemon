@@ -634,6 +634,16 @@ html {
 
 /*-------- Phone Call Management ----------*/
 /* line 5, ../../../sass/mslemon/_phonecall.scss */
+.phone-main-view-button-bar {
+  background: #8f8f8f;
+  color: whitesmoke;
+  text-align: center;
+  border-style: solid;
+  border-width: 0.3em;
+  border-color: #c2c2c2;
+}
+
+/* line 15, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-header {
   background: #8f8f8f;
   color: whitesmoke;
@@ -641,7 +651,7 @@ html {
   font-size: 1.5em;
 }
 
-/* line 12, ../../../sass/mslemon/_phonecall.scss */
+/* line 22, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-update-phonecall {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
@@ -704,7 +714,7 @@ html {
 }
 
 /*-------- Phonecall List ----------*/
-/* line 21, ../../../sass/mslemon/_phonecall.scss */
+/* line 31, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-header {
   background: #8f8f8f;
   color: whitesmoke;
@@ -712,13 +722,13 @@ html {
   font-size: 1.5em;
 }
 
-/* line 27, ../../../sass/mslemon/_phonecall.scss */
+/* line 37, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-list {
   background: #8f8f8f;
   padding: 0.3em;
 }
 
-/* line 31, ../../../sass/mslemon/_phonecall.scss */
+/* line 41, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-entry {
   background: #8f8f8f;
   margin: 0.5em;
@@ -728,14 +738,14 @@ html {
   padding: 0.3em;
 }
 
-/* line 39, ../../../sass/mslemon/_phonecall.scss */
+/* line 49, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-entry-status {
   float: right;
 }
 
 /******************************************************************/
 /*-------- Ticket Management ----------*/
-/* line 51, ../../../sass/mslemon/_phonecall.scss */
+/* line 61, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-header {
   background: #8f8f8f;
   color: whitesmoke;
@@ -743,7 +753,7 @@ html {
   font-size: 1.5em;
 }
 
-/* line 58, ../../../sass/mslemon/_phonecall.scss */
+/* line 68, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
@@ -805,19 +815,19 @@ html {
   margin: -1px !important;
 }
 
-/* line 64, ../../../sass/mslemon/_phonecall.scss */
+/* line 74, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-status-entry {
   background: #8f8f8f;
   margin: 0.5em;
 }
 
-/* line 70, ../../../sass/mslemon/_phonecall.scss */
+/* line 80, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-status-entry-changedate {
   font-size: 0.8em;
   text-align: center;
 }
 
-/* line 75, ../../../sass/mslemon/_phonecall.scss */
+/* line 85, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-status-entry-reason {
   font-size: 0.8em;
 }

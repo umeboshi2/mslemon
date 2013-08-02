@@ -1,7 +1,11 @@
-$(document).ready ->
+make_calendar = (element) ->
+        eventSource = $('#eventSource').val()
+        defaultView = $('#defaultView').val()
         rnow = new Date()
         thour = rnow.getHours() - 2
-        $('#phone-calendar').fullCalendar
+        element.load('/')
+        $('#list-button').hide()
+        element.fullCalendar
                 header:
                         left: 'month, agendaWeek, agendaDay'
                         center: 'title'
@@ -9,7 +13,7 @@ $(document).ready ->
                 eventSources:
                         [
                                 {
-                                        url:'/consult/json/phonecal/calls',
+                                        url: eventSource
                                         color: '#8B8878'
                                 },
                         ]
@@ -17,10 +21,9 @@ $(document).ready ->
                 selectable: false
                 allDayDefault: false
                 eventColor: '#8B8878'
-                defaultView: 'agendaDay'
+                defaultView: defaultView
                 # the firstHour is where the agendaDay
                 # calendar starts.
                 firstHour: thour
-                
                 
                 

@@ -67,7 +67,7 @@ Group.users = relationship(User, secondary='group_user')
 
 def populate_groups():
     session = DBSession()
-    groups = ['user', 'admin', 'guest', 'manager']
+    groups = ['admin', 'manager']
     with transaction.manager:
         for gname in groups:
             group = Group(gname)
@@ -94,10 +94,9 @@ def populate_users(admin_username):
 def populate_usergroups():
     session = DBSession()
     with transaction.manager:
-        users = [(1, 1)]  # admin user should be 1
-        admins = [(2, 1)]  # admin user should be 1
-        all = users + admins
-        for gid, uid in all:
+        admins = [(1, 1)]  # admin user should be 1
+        ulist = admins
+        for gid, uid in ulist:
             row = UserGroup(gid, uid)
             session.add(row)
 

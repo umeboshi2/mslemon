@@ -18,7 +18,7 @@ $(document).ready ->
                 selectable: false
                 allDayDefault: false
                 eventColor: '#8B8878'
-                defaultView: 'agendaDay'
+                defaultView: 'month'
                 # the firstHour is where the agendaDay
                 # calendar starts.
                 firstHour: thour

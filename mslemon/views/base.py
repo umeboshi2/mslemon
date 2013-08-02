@@ -35,7 +35,7 @@ def make_ctx_menu(request):
     logged_in = user is not None
     if logged_in:
         #url = request.route_url('user', context='preferences')
-        url = '/foobar'
+        url = request.route_url('user', context='status')
         menu.append_new_entry('Preferences', url)
     else:
         login_url = request.route_url('login')

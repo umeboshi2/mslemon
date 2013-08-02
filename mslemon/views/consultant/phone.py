@@ -96,27 +96,17 @@ class PhoneCallViewer(BaseViewer):
         self.phonecalls = PhoneCallManager(self.request.db)
         
         self._dispatch_table = dict(
-            list=self.received_calls_calendar,
-            assignedcalls=self.assigned_calls_calendar,
-            closedcalls=self.closed_calls_calendar,
+            list=self.main_phone_view,
             takencalls=self.list_taken_calls,
             add=self.take_call,
-            updatephonecall=self.update_call,
-            viewcall=self.view_call,)
+            viewcall=self.view_call,
+            updatephonecall=self.update_call,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
         user_id = self.request.session['user'].id
         url = self.url(context='takencalls', id=user_id)
         label = "Calls I've taken"
-        self.layout.ctx_menu.append_new_entry(label, url)
-
-        url = self.url(context='assignedcalls', id=user_id)
-        label = "Assigned Calls"
-        self.layout.ctx_menu.append_new_entry(label, url)
-        
-        url = self.url(context='closedcalls', id=user_id)
-        label = "Closed Calls"
         self.layout.ctx_menu.append_new_entry(label, url)
 
         url = self.url(context='add', id='somebody')
@@ -131,19 +121,18 @@ class PhoneCallViewer(BaseViewer):
 
     def _take_call_form_submitted(self, form):
         controls = self.request.POST.items()
-        self.layout.subheader = "Phone call all submitted to database"
+        self.layout.subheader = "Phone call submitted to database"
         try:
             data = form.validate(controls)
         except deform.ValidationFailure, e:
             self.layout.content = e.render()
             return
-        fields = ['caller', 'callee', 'text', 'received', 'number']
         fields = ['received', 'caller', 'number', 'text', 'callee']
         values = [data[f] for f in fields]
         received_by = self.request.session['user'].id
         values.append(received_by)
         pcall = self.phonecalls.new_call(*values)
-        self.layout.subheader = "Phone Call taken: %s" % pcall
+        #self.layout.subheader = "Phone Call taken: %s" % pcall
         
         
     
@@ -179,7 +168,9 @@ class PhoneCallViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         
-
+    def taken_calls_calendar(self):
+        pass
+    
     def view_call(self):
         id = int(self.request.matchdict['id'])
         pcall = self.phonecalls.get(id)
@@ -192,37 +183,32 @@ class PhoneCallViewer(BaseViewer):
         self.layout.content = content
         
     
-    def phone_calendar(self):
-        template = 'mslemon:templates/consult/calendar-phone.mako'
-        env = {}
+    def main_phone_view(self):
+        template = 'mslemon:templates/consult/main-phone-view.mako'
+        default_view = 'agendaDay'
+        received_url = self.request.route_url(
+            'consult_json', context='receivedcalls', id='calls')
+        assigned_url = self.request.route_url(
+            'consult_json', context='assignedcalls', id='calls') 
+        delegated_url = self.request.route_url(
+            'consult_json', context='delegatedcalls', id='calls')
+        unread_url = self.request.route_url(
+            'consult_json', context='unreadcalls', id='calls')
+        pending_url = self.request.route_url(
+            'consult_json', context='pendingcalls', id='calls')
+        closed_url = self.request.route_url(
+            'consult_json', context='closedcalls', id='calls')
+        env = dict(received_url=received_url,
+                   assigned_url=assigned_url,
+                   delegated_url=delegated_url,
+                   unread_url=unread_url,
+                   pending_url=pending_url,
+                   closed_url=closed_url,)
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.phone_calendar.need()
         self.layout.resources.cornsilk.need()
-
-    def received_calls_calendar(self):
-        template = 'mslemon:templates/consult/calendar-phone.mako'
-        env = {}
-        content = self.render(template, env)
-        self.layout.content = content
-        self.layout.resources.phone_calendar_received.need()
-        self.layout.resources.cornsilk.need()
-
-    def assigned_calls_calendar(self):
-        template = 'mslemon:templates/consult/calendar-phone.mako'
-        env = {}
-        content = self.render(template, env)
-        self.layout.content = content
-        self.layout.resources.phone_calendar_assigned.need()
-        self.layout.resources.cornsilk.need()
-
-    def closed_calls_calendar(self):
-        template = 'mslemon:templates/consult/calendar-phone.mako'
-        env = {}
-        content = self.render(template, env)
-        self.layout.content = content
-        self.layout.resources.phone_calendar_closed.need()
-        self.layout.resources.cornsilk.need()
+        self.layout.resources.main_phone_view.need()
         
     def update_call(self):
         call_id = int(self.request.matchdict['id'])

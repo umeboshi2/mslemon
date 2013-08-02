@@ -22,7 +22,7 @@
       selectable: false,
       allDayDefault: false,
       eventColor: '#8B8878',
-      defaultView: 'agendaDay',
+      defaultView: 'month',
       firstHour: thour
     });
   });
