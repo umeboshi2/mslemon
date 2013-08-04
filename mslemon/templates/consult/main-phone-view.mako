@@ -12,13 +12,16 @@
   </div>
   <hr>
   <div id="phonecall-content">
+    <% calltypes = ['received', 'assigned', 'delegated', 'unread', 'pending', 'closed'] %>
     <div id="calendar-variables">
-      <input type="hidden" id="receivedUrl" value="${received_url}">
-      <input type="hidden" id="assignedUrl" value="${assigned_url}">
-      <input type="hidden" id="delegatedUrl" value="${delegated_url}">
-      <input type="hidden" id="unreadUrl" value="${unread_url}">
-      <input type="hidden" id="pendingUrl" value="${pending_url}">
-      <input type="hidden" id="closedUrl" value="${closed_url}">
+      %for calltype in calltypes:
+      <input type="hidden" id="${calltype}Url" value="${calendar_urls[calltype]}">
+      %endfor
+    </div>
+    <div id="list-variables">
+      %for calltype in calltypes:
+      <input type="hidden" id="ALL${calltype}Url" value="${list_urls[calltype]}">
+      %endfor
     </div>
     <div id="phone-calendar">
     </div>

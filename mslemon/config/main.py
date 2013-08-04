@@ -39,6 +39,14 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     renderer='string',
                     layout='base',
                     permission=permission)
+    route_name = 'consultant_phonefrag'
+    config.add_route(route_name,
+                     '%s/phonefrag/{context}/{id}' % rootpath)
+    config.add_view('mslemon.views.consultant.phone.PhoneCallFrag',
+                    route_name=route_name,
+                    renderer='string',
+                    layout='base',
+                    permission=permission)
     
     
 

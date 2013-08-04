@@ -42,8 +42,21 @@ def make_ctx_menu(request):
         menu.append_new_entry('Sign In', login_url)
     if 'user' in request.session:
         user = request.session['user']
-        url = request.route_url('consult')
-        menu.append_new_entry('Consultant', url)
+        url = request.route_url('consult_contacts', context='list', id='all')
+        menu.append_new_entry('Contacts', url)
+
+        url = request.route_url('consult_clients', context='list', id='all')
+        menu.append_new_entry('Clients', url)
+
+        url = request.route_url('consult_calendar', context='list', id='all')
+        menu.append_new_entry('Calendar', url)
+
+        url = request.route_url('consult_tickets', context='list', id='all')
+        menu.append_new_entry('Tickets', url)
+
+        url = request.route_url('consult_phone', context='list', id='all')
+        menu.append_new_entry('Phone Calls', url)
+
     return menu
     
 class BaseViewer(TrumpetViewer):

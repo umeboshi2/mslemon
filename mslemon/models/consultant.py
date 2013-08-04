@@ -193,6 +193,7 @@ PhoneCall.history = relationship(PhoneCallStatus,
 PhoneCall.status = relationship(PhoneCallCurrentStatus)
 
 PhoneCallCurrentStatus.phone_call = relationship(PhoneCall)
+PhoneCallCurrentStatus.statustype = relationship(PhoneCallStatusType)
 
 # populate db
 

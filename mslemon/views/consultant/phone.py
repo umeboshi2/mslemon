@@ -89,6 +89,67 @@ def prepare_main_layout(request):
     layout.subheader = 'Telephone Area'
 
 
+class PhoneCallFrag(BaseViewer):
+    def __init__(self, request):
+        super(PhoneCallFrag, self).__init__(request)
+        self.phonecalls = PhoneCallManager(self.request.db)
+        calltypes = ['received', 'assigned', 'delegated', 'unread',
+                     'pending', 'closed']
+        self.dtformat = '%A - %B %d %H:%m'
+        self._dispatch_table = {}
+        for calltype in calltypes:
+            key = 'all_%scalls' % calltype
+            method = 'get_all_%s_calls' % calltype
+            self._dispatch_table[key] = getattr(self, method)
+        self.context = self.request.matchdict['context']
+        self._view = self.context
+        self.dispatch()
+
+    def get_all_received_calls(self):
+        user_id = self.request.session['user'].id
+        calls = self.phonecalls.get_all_received_calls(user_id)
+        env = dict(calls=calls, dtformat=self.dtformat)
+        template = 'mslemon:templates/consult/listphonecalls.mako'
+        self.response = self.render(template, env)
+        
+
+    def get_all_assigned_calls(self):
+        user_id = self.request.session['user'].id
+        clist = self.phonecalls.get_all_assigned_calls(user_id)
+        env = dict(clist=clist, dtformat=self.dtformat)
+        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
+        self.response = self.render(template, env)
+        
+    def get_all_delegated_calls(self):
+        user_id = self.request.session['user'].id
+        clist = self.phonecalls.get_all_delegated_calls(user_id)
+        env = dict(clist=clist, dtformat=self.dtformat)
+        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
+        self.response = self.render(template, env)
+
+    def get_all_unread_calls(self):
+        user_id = self.request.session['user'].id
+        clist = self.phonecalls.get_all_unread_calls(user_id)
+        env = dict(clist=clist, dtformat=self.dtformat)
+        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
+        self.response = self.render(template, env)
+
+    def get_all_pending_calls(self):
+        user_id = self.request.session['user'].id
+        clist = self.phonecalls.get_all_pending_calls(user_id)
+        env = dict(clist=clist, dtformat=self.dtformat)
+        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
+        self.response = self.render(template, env)
+
+    def get_all_closed_calls(self):
+        user_id = self.request.session['user'].id
+        clist = self.phonecalls.get_all_closed_calls(user_id)
+        env = dict(clist=clist, dtformat=self.dtformat)
+        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
+        self.response = self.render(template, env)
+
+    
+
 class PhoneCallViewer(BaseViewer):
     def __init__(self, request):
         super(PhoneCallViewer, self).__init__(request)
@@ -161,8 +222,7 @@ class PhoneCallViewer(BaseViewer):
 
     def list_taken_calls(self):
         user_id = self.request.session['user'].id
-        calls = self.phonecalls.get_all_calls_for_user(user_id)
-        content = 'User_id: %d-----<pre>%s</pre>' % (user_id, calls)
+        calls = self.phonecalls.get_all_taken_calls(user_id)
         env = dict(calls=calls)
         template = 'mslemon:templates/consult/listphonecalls.mako'
         content = self.render(template, env)
@@ -186,24 +246,22 @@ class PhoneCallViewer(BaseViewer):
     def main_phone_view(self):
         template = 'mslemon:templates/consult/main-phone-view.mako'
         default_view = 'agendaDay'
-        received_url = self.request.route_url(
-            'consult_json', context='receivedcalls', id='calls')
-        assigned_url = self.request.route_url(
-            'consult_json', context='assignedcalls', id='calls') 
-        delegated_url = self.request.route_url(
-            'consult_json', context='delegatedcalls', id='calls')
-        unread_url = self.request.route_url(
-            'consult_json', context='unreadcalls', id='calls')
-        pending_url = self.request.route_url(
-            'consult_json', context='pendingcalls', id='calls')
-        closed_url = self.request.route_url(
-            'consult_json', context='closedcalls', id='calls')
-        env = dict(received_url=received_url,
-                   assigned_url=assigned_url,
-                   delegated_url=delegated_url,
-                   unread_url=unread_url,
-                   pending_url=pending_url,
-                   closed_url=closed_url,)
+        calltypes = ['received', 'assigned', 'delegated', 'unread',
+                     'pending', 'closed']
+        calendar_urls = {}
+        list_urls = {}
+        id_ = 'calls'
+        for calltype in calltypes:
+            route = 'consult_json'
+            context = '%scalls' % calltype
+            url = self.request.route_url(route, context=context, id=id_)
+            calendar_urls[calltype] = url
+            route = 'consultant_phonefrag'
+            context = 'all_%scalls' % calltype
+            url = self.request.route_url(route, context=context, id=id_)
+            list_urls[calltype] = url
+        env = dict(calendar_urls=calendar_urls,
+                   list_urls=list_urls)
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.phone_calendar.need()

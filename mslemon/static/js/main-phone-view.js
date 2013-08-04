@@ -57,7 +57,7 @@
       defaultView: 'agendaDay',
       firstHour: thour
     });
-    $('#received-button').click(function() {
+    $('#2received-button').click(function() {
       var _element, _hr, _now, _url;
       _now = new Date();
       _hr = _now.getHours() - 2;
@@ -65,7 +65,7 @@
       _element = $('#phone-calendar');
       return make_calendar(_element, _url, 'agendaDay', _hr);
     });
-    $('#assigned-button').click(function() {
+    $('#2assigned-button').click(function() {
       var _element, _hr, _now, _url;
       _now = new Date();
       _hr = _now.getHours() - 2;
@@ -73,7 +73,7 @@
       _element = $('#phone-calendar');
       return make_calendar(_element, _url, 'agendaWeek', _hr);
     });
-    $('#delegated-button').click(function() {
+    $('#2delegated-button').click(function() {
       var _element, _hr, _now, _url;
       _now = new Date();
       _hr = _now.getHours() - 2;
@@ -81,7 +81,7 @@
       _element = $('#phone-calendar');
       return make_calendar(_element, _url, 'agendaWeek', _hr);
     });
-    $('#unread-button').click(function() {
+    $('#2unread-button').click(function() {
       var _element, _hr, _now, _url;
       _now = new Date();
       _hr = _now.getHours() - 2;
@@ -89,7 +89,7 @@
       _element = $('#phone-calendar');
       return make_calendar(_element, _url, 'agendaWeek', _hr);
     });
-    $('#pending-button').click(function() {
+    $('#2pending-button').click(function() {
       var _element, _hr, _now, _url;
       _now = new Date();
       _hr = _now.getHours() - 2;
@@ -97,7 +97,7 @@
       _element = $('#phone-calendar');
       return make_calendar(_element, _url, 'agendaWeek', _hr);
     });
-    $('#closed-button').click(function() {
+    $('#2closed-button').click(function() {
       var _element, _hr, _now, _url;
       _now = new Date();
       _hr = _now.getHours() - 2;
@@ -105,7 +105,7 @@
       _element = $('#phone-calendar');
       return make_calendar(_element, _url, 'month', _hr);
     });
-    return $('#list-button').click(function() {
+    $('#list-button').click(function() {
       var button, text;
       button = $('#list-button');
       $('#phone-calendar').toggle();
@@ -117,6 +117,27 @@
       }
       if (text === 'Calendar') {
         return button.text('List');
+      }
+    });
+    return $('.query-button').click(function() {
+      var button, calendar_content, calltype, element, hr, list_content, now, url, urlid, view, viewbutton;
+      calendar_content = $('#phone-calendar');
+      list_content = $('#phonecall-list');
+      viewbutton = $('#list-button');
+      view = viewbutton.text();
+      button = $(this);
+      calltype = $(this).attr('id').split('-')[0];
+      if (view === 'List') {
+        urlid = '#' + calltype + 'Url';
+        now = new Date();
+        hr = now.getHours() - 2;
+        url = $(urlid).val();
+        element = calendar_content;
+        return make_calendar(element, url, 'agendaWeek', hr);
+      } else {
+        urlid = '#ALL' + calltype + 'Url';
+        url = $(urlid).val();
+        return list_content.load(url);
       }
     });
   });

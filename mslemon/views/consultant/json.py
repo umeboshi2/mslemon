@@ -19,10 +19,10 @@ class JSONViewer(BaseViewer):
             ticketcal=self.get_ticket_calendar_status,
             receivedcalls=self.get_received_phone_calls,
             assignedcalls=self.get_assigned_phone_calls,
-            delegatedcalls=self.get_delegated_calls,
+            delegatedcalls=self.get_delegated_phone_calls,
             closedcalls=self.get_closed_phone_calls,
-            unreadcalls=self.get_newly_opened_calls,
-            pendingcalls=self.get_pending_calls,)
+            unreadcalls=self.get_unread_phone_calls,
+            pendingcalls=self.get_pending_phone_calls,)
 
         # dispatch context request
         if self.context in self._cntxt_meth:
@@ -86,7 +86,7 @@ class JSONViewer(BaseViewer):
     
     def get_assigned_phone_calls(self):
         start, end, user_id = self._get_start_end_userid()
-        calls = self.pcm.get_open_and_pending_calls(
+        calls = self.pcm.get_assigned_calls(
             user_id, start, end, timestamps=True)
         clist = []
         for pcall in calls:
@@ -96,7 +96,7 @@ class JSONViewer(BaseViewer):
 
     def get_received_phone_calls(self):
         start, end, user_id = self._get_start_end_userid()
-        calls = self.pcm.get_calls_for_user(user_id, start, end,
+        calls = self.pcm.get_received_calls(user_id, start, end,
                                             timestamps=True)
         clist = []
         for pcall in calls:
@@ -114,9 +114,9 @@ class JSONViewer(BaseViewer):
             clist.append(pcdata)
         self.response = clist
 
-    def get_newly_opened_calls(self):
+    def get_unread_phone_calls(self):
         start, end, user_id = self._get_start_end_userid()
-        calls = self.pcm.get_newly_opened_calls(
+        calls = self.pcm.get_unread_calls(
             user_id, start, end, timestamps=True)
         clist = []
         for pcall in calls:
@@ -124,7 +124,7 @@ class JSONViewer(BaseViewer):
             clist.append(pcdata)
         self.response = clist
 
-    def get_pending_calls(self):
+    def get_pending_phone_calls(self):
         start, end, user_id = self._get_start_end_userid()
         calls = self.pcm.get_pending_calls(
             user_id, start, end, timestamps=True)
@@ -134,7 +134,7 @@ class JSONViewer(BaseViewer):
             clist.append(pcdata)
         self.response = clist
         
-    def get_delegated_calls(self):
+    def get_delegated_phone_calls(self):
         start, end, user_id = self._get_start_end_userid()
         calls = self.pcm.get_delegated_calls(
             user_id, start, end, timestamps=True)

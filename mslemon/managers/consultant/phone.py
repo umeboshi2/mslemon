@@ -119,8 +119,20 @@ class PhoneCallManager(object):
 
     def get_calls_range_ts(self, start, end):
         return self.get_calls_range(start, end, timestamps=True)
+
+    def get_taken_calls(self, user_id, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.query()
+        q = self._range_filter(q, start, end)
+        q = q.filter_by(received_by=user_id)
+        return q.all()
     
-    def get_calls_for_user(self, user_id, start, end, timestamps=False):
+    def get_all_taken_calls(self, user_id):
+        q = self.query().filter_by(received_by=user_id)
+        return q.all()
+    
+    def get_received_calls(self, user_id, start, end, timestamps=False):
         closed_id = self.stypes.get_id('closed')
         if timestamps:
             start, end = convert_range_to_datetime(start, end)
@@ -129,13 +141,16 @@ class PhoneCallManager(object):
         #q = q.filter(PhoneCallCurrentStatus.status != closed_id)
         calls = [c for c in q.all() if c.status[0].status != closed_id]
         return calls
-    
 
-    def get_all_calls_for_user(self, user_id):
-        q = self.query().filter_by(received_by=user_id)
-        return q.all()
-    
-    def get_open_and_pending_calls(self,
+    # FIXME: we really need a join when not specifying time range
+    def get_all_received_calls(self, user_id):
+        closed_id = self.stypes.get_id('closed')
+        q = self.query().filter_by(callee=user_id)
+        calls = [c for c in q.all() if c.status[0].status != closed_id]
+        return calls
+
+
+    def get_assigned_calls(self,
                                    user_id, start, end, timestamps=False):
         closed_id = self.stypes.get_id('closed')
         if timestamps:
@@ -146,6 +161,13 @@ class PhoneCallManager(object):
         q = q.filter(PhoneCallCurrentStatus.status != closed_id)
         return q.all()
 
+    def get_all_assigned_calls(self, user_id):
+        closed_id = self.stypes.get_id('closed')
+        q = self.session.query(PhoneCallCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = q.filter(PhoneCallCurrentStatus.status != closed_id)
+        return q.all()
+    
     def _get_by_status_id(self,
                           user_id, start, end, timestamps, status):
         status_id = self.stypes.get_id(status)
@@ -164,30 +186,6 @@ class PhoneCallManager(object):
         q = q.filter(PhoneCallCurrentStatus.status == status_id)
         return q.all()
         
-    def get_closed_calls(self,
-                         user_id, start, end, timestamps=False):
-        return self._get_by_status_id(
-            user_id, start, end, timestamps, 'closed')
-
-    def get_all_closed_calls(self, user_id):
-        return self._get_all_by_status_id(user_id, 'closed')
-
-    def get_newly_opened_calls(self,
-                               user_id, start, end, timestamps=False):
-        return self._get_by_status_id(
-            user_id, start, end, timestamps, 'opened')
-
-    def get_all_newly_opened_calls(self, user_id):
-        return self._get_all_by_status_id(user_id, 'opened')
-
-    def get_pending_calls(self,
-                          user_id, start, end, timestamps=False):
-        return self._get_by_status_id(
-            user_id, start, end, timestamps, 'pending')
-
-    def get_all_pending_calls(self, user_id):
-        return self._get_all_by_status_id(user_id, 'pending')
-
     def get_delegated_calls(self, user_id, start, end, timestamps=False):
         status_id = self.stypes.get_id('pending')
         if timestamps:
@@ -205,3 +203,27 @@ class PhoneCallManager(object):
         q = q.filter(PhoneCallCurrentStatus.handler != user_id)
         return [r for r in q if r.phone_call.callee == user_id]
         
+    def get_unread_calls(self,
+                               user_id, start, end, timestamps=False):
+        return self._get_by_status_id(
+            user_id, start, end, timestamps, 'opened')
+
+    def get_all_unread_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'opened')
+    
+    def get_pending_calls(self,
+                          user_id, start, end, timestamps=False):
+        return self._get_by_status_id(
+            user_id, start, end, timestamps, 'pending')
+
+    def get_all_pending_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'pending')
+
+    def get_closed_calls(self,
+                         user_id, start, end, timestamps=False):
+        return self._get_by_status_id(
+            user_id, start, end, timestamps, 'closed')
+
+    def get_all_closed_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'closed')
+    
