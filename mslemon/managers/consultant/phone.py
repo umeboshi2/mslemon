@@ -157,21 +157,36 @@ class PhoneCallManager(object):
         q = q.filter(PhoneCallCurrentStatus.status == status_id)
         return q.all()
     
-    
+    def _get_all_by_status_id(self, user_id, status):
+        status_id = self.stypes.get_id(status)
+        q = self.session.query(PhoneCallCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = q.filter(PhoneCallCurrentStatus.status == status_id)
+        return q.all()
+        
     def get_closed_calls(self,
                          user_id, start, end, timestamps=False):
         return self._get_by_status_id(
             user_id, start, end, timestamps, 'closed')
+
+    def get_all_closed_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'closed')
 
     def get_newly_opened_calls(self,
                                user_id, start, end, timestamps=False):
         return self._get_by_status_id(
             user_id, start, end, timestamps, 'opened')
 
+    def get_all_newly_opened_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'opened')
+
     def get_pending_calls(self,
                           user_id, start, end, timestamps=False):
         return self._get_by_status_id(
             user_id, start, end, timestamps, 'pending')
+
+    def get_all_pending_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'pending')
 
     def get_delegated_calls(self, user_id, start, end, timestamps=False):
         status_id = self.stypes.get_id('pending')
@@ -183,3 +198,10 @@ class PhoneCallManager(object):
         q = q.filter(PhoneCallCurrentStatus.handler != user_id)
         return [r for r in q if r.phone_call.callee == user_id]
 
+    def get_all_delegated_calls(self, user_id):
+        status_id = self.stypes.get_id('pending')
+        q = self.session.query(PhoneCallCurrentStatus)
+        q = q.filter(PhoneCallCurrentStatus.status == status_id)
+        q = q.filter(PhoneCallCurrentStatus.handler != user_id)
+        return [r for r in q if r.phone_call.callee == user_id]
+        
