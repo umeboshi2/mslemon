@@ -11,7 +11,13 @@
 	<% r = 'consult_phone' %>
 	<% kw = dict(context='viewcall', id=c.id) %>
 	<% url = request.route_url(r, **kw) %>
-	<a href="${url}">${a}</a>
+	<a href="${url}">${a}</a>&nbsp;(${c.status[0].statustype.name})
+	<div class="phonecalls-list-entry-content-received">
+	  Received: ${c.received.strftime(dtformat)}
+	</div>
+	<div class="phonecalls-list-entry-content-lastupdate">
+	  Last Update: ${c.status[0].last_change.strftime(dtformat)}
+	</div>
       </div>
     </div>
     %endfor

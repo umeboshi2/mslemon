@@ -56,48 +56,6 @@ $(document).ready ->
         # ######################
         # event source buttons
         # ######################
-        $('#2received-button').click ->
-                _now = new Date()
-                _hr = _now.getHours() - 2
-                _url = $('#receivedUrl').val()
-                _element = $('#phone-calendar')
-                make_calendar(_element, _url, 'agendaDay', _hr)                
-
-        $('#2assigned-button').click ->
-                _now = new Date()
-                _hr = _now.getHours() - 2
-                _url = $('#assignedUrl').val()
-                _element = $('#phone-calendar')
-                make_calendar(_element, _url, 'agendaWeek', _hr)                
-
-        $('#2delegated-button').click ->
-                _now = new Date()
-                _hr = _now.getHours() - 2
-                _url = $('#delegatedUrl').val()
-                _element = $('#phone-calendar')
-                make_calendar(_element, _url, 'agendaWeek', _hr)                
-
-        $('#2unread-button').click ->
-                _now = new Date()
-                _hr = _now.getHours() - 2
-                _url = $('#unreadUrl').val()
-                _element = $('#phone-calendar')
-                make_calendar(_element, _url, 'agendaWeek', _hr)                
-                
-        $('#2pending-button').click ->
-                _now = new Date()
-                _hr = _now.getHours() - 2
-                _url = $('#pendingUrl').val()
-                _element = $('#phone-calendar')
-                make_calendar(_element, _url, 'agendaWeek', _hr)                
-
-        $('#2closed-button').click ->
-                _now = new Date()
-                _hr = _now.getHours() - 2
-                _url = $('#closedUrl').val()
-                _element = $('#phone-calendar')
-                make_calendar(_element, _url, 'month', _hr)                
-                
         $('#list-button').click ->
                 button = $('#list-button')
                 $('#phone-calendar').toggle()
@@ -132,7 +90,11 @@ $(document).ready ->
                 else
                         urlid = '#ALL' + calltype + 'Url'
                         url = $(urlid).val()
-                        list_content.load(url)
+                        list_content.load(url, {}, () ->
+                                title = calltype.slice(0,1).toUpperCase() + calltype.slice(1)
+                                $('.phonecalls-list-header').text(title + ' Phone Calls')
+                                )
+                        
 
                         
                 

@@ -57,54 +57,6 @@
       defaultView: 'agendaDay',
       firstHour: thour
     });
-    $('#2received-button').click(function() {
-      var _element, _hr, _now, _url;
-      _now = new Date();
-      _hr = _now.getHours() - 2;
-      _url = $('#receivedUrl').val();
-      _element = $('#phone-calendar');
-      return make_calendar(_element, _url, 'agendaDay', _hr);
-    });
-    $('#2assigned-button').click(function() {
-      var _element, _hr, _now, _url;
-      _now = new Date();
-      _hr = _now.getHours() - 2;
-      _url = $('#assignedUrl').val();
-      _element = $('#phone-calendar');
-      return make_calendar(_element, _url, 'agendaWeek', _hr);
-    });
-    $('#2delegated-button').click(function() {
-      var _element, _hr, _now, _url;
-      _now = new Date();
-      _hr = _now.getHours() - 2;
-      _url = $('#delegatedUrl').val();
-      _element = $('#phone-calendar');
-      return make_calendar(_element, _url, 'agendaWeek', _hr);
-    });
-    $('#2unread-button').click(function() {
-      var _element, _hr, _now, _url;
-      _now = new Date();
-      _hr = _now.getHours() - 2;
-      _url = $('#unreadUrl').val();
-      _element = $('#phone-calendar');
-      return make_calendar(_element, _url, 'agendaWeek', _hr);
-    });
-    $('#2pending-button').click(function() {
-      var _element, _hr, _now, _url;
-      _now = new Date();
-      _hr = _now.getHours() - 2;
-      _url = $('#pendingUrl').val();
-      _element = $('#phone-calendar');
-      return make_calendar(_element, _url, 'agendaWeek', _hr);
-    });
-    $('#2closed-button').click(function() {
-      var _element, _hr, _now, _url;
-      _now = new Date();
-      _hr = _now.getHours() - 2;
-      _url = $('#closedUrl').val();
-      _element = $('#phone-calendar');
-      return make_calendar(_element, _url, 'month', _hr);
-    });
     $('#list-button').click(function() {
       var button, text;
       button = $('#list-button');
@@ -137,7 +89,11 @@
       } else {
         urlid = '#ALL' + calltype + 'Url';
         url = $(urlid).val();
-        return list_content.load(url);
+        return list_content.load(url, {}, function() {
+          var title;
+          title = calltype.slice(0, 1).toUpperCase() + calltype.slice(1);
+          return $('.phonecalls-list-header').text(title + ' Phone Calls');
+        });
       }
     });
   });
