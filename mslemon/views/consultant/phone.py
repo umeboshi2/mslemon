@@ -155,6 +155,7 @@ class PhoneCallViewer(BaseViewer):
         super(PhoneCallViewer, self).__init__(request)
         prepare_main_layout(self.request)
         self.phonecalls = PhoneCallManager(self.request.db)
+        self.dtformat = '%A - %B %d %H:%m'
         
         self._dispatch_table = dict(
             list=self.main_phone_view,
@@ -223,7 +224,7 @@ class PhoneCallViewer(BaseViewer):
     def list_taken_calls(self):
         user_id = self.request.session['user'].id
         calls = self.phonecalls.get_all_taken_calls(user_id)
-        env = dict(calls=calls)
+        env = dict(calls=calls, dtformat=self.dtformat)
         template = 'mslemon:templates/consult/listphonecalls.mako'
         content = self.render(template, env)
         self.layout.content = content
