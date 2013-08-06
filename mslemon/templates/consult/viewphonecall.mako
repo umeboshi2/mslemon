@@ -7,6 +7,11 @@
     ${pcall.caller} called ${callee}<br>
     (Call received by ${received_by})
   </div>
+  <div class="action-button">
+    <% p = pcall.number %>
+    <% p = p[1:4] + p[5:] %>
+    <a href="tel:${p}">${pcall.number}</a>
+  </div>
   <div class="phonecall-description">
     ${rst(pcall.text)|n}
   </div>

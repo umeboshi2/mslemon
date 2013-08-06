@@ -12,6 +12,11 @@
 	<% kw = dict(context='viewcall', id=c.id) %>
 	<% url = request.route_url(r, **kw) %>
 	<a href="${url}">${a}</a>&nbsp;(${c.status[0].statustype.name})
+	<div class="action-button">
+	  <% p = c.number %>
+	  <% p = p[1:4] + p[5:] %>
+	  <a href="tel:${p}">${c.number}</a>
+	</div>
 	<div class="phonecalls-list-entry-content-received">
 	  Received: ${c.received.strftime(dtformat)}
 	</div>
