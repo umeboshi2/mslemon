@@ -171,14 +171,6 @@ class PhoneCallViewer(BaseViewer):
         label = "Calls I've taken"
         self.layout.ctx_menu.append_new_entry(label, url)
 
-        url = self.url(context='add', id='somebody')
-        button = '<div id="take-call-button" class="action-button">'
-        button += 'Take Call<input id="take-call-url" type="hidden"'
-        button += ' value="%s"></div>' % url
-        self.layout.widgetbox = button
-        self.layout.resources.take_call_button.need()
-        
-        
         self.dispatch()
 
     def _take_call_form_submitted(self, form):

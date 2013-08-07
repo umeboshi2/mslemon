@@ -1,6 +1,6 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
-from sqlalchemy import Unicode
+from sqlalchemy import Unicode, UnicodeText
 from sqlalchemy import ForeignKey
 
 
@@ -31,6 +31,14 @@ class User(Base):
         return [g.name for g in self.groups]
 
 
+class UserOption(Base):
+    __tablename__ = 'user_options'
+    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    section = Column(Unicode(50), primary_key=True)
+    option = Column(Unicode(50), primary_key=True)
+    value = Column(UnicodeText, default='')
+    
+    
 class Password(Base):
     __tablename__ = 'passwords'
     user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
