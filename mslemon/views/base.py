@@ -19,6 +19,8 @@ def make_main_menu(request):
     bar = TopBar(request.matched_route.name)
     bar.entries['Home'] = request.route_url('home')
     if 'user' in request.session:
+        url = request.route_url('consult_phone', context='add', id='somebody')
+        bar.entries['Take Call'] = url
         user = request.session['user']
         if 'admin' in user.groups:
             try:
@@ -63,6 +65,7 @@ class BaseViewer(TrumpetViewer):
     def __init__(self, request):
         super(BaseViewer, self).__init__(request)
         prepare_layout(self.layout)
+        self.layout.main_menu = make_main_menu(request).render()
         self.css = self.layout.resources.main_screen
         #skey = 'mslemon.admin.admin_username'
         #self.admin_username = self.request.registry.settings[skey]
