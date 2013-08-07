@@ -1,3 +1,11 @@
+loading_events = (bool) ->
+        if bool
+                $('#loading').show()
+                $('.fc-header').hide()
+        else
+                $('#loading').hide()
+                $('.fc-header').show()
+        
 make_calendar = (element, url, defaultview, firsthour) ->
         element.fullCalendar('destroy')
         element.fullCalendar
@@ -17,6 +25,7 @@ make_calendar = (element, url, defaultview, firsthour) ->
                 allDayDefault: false
                 eventColor: '#8B8878'
                 defaultView: defaultview
+                loading: loading_events
                 # the firstHour is where the agendaDay
                 # calendar starts.
                 firstHour: firsthour
@@ -27,8 +36,8 @@ make_calendar_orig = (element) ->
         rnow = new Date()
         thour = rnow.getHours() - 2
 
-
 $(document).ready ->
+        $('#loading').hide()
         rnow = new Date()
         thour = rnow.getHours() - 2
         #$('#phonecall-list').load('/consult/frag/contactlist/A')

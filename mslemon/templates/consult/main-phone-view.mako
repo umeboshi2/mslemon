@@ -23,6 +23,9 @@
       <input type="hidden" id="ALL${calltype}Url" value="${list_urls[calltype]}">
       %endfor
     </div>
+    <div id="loading">
+      <h2>Loading Events</h2>
+    </div>
     <div id="phone-calendar">
     </div>
     <div id="phonecall-list">
