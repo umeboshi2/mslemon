@@ -69,6 +69,7 @@ class BaseViewer(TrumpetViewer):
         self.css = self.layout.resources.main_screen
         #skey = 'mslemon.admin.admin_username'
         #self.admin_username = self.request.registry.settings[skey]
+        #import pdb ; pdb.set_trace()
         
     def __call__(self):
         if hasattr(self, 'css'):

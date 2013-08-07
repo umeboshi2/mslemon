@@ -2,9 +2,9 @@ from sqlalchemy.orm.exc import NoResultFound
 import transaction
 
 
-from trumpet.models.base import DBSession
-from trumpet.models.usergroup import User, Group, Password
-from trumpet.models.usergroup import UserGroup
+from mslemon.models.base import DBSession
+from mslemon.models.usergroup import User, Group, Password
+from mslemon.models.usergroup import UserGroup, UserOption
 
 from trumpet.security import encrypt_password
 
@@ -69,5 +69,18 @@ class UserManager(object):
         return self.group_query().all()
 
     
-    
+    def Make_default_user_options(self, user_id): 
+        main = dict(sms_email_address='') 
+        phonecall_views = dict(received='agendaDay', assigned='agendaWeek',
+                               delegated='agendaWeek', unread='agendaWeek',
+                               pending='agendaWeek', closed='month')
+        with transaction.manager:
+            for key in main:
+                opt = UserOption(user_id, 'main', key, main[key])
+                self.session.add(opt)
+            for view in phonecall_views:
+                opt = UserOption(user_id,
+                                 'phonecall_views', view, phonecall_views[view])
+                self.session.add(opt)
+                
 

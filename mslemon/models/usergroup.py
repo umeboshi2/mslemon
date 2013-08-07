@@ -20,7 +20,7 @@ class User(Base):
     username = Column(Unicode(50), unique=True)
     email = Column(Unicode(50), unique=True)
     pw = relationship('Password', uselist=False)
-
+    
     def __init__(self, username):
         self.username = username
 
@@ -30,6 +30,19 @@ class User(Base):
     def get_groups(self):
         return [g.name for g in self.groups]
 
+    def get_option(self, section, option):
+        pass
+
+    def get_config(self):
+        from ConfigParser import ConfigParser
+        c = ConfigParser()
+        for row in self.options:
+            if row.section not in c.sections():
+                c.add_section(row.section)
+            c.set(row.section, row.option, row.value)
+        return c
+    
+    
 
 class UserOption(Base):
     __tablename__ = 'user_options'
@@ -37,6 +50,13 @@ class UserOption(Base):
     section = Column(Unicode(50), primary_key=True)
     option = Column(Unicode(50), primary_key=True)
     value = Column(UnicodeText, default='')
+
+    def __init__(self, user_id, section, option, value):
+        self.user_id = user_id
+        self.section = section
+        self.option = option
+        self.value = value
+        
     
     
 class Password(Base):
@@ -69,6 +89,7 @@ class UserGroup(Base):
 
 
 User.groups = relationship(Group, secondary='group_user')
+User.options = relationship(UserOption, backref='user')
 Group.users = relationship(User, secondary='group_user')
 
 
