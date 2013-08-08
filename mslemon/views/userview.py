@@ -16,7 +16,7 @@ from mslemon.views.base import BaseViewer
 from mslemon.models.base import DBSession
 from mslemon.models.consultant import Contact
 from mslemon.models.usergroup import User, Password
-from mslemon.models.usergroup import UserOption
+from mslemon.models.usergroup import UserConfig
 
 #########################
 #[main]
@@ -65,15 +65,15 @@ class ChangePasswordSchema(colander.Schema):
         widget=deform.widget.PasswordWidget(size=20),
         description="Please confirm the new password.")
 
-class UserOptionsSchema(colander.Schema):
-    pass
-
 
 #_view_choices = ['agendaDay', 'agendaWeek', 'month']
 _view_choices = [(0, 'agendaDay'), (1, 'agendaWeek'), (2, 'month')]
 
 ViewChoices = dict(_view_choices)
 ViewChoiceLookup = dict([(v, k) for k,v in ViewChoices.items()])
+PhoneCallViews = ['received', 'assigned', 'delegated', 'unread',
+                  'pending', 'closed']
+
 
 class PhoneCallViewOptionsSchema(colander.Schema):
     received = colander.SchemaNode(
@@ -123,12 +123,6 @@ class MainViewer(BaseViewer):
     def __init__(self, request):
         super(MainViewer, self).__init__(request)
         self.users = UserManager(self.request.db)
-        uids = [u.id for u in self.users.user_query().all()]
-        #for user in self.users.user_query().all():
-        for uid in uids:
-            user = self.users.get_user(uid)
-            if not len(user.options):
-                self.users.Make_default_user_options(user.id)
         self.context = self.request.matchdict['context']
         self.layout.header = "User Preferences"
         self.layout.title = "User Preferences"
@@ -163,12 +157,47 @@ class MainViewer(BaseViewer):
     def phone_call_preferences(self):
         schema = PhoneCallViewOptionsSchema()
         choices = _view_choices
-        for key in ['received', 'assigned', 'delegated', 'unread',
-                    'pending', 'closed']:
+        for key in PhoneCallViews:
             schema[key].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
-        self.layout.content = form.render()
+        if 'submit' in self.request.POST:
+            self._phone_call_pref_form_submitted(form)
+        else:
+            user = self.get_current_user()
+            if user.config is not None:
+                cfg = user.config.get_config()
+                data = dict(cfg.items('phonecall_views'))
+                data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
+            else:
+                data = {}
+            self.layout.content = form.render(data)
+
+    def _phone_call_pref_form_submitted(self, form):
+        db = self.request.db
+        controls = self.request.POST.items()
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        fields = PhoneCallViews
+        section = 'phonecall_views'
+        values = [ViewChoices[int(data[f])] for f in fields]
+        options = dict(zip(fields, values))
+        user = self.get_current_user()
+        if user.config is None:
+            self.users.Make_default_config(user.id)
+            user = self.get_current_user()
+        #import pdb ; pdb.set_trace()
+        cfg = user.config.get_config()
+        for o in options:
+            cfg.set(section, o, options[o])
+        user.config.set_config(cfg)
+        with transaction.manager:
+            db.add(user.config)
+        
+                
         
     def change_password(self):
         schema = ChangePasswordSchema()

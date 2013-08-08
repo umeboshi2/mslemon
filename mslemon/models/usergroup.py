@@ -1,3 +1,6 @@
+from ConfigParser import ConfigParser
+from StringIO import StringIO
+
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import Unicode, UnicodeText
@@ -30,34 +33,28 @@ class User(Base):
     def get_groups(self):
         return [g.name for g in self.groups]
 
-    def get_option(self, section, option):
-        pass
+    
+class UserConfig(Base):
+    __tablename__ = 'user_config'
+    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    text = Column(UnicodeText)
+
+    def __init__(self, user_id, text):
+        self.user_id = user_id
+        self.text = text
 
     def get_config(self):
-        from ConfigParser import ConfigParser
         c = ConfigParser()
-        for row in self.options:
-            if row.section not in c.sections():
-                c.add_section(row.section)
-            c.set(row.section, row.option, row.value)
+        c.readfp(StringIO(self.text))
         return c
-    
-    
 
-class UserOption(Base):
-    __tablename__ = 'user_options'
-    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
-    section = Column(Unicode(50), primary_key=True)
-    option = Column(Unicode(50), primary_key=True)
-    value = Column(UnicodeText, default='')
-
-    def __init__(self, user_id, section, option, value):
-        self.user_id = user_id
-        self.section = section
-        self.option = option
-        self.value = value
-        
-    
+    def set_config(self, config):
+        cfile = StringIO()
+        config.write(cfile)
+        cfile.seek(0)
+        text = cfile.read()
+        self.text = text
+        #return self
     
 class Password(Base):
     __tablename__ = 'passwords'
@@ -89,7 +86,7 @@ class UserGroup(Base):
 
 
 User.groups = relationship(Group, secondary='group_user')
-User.options = relationship(UserOption, backref='user')
+User.config = relationship(UserConfig, uselist=False, lazy='subquery')
 Group.users = relationship(User, secondary='group_user')
 
 

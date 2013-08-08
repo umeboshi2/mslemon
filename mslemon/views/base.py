@@ -3,6 +3,7 @@ from trumpet.views.base import BaseMenu
 from trumpet.views.menus import BaseMenu, TopBar
 
 from mslemon.resources import StaticResources
+from mslemon.models.usergroup import User
 
 def prepare_layout(layout):
     layout.title = 'Miss Lemon'
@@ -76,6 +77,10 @@ class BaseViewer(TrumpetViewer):
             self.css.need()
         return super(BaseViewer, self).__call__()
 
+    def get_current_user(self):
+        db = self.request.db
+        user_id = self.request.session['user'].id
+        return db.query(User).get(user_id)
 
 class AdminViewer(BaseViewer):
     def __init__(self, request):

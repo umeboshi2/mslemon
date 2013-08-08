@@ -16,6 +16,7 @@
     <div id="calendar-variables">
       %for calltype in calltypes:
       <input type="hidden" id="${calltype}Url" value="${calendar_urls[calltype]}">
+      <input type="hidden" id="calendar_view_${calltype}" value="${calviews[calltype]}">
       %endfor
     </div>
     <div id="list-variables">

@@ -207,7 +207,6 @@ class PhoneCallViewer(BaseViewer):
             formdata = dict(received=datetime.now())
             rendered = form.render(formdata)
             self.layout.content = rendered
-        self.layout.footer = 'take a phone call............'
         
     
     def list_calls(self):
@@ -253,8 +252,12 @@ class PhoneCallViewer(BaseViewer):
             context = 'all_%scalls' % calltype
             url = self.request.route_url(route, context=context, id=id_)
             list_urls[calltype] = url
+            user = self.get_current_user()
+            cfg = user.config.get_config()
+            calviews = dict(cfg.items('phonecall_views'))
         env = dict(calendar_urls=calendar_urls,
-                   list_urls=list_urls)
+                   list_urls=list_urls,
+                   calviews=calviews)
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.phone_calendar.need()

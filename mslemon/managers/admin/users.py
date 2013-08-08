@@ -1,10 +1,12 @@
+from ConfigParser import ConfigParser
+from StringIO import StringIO
 from sqlalchemy.orm.exc import NoResultFound
 import transaction
 
 
 from mslemon.models.base import DBSession
 from mslemon.models.usergroup import User, Group, Password
-from mslemon.models.usergroup import UserGroup, UserOption
+from mslemon.models.usergroup import UserGroup, UserConfig
 
 from trumpet.security import encrypt_password
 
@@ -31,6 +33,7 @@ class UserManager(object):
             self.session.add(user)
         user = self.session.merge(user)
         self.set_password(user.id, password)
+        self.Make_default_config(user.id)
         return user
     
 
@@ -68,19 +71,24 @@ class UserManager(object):
     def list_groups(self):
         return self.group_query().all()
 
-    
-    def Make_default_user_options(self, user_id): 
+
+    def Make_default_config(self, user_id):
         main = dict(sms_email_address='') 
         phonecall_views = dict(received='agendaDay', assigned='agendaWeek',
                                delegated='agendaWeek', unread='agendaWeek',
                                pending='agendaWeek', closed='month')
+        c = ConfigParser()
+        c.add_section('main')
+        for option in main:
+            c.set('main', option, main[option])
+        c.add_section('phonecall_views')
+        for option in phonecall_views:
+            c.set('phonecall_views', option, phonecall_views[option])
+        cfg = StringIO()
+        c.write(cfg)
+        cfg.seek(0)
+        text = cfg.read()
         with transaction.manager:
-            for key in main:
-                opt = UserOption(user_id, 'main', key, main[key])
-                self.session.add(opt)
-            for view in phonecall_views:
-                opt = UserOption(user_id,
-                                 'phonecall_views', view, phonecall_views[view])
-                self.session.add(opt)
-                
-
+            config = UserConfig(user_id, text)
+            self.session.add(config)
+            
