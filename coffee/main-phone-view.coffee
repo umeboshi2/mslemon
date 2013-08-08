@@ -58,7 +58,7 @@ $(document).ready ->
                 selectable: false
                 allDayDefault: false
                 eventColor: '#8B8878'
-                defaultView: 'agendaDay'
+                defaultView: $('#calendar_view_received').val()
                 # the firstHour is where the agendaDay
                 # calendar starts.
                 firstHour: thour
@@ -83,6 +83,8 @@ $(document).ready ->
                 view = viewbutton.text()
                 button = $(this)
                 calltype = $(this).attr('id').split('-')[0]
+                defaultViewID = '#calendar_view_' + calltype
+                defaultView = $(defaultViewID).val()
                 # FIXME: we may need a bar of buttons for different
                 # view types.
                 # 
@@ -94,7 +96,7 @@ $(document).ready ->
                         url = $(urlid).val()
                         element = calendar_content
                         # FIXME: put calendar view type in template
-                        make_calendar(element, url, 'agendaWeek', hr)
+                        make_calendar(element, url, defaultView, hr)
                 # else we are in List View
                 else
                         urlid = '#ALL' + calltype + 'Url'
@@ -103,6 +105,9 @@ $(document).ready ->
                                 title = calltype.slice(0,1).toUpperCase() + calltype.slice(1)
                                 $('.phonecalls-list-header').text(title + ' Phone Calls')
                                 )
+
+                
+                
                         
 
                         

@@ -123,6 +123,10 @@ class MainViewer(BaseViewer):
     def __init__(self, request):
         super(MainViewer, self).__init__(request)
         self.users = UserManager(self.request.db)
+        # make default config for user, if needed
+        user = self.get_current_user()
+        if user.config is None:
+            self.users.Make_default_config(user.id)
         self.context = self.request.matchdict['context']
         self.layout.header = "User Preferences"
         self.layout.title = "User Preferences"
@@ -165,12 +169,9 @@ class MainViewer(BaseViewer):
             self._phone_call_pref_form_submitted(form)
         else:
             user = self.get_current_user()
-            if user.config is not None:
-                cfg = user.config.get_config()
-                data = dict(cfg.items('phonecall_views'))
-                data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
-            else:
-                data = {}
+            cfg = user.config.get_config()
+            data = dict(cfg.items('phonecall_views'))
+            data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
             self.layout.content = form.render(data)
 
     def _phone_call_pref_form_submitted(self, form):
@@ -186,10 +187,6 @@ class MainViewer(BaseViewer):
         values = [ViewChoices[int(data[f])] for f in fields]
         options = dict(zip(fields, values))
         user = self.get_current_user()
-        if user.config is None:
-            self.users.Make_default_config(user.id)
-            user = self.get_current_user()
-        #import pdb ; pdb.set_trace()
         cfg = user.config.get_config()
         for o in options:
             cfg.set(section, o, options[o])

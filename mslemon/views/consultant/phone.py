@@ -52,7 +52,11 @@ class TakePhoneCallSchema(colander.Schema):
         title='Call received',
         widget=deform.widget.DateTimeInputWidget(),
         )
-
+    send_textmsg = colander.SchemaNode(
+        colander.Boolean(),
+        title='Send text message to cellphone',
+        widget=deform.widget.CheckboxWidget(),
+        )
 
 reason_description = """\
 You can instruct another user to handle the phone call by

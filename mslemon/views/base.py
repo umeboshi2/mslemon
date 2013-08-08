@@ -68,9 +68,6 @@ class BaseViewer(TrumpetViewer):
         prepare_layout(self.layout)
         self.layout.main_menu = make_main_menu(request).render()
         self.css = self.layout.resources.main_screen
-        #skey = 'mslemon.admin.admin_username'
-        #self.admin_username = self.request.registry.settings[skey]
-        #import pdb ; pdb.set_trace()
         
     def __call__(self):
         if hasattr(self, 'css'):
@@ -82,6 +79,9 @@ class BaseViewer(TrumpetViewer):
         user_id = self.request.session['user'].id
         return db.query(User).get(user_id)
 
+    def get_app_settings(self):
+        return self.request.registry.settings
+    
 class AdminViewer(BaseViewer):
     def __init__(self, request):
         super(AdminViewer, self).__init__(request)

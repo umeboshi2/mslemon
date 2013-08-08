@@ -66,7 +66,7 @@
       selectable: false,
       allDayDefault: false,
       eventColor: '#8B8878',
-      defaultView: 'agendaDay',
+      defaultView: $('#calendar_view_received').val(),
       firstHour: thour
     });
     $('#list-button').click(function() {
@@ -84,20 +84,22 @@
       }
     });
     return $('.query-button').click(function() {
-      var button, calendar_content, calltype, element, hr, list_content, now, url, urlid, view, viewbutton;
+      var button, calendar_content, calltype, defaultView, defaultViewID, element, hr, list_content, now, url, urlid, view, viewbutton;
       calendar_content = $('#phone-calendar');
       list_content = $('#phonecall-list');
       viewbutton = $('#list-button');
       view = viewbutton.text();
       button = $(this);
       calltype = $(this).attr('id').split('-')[0];
+      defaultViewID = '#calendar_view_' + calltype;
+      defaultView = $(defaultViewID).val();
       if (view === 'List') {
         urlid = '#' + calltype + 'Url';
         now = new Date();
         hr = now.getHours() - 2;
         url = $(urlid).val();
         element = calendar_content;
-        return make_calendar(element, url, 'agendaWeek', hr);
+        return make_calendar(element, url, defaultView, hr);
       } else {
         urlid = '#ALL' + calltype + 'Url';
         url = $(urlid).val();
