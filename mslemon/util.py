@@ -26,15 +26,4 @@ def send_email_through_smtp_server(settings, message, sender, receiver):
 
             
 if __name__ == "__main__":
-    subject = "test oneway.mailer.py"
-    message = "This is another test.\nOneway.\n"
-    sender = "oneway@littledebian.org"
-    receiver = "joseph.rawson.works@littledebian.org"
-    email = make_email_message(subject, message, sender, receiver)
-    send_email_through_littledebian(email, sender, receiver)
-    
-    
-
-        
-    
-
+    pass

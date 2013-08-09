@@ -1,3 +1,4 @@
+import urlparse
 from datetime import datetime
 
 import colander
@@ -15,6 +16,9 @@ from mslemon.views.consultant.base import prepare_base_layout
 
 from mslemon.models.usergroup import User
 from mslemon.managers.consultant.phone import PhoneCallManager
+
+from mslemon.util import send_email_through_smtp_server, make_email_message
+
 
 
 def deferred_choices(node, kw):
@@ -191,8 +195,29 @@ class PhoneCallViewer(BaseViewer):
         values.append(received_by)
         pcall = self.phonecalls.new_call(*values)
         #self.layout.subheader = "Phone Call taken: %s" % pcall
+        if data['send_textmsg']:
+            self._send_text_notification(pcall)
+                
         
-        
+    def _send_text_notification(self, pcall):
+        callee = self.request.db.query(User).get(pcall.callee)
+        settings = self.request.registry.settings
+        cfg = callee.config.get_config()
+        if cfg.get('main', 'sms_email_address'):
+            prefix = 'mslemon.smtp.'
+            server = settings[prefix + 'server']
+            port = int(settings[prefix + 'port'])
+            login = settings[prefix + 'login']
+            password = settings[prefix + 'password']
+            subject = "%s just called" % pcall.caller
+            url = self.url(context='viewcall', id=pcall.id)
+            path = urlparse.urlparse(url).path
+            message = 'https://cypress.littledebian.org%s' % path
+            sender = login
+            receiver = cfg.get('main', 'sms_email_address')
+            msg = make_email_message(subject, message, sender, receiver)
+            send_email_through_smtp_server(settings, msg, sender, receiver)
+    
     
     def take_call(self):
         schema = TakePhoneCallSchema()

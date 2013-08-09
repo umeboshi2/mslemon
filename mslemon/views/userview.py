@@ -76,6 +76,10 @@ PhoneCallViews = ['received', 'assigned', 'delegated', 'unread',
 
 
 class PhoneCallViewOptionsSchema(colander.Schema):
+    sms_email_address = colander.SchemaNode(
+        colander.String(),
+        title='Cell Phone Email Address',
+        )
     received = colander.SchemaNode(
         colander.String(),
         title='Received',
@@ -172,6 +176,7 @@ class MainViewer(BaseViewer):
             cfg = user.config.get_config()
             data = dict(cfg.items('phonecall_views'))
             data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
+            data['sms_email_address'] = cfg.get('main', 'sms_email_address')
             self.layout.content = form.render(data)
 
     def _phone_call_pref_form_submitted(self, form):
@@ -190,10 +195,10 @@ class MainViewer(BaseViewer):
         cfg = user.config.get_config()
         for o in options:
             cfg.set(section, o, options[o])
+        cfg.set('main', 'sms_email_address', data['sms_email_address'])
         user.config.set_config(cfg)
         with transaction.manager:
             db.add(user.config)
-        
                 
         
     def change_password(self):
