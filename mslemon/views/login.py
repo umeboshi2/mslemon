@@ -103,7 +103,9 @@ class LoginViewer(BaseViewer):
         self.layout.header = "Session Expired"
         self.layout.title = self.layout.header
         self.layout.subheader = "Please authenticate or log out."
-        formdata = dict(username=self.request.session['user'].username)
+        formdata = {}
+        if 'user' in self.request.session:
+            formdata = dict(username=self.request.session['user'].username)
         if 'login' in self.request.params:
             self._login_submitted()
         else:
