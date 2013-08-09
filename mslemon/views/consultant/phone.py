@@ -198,7 +198,16 @@ class PhoneCallViewer(BaseViewer):
         if data['send_textmsg']:
             self._send_text_notification(pcall)
                 
-        
+
+    def _make_text_message(self, pcall):
+        settings = self.request.registry.settings
+        url = self.url(context='viewcall', id=pcall.id)
+        path = urlparse.urlparse(url).path
+        url = settings['mslemon.public_url'] + path 
+        text = "%s\n\n" % url
+        text += "%s\n\n" % pcall.number
+        return text
+    
     def _send_text_notification(self, pcall):
         callee = self.request.db.query(User).get(pcall.callee)
         settings = self.request.registry.settings
@@ -210,9 +219,7 @@ class PhoneCallViewer(BaseViewer):
             login = settings[prefix + 'login']
             password = settings[prefix + 'password']
             subject = "%s just called" % pcall.caller
-            url = self.url(context='viewcall', id=pcall.id)
-            path = urlparse.urlparse(url).path
-            message = 'https://cypress.littledebian.org%s' % path
+            message = self._make_text_message(pcall)
             sender = login
             receiver = cfg.get('main', 'sms_email_address')
             msg = make_email_message(subject, message, sender, receiver)
