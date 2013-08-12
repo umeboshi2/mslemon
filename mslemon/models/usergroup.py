@@ -2,7 +2,7 @@ from ConfigParser import ConfigParser
 from StringIO import StringIO
 
 from sqlalchemy import Column
-from sqlalchemy import Integer
+from sqlalchemy import Integer, Boolean
 from sqlalchemy import Unicode, UnicodeText
 from sqlalchemy import ForeignKey
 
@@ -22,6 +22,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(Unicode(50), unique=True)
     email = Column(Unicode(50), unique=True)
+    active = Column(Boolean, default=True)
     pw = relationship('Password', uselist=False)
     
     def __init__(self, username):

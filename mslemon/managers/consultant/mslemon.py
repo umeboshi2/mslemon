@@ -1,0 +1,394 @@
+from datetime import datetime, timedelta
+
+import transaction
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy import desc
+
+from mslemon.managers.util import convert_range_to_datetime
+
+from mslemon.models.mslemon import Description
+from mslemon.models.mslemon import Ticket, TicketCurrentStatus
+from mslemon.models.mslemon import TicketStatusChange
+from mslemon.models.mslemon import PhoneCall
+
+class DescriptionManager(object):
+    def __init__(self, session):
+        self.session = session
+        self.stypes = StatusTypeManager(self.session)
+
+    def query(self):
+        return self.session.query(Description)
+
+    def new(self, text):
+        with transaction.manager:
+            d = Description()
+            d.text = text
+            self.session.add(d)
+        return self.session.merge(d)
+
+    def get(self, id):
+        return self.query().get(id)
+    
+    def update(self, text):
+        with transaction.manager:
+            try:
+                d = self.session.query(Description).filter_by(text=text).one()
+            except NoResultFound:
+                d = Description()
+                d.text = text
+                self.session.add(d)
+                d = self.session.merge(d)
+        return d
+    
+class TicketManager(object):
+    def __init__(self, session):
+        self.session = session
+        self.descriptions = DescriptionManager(self.session)
+
+    def query(self):
+        return self.session.query(Ticket)
+
+    def open(self, user_id, title, description, handler_id=None):
+        if handler_id is None:
+            handler_id = user_id
+        with transaction.manager:
+            now = datetime.now()
+            d = self.descriptions.new(description)
+            t = Ticket()
+            t.title = title
+            t.description_id = d.id
+            t.created = now
+            self.session.add(t)
+            ticket = self.session.merge(t)
+            change = TicketStatusChange()
+            change.ticket_id = ticket.id
+            change.status = 'opened'
+            change.reason = "New Ticket"
+            change.description_id = d.id
+            change.changed = now
+            change.changed_by_id = user_id
+            change.handler_id = handler_id
+            self.session.add(change)
+            change = self.session.merge(change)
+            current = TicketCurrentStatus()
+            current.ticket_id = ticket.id
+            current.last_change_id = change.id
+            current.created = ticket.created
+            current.last_change = change.changed
+            current.status = change.status
+            current.changed_by_id = user_id
+            current.handler_id = handler_id
+            self.session.add(current)
+        return self.session.merge(ticket)
+    
+
+
+    def update_ticket(self, ticket_id, user_id, status, reason, handler_id,
+                      description=None):
+        now = datetime.now()
+        with transaction.manager:
+            ticket = self.get(ticket_id)
+            change = TicketStatusChange()
+            change.ticket_id = ticket_id
+            change.status = status
+            change.reason = reason
+            change.changed = now
+            change.changed_by_id = user_id
+            change.handler_id = handler_id
+            self.session.add(change)
+            change = self.session.merge(change)
+            current = self.session.query(TicketCurrentStatus).get(ticket_id)
+            current.last_change = now
+            current.last_change_id = change.id
+            current.status = status
+            current.changed_by_id = user_id
+            current.handler_id = handler_id
+            current = self.session.merge(current)
+        return self.session.merge(change)
+
+    def all(self):
+        return self.query().all()
+
+    def status(self, ticket_id):
+        q = self.session.query(TicketCurrentStatus)
+        q = q.filter_by(ticket_id=ticket_id)
+        return q.one()
+
+    def get_status(self, ticket_id):
+        s = self.status(ticket_id)
+        return s.status
+    
+    def _range_filter(self, query, start, end):
+        "start and end are datetime objects"
+        query = query.filter(TicketCurrentStatus.last_change >= start)
+        query = query.filter(TicketCurrentStatus.last_change <= end)
+        return query
+    
+    def get_current_status_range(self, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(TicketCurrentStatus)
+        q = self._range_filter(q, start, end)
+        return q.all()
+    
+    def get_current_status_range_ts(self, start, end):
+        return self.get_current_status_range(start, end, timestamps=True)
+
+    def _basic_query(self, user_id, 
+                     start=None, end=None, timestamps=False):
+        q = self.session.query(TicketCurrentStatus)
+        q.filter_by(handler_id=user_id)
+        if start is not None:
+            if timestamps:
+                start, end = convert_range_to_datetime(start, end)
+            q = self._range_filter(q, start, end)
+        return q
+    
+
+    def get_assigned_query(self, user_id,
+                           start=None, end=None, timestamps=False):
+        q = self._basic_query(user_id, start=start, end=end,
+                              timestamps=timestamps)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
+        return q
+
+    def get_assigned(self, user_id,
+                     start=None, end=None, timestamps=False):
+        q = self.get_assigned_query(user_id, start=start, end=end,
+                                    timestamps=timestamps)
+        return q.all()
+
+    def get_delegated_query(self, user_id,
+                            start=None, end=None, timestamps=False):
+        q = self.session.query(TicketCurrentStatus)
+        q.filter_by(changed_by_id=user_id)
+        if start is not None:
+            if timestamps:
+                start, end = convert_range_to_datetime(start, end)
+            q = self._range_filter(q, start, end)
+        q = q.filter(TicketCurrentStatus.handler_id != user_id)
+        return q
+
+    def get_delegated(self, user_id,
+                      start=None, end=None, timestamps=False):
+        q = self.get_delegated_query(user_id, start=start, end=end,
+                                     timestamps=timestamps)
+        return q.all()
+
+    def _get_by_status_query(self, user_id, status,
+                             start=None, end=None, timestamps=False):
+        q = self._basic_query(user_id, start=start, end=end,
+                              timestamps=timestamps)
+        q.filter_by(status=status)
+        return q
+    
+    def _get_by_status(self, user_id, status,
+                       start=None, end=None, timestamps=False):
+        q = self._get_by_status_query(user_id, status, start=start, end=end,
+                                      timestamps=timestamps)
+        return q.all()
+
+    def get_unread(self, user_id,
+                   start=None, end=None, timestamps=False):
+        return self._get_by_status(user_id, 'opened',
+                                   start=start, end=end, timestamps=timestamps)
+
+    def get_pending(self, user_id,
+                   start=None, end=None, timestamps=False):
+        return self._get_by_status(user_id, 'pending',
+                                   start=start, end=end, timestamps=timestamps)
+    
+    def get_closed(self, user_id,
+                   start=None, end=None, timestamps=False):
+        return self._get_by_status(user_id, 'closed',
+                                   start=start, end=end, timestamps=timestamps)
+    
+
+
+
+class PhoneCallManager(object):
+    def __init__(self, session):
+        self.session = session
+        self.tickets = TicketManager(self.session)
+        
+    def query(self):
+        return self.session.query(PhoneCall)
+
+    def get(self, id):
+        return self.query().get(id)
+
+    def new_call(self, received, caller, number,
+                 callee_id, received_by_id, title, description):
+        with transaction.manager:
+            now = datetime.now()
+            ticket = self.tickets.open(received_by_id,
+                                       title, description, callee_id)
+            pc = PhoneCall()
+            pc.received = received
+            pc.caller = caller
+            pc.number = number
+            pc.callee_id = callee_id
+            pc.received_by_id = received_by_id
+            pc.ticket_id = ticket.id
+            self.session.add(pc)
+        return self.session.merge(pc)
+    
+    def get_calls_range(self, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.query()
+        q = self._range_filter(q, start, end)
+        return q.all()
+
+    def get_calls_range_ts(self, start, end):
+        return self.get_calls_range(start, end, timestamps=True)
+
+    def get_taken_calls(self, user_id, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.query()
+        q = self._range_filter(q, start, end)
+        q = q.filter_by(received_by_id=user_id)
+        return q.all()
+    
+    def get_all_taken_calls(self, user_id):
+        q = self.query().filter_by(received_by_id=user_id)
+        return q.all()
+    
+    def get_received_calls(self, user_id, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.query().filter_by(callee=user_id)
+        q = self._range_filter(q, start, end)
+        #q = q.filter(PhoneCallCurrentStatus.status != closed_id)
+        calls = [c for c in q.all() if c.status[0].status != 'closed']
+        return calls
+
+    # FIXME: we really need a join when not specifying time range
+    def get_all_received_calls(self, user_id):
+        q = self.query().filter_by(callee=user_id)
+        calls = [c for c in q.all() if c.status[0].status != 'closed']
+        return calls
+
+
+    def get_assigned_calls(self,
+                           user_id, start, end, timestamps=False):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(TicketCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = self._last_change_range(q, start, end)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
+        return q.all()
+
+    def get_all_assigned_calls(self, user_id):
+        q = self.session.query(TicketCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
+        return q.all()
+    
+    def _get_by_status(self,
+                       user_id, start, end, timestamps, status):
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(TicketCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = self._last_change_range(q, start, end)
+        q = q.filter(TicketCurrentStatus.status == status)
+        return q.all()
+    
+    def _get_all_by_status(self, user_id, status):
+        q = self.session.query(TicketCurrentStatus)
+        q = q.filter_by(handler=user_id)
+        q = q.filter(TicketCurrentStatus.status == status)
+        return q.all()
+        
+    def get_delegated_calls(self, user_id, start, end, timestamps=False):
+        status = 'pending'
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(TicketCurrentStatus)
+        q = self._last_change_range(q, start, end)
+        q = q.filter(TicketCurrentStatus.status == status)
+        q = q.filter(TicketCurrentStatus.handler != user_id)
+        return [r for r in q if r.phone_call.callee_id == user_id]
+
+    def get_all_delegated_calls(self, user_id):
+        status = 'pending'
+        q = self.session.query(TicketCurrentStatus)
+        q = q.filter(TicketCurrentStatus.status == status)
+        q = q.filter(TicketCurrentStatus.handler != user_id)
+        return [r for r in q if r.phone_call.callee == user_id]
+    
+    def get_unread_calls(self,
+                         user_id, start, end, timestamps=False):
+        return self._get_by_status(
+            user_id, start, end, timestamps, 'opened')
+    
+    def get_all_unread_calls(self, user_id):
+        return self._get_all_by_status(user_id, 'opened')
+    
+    def get_pending_calls(self,
+                          user_id, start, end, timestamps=False):
+        return self._get_by_status(
+            user_id, start, end, timestamps, 'pending')
+    
+    def get_all_pending_calls(self, user_id):
+        return self._get_all_by_status_id(user_id, 'pending')
+    
+    def get_closed_calls(self,
+                         user_id, start, end, timestamps=False):
+        return self._get_by_status(
+            user_id, start, end, timestamps, 'closed')
+
+    def get_all_closed_calls(self, user_id):
+        return self._get_all_by_status(user_id, 'closed')
+    
+
+class PhoneCallAdminManager(PhoneCallManager):
+    def __init__(self, session):
+        super(PhoneCallAdminManager, self).__init__(session)
+
+    def _filter_by_status_name(self, status):
+        status_id = self.stypes.get_id(status)
+        q = self.session.query(TicketCurrentStatus)
+        return q.filter(TicketCurrentStatus.status == status_id)
+
+    def _filter_by_status_name_range(self,
+                                     status, start, end,
+                                     timestamps=False):
+        status_id = self.stypes.get_id(status)
+        if timestamps:
+            start, end = convert_range_to_datetime(start, end)
+        q = self.session.query(TicketCurrentStatus)
+        q = self._last_change_range(q, start, end)
+        return q.filter(TicketCurrentStatus.status == status_id)
+
+    def get_unread_calls(self, start, end, timestamps=False):
+        q = self._filter_by_status_name_range('opened', start, end,
+                                              timestamps=timestamps)
+        return q.all()
+
+    def get_all_unread_calls(self):
+        q = self._filter_by_status_name('opened')
+        return q.all()
+
+    def get_pending_calls(self, start, end, timestamps=False):
+        q = self._filter_by_status_name_range('pending', start, end,
+                                              timestamps=timestamps)
+        return q.all()
+
+    def get_all_pending_calls(self):
+        q = self._filter_by_status_name('pending')
+        return q.all()
+
+    def get_closed_calls(self, start, end, timestamps=False):
+        q = self._filter_by_status_name_range('closed', start, end,
+                                              timestamps=timestamps)
+        return q.all()
+
+    def get_all_closed_calls(self):
+        q = self._filter_by_status_name('closed')
+        return q.all()
+    
+    
