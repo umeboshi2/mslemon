@@ -189,6 +189,9 @@ class PhoneCallViewer(BaseViewer):
         except deform.ValidationFailure, e:
             self.layout.content = e.render()
             return
+        # strip tzinfo that is attached by deform
+        if data['received'].tzinfo is not None:
+            data['received'] = data['received'].replace(tzinfo=None)
         fields = ['received', 'caller', 'number', 'text', 'callee']
         values = [data[f] for f in fields]
         received_by = self.request.session['user'].id
