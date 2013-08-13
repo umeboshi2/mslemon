@@ -52,9 +52,26 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     route_name = 'msl_tickets'
     config.add_route(route_name,
                      '/msl/tickets/{context}/{id}')
-    config.add_view('mslemon.views.consultant.msl.MSLViewer',
+    #FIXME: better module name
+    config.add_view('mslemon.views.consultant.misslemon.MSLViewer',
                     route_name=route_name,
                     renderer=basetemplate,
+                    layout='base',
+                    permission=permission)
+    route_name = 'msl_tktjson'
+    config.add_route(route_name,
+                     '/msl/tktjson/{context}/{id}')
+    config.add_view('mslemon.views.consultant.misslemon.TicketJSONViewer',
+                    route_name=route_name,
+                    renderer='json',
+                    layout='base',
+                    permission=permission)
+    route_name = 'msl_tktfrag'
+    config.add_route(route_name,
+                     '/msl/tktfrag/{context}/{id}')
+    config.add_view('mslemon.views.consultant.misslemon.TicketFrag',
+                    route_name=route_name,
+                    renderer='string',
                     layout='base',
                     permission=permission)
                      

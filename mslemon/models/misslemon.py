@@ -95,7 +95,7 @@ class Description(Base):
     id = Column(Integer, primary_key=True)
     text = Column(UnicodeText)
     
-TicketStatus = Enum('opened', 'pending', 'closed')
+TicketStatus = Enum('opened', 'pending', 'closed', name='msl_ticket_status_types')
 
 class Ticket(Base):
     __tablename__ = 'msl_tickets'
@@ -163,11 +163,18 @@ class ClientCall(Base):
 Ticket.description = relationship(Description)
 Ticket.history = relationship(TicketStatusChange,
                               order_by=TicketStatusChange.changed)
+Ticket.current_status = relationship(TicketCurrentStatus, uselist=False)
+
 TicketStatusChange.handler = \
     relationship(User, foreign_keys=[TicketStatusChange.handler_id])
+TicketStatusChange.changed_by = \
+    relationship(User, foreign_keys=[TicketStatusChange.changed_by_id])
+    
 TicketCurrentStatus.ticket = relationship(Ticket)
 TicketCurrentStatus.changed_by = \
     relationship(User, foreign_keys=[TicketCurrentStatus.changed_by_id])
+TicketCurrentStatus.handler = \
+    relationship(User, foreign_keys=[TicketCurrentStatus.handler_id])
 
 
 PhoneCall.ticket = relationship(Ticket)

@@ -7,10 +7,10 @@ from sqlalchemy import desc
 from mslemon.managers.util import convert_range_to_datetime
 
 #FIXME: better module name
-from mslemon.models.msll import Description
-from mslemon.models.msll import Ticket, TicketCurrentStatus
-from mslemon.models.msll import TicketStatusChange
-from mslemon.models.msll import PhoneCall
+from mslemon.models.misslemon import Description
+from mslemon.models.misslemon import Ticket, TicketCurrentStatus
+from mslemon.models.misslemon import TicketStatusChange
+from mslemon.models.misslemon import PhoneCall
 
 class DescriptionManager(object):
     def __init__(self, session):
@@ -48,6 +48,9 @@ class TicketManager(object):
     def query(self):
         return self.session.query(Ticket)
 
+    def get(self, id):
+        return self.query().get(id)
+    
     def open(self, user_id, title, description, handler_id=None):
         if handler_id is None:
             handler_id = user_id
@@ -95,6 +98,8 @@ class TicketManager(object):
             change.changed = now
             change.changed_by_id = user_id
             change.handler_id = handler_id
+            if description is None:
+                change.description_id = ticket.description_id
             self.session.add(change)
             change = self.session.merge(change)
             current = self.session.query(TicketCurrentStatus).get(ticket_id)
@@ -179,7 +184,7 @@ class TicketManager(object):
                              start=None, end=None, timestamps=False):
         q = self._basic_query(user_id, start=start, end=end,
                               timestamps=timestamps)
-        q.filter_by(status=status)
+        q = q.filter_by(status=status)
         return q
     
     def _get_by_status(self, user_id, status,
