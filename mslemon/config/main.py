@@ -48,7 +48,16 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     layout='base',
                     permission=permission)
     
-    
+    ###################################
+    route_name = 'msl_tickets'
+    config.add_route(route_name,
+                     '/msl/tickets/{context}/{id}')
+    config.add_view('mslemon.views.consultant.msl.MSLViewer',
+                    route_name=route_name,
+                    renderer=basetemplate,
+                    layout='base',
+                    permission=permission)
+                     
 
     
                      

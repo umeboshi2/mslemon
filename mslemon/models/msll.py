@@ -122,7 +122,7 @@ class TicketStatusChange(Base):
 class TicketCurrentStatus(Base):
     __tablename__ = 'msl_ticket_current_status'
     ticket_id = Column(Integer, ForeignKey('msl_tickets.id'), primary_key=True)
-    last_change_id = Column(Integer, ForeignKey('msl_ticket_status.id',
+    last_change_id = Column(Integer, ForeignKey('msl_ticket_status.id'),
                                                 nullable=False)
     created = Column(DateTime)
     last_change = Column(DateTime)
@@ -143,24 +143,31 @@ class PhoneCall(Base):
     
 
 class ContactCall(Base):
-    __tablename__ = 'contact_phone_calls'
-    contact_id = Column(Integer, ForeignKey('contacts.id'), primary_key=True)
-    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    __tablename__ = 'msl_contact_phone_calls'
+    contact_id = Column(Integer,
+                        ForeignKey('msl_contacts.id'), primary_key=True)
+    call_id = Column(Integer,
+                     ForeignKey('msl_phone_calls.id'), primary_key=True)
 
 class ClientCall(Base):
-    __tablename__ = 'client_phone_calls'
-    client_id = Column(Integer, ForeignKey('clients.id'), primary_key=True)
-    call_id = Column(Integer, ForeignKey('phone_calls.id'), primary_key=True)
+    __tablename__ = 'msl_client_phone_calls'
+    client_id = Column(Integer,
+                       ForeignKey('msl_clients.id'), primary_key=True)
+    call_id = Column(Integer,
+                     ForeignKey('msl_phone_calls.id'), primary_key=True)
     
     
     
 
 # relationships    
 Ticket.description = relationship(Description)
-Ticket.history = relationship(TicketStatus, order_by=TicketStatus.changed)
-TicketStatusChange.user = relationship(User)
+Ticket.history = relationship(TicketStatusChange,
+                              order_by=TicketStatusChange.changed)
+TicketStatusChange.handler = \
+    relationship(User, foreign_keys=[TicketStatusChange.handler_id])
 TicketCurrentStatus.ticket = relationship(Ticket)
-TicketCurrentStatus.changed_by = relationship(User)
+TicketCurrentStatus.changed_by = \
+    relationship(User, foreign_keys=[TicketCurrentStatus.changed_by_id])
 
 
 PhoneCall.ticket = relationship(Ticket)

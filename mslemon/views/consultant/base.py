@@ -22,6 +22,9 @@ def prepare_base_layout(request):
 
         url = request.route_url('consult_phone', context='list', id='all')
         layout.ctx_menu.append_new_entry('Phone Calls', url)
+
+        url = request.route_url('msl_tickets', context='list', id='all')
+        layout.ctx_menu.append_new_entry('new stuff', url)
         
     #url = request.route_url('view_wiki')
     #layout.ctx_menu.append_new_entry('Wiki', url)

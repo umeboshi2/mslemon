@@ -6,15 +6,15 @@ from sqlalchemy import desc
 
 from mslemon.managers.util import convert_range_to_datetime
 
-from mslemon.models.mslemon import Description
-from mslemon.models.mslemon import Ticket, TicketCurrentStatus
-from mslemon.models.mslemon import TicketStatusChange
-from mslemon.models.mslemon import PhoneCall
+#FIXME: better module name
+from mslemon.models.msll import Description
+from mslemon.models.msll import Ticket, TicketCurrentStatus
+from mslemon.models.msll import TicketStatusChange
+from mslemon.models.msll import PhoneCall
 
 class DescriptionManager(object):
     def __init__(self, session):
         self.session = session
-        self.stypes = StatusTypeManager(self.session)
 
     def query(self):
         return self.session.query(Description)
@@ -221,6 +221,8 @@ class PhoneCallManager(object):
                  callee_id, received_by_id, title, description):
         with transaction.manager:
             now = datetime.now()
+            # the ticket is opened by the receiver
+            # and then handled by the callee
             ticket = self.tickets.open(received_by_id,
                                        title, description, callee_id)
             pc = PhoneCall()
