@@ -96,7 +96,7 @@ $(document).ready ->
                         url = $(urlid).val()
                         list_content.load(url, {}, () ->
                                 title = tkt_type.slice(0,1).toUpperCase() + tkt_type.slice(1)
-                                $('.phonecalls-list-header').text(title + ' Phone Calls')
+                                $('.tickets-list-header').text(title + ' Tickets')
                                 )
 
                 

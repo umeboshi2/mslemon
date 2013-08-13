@@ -142,7 +142,7 @@ class TicketManager(object):
     def _basic_query(self, user_id, 
                      start=None, end=None, timestamps=False):
         q = self.session.query(TicketCurrentStatus)
-        q.filter_by(handler_id=user_id)
+        q = q.filter_by(handler_id=user_id)
         if start is not None:
             if timestamps:
                 start, end = convert_range_to_datetime(start, end)
@@ -166,7 +166,7 @@ class TicketManager(object):
     def get_delegated_query(self, user_id,
                             start=None, end=None, timestamps=False):
         q = self.session.query(TicketCurrentStatus)
-        q.filter_by(changed_by_id=user_id)
+        q = q.filter_by(changed_by_id=user_id)
         if start is not None:
             if timestamps:
                 start, end = convert_range_to_datetime(start, end)

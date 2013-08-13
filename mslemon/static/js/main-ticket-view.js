@@ -98,7 +98,7 @@
         return list_content.load(url, {}, function() {
           var title;
           title = tkt_type.slice(0, 1).toUpperCase() + tkt_type.slice(1);
-          return $('.phonecalls-list-header').text(title + ' Phone Calls');
+          return $('.tickets-list-header').text(title + ' Tickets');
         });
       }
     });

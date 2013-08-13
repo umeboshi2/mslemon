@@ -268,17 +268,18 @@ class BaseTicketViewer(BaseViewer):
         return text
     
     def _send_text_notification(self, ticket):
-        callee = self.request.db.query(User).get(pcall.callee)
+        #callee = self.request.db.query(User).get(pcall.callee)
         settings = self.request.registry.settings
-        cfg = callee.config.get_config()
+        cfg = ticket.current_status.handler.config.get_config()
         if cfg.get('main', 'sms_email_address'):
             prefix = 'mslemon.smtp.'
             server = settings[prefix + 'server']
             port = int(settings[prefix + 'port'])
             login = settings[prefix + 'login']
             password = settings[prefix + 'password']
-            subject = "%s just called" % pcall.caller
-            message = self._make_text_message(pcall)
+            cstatus = ticket.current_status
+            subject = "%s created a new ticket" % cstatus.changed_by.username
+            message = self._make_text_message(ticket)
             sender = login
             receiver = cfg.get('main', 'sms_email_address')
             msg = make_email_message(subject, message, sender, receiver)
