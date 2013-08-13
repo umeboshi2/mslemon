@@ -47,6 +47,10 @@ class TakePhoneCallSchema(colander.Schema):
         widget=deform.widget.TextInputWidget(mask='(999)-999-9999',
                                       mask_placeholder='0'),
         )
+    subject = colander.SchemaNode(
+        colander.String(),
+        title='Subject',
+        )
     text = colander.SchemaNode(
         colander.String(),
         title='Text',
@@ -99,66 +103,146 @@ def prepare_main_layout(request):
     layout.subheader = 'Telephone Area'
 
 
-class PhoneCallFrag(BaseViewer):
+
+class TicketFrag(BaseViewer):
     def __init__(self, request):
-        super(PhoneCallFrag, self).__init__(request)
-        self.phonecalls = PhoneCallManager(self.request.db)
-        calltypes = ['received', 'assigned', 'delegated', 'unread',
+        super(TicketFrag, self).__init__(request)
+        self._template = 'mslemon:templates/consult/listphonecallsstatus.mako'
+        self.tickets = TicketManager(self.request.db)
+        tkt_types = ['assigned', 'delegated', 'unread',
                      'pending', 'closed']
         self.dtformat = '%A - %B %d %H:%m'
+        self.env = dict(dtformat=self.dtformat)
         self._dispatch_table = {}
-        for calltype in calltypes:
-            key = 'all_%scalls' % calltype
-            method = 'get_all_%s_calls' % calltype
+        for tkt_type in tkt_types:
+            key = 'all_%s_tickets' % tkt_type
+            method = 'get_all_%s' % tkt_type
             self._dispatch_table[key] = getattr(self, method)
         self.context = self.request.matchdict['context']
         self._view = self.context
         self.dispatch()
 
-    def get_all_received_calls(self):
-        user_id = self.request.session['user'].id
-        calls = self.phonecalls.get_all_received_calls(user_id)
-        env = dict(calls=calls, dtformat=self.dtformat)
-        template = 'mslemon:templates/consult/listphonecalls.mako'
-        self.response = self.render(template, env)
+    def _getuserid(self):
+        return self.request.session['user'].id
+
+    ##################################
+    # FIXME fix clist tlist template
+    # FIXME fix clist tlist template
+    ##################################
+    def get_all_assigned(self):
+        user_id = self._getuserid()
+        tlist = self.tickets.assigned(user_id)
+        env = self.env.update(clist=tlist)
+        self.response = self.render(self._template, self.env)
+
+    def get_all_delegated(self):
+        user_id = self._getuserid()
+        tlist = self.tickets.delegated(user_id)
+        env = self.env.update(clist=tlist)
+        self.response = self.render(self._template, self.env)
+
+    def get_all_unread(self):
+        user_id = self._getuserid()
+        tlist = self.tickets.unread(user_id)
+        env = self.env.update(clist=tlist)
+        self.response = self.render(self._template, self.env)
         
-
-    def get_all_assigned_calls(self):
-        user_id = self.request.session['user'].id
-        clist = self.phonecalls.get_all_assigned_calls(user_id)
-        env = dict(clist=clist, dtformat=self.dtformat)
-        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
-        self.response = self.render(template, env)
+    def get_all_pending(self):
+        user_id = self._getuserid()
+        tlist = self.tickets.pending(user_id)
+        env = self.env.update(clist=tlist)
+        self.response = self.render(self._template, self.env)
         
-    def get_all_delegated_calls(self):
-        user_id = self.request.session['user'].id
-        clist = self.phonecalls.get_all_delegated_calls(user_id)
-        env = dict(clist=clist, dtformat=self.dtformat)
-        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
-        self.response = self.render(template, env)
+    def get_all_closed(self):
+        user_id = self._getuserid()
+        tlist = self.tickets.closed(user_id)
+        env = self.env.update(clist=tlist)
+        self.response = self.render(self._template, self.env)
+        
+#######################################
+# fix clist=tlist and template above
+########################################
+class BaseJSONViewer(BaseViewer):
+    def __init__(self, request):
+        super(BaseJSONViewer, self).__init__(request)
+        self.tickets = TicketManager(self.request.db)
+        self.context = None
+        self._dispatch_table = dict(
+            assigned_tickets=self.get_assigned_tickets,
+            delegated_tickets=self.get_delegated_tickets,
+            unread_tickets=self.get_unread_tickets,
+            pending_tickets=self.get_pending_tickets,
+            closed_tickets=self.get_closed_tickets,
+            )
 
-    def get_all_unread_calls(self):
-        user_id = self.request.session['user'].id
-        clist = self.phonecalls.get_all_unread_calls(user_id)
-        env = dict(clist=clist, dtformat=self.dtformat)
-        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
-        self.response = self.render(template, env)
+        self.dispatch()
 
-    def get_all_pending_calls(self):
-        user_id = self.request.session['user'].id
-        clist = self.phonecalls.get_all_pending_calls(user_id)
-        env = dict(clist=clist, dtformat=self.dtformat)
-        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
-        self.response = self.render(template, env)
-
-    def get_all_closed_calls(self):
-        user_id = self.request.session['user'].id
-        clist = self.phonecalls.get_all_closed_calls(user_id)
-        env = dict(clist=clist, dtformat=self.dtformat)
-        template = 'mslemon:templates/consult/listphonecallsstatus.mako'
-        self.response = self.render(template, env)
-
+    def get_assigned_tickets(self):
+        pass
+    def get_delegated_tickets(self):
+        pass
+    def get_unread_tickets(self):
+        pass
+    def get_pending_tickets(self):
+        pass
+    def get_closed_tickets(self):
+        pass
     
+class BaseTicketViewer(BaseViewer):
+    def __init__(self, request):
+        super(BaseTicketViewer, self).__init__(request)
+        prepare_main_layout(self.request)
+        self.tickets = TicketManager(self.request.db)
+        
+        self.dtformat = '%A - %B %d %H:%m'
+        
+        self._dispatch_table = dict(
+            main=self.main_tickets_view,
+            add=self.open_ticket,
+            viewticket=self.view_ticket,
+            updateticket=self.update_ticket,)
+        self.context = self.request.matchdict['context']
+        self._view = self.context
+
+        #user_id = self.request.session['user'].id
+        #url = self.url(context='takencalls', id=user_id)
+        #label = "Calls I've taken"
+        #self.layout.ctx_menu.append_new_entry(label, url)
+
+        self.dispatch()
+    
+    def main_phone_view(self):
+        template = 'mslemon:templates/consult/main-ticket-view.mako'
+        default_view = 'agendaDay'
+        calltypes = ['assigned', 'delegated', 'unread',
+                     'pending', 'closed']
+        calendar_urls = {}
+        list_urls = {}
+        id_ = 'tickets'
+        for tkt_type in tkt_types:
+            pass
+        
+        for calltype in calltypes:
+            route = 'consult_json'
+            context = '%scalls' % calltype
+            url = self.request.route_url(route, context=context, id=id_)
+            calendar_urls[calltype] = url
+            route = 'consultant_phonefrag'
+            context = 'all_%scalls' % calltype
+            url = self.request.route_url(route, context=context, id=id_)
+            list_urls[calltype] = url
+            user = self.get_current_user()
+            cfg = user.config.get_config()
+            calviews = dict(cfg.items('phonecall_views'))
+        env = dict(calendar_urls=calendar_urls,
+                   list_urls=list_urls,
+                   calviews=calviews)
+        content = self.render(template, env)
+        self.layout.content = content
+        self.layout.resources.phone_calendar.need()
+        self.layout.resources.cornsilk.need()
+        self.layout.resources.main_phone_view.need()
+        
 
 class PhoneCallViewer(BaseViewer):
     def __init__(self, request):
