@@ -74,8 +74,31 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     renderer='string',
                     layout='base',
                     permission=permission)
-                     
-
+    route_name = 'msl_phonecalls'
+    config.add_route(route_name,
+                     '/msl/phonecalls/{context}/{id}')
+    config.add_view('mslemon.views.consultant.misslemon.MSLPhoneViewer',
+                    route_name=route_name,
+                    renderer=basetemplate,
+                    layout='base',
+                    permission=permission)
+    route_name = 'msl_pcallfrag'
+    config.add_route(route_name,
+                     '/msl/pcallfrag/{context}/{id}')
+    config.add_view('mslemon.views.consultant.misslemon.PhoneCallFrag',
+                    route_name=route_name,
+                    renderer='string',
+                    layout='base',
+                    permission=permission)
+    route_name = 'msl_pcalljson'
+    config.add_route(route_name,
+                     '/msl/pcalljson/{context}/{id}')
+    config.add_view('mslemon.views.consultant.misslemon.PhoneCallJSONViewer',
+                    route_name=route_name,
+                    renderer='json',
+                    layout='base',
+                    permission=permission)
+    
     
                      
     

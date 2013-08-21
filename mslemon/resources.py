@@ -1,7 +1,8 @@
 from pyramid.security import Allow, Everyone, Authenticated
 from fanstatic import Library, Resource
 
-from haberdashery.resources import jqueryui, fc_css
+from haberdashery.resources import jqueryui, fc_css, deform_css
+
 
 #from trumpet.resources import jqueryui
 from trumpet.resources import StaticResources as TrumpetResources
@@ -12,8 +13,8 @@ js = Library('mslemon_js', 'static/js')
 
 favicon = Resource(library, 'favicon.ico')
 
-main_screen = Resource(css, 'mainscreen.css')
-admin_screen = Resource(css, 'adminscreen.css')
+main_screen = Resource(css, 'mainscreen.css', depends=[deform_css])
+admin_screen = Resource(css, 'adminscreen.css', depends=[deform_css])
 
 
 take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])

@@ -22,8 +22,13 @@ def make_main_menu(request):
     if 'user' in request.session:
         url = request.route_url('consult_phone', context='add', id='somebody')
         bar.entries['Take Call'] = url
+
+        url = request.route_url('msl_phonecalls', context='add', id='somebody')
+        bar.entries['MSL Take Call'] = url
+
         url = request.route_url('msl_tickets', context='add', id='somebody')
         bar.entries['Open Ticket'] = url
+
         user = request.session['user']
         if 'admin' in user.groups:
             try:
@@ -64,6 +69,9 @@ def make_ctx_menu(request):
 
         url = request.route_url('msl_tickets', context='main', id='all')
         menu.append_new_entry('MSL Tickets', url)
+
+        url = request.route_url('msl_phonecalls', context='main', id='all')
+        menu.append_new_entry('MSL Phone', url)
         
         
     return menu

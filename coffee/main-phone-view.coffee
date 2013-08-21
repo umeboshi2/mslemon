@@ -30,17 +30,10 @@ make_calendar = (element, url, defaultview, firsthour) ->
                 # calendar starts.
                 firstHour: firsthour
 
-make_calendar_orig = (element) ->
-        eventSource_ = $('#eventSource').val()
-        defaultView_ = $('#defaultView').val()
-        rnow = new Date()
-        thour = rnow.getHours() - 2
-
 $(document).ready ->
         $('#loading').hide()
         rnow = new Date()
         thour = rnow.getHours() - 2
-        #$('#phonecall-list').load('/consult/frag/contactlist/A')
         $('#phonecall-list').hide()
         $('#phone-calendar').fullCalendar
                 header:
