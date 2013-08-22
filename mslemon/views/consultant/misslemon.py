@@ -279,7 +279,7 @@ class BaseTicketViewer(BaseViewer):
             list_urls[tkt_type] = url
         user = self.get_current_user()
         cfg = user.config.get_config()
-        calviews = dict(cfg.items('phonecall_views'))
+        calviews = dict(cfg.items('ticket_views'))
         env = dict(calendar_urls=calendar_urls,
                    list_urls=list_urls,
                    calviews=calviews)
@@ -584,8 +584,7 @@ class MSLPhoneViewer(BaseViewer):
         #self.layout.resources.phone_calendar.need()
         self.layout.resources.main_phone_view.need()
         self.layout.resources.cornsilk.need()
-        #self.layout.resources.azure3.need()
-        pass
+
 
     def _make_text_message(self, pcall):
         settings = self.request.registry.settings

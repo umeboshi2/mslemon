@@ -20,11 +20,8 @@ def make_main_menu(request):
     bar = TopBar(request.matched_route.name)
     bar.entries['Home'] = request.route_url('home')
     if 'user' in request.session:
-        url = request.route_url('consult_phone', context='add', id='somebody')
-        bar.entries['Take Call'] = url
-
         url = request.route_url('msl_phonecalls', context='add', id='somebody')
-        bar.entries['MSL Take Call'] = url
+        bar.entries['Take Call'] = url
 
         url = request.route_url('msl_tickets', context='add', id='somebody')
         bar.entries['Open Ticket'] = url
@@ -61,19 +58,12 @@ def make_ctx_menu(request):
         url = request.route_url('consult_calendar', context='list', id='all')
         menu.append_new_entry('Calendar', url)
 
-        url = request.route_url('consult_tickets', context='list', id='all')
+        url = request.route_url('msl_tickets', context='main', id='all')
         menu.append_new_entry('Tickets', url)
 
-        url = request.route_url('consult_phone', context='list', id='all')
+        url = request.route_url('msl_phonecalls', context='main', id='all')
         menu.append_new_entry('Phone Calls', url)
 
-        url = request.route_url('msl_tickets', context='main', id='all')
-        menu.append_new_entry('MSL Tickets', url)
-
-        url = request.route_url('msl_phonecalls', context='main', id='all')
-        menu.append_new_entry('MSL Phone', url)
-        
-        
     return menu
     
 class BaseViewer(TrumpetViewer):

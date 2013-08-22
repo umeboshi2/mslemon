@@ -1,4 +1,5 @@
 from datetime import datetime
+from ConfigParser import NoSectionError, DuplicateSectionError
 
 import transaction
 from formencode.htmlgen import html
@@ -71,18 +72,54 @@ _view_choices = [(0, 'agendaDay'), (1, 'agendaWeek'), (2, 'month')]
 
 ViewChoices = dict(_view_choices)
 ViewChoiceLookup = dict([(v, k) for k,v in ViewChoices.items()])
-PhoneCallViews = ['received', 'assigned', 'delegated', 'unread',
+PhoneCallViews = ['received', 'taken', 'assigned', 'delegated', 'unread',
                   'pending', 'closed']
+TicketViews = ['assigned', 'delegated', 'unread', 'pending', 'closed']
 
 
-class PhoneCallViewOptionsSchema(colander.Schema):
+class MainOptionsSchema(colander.Schema):
     sms_email_address = colander.SchemaNode(
         colander.String(),
         title='Cell Phone Email Address',
         )
+    
+class TicketViewOptionsSchema(colander.Schema):
+    assigned = colander.SchemaNode(
+        colander.String(),
+        title='Assigned',
+        widget=deferred_choices,
+        )
+    delegated = colander.SchemaNode(
+        colander.String(),
+        title='Delegated',
+        widget=deferred_choices,
+        )
+    unread = colander.SchemaNode(
+        colander.String(),
+        title='Unread',
+        widget=deferred_choices,
+        )
+    pending = colander.SchemaNode(
+        colander.String(),
+        title='Pending',
+        widget=deferred_choices,
+        )
+    closed = colander.SchemaNode(
+        colander.String(),
+        title='Closed',
+        widget=deferred_choices,
+        )
+    
+
+class PhoneCallViewOptionsSchema(colander.Schema):
     received = colander.SchemaNode(
         colander.String(),
         title='Received',
+        widget=deferred_choices,
+        )
+    taken = colander.SchemaNode(
+        colander.String(),
+        title='Taken',
         widget=deferred_choices,
         )
     assigned = colander.SchemaNode(
@@ -140,6 +177,10 @@ class MainViewer(BaseViewer):
         entries.append(('Change Password', url))
         url = request.route_url('user', context='status')
         entries.append(('Status', url))
+        url = request.route_url('user', context='mainprefs')
+        entries.append(('Main Prefs', url))
+        url = request.route_url('user', context='tktprefs')
+        entries.append(('Ticket Prefs', url))
         url = request.route_url('user', context='phonecallprefs')
         entries.append(('Phone Call Prefs', url))
         menu = self.layout.ctx_menu
@@ -147,6 +188,8 @@ class MainViewer(BaseViewer):
         # make dispatch table
         self._cntxt_meth = dict(
             chpasswd=self.change_password,
+            mainprefs=self.main_preferences,
+            tktprefs=self.ticket_preferences,
             phonecallprefs=self.phone_call_preferences,
             preferences=self.preferences_view,
             )
@@ -162,6 +205,77 @@ class MainViewer(BaseViewer):
     def preferences_view(self):
         self.layout.content = "Here are your preferences."
 
+    def main_preferences(self):
+        schema = MainOptionsSchema()
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        if 'submit' in self.request.POST:
+            self._main_pref_form_submitted(form)
+        else:
+            user = self.get_current_user()
+            cfg = user.config.get_config()
+            data = dict()
+            data['sms_email_address'] = cfg.get('main', 'sms_email_address')
+            self.layout.content = form.render(data)
+
+    def _main_pref_form_submitted(self, form):
+        db = self.request.db
+        controls = self.request.POST.items()
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        user = self.get_current_user()
+        cfg = user.config.get_config()
+        cfg.set('main', 'sms_email_address', data['sms_email_address'])
+        user.config.set_config(cfg)
+        with transaction.manager:
+            db.add(user.config)
+                
+    def ticket_preferences(self):
+        schema = TicketViewOptionsSchema()
+        choices = _view_choices
+        for key in TicketViews:
+            schema[key].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        if 'submit' in self.request.POST:
+            self._ticket_pref_form_submitted(form)
+        else:
+            user = self.get_current_user()
+            cfg = user.config.get_config()
+            try:
+                data = dict(cfg.items('ticket_views'))
+            except NoSectionError:
+                data = dict(((k, 'month') for k in TicketViews))
+            data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
+            self.layout.content = form.render(data)
+
+    def _ticket_pref_form_submitted(self, form):
+        db = self.request.db
+        controls = self.request.POST.items()
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        fields = TicketViews
+        section = 'ticket_views'
+        values = [ViewChoices[int(data[f])] for f in fields]
+        options = dict(zip(fields, values))
+        user = self.get_current_user()
+        cfg = user.config.get_config()
+        try:
+            cfg.add_section(section)
+        except DuplicateSectionError:
+            pass
+        for o in options:
+            cfg.set(section, o, options[o])
+        user.config.set_config(cfg)
+        with transaction.manager:
+            db.add(user.config)
+                
     def phone_call_preferences(self):
         schema = PhoneCallViewOptionsSchema()
         choices = _view_choices
@@ -176,7 +290,6 @@ class MainViewer(BaseViewer):
             cfg = user.config.get_config()
             data = dict(cfg.items('phonecall_views'))
             data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
-            data['sms_email_address'] = cfg.get('main', 'sms_email_address')
             self.layout.content = form.render(data)
 
     def _phone_call_pref_form_submitted(self, form):
@@ -193,9 +306,12 @@ class MainViewer(BaseViewer):
         options = dict(zip(fields, values))
         user = self.get_current_user()
         cfg = user.config.get_config()
+        try:
+            cfg.add_section(section)
+        except DuplicateSectionError:
+            pass
         for o in options:
             cfg.set(section, o, options[o])
-        cfg.set('main', 'sms_email_address', data['sms_email_address'])
         user.config.set_config(cfg)
         with transaction.manager:
             db.add(user.config)

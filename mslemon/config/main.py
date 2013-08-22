@@ -3,9 +3,7 @@ from trumpet.config.base import add_view
 
 viewers = dict(contacts='ContactViewer',
                clients='ClientViewer',
-               calendar='CalendarViewer',
-               tickets='TicketViewer',
-               phone='PhoneCallViewer',)
+               calendar='CalendarViewer',)
 
 def configure_consultant(config, rootpath='/consult', permission='consultant'):
     config.add_route('consult', rootpath)
@@ -14,7 +12,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     renderer=basetemplate,
                     layout='base',
                     permission=permission)
-    for route in ['contacts', 'clients', 'calendar', 'tickets', 'phone']:
+    for route in ['contacts', 'clients', 'calendar']:
         route_name = 'consult_%s' % route
         config.add_route(route_name,
                          '%s/%s/{context}/{id}' % (rootpath, route))
@@ -35,14 +33,6 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     config.add_route(route_name,
                      '%s/frag/{context}/{id}' % rootpath)
     config.add_view('mslemon.views.consultant.frag.FragViewer',
-                    route_name=route_name,
-                    renderer='string',
-                    layout='base',
-                    permission=permission)
-    route_name = 'consultant_phonefrag'
-    config.add_route(route_name,
-                     '%s/phonefrag/{context}/{id}' % rootpath)
-    config.add_view('mslemon.views.consultant.phone.PhoneCallFrag',
                     route_name=route_name,
                     renderer='string',
                     layout='base',
