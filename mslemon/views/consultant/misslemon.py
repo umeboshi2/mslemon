@@ -284,7 +284,8 @@ class BaseTicketViewer(BaseViewer):
             calviews = dict(cfg.items('ticket_views'))
         except NoSectionError:
             calviews = dict(((k, 'month') for k in tkt_types))
-        calviews = dict(cfg.items('ticket_views'))
+            for k in calviews:
+                cfg.set('ticket_views', k, calviews[k])
         env = dict(calendar_urls=calendar_urls,
                    list_urls=list_urls,
                    calviews=calviews)
@@ -583,6 +584,8 @@ class MSLPhoneViewer(BaseViewer):
             calviews = dict(cfg.items('phonecall_views'))
         except NoSectionError:
             calviews = dict(((k, 'month') for k in call_types))
+            for k in calviews:
+                cfg.set('phonecall_views', k, calviews[k])
         env = dict(calendar_urls=calendar_urls,
                    list_urls=list_urls,
                    calviews=calviews)
