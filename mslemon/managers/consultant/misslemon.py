@@ -161,6 +161,7 @@ class TicketManager(object):
                      start=None, end=None, timestamps=False):
         q = self.get_assigned_query(user_id, start=start, end=end,
                                     timestamps=timestamps)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
         return q.all()
 
     def get_delegated_query(self, user_id,
@@ -171,6 +172,7 @@ class TicketManager(object):
             if timestamps:
                 start, end = convert_range_to_datetime(start, end)
             q = self._range_filter(q, start, end)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
         q = q.filter(TicketCurrentStatus.handler_id != user_id)
         return q
 
@@ -178,6 +180,7 @@ class TicketManager(object):
                       start=None, end=None, timestamps=False):
         q = self.get_delegated_query(user_id, start=start, end=end,
                                      timestamps=timestamps)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
         return q.all()
 
     def _get_by_status_query(self, user_id, status,
@@ -266,6 +269,7 @@ class PhoneCallManager(object):
             if timestamps:
                 start, end = convert_range_to_datetime(start, end)
             q = self._received_range_filter(q, start, end)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
         return q.all()
 
     def get_received_calls(self, user_id, start=None,
@@ -276,6 +280,7 @@ class PhoneCallManager(object):
             if timestamps:
                 start, end = convert_range_to_datetime(start, end)
             q = self._received_range_filter(q, start, end)
+        q = q.filter(TicketCurrentStatus.status != 'closed')
         return q.all()
 
     def get_assigned_calls(self, user_id, start=None,
@@ -331,7 +336,7 @@ class PhoneCallManager(object):
             if timestamps:
                 start, end = convert_range_to_datetime(start, end)
             q = self._received_range_filter(q, start, end)
-        q = q.filter(TicketCurrentStatus.status != 'opened')
+        q = q.filter(TicketCurrentStatus.status == 'pending')
         q = q.filter(TicketCurrentStatus.changed_by_id != user_id)
         return q.all()
                             

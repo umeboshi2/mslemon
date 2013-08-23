@@ -76,7 +76,7 @@
       }
     });
     return $('.query-button').click(function() {
-      var button, calendar_content, calltype, defaultView, defaultViewID, element, hr, list_content, now, url, urlid, view, viewbutton;
+      var button, calendar_content, calltype, defaultView, defaultViewID, element, hr, list_content, now, title, url, urlid, view, viewbutton;
       calendar_content = $('#phone-calendar');
       list_content = $('#phonecall-list');
       viewbutton = $('#list-button');
@@ -91,12 +91,13 @@
         hr = now.getHours() - 2;
         url = $(urlid).val();
         element = calendar_content;
-        return make_calendar(element, url, defaultView, hr);
+        make_calendar(element, url, defaultView, hr);
+        title = calltype.slice(0, 1).toUpperCase() + calltype.slice(1);
+        return $('.phonecalls-list-header').text(title + ' Phone Calls');
       } else {
         urlid = '#ALL' + calltype + 'Url';
         url = $(urlid).val();
         return list_content.load(url, {}, function() {
-          var title;
           title = calltype.slice(0, 1).toUpperCase() + calltype.slice(1);
           return $('.phonecalls-list-header').text(title + ' Phone Calls');
         });

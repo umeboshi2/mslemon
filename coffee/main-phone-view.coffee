@@ -90,6 +90,8 @@ $(document).ready ->
                         element = calendar_content
                         # FIXME: put calendar view type in template
                         make_calendar(element, url, defaultView, hr)
+                        title = calltype.slice(0,1).toUpperCase() + calltype.slice(1)
+                        $('.phonecalls-list-header').text(title + ' Phone Calls')
                 # else we are in List View
                 else
                         urlid = '#ALL' + calltype + 'Url'

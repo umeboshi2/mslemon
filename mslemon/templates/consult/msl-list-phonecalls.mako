@@ -1,7 +1,4 @@
 <div class="phonecalls-list">
-  <div class="phonecalls-list-header">
-    Current Phonecalls
-  </div>
   <div class="phonecalls-list-list">
     %for pcall, cstatus in clist:
     <div class="phonecalls-list-entry">

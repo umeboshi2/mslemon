@@ -24,6 +24,9 @@
     <div id="loading">
       <h2>Loading Events</h2>
     </div>
+    <div class="phonecalls-list-header">
+      Current Phonecalls
+    </div>
     <div id="phone-calendar">
     </div>
     <div id="phonecall-list">
