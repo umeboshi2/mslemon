@@ -1,5 +1,6 @@
 import urlparse
 from datetime import datetime
+from ConfigParser import NoSectionError, DuplicateSectionError
 
 import colander
 import deform
@@ -279,6 +280,10 @@ class BaseTicketViewer(BaseViewer):
             list_urls[tkt_type] = url
         user = self.get_current_user()
         cfg = user.config.get_config()
+        try:
+            calviews = dict(cfg.items('ticket_views'))
+        except NoSectionError:
+            calviews = dict(((k, 'month') for k in tkt_types))
         calviews = dict(cfg.items('ticket_views'))
         env = dict(calendar_urls=calendar_urls,
                    list_urls=list_urls,
@@ -574,8 +579,10 @@ class MSLPhoneViewer(BaseViewer):
             list_urls[call_type] = url
         user = self.get_current_user()
         cfg = user.config.get_config()
-        calviews = dict(cfg.items('phonecall_views'))
-        calviews.update(dict(taken='month', received='month'))
+        try:
+            calviews = dict(cfg.items('phonecall_views'))
+        except NoSectionError:
+            calviews = dict(((k, 'month') for k in call_types))
         env = dict(calendar_urls=calendar_urls,
                    list_urls=list_urls,
                    calviews=calviews)
