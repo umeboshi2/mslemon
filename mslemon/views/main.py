@@ -60,6 +60,9 @@ class MainViewer(BaseViewer):
         env = {}
         content = self.render(template, env)
         self.layout.content = content
+        from mslemon.util import get_scanned_pdfs
+        pdfs = get_scanned_pdfs(self.request)
+        self.layout.footer = str(pdfs)
         
     def view_event(self):
         pass

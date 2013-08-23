@@ -1,6 +1,6 @@
-#!/usr/bin/env python
 import smtplib
 from email.MIMEText import MIMEText
+
 
 def make_email_message(subject, message, sender, receiver):
     msg = MIMEText(message)
@@ -24,6 +24,44 @@ def send_email_through_smtp_server(settings, message, sender, receiver):
     server.sendmail(sender, receiver, msg)
     server.close()
 
-            
+
+import os
+from datetime import datetime, timedelta
+
+testname = '130501151028_0001.pdf'
+
+def datetime_from_pdf_filename(filename):
+    dtstring = filename.split('_')[0]
+    year = int(dtstring[0:2]) + 2000
+    month = int(dtstring[2:4])
+    day = int(dtstring[4:6])
+    hour = int(dtstring[6:8])
+    minutes = int(dtstring[8:10])
+    seconds = int(dtstring[10:12])
+    return datetime(year, month, day, hour, minutes, seconds)
+
+def get_scanned_filenames(directory):
+    filenames = os.listdir(directory)
+    now = datetime.now()
+    prefix = str(now.year - 2000)
+    filenames = [f for f in filenames if f.startswith(prefix)]
+    filenames = [f for f in filenames if len(f) == 21]
+    filenames = [f for f in filenames if f.index('_') == 12]    
+    return filenames
+
+def get_scanned_pdfs(request):
+    settings = request.registry.settings
+    dirname = settings['mslemon.scans.directory']
+    filenames = get_scanned_filenames(dirname)
+    dts = [datetime_from_pdf_filename(f) for f in filenames]
+    #return dict(zip(filenames, dts))
+    content = ''
+    for f in filenames:
+        fp = os.path.join(dirname, f)
+        content += file(fp).read()
+    return len(content)/ 1024.0 / 1024.0
+
+
+
 if __name__ == "__main__":
     pass

@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import transaction
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
+from sqlalchemy import func
 
 from mslemon.managers.util import convert_range_to_datetime
 
@@ -11,6 +12,7 @@ from mslemon.models.misslemon import Description
 from mslemon.models.misslemon import Ticket, TicketCurrentStatus
 from mslemon.models.misslemon import TicketStatusChange
 from mslemon.models.misslemon import PhoneCall
+from mslemon.models.misslemon import File, ScannedDocument
 
 class DescriptionManager(object):
     def __init__(self, session):
@@ -388,3 +390,21 @@ class PhoneCallAdminManager(PhoneCallManager):
         return q.all()
     
     
+class ScannedDocumentsManager(object):
+    def __init__(self, session):
+        self.session = session
+        self.directory = None
+        
+    def query(self):
+        q = self.session.query(ScannedDocument)
+        return q
+    
+    def get(self, id):
+        return self.query().get(id)
+
+    def set_scans_directory(self, directory):
+        self.directory = directory
+
+    def get_latest(self):
+        return self.session.query(func.max(ScannedDocument.created)).one()
+        

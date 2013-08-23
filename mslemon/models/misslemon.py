@@ -5,6 +5,7 @@ from sqlalchemy import ForeignKey, Boolean
 from sqlalchemy import Date, Time, DateTime
 from sqlalchemy import Enum
 from sqlalchemy import PickleType
+from sqlalchemy import LargeBinary
 
 from sqlalchemy.exc import IntegrityError
 
@@ -157,6 +158,21 @@ class ClientCall(Base):
                      ForeignKey('msl_phone_calls.id'), primary_key=True)
     
     
+class File(Base):
+    __tablename__ = 'msl_files'
+    id = Column(Integer, primary_key=True)
+    name = Column(Unicode(255), unique=True)
+    created = Column(DateTime)
+    content = Column(LargeBinary)
+    info = Column(PickleType)
+
+
+class ScannedDocument(Base):
+    __tablename__ = 'msl_scanned_docs'
+    created = Column(DateTime, primary_key=True)
+    file_id = Column(Integer,
+                       ForeignKey('msl_files.id'))
+    info = Column(PickleType)
     
 
 # relationships    
@@ -181,4 +197,6 @@ PhoneCall.ticket = relationship(Ticket)
 PhoneCall.callee = relationship(User, foreign_keys=[PhoneCall.callee_id])
 PhoneCall.received_by = relationship(User,
                                      foreign_keys=[PhoneCall.received_by_id])
+
+ScannedDocument.file = relationship(File)
 

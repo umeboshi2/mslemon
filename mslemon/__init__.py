@@ -29,7 +29,8 @@ def main(global_config, **settings):
     DBSession.configure(bind=engine)
     # bind objects to engine
     Base.metadata.bind = engine
-    if settings.get('db.populate', False):
+
+    if settings.get('db.populate', 'False') == 'True':
         from mslemon.models.main import populate
         from mslemon.models.consultant import populate_ticket_status
         from mslemon.models.consultant import populate_phonecall_status
