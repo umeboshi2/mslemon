@@ -608,7 +608,7 @@ class MSLPhoneViewer(BaseViewer):
         return text
     
     def _send_text_notification(self, pcall):
-        callee = self.request.db.query(User).get(pcall.callee)
+        callee = pcall.callee
         settings = self.request.registry.settings
         cfg = callee.config.get_config()
         if cfg.get('main', 'sms_email_address'):
