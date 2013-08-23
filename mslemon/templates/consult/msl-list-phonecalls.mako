@@ -8,7 +8,7 @@
       <div class="phonecalls-list-entry-content">
 	<% a = '%s' % pcall.caller %>
 	<% call = pcall %>
-	<% r = 'consult_phone' %>
+	<% r = 'msl_phonecalls' %>
 	<% kw = dict(context='view', id=call.id) %>
 	<% url = request.route_url(r, **kw) %>
 	<a href="${url}">${a}</a>&nbsp;(${cstatus.status})
