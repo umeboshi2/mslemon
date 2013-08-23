@@ -1,5 +1,5 @@
 import urlparse
-from datetime import datetime
+from datetime import datetime, timedelta
 from ConfigParser import NoSectionError, DuplicateSectionError
 
 import colander
@@ -445,10 +445,15 @@ class PhoneCallJSONViewer(BaseViewer):
         url = self.request.route_url('msl_phonecalls',
                                      context='view',
                                      id=pcall.id)
-        start = pcall.received.isoformat()
-        end = cstatus.last_change.isoformat()
+        start = pcall.received
+        end = cstatus.last_change
+        thirty_minutes = timedelta(minutes=30)
+        if end - start < thirty_minutes:
+            end = start + thirty_minutes
+            
         title = pcall.caller
-        data = dict(id=pcall.id, start=start, end=end,
+        data = dict(id=pcall.id, start=start.isoformat(),
+                    end=end.isoformat(),
                     title=title, url=url)
         if cstatus.status == 'pending':
             data['color'] = 'blue'
