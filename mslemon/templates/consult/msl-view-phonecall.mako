@@ -6,10 +6,7 @@
     <% received_by = pcall.received_by %>
     At ${pcall.received.strftime('%R')} on ${the_date}<br>
     ${pcall.caller} called ${callee}<br>
-    (Call received by ${received_by})
-  </div>
-  <div class="ticket-header">
-    <% the_date = ticket.created.strftime('%A, %d %B, %Y') %>
+    (Call received by ${received_by})<br>
     <% first_change = ticket.history[0] %>
     <% handler = first_change.handler.username %>
     <% opener = first_change.changed_by.username %>

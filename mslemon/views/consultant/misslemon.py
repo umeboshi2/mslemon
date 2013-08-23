@@ -2,6 +2,8 @@ import urlparse
 from datetime import datetime, timedelta
 from ConfigParser import NoSectionError, DuplicateSectionError
 
+from pyramid.httpexceptions import HTTPFound
+
 import colander
 import deform
 
@@ -314,6 +316,7 @@ class BaseTicketViewer(BaseViewer):
                                    description, handler_id=handler_id)
         if data['send_textmsg']:
             self._send_text_notification(ticket)
+        self.response = HTTPFound(self.url(context='viewticket', id=ticket.id))
 
     def _update_ticket_form_submitted(self, form):
         controls = self.request.POST.items()
@@ -334,6 +337,7 @@ class BaseTicketViewer(BaseViewer):
         
         content = '<p>Ticket updated. %d</p>' % change.id
         self.layout.content = content
+        self.response = HTTPFound(self.url(context='viewticket', id=ticket_id))
         
     
         
@@ -640,6 +644,9 @@ class MSLPhoneViewer(BaseViewer):
         # strip tzinfo that is attached by deform
         if data['received'].tzinfo is not None:
             data['received'] = data['received'].replace(tzinfo=None)
+        for field in ['subject', 'text']:
+            if data[field] is colander.null:
+                data[field] = ''
         fields = ['received', 'caller', 'number', 'text', 'callee']
         fields = ['received', 'caller', 'number', 'callee']
         values1 = [data[f] for f in fields]
@@ -649,7 +656,8 @@ class MSLPhoneViewer(BaseViewer):
         pcall = self.pcm.new_call(*values)
         if data['send_textmsg']:
             self._send_text_notification(pcall)
-                
+        self.response = HTTPFound(self.url(context='view', id=pcall.id))
+        
 
     def take_phonecall(self):
         schema = TakePhoneCallSchema()
@@ -684,7 +692,8 @@ class MSLPhoneViewer(BaseViewer):
         self.layout.content = content
 
     def update_phonecall(self):
-        pass
+        self.response = HTTPFound(self.url(context='view', id=pcall.id))
+
 
     
     
