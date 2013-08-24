@@ -44,22 +44,27 @@ def get_scanned_filenames(directory):
     filenames = os.listdir(directory)
     now = datetime.now()
     prefix = str(now.year - 2000)
-    filenames = [f for f in filenames if f.startswith(prefix)]
-    filenames = [f for f in filenames if len(f) == 21]
-    filenames = [f for f in filenames if f.index('_') == 12]    
+    filenames = (f for f in filenames if f.startswith(prefix))
+    filenames = (f for f in filenames if len(f) == 21)
+    filenames = (f for f in filenames if f.index('_') == 12)
     return filenames
 
-def get_scanned_pdfs(request):
-    settings = request.registry.settings
-    dirname = settings['mslemon.scans.directory']
-    filenames = get_scanned_filenames(dirname)
+
+def get_scanned_pdfs(directory):
+    filenames = get_scanned_filenames(directory)
     dts = [datetime_from_pdf_filename(f) for f in filenames]
     #return dict(zip(filenames, dts))
     content = ''
     for f in filenames:
-        fp = os.path.join(dirname, f)
+        fp = os.path.join(directory, f)
         content += file(fp).read()
     return len(content)/ 1024.0 / 1024.0
+
+def get_scanned_pdfs_request(request):
+    settings = request.registry.settings
+    dirname = settings['mslemon.scans.directory']
+    return get_scanned_pdfs(dirname)
+
 
 
 

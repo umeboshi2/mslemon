@@ -20,6 +20,7 @@ admin_screen = Resource(css, 'adminscreen.css', depends=[deform_css])
 take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])
 main_phone_view = Resource(js, 'main-phone-view.js', depends=[fc_css])
 main_ticket_view = Resource(js, 'main-ticket-view.js', depends=[fc_css])
+main_scandoc_view = Resource(js, 'main-scandoc-view.js', depends=[fc_css])
 
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
 
@@ -35,6 +36,7 @@ class StaticResources(TrumpetResources):
     take_call_button = take_call_button
     main_phone_view = main_phone_view
     main_ticket_view = main_ticket_view
+    main_scandoc_view = main_scandoc_view
     
     phone_calendar = phone_calendar
     

@@ -64,6 +64,9 @@ def make_ctx_menu(request):
         url = request.route_url('msl_phonecalls', context='main', id='all')
         menu.append_new_entry('Phone Calls', url)
 
+        url = request.route_url('msl_scandocs', context='main', id='all')
+        menu.append_new_entry('Scanned Docs', url)
+        
     return menu
     
 class BaseViewer(TrumpetViewer):

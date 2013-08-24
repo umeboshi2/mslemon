@@ -161,8 +161,6 @@ class ClientCall(Base):
 class File(Base):
     __tablename__ = 'msl_files'
     id = Column(Integer, primary_key=True)
-    name = Column(Unicode(255), unique=True)
-    created = Column(DateTime)
     content = Column(LargeBinary)
     info = Column(PickleType)
 
@@ -170,6 +168,7 @@ class File(Base):
 class ScannedDocument(Base):
     __tablename__ = 'msl_scanned_docs'
     created = Column(DateTime, primary_key=True)
+    name = Column(Unicode(255), unique=True)
     file_id = Column(Integer,
                        ForeignKey('msl_files.id'))
     info = Column(PickleType)

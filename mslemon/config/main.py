@@ -90,5 +90,22 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     permission=permission)
     
     
-                     
+    route_name = 'msl_scandocs'
+    config.add_route(route_name,
+                     '/msl/scandocs/{context}/{id}')
+    config.add_view('mslemon.views.consultant.pdfscans.ScannedDocumentsViewer',
+                    route_name=route_name,
+                    renderer=basetemplate,
+                    layout='base',
+                    permission=permission)
+
+    route_name = 'msl_scandoc_json'
+    config.add_route(route_name,
+                     '/msl/scandocsjson/{context}/{id}')
+    view = 'mslemon.views.consultant.pdfscans.ScannedDocumentsJSONViewer'
+    config.add_view(view,
+                    route_name=route_name,
+                    renderer='json',
+                    layout='base',
+                    permission=permission)
     
