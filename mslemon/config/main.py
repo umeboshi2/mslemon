@@ -21,14 +21,6 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                         renderer=basetemplate,
                         layout='base',
                         permission=permission)
-    route_name = 'consult_json'
-    config.add_route(route_name,
-                     '%s/json/{context}/{id}' % rootpath)
-    config.add_view('mslemon.views.consultant.json.JSONViewer',
-                    route_name=route_name,
-                    renderer='json',
-                    layout='base',
-                    permission=permission)
     route_name = 'consult_frag'
     config.add_route(route_name,
                      '%s/frag/{context}/{id}' % rootpath)

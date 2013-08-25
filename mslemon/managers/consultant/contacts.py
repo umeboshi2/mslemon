@@ -3,7 +3,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
 
 
-from trumpet.models.consultant import Contact
+from mslemon.models.misslemon import Contact
 
 class ContactManager(object):
     def __init__(self, session):

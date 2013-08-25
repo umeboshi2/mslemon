@@ -32,15 +32,11 @@ def main(global_config, **settings):
 
     if settings.get('db.populate', 'False') == 'True':
         from mslemon.models.main import populate
-        from mslemon.models.consultant import populate_ticket_status
-        from mslemon.models.consultant import populate_phonecall_status
         from mslemon.models.main import make_test_data
         import mslemon.models.misslemon
         Base.metadata.create_all(engine)
         #initialize_sql(engine)
         populate(admin_username)
-        populate_ticket_status()
-        populate_phonecall_status()
         #make_test_data(DBSession)
         
     # setup authn and authz

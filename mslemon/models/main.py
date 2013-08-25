@@ -16,7 +16,8 @@ from mslemon.models.base import Base, DBSession
 
 import mslemon.models.usergroup
 import mslemon.models.sitecontent
-import mslemon.models.consultant
+import mslemon.models.misslemon
+
 
 class LoginHistory(Base):
     __tablename__ = 'login_history'

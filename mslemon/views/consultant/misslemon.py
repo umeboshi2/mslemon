@@ -11,9 +11,8 @@ from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 from trumpet.views.base import render_rst
 
-#FIXME: better module name
-from mslemon.managers.consultant.misslemon import TicketManager
-from mslemon.managers.consultant.misslemon import PhoneCallManager
+from mslemon.managers.tickets import TicketManager
+from mslemon.managers.phonecalls import PhoneCallManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 

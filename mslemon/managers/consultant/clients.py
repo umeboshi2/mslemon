@@ -3,7 +3,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
 
 
-from trumpet.models.consultant import Client
+from mslemon.models.misslemon import Client
 
 class ClientManager(object):
     def __init__(self, session):

@@ -15,7 +15,6 @@ from mslemon.managers.admin.users import UserManager
 from mslemon.views.base import BaseViewer
 
 from mslemon.models.base import DBSession
-from mslemon.models.consultant import Contact
 from mslemon.models.usergroup import User, Password
 from mslemon.models.usergroup import UserConfig
 

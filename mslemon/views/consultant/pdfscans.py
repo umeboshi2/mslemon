@@ -22,6 +22,7 @@ from mslemon.models.usergroup import User
 from mslemon.util import send_email_through_smtp_server, make_email_message
 
 
+dt_isoformat = '%Y-%m-%dT%H:%M:%S'
 
 def deferred_choices(node, kw):
     choices = kw['choices']
@@ -127,7 +128,6 @@ class ScannedDocumentsViewer(BaseViewer):
         env = dict()
         content = self.render(template, env)
         self.layout.content = content
-        #self.layout.resources.phone_calendar.need()
         self.layout.resources.main_scandoc_view.need()
         self.layout.resources.cornsilk.need()
 
@@ -146,6 +146,7 @@ class ScannedDocumentsViewer(BaseViewer):
 
     def export_document(self):
         id = self.request.matchdict['id']
+        id = datetime.strptime(id, dt_isoformat)
         doc = self.sdm.get(id)
         r = Response(content_type='application/pdf',
                      body=doc.file.content)

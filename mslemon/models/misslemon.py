@@ -71,8 +71,10 @@ class Client(Base):
             
 class ClientContact(Base):
     __tablename__ = 'msl_client_contact'
-    client_id = Column(Integer, ForeignKey('clients.id'), primary_key=True)
-    contact_id = Column(Integer, ForeignKey('contacts.id'), primary_key=True)
+    client_id = Column(Integer,
+                       ForeignKey('msl_clients.id'), primary_key=True)
+    contact_id = Column(Integer,
+                        ForeignKey('msl_contacts.id'), primary_key=True)
     
 
 class Event(Base):
@@ -172,6 +174,15 @@ class ScannedDocument(Base):
     file_id = Column(Integer,
                        ForeignKey('msl_files.id'))
     info = Column(PickleType)
+
+class NamedDocument(Base):
+    __tablename__ = 'msl_named_docs'
+    id = Column(Integer, primary_key=True)
+    name = Column(Unicode(255), unique=True)
+    file_id = Column(Integer,
+                       ForeignKey('msl_files.id'))
+    info = Column(PickleType)
+    created = Column(DateTime)
     
 
 # relationships    
