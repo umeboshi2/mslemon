@@ -5,8 +5,8 @@ from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 
 
-from mslemon.managers.consultant.clients import ClientManager
-from mslemon.managers.consultant.contacts import ContactManager
+from mslemon.managers.clients import ClientManager
+from mslemon.managers.contacts import ContactManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 
@@ -62,7 +62,8 @@ class ClientViewer(BaseViewer):
             add=self.add_client,
             delete=self.delete_client,
             confirmdelete=self.confirm_delete_client,
-            editclient=self.edit_client,)
+            editclient=self.edit_client,
+            viewclient=self.view_client,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -140,4 +141,6 @@ class ClientViewer(BaseViewer):
     def confirm_delete_client(self):
         pass
     
-
+    def view_client(self):
+        self.layout.content = "what are we doing?"
+        

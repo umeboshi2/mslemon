@@ -182,6 +182,8 @@ class MainViewer(BaseViewer):
         entries.append(('Ticket Prefs', url))
         url = request.route_url('user', context='phonecallprefs')
         entries.append(('Phone Call Prefs', url))
+        url = request.route_url('user', context='caseprefs')
+        entries.append(('Case Prefs', url))
         menu = self.layout.ctx_menu
         menu.set_new_entries(entries, header='Preferences')
         # make dispatch table
@@ -190,6 +192,7 @@ class MainViewer(BaseViewer):
             mainprefs=self.main_preferences,
             tktprefs=self.ticket_preferences,
             phonecallprefs=self.phone_call_preferences,
+            caseprefs=self.case_preferences,
             preferences=self.preferences_view,
             )
 
@@ -316,6 +319,49 @@ class MainViewer(BaseViewer):
             db.add(user.config)
                 
         
+    def case_preferences(self):
+        schema = TicketViewOptionsSchema()
+        choices = _view_choices
+        for key in TicketViews:
+            schema[key].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        if 'submit' in self.request.POST:
+            self._case_pref_form_submitted(form)
+        else:
+            user = self.get_current_user()
+            cfg = user.config.get_config()
+            try:
+                data = dict(cfg.items('case_views'))
+            except NoSectionError:
+                data = dict(((k, 'month') for k in TicketViews))
+            data = dict(((k, ViewChoiceLookup[data[k]]) for k in data))
+            self.layout.content = form.render(data)
+
+    def _case_pref_form_submitted(self, form):
+        db = self.request.db
+        controls = self.request.POST.items()
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        fields = TicketViews
+        section = 'case_views'
+        values = [ViewChoices[int(data[f])] for f in fields]
+        options = dict(zip(fields, values))
+        user = self.get_current_user()
+        cfg = user.config.get_config()
+        try:
+            cfg.add_section(section)
+        except DuplicateSectionError:
+            pass
+        for o in options:
+            cfg.set(section, o, options[o])
+        user.config.set_config(cfg)
+        with transaction.manager:
+            db.add(user.config)
+                
     def change_password(self):
         schema = ChangePasswordSchema()
         form = deform.Form(schema, buttons=('update',))

@@ -183,7 +183,100 @@ class NamedDocument(Base):
                        ForeignKey('msl_files.id'))
     info = Column(PickleType)
     created = Column(DateTime)
+    created_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+class UnassignedDocument(Base):
+    __tablename__ = 'msl_unassigned_docs'
+    doc_id = Column(Integer,
+                    ForeignKey('msl_named_docs.id'), primary_key=True)
+
+class ClientDocument(Base):
+    __tablename__ = 'msl_client_docs'
+    client_id = Column(Integer,
+                       ForeignKey('msl_clients.id'), primary_key=True)
+    doc_id = Column(Integer,
+                    ForeignKey('msl_named_docs.id'), primary_key=True)
+    info = Column(PickleType)
+    created = Column(DateTime)
+    created_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+class TicketDocument(Base):
+    __tablename__ = 'msl_ticket_docs'
+    ticket_id = Column(Integer,
+                       ForeignKey('msl_tickets.id'), primary_key=True)
+    doc_id = Column(Integer,
+                    ForeignKey('msl_named_docs.id'), primary_key=True)
+    info = Column(PickleType)
+    attached = Column(DateTime)
+    attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+CaseStatus = Enum('opened', 'pending', 'closed', name='msl_case_status_types')
+
+class Case(Base):
+    __tablename__ = 'msl_cases'
+    id = Column(Integer, primary_key=True)
+    name = Column(Unicode(255), unique=True)
+    client_id = Column(Integer,
+                       ForeignKey('msl_clients.id'), nullable=False)
+    description_id = Column(Integer, ForeignKey('msl_descriptions.id'),
+                            nullable=False)
+    info = Column(PickleType)
+    created = Column(DateTime)
+    created_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+class CaseStatusChange(Base):
+    __tablename__ = 'msl_case_status'
+    id = Column(Integer, primary_key=True)
+    case_id = Column(Integer, ForeignKey('msl_cases.id'), nullable=False)
+    status = Column('status', CaseStatus)
+    reason = Column(UnicodeText)
+    description_id = Column(Integer, ForeignKey('msl_descriptions.id')
+                            , nullable=False)
+    changed = Column(DateTime)
+    changed_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    handler_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     
+
+class CaseCurrentStatus(Base):
+    __tablename__ = 'msl_case_current_status'
+    case_id = Column(Integer, ForeignKey('msl_cases.id'), primary_key=True)
+    last_change_id = Column(Integer, ForeignKey('msl_case_status.id'),
+                                                nullable=False)
+    created = Column(DateTime)
+    last_change = Column(DateTime)
+    status = Column('status', CaseStatus)
+    changed_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    handler_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+
+class CaseUser(Base):
+    __tablename__ = 'msl_case_users'
+    case_id = Column(Integer,
+                     ForeignKey('msl_cases.id'), primary_key=True)
+    user_id = Column(Integer,
+                     ForeignKey('users.id'), primary_key=True)
+    
+class CaseTicket(Base):
+    __tablename__ = 'msl_case_tickets'
+    case_id = Column(Integer,
+                     ForeignKey('msl_cases.id'), primary_key=True)
+    ticket_id = Column(Integer,
+                       ForeignKey('msl_tickets.id'), primary_key=True)
+    info = Column(PickleType)
+    attached = Column(DateTime)
+    attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+    
+class CaseDocument(Base):
+    __tablename__ = 'msl_case_docs'
+    case_id = Column(Integer,
+                     ForeignKey('msl_cases.id'), primary_key=True)
+    doc_id = Column(Integer,
+                    ForeignKey('msl_named_docs.id'), primary_key=True)
+    info = Column(PickleType)
+    attached = Column(DateTime)
+    attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
 
 # relationships    
 Ticket.description = relationship(Description)
@@ -210,3 +303,29 @@ PhoneCall.received_by = relationship(User,
 
 ScannedDocument.file = relationship(File)
 
+NamedDocument.file = relationship(File)
+
+UnassignedDocument.doc = relationship(NamedDocument)
+
+
+Case.description = relationship(Description)
+Case.users = relationship(CaseUser)
+Case.tickets = relationship(CaseTicket)
+Case.documents = relationship(CaseDocument)
+Case.created_by = relationship(User)
+
+Case.history = relationship(CaseStatusChange,
+                              order_by=CaseStatusChange.changed)
+Case.current_status = relationship(CaseCurrentStatus, uselist=False)
+
+
+CaseStatusChange.handler = \
+    relationship(User, foreign_keys=[CaseStatusChange.handler_id])
+CaseStatusChange.changed_by = \
+    relationship(User, foreign_keys=[CaseStatusChange.changed_by_id])
+    
+CaseCurrentStatus.case = relationship(Case)
+CaseCurrentStatus.changed_by = \
+    relationship(User, foreign_keys=[CaseCurrentStatus.changed_by_id])
+CaseCurrentStatus.handler = \
+    relationship(User, foreign_keys=[CaseCurrentStatus.handler_id])

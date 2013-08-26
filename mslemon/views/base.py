@@ -66,6 +66,9 @@ def make_ctx_menu(request):
 
         url = request.route_url('msl_scandocs', context='main', id='all')
         menu.append_new_entry('Scanned Docs', url)
+
+        url = request.route_url('msl_cases', context='main', id='all')
+        menu.append_new_entry('Cases', url)
         
     return menu
     

@@ -1,6 +1,7 @@
 import smtplib
 from email.MIMEText import MIMEText
 
+from mslemon.models.usergroup import User
 
 def make_email_message(subject, message, sender, receiver):
     msg = MIMEText(message)
@@ -64,6 +65,13 @@ def get_scanned_pdfs_request(request):
     settings = request.registry.settings
     dirname = settings['mslemon.scans.directory']
     return get_scanned_pdfs(dirname)
+
+
+def get_regular_users(request):
+    users = request.db.query(User).all()
+    skey = 'mslemon.admin.admin_username'
+    admin_username = request.registry.settings.get(skey, 'admin')
+    return [u for u in users if u.username != admin_username]
 
 
 

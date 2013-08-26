@@ -12,8 +12,7 @@ from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 from trumpet.views.base import render_rst
 
-#FIXME: better module name
-from mslemon.managers.consultant.misslemon import ScannedDocumentsManager
+from mslemon.managers.documents import ScannedDocumentsManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 
@@ -42,6 +41,11 @@ def prepare_main_layout(request):
 
 
 
+class NameDocumentSchema(colander.Schema):
+    name = colander.SchemaNode(
+        colander.String(),
+        title='Name',
+        )
 
 class ScannedDocumentsFrag(BaseViewer):
     def __init__(self, request):
@@ -75,7 +79,7 @@ class ScannedDocumentsJSONViewer(BaseViewer):
         
     def serialize_scandoc_for_calendar(self, sdoc):
         url = self.request.route_url('msl_scandocs',
-                                     context='export',
+                                     context='view',
                                      id=sdoc.created.isoformat())
         start = sdoc.created
         end = start + timedelta(minutes=60)
@@ -132,18 +136,35 @@ class ScannedDocumentsViewer(BaseViewer):
         self.layout.resources.cornsilk.need()
 
 
+    def _name_document_form_submitted(self, sdoc, form):
+        controls = self.request.POST.items()
+        self.layout.subheader = "Name submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        name = data['name']
+        user_id = self.request.session['user'].id
+        self.sdm.name_document(sdoc.created, name, user_id)
+        self.response = HTTPFound(self.url(context='main', id='all'))
 
     def view_document(self):
-        id = int(self.request.matchdict['id'])
+        id = self.request.matchdict['id']
+        id = datetime.strptime(id, dt_isoformat)
         sdoc = self.sdm.get(id)
         template = 'mslemon:templates/consult/msl-view-scandoc.mako'
-        rst = render_rst
-        db = self.request.db
-        pcm = self.pcm
-        env = dict(pcall=pcall, rst=rst, db=db, User=User, pcm=pcm)
-        content = self.render(template, env)
-        self.layout.content = content
-
+        scanplace = self.request.registry.settings['mslemon.scans.scanplace']
+        schema = NameDocumentSchema()
+        form = deform.Form(schema, buttons=('submit',))
+        if 'submit' in self.request.POST:
+            self._name_document_form_submitted(sdoc, form)
+        else:
+            rform = form.render(dict(name=sdoc.name)) 
+            env = dict(sdoc=sdoc, scanplace=scanplace, form=rform)
+            content = self.render(template, env)
+            self.layout.content = content
+        
     def export_document(self):
         id = self.request.matchdict['id']
         id = datetime.strptime(id, dt_isoformat)

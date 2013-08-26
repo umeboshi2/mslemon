@@ -849,3 +849,218 @@ html {
 .phonecall-status-entry-reason {
   font-size: 0.8em;
 }
+
+/*-------- Case Management ----------*/
+/* line 5, ../../../sass/mslemon/_cases-main.scss */
+.cases-main-view-button-bar {
+  background: #8f8f8f;
+  color: whitesmoke;
+  text-align: center;
+  border-style: solid;
+  border-width: 0.3em;
+  border-color: #c2c2c2;
+}
+
+/* line 15, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-header {
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+  background: #8f8f8f;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 1.25em;
+  border-style: solid;
+  border-width: 0.3em;
+  border-color: #c2c2c2;
+}
+
+/* line 26, ../../../sass/mslemon/_cases-main.scss */
+.ticket-history {
+  border-style: solid;
+  border-width: 0.3em;
+  border-color: #c2c2c2;
+}
+
+/* line 32, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-update-phonecall {
+  font-size: 0.7em;
+  padding: 0.3em 1.5em;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
+  background: -webkit-linear-gradient(#8f8f8f, #767676);
+  background: -moz-linear-gradient(#8f8f8f, #767676);
+  background: -o-linear-gradient(#8f8f8f, #767676);
+  background: linear-gradient(#8f8f8f, #767676);
+  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
+  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
+  box-shadow: #b5b5b5 0 1px 0 inset;
+  border: 1px solid dimgrey;
+  text-shadow: #4d4d4d 0 -1px 0;
+  font-weight: bold;
+  font-family: "Droid Sans Bold";
+}
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-phonecall:hover {
+  text-decoration: none;
+}
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-phonecall:hover {
+  background-color: dimgrey;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
+  background: -webkit-linear-gradient(#828282, #696969);
+  background: -moz-linear-gradient(#828282, #696969);
+  background: -o-linear-gradient(#828282, #696969);
+  background: linear-gradient(#828282, #696969);
+}
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-phonecall:active {
+  -webkit-box-shadow: #616161 0 1px 2px inset;
+  -moz-box-shadow: #616161 0 1px 2px inset;
+  box-shadow: #616161 0 1px 2px inset;
+}
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+  background: #767676;
+  cursor: default;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+.phonecall-update-phonecall::-moz-focus-inner {
+  padding: 0 !important;
+  margin: -1px !important;
+}
+
+/*-------- Phonecall List ----------*/
+/* line 41, ../../../sass/mslemon/_cases-main.scss */
+.cases-list-header {
+  background: #8f8f8f;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* line 47, ../../../sass/mslemon/_cases-main.scss */
+.cases-list-list {
+  background: #8f8f8f;
+  padding: 0.3em;
+}
+
+/* line 51, ../../../sass/mslemon/_cases-main.scss */
+.cases-list-entry {
+  background: #8f8f8f;
+  margin: 0.5em;
+  border-style: solid;
+  border-width: 0.1em;
+  border-color: #c2c2c2;
+  padding: 0.3em;
+}
+
+/* line 59, ../../../sass/mslemon/_cases-main.scss */
+.cases-list-entry-status {
+  float: right;
+}
+
+/******************************************************************/
+/*-------- Ticket Management ----------*/
+/* line 71, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-header {
+  background: #8f8f8f;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* line 78, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-update-ticket {
+  font-size: 0.7em;
+  padding: 0.3em 1.5em;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
+  background: -webkit-linear-gradient(#8f8f8f, #767676);
+  background: -moz-linear-gradient(#8f8f8f, #767676);
+  background: -o-linear-gradient(#8f8f8f, #767676);
+  background: linear-gradient(#8f8f8f, #767676);
+  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
+  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
+  box-shadow: #b5b5b5 0 1px 0 inset;
+  border: 1px solid dimgrey;
+  text-shadow: #4d4d4d 0 -1px 0;
+  font-weight: bold;
+  font-family: "Droid Sans Bold";
+}
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-ticket:hover {
+  text-decoration: none;
+}
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-ticket:hover {
+  background-color: dimgrey;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
+  background: -webkit-linear-gradient(#828282, #696969);
+  background: -moz-linear-gradient(#828282, #696969);
+  background: -o-linear-gradient(#828282, #696969);
+  background: linear-gradient(#828282, #696969);
+}
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-ticket:active {
+  -webkit-box-shadow: #616161 0 1px 2px inset;
+  -moz-box-shadow: #616161 0 1px 2px inset;
+  box-shadow: #616161 0 1px 2px inset;
+}
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+.phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+  background: #767676;
+  cursor: default;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+.phonecall-update-ticket::-moz-focus-inner {
+  padding: 0 !important;
+  margin: -1px !important;
+}
+
+/* line 84, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-status-entry {
+  background: #8f8f8f;
+  margin: 0.5em;
+}
+
+/* line 90, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-status-entry-changedate {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+/* line 95, ../../../sass/mslemon/_cases-main.scss */
+.phonecall-status-entry-reason {
+  font-size: 0.8em;
+}

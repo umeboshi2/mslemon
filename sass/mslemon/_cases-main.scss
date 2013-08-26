@@ -1,0 +1,99 @@
+
+/*-------- Case Management ----------*/
+//@import "partials/action-button";
+
+.cases-main-view-button-bar {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    border-style: solid;
+    border-width: 0.3em;
+    border-color: $basecolor2;
+}
+
+
+.phonecall-header {
+    @include border-radius(0.5em);
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    font-size: 1.25em;
+    border-style: solid;
+    border-width: 0.3em;
+    border-color: $basecolor2;
+}
+
+.ticket-history {
+    border-style: solid;
+    border-width: 0.3em;
+    border-color: $basecolor2;
+}
+
+.phonecall-update-phonecall {
+    @include action-button;
+}
+
+
+
+
+/*-------- Phonecall List ----------*/
+
+.cases-list-header {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    font-size: 1.5em;
+}
+.cases-list-list {
+    background: $basecolor4;
+    padding: 0.3em;
+}
+.cases-list-entry {
+    background: $basecolor4;
+    margin: 0.5em;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: $basecolor2;
+    padding: 0.3em;
+}
+.cases-list-entry-status {
+    float: right;
+}
+.cases-list-entry-content {
+}
+
+
+/******************************************************************/
+
+/*-------- Ticket Management ----------*/
+//@import "partials/action-button";
+
+.phonecall-header {
+    background: $menu-header-bg-color;
+    color: $menu-header-text-color;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.phonecall-update-ticket {
+    @include action-button;
+}
+
+
+
+.phonecall-status-entry {
+    background: $basecolor4;
+    margin: 0.5em;
+}
+
+
+.phonecall-status-entry-changedate {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.phonecall-status-entry-reason {
+    font-size: 0.8em;
+}
+
+

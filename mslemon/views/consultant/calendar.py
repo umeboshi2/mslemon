@@ -5,8 +5,8 @@ from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 
 
-from mslemon.managers.consultant.clients import ClientManager
-from mslemon.managers.consultant.contacts import ContactManager
+from mslemon.managers.clients import ClientManager
+from mslemon.managers.contacts import ContactManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 

@@ -5,6 +5,37 @@ viewers = dict(contacts='ContactViewer',
                clients='ClientViewer',
                calendar='CalendarViewer',)
 
+
+def configure_mslemon_cases(config, rootpath='mslcases',
+                            permission='consultant'):
+    route_name = 'msl_cases'
+    config.add_route(route_name,
+                     '/%s/cases/{context}/{id}' % rootpath)
+    #FIXME: better module name
+    config.add_view('mslemon.views.cases.MainCaseViewer',
+                    route_name=route_name,
+                    renderer=basetemplate,
+                    layout='base',
+                    permission=permission)
+    route_name = 'msl_casesjson'
+    config.add_route(route_name,
+                     '/%s/casesjson/{context}/{id}' % rootpath)
+    config.add_view('mslemon.views.cases.CaseJSONViewer',
+                    route_name=route_name,
+                    renderer='json',
+                    layout='base',
+                    permission=permission)
+    route_name = 'msl_casesfrag'
+    config.add_route(route_name,
+                     '/msl/casesfrag/{context}/{id}')
+    config.add_view('mslemon.views.cases.CaseFrag',
+                    route_name=route_name,
+                    renderer='string',
+                    layout='base',
+                    permission=permission)
+
+
+
 def configure_consultant(config, rootpath='/consult', permission='consultant'):
     config.add_route('consult', rootpath)
     config.add_view('mslemon.views.consultant.main.MainViewer',
