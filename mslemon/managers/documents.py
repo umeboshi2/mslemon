@@ -52,17 +52,15 @@ class ScannedDocumentsManager(object):
     
         
     def get_latest(self):
-        try:
             q = self.session.query(NamedDocument)
             q = q.order_by(NamedDocument.created.desc())
-            return q.first()
-        except NoResultFound:
-            try:
+        latest = q.first()
+        if latest is None:
                 q = self.session.query(ScannedDocument)
                 q = q.order_by(ScannedDocument.created.desc())
-                return q.first()
-            except NoResultFound:
-                return None
+            latest = q.first()
+        return latest
+    
         
 
     def update_database(self):
