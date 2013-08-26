@@ -52,12 +52,12 @@ class ScannedDocumentsManager(object):
     
         
     def get_latest(self):
-            q = self.session.query(NamedDocument)
-            q = q.order_by(NamedDocument.created.desc())
+        q = self.session.query(NamedDocument)
+        q = q.order_by(NamedDocument.created.desc())
         latest = q.first()
         if latest is None:
-                q = self.session.query(ScannedDocument)
-                q = q.order_by(ScannedDocument.created.desc())
+            q = self.session.query(ScannedDocument)
+            q = q.order_by(ScannedDocument.created.desc())
             latest = q.first()
         return latest
     
