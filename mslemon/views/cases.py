@@ -82,7 +82,15 @@ class UpdateCaseSchema(colander.Schema):
         widget=deform.widget.TextAreaWidget(rows=10, cols=60),
         )
     
-        
+class AddUserToCaseSchema(colander.Schema):
+    user = colander.SchemaNode(
+        colander.Integer(),
+        title="User",
+        widget=deferred_choices,
+        description="User to add to case",
+        )
+    
+    
 def prepare_main_layout(request):
     prepare_base_layout(request)
     layout = request.layout_manager.layout
@@ -169,7 +177,9 @@ class MainCaseViewer(BaseViewer):
             main=self.main_view,
             add=self.open_case,
             view=self.view_case,
-            update=self.update_case,)
+            update=self.update_case,
+            manageusers=self.manage_users,
+            detachuser=self.detach_user,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -273,7 +283,6 @@ class MainCaseViewer(BaseViewer):
         status = sdict[data['status']]
         change = self.cases.update_case(case_id, user_id,
                                             status, reason, handler_id)
-        
         content = '<p>Case updated. %d</p>' % change.id
         self.layout.content = content
         self.response = HTTPFound(self.url(context='view', id=case_id))
@@ -295,18 +304,30 @@ class MainCaseViewer(BaseViewer):
             formdata = dict(handler=self.request.session['user'].id)
             rendered = form.render(formdata)
             self.layout.content = rendered
-        
+
+    def _check_authorized(self, case):
+        user_id = self.request.session['user'].id
+        case_user_ids = [u.user_id for u in case.users]
+        return user_id in case_user_ids
+    
     def view_case(self):
         id = int(self.request.matchdict['id'])
         case = self.cases.query().get(id)
-        template = 'mslemon:templates/consult/msl-view-case.mako'
-        rst = render_rst
-        env = dict(case=case, rst=rst)
-        content = self.render(template, env)
-        self.layout.content = content
-        
+        if self._check_authorized(case):
+            template = 'mslemon:templates/consult/msl-view-case.mako'
+            rst = render_rst
+            env = dict(case=case, rst=rst)
+            content = self.render(template, env)
+            self.layout.content = content
+        else:
+            self.layout.content = "Unavailable"
+            
     def update_case(self):
         case_id = int(self.request.matchdict['id'])
+        case = self.cases.query().get(case_id)
+        if not self._check_authorized(case):
+            self.layout.content = 'unavailable'
+            return
         schema = UpdateCaseSchema()
         choices = enumerate(['pending', 'closed'])
         schema['status'].widget = make_select_widget(choices)
@@ -342,4 +363,53 @@ class MainCaseViewer(BaseViewer):
         def attach_document(self):
             pass
 
+    def manage_users(self):
+        id = int(self.request.matchdict['id'])
+        case = self.cases.get(id)
+        if not self._check_authorized(case):
+            self.layout.content = "unavailable"
+            return
+        users = case.users
+        case_user_ids = [u.user_id for u in users]
+        template = 'mslemon:templates/consult/msl-view-case-users.mako'
+        rst = render_rst
+        schema = AddUserToCaseSchema()
+        all_users = get_regular_users(self.request)
+        available = [u for u in all_users if u.id not in case_user_ids]
+        choices = [(u.id, u.username) for u in available]
+        schema['user'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        if 'submit' in self.request.POST:
+            self._manage_users_form_submitted(form)
+        else:
+            formdata = dict()
+            env = dict(users=users, form=form, rst=rst)
+            content = self.render(template, env)
+            self.layout.content = content
+            
+    def _manage_users_form_submitted(self, form):
+        case_id = int(self.request.matchdict['id'])
+        controls = self.request.POST.items()
+        self.layout.subheader = "Case user submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        user_id = data['user']
+        self.cases.attach_user(case_id, user_id)
+        self.response = HTTPFound(self.url(context='manageusers', id=case_id))
         
+    def detach_user(self):
+        case_id, user_id = self.request.matchdict['id'].split('_')
+        case_id = int(case_id)
+        user_id = int(user_id)
+        case = self.cases.get(case_id)
+        if not self._check_authorized(case):
+            self.layout.content = "unavailable"
+            return
+        self.cases.detach_user(case_id, user_id)
+        self.response = HTTPFound(self.url(context='manageusers', id=case_id))
+        
+        
+

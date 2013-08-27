@@ -153,7 +153,8 @@ class CaseManager(object):
 
     def detach_user(self, case_id, user_id):
         with transaction.manager:
-            self.session.query(CaseUser).delete((case_id, user_id))
+            cu = self.session.query(CaseUser).get((case_id, user_id))
+            self.session.delete(cu)
         reason = "Removed User from Case"
         status = "pending"
         current = self.session.query(CaseCurrentStatus).get(case_id)

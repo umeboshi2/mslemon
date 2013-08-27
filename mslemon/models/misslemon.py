@@ -329,3 +329,5 @@ CaseCurrentStatus.changed_by = \
     relationship(User, foreign_keys=[CaseCurrentStatus.changed_by_id])
 CaseCurrentStatus.handler = \
     relationship(User, foreign_keys=[CaseCurrentStatus.handler_id])
+
+CaseUser.user = relationship(User)
