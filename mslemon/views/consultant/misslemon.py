@@ -608,7 +608,7 @@ class MSLPhoneViewer(BaseViewer):
 
     def _make_text_message(self, pcall):
         settings = self.request.registry.settings
-        url = self.url(context='viewcall', id=pcall.id)
+        url = self.url(context='view', id=pcall.id)
         path = urlparse.urlparse(url).path
         url = settings['mslemon.public_url'] + path 
         text = "%s\n\n" % url

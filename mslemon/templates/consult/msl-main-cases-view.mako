@@ -1,5 +1,4 @@
 <div class="cases-main-view">
-  <% casetypes = ['assigned', 'delegated', 'unread', 'pending', 'closed'] %>
   <div class="cases-main-view-button-bar">
     <div id="list-button" class="action-button">List</div>
   </div>

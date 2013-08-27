@@ -10,6 +10,7 @@ from mslemon.models.base import DBSession, Base
 from mslemon.config.admin import configure_admin
 from mslemon.config.main import configure_consultant
 from mslemon.config.main import configure_mslemon_cases
+from mslemon.config.main import configure_mslemon_docs
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -60,6 +61,7 @@ def main(global_config, **settings):
     configure_admin(config)
     configure_consultant(config)
     configure_mslemon_cases(config)
+    configure_mslemon_docs(config)
     config.add_static_view('static',
                            'mslemon:static', cache_max_age=3600)
     ##################################

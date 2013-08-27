@@ -7,6 +7,16 @@
     At ${case.created.strftime('%R')} on ${the_date}<br>
     ${opener} created a case for ${handler}<br>
   </div>
+  <div class="ticket-update-ticket">
+    <% kw = dict(context='update', id=case.id) %>
+    <% url = request.route_url('msl_cases', **kw) %>
+    <a href="${url}">Update Status</a>
+  </div>
+  <div class="case-manage-users action-button">
+    <% kw = dict(context='manageusers', id=case.id) %>
+    <% url = request.route_url('msl_cases', **kw) %>
+    <a href="${url}">Manage Users</a>
+  </div>
   <div class="ticket-description">
     ${rst(case.description.text)|n}
   </div>

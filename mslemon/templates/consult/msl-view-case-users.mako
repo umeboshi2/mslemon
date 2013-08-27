@@ -13,4 +13,6 @@
   <div class="manage-case-users-add-user-form">
     ${form.render()|n}
   </div>
+  <% url = request.route_url('msl_cases', context='view', id=users[0].case_id) %>
+  <a class="action-button" href="${url}">View Case</a>
 </div>

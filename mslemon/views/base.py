@@ -64,8 +64,8 @@ def make_ctx_menu(request):
         url = request.route_url('msl_phonecalls', context='main', id='all')
         menu.append_new_entry('Phone Calls', url)
 
-        url = request.route_url('msl_scandocs', context='main', id='all')
-        menu.append_new_entry('Scanned Docs', url)
+        url = request.route_url('msl_docs', context='main', id='all')
+        menu.append_new_entry('Documents', url)
 
         url = request.route_url('msl_cases', context='main', id='all')
         menu.append_new_entry('Cases', url)
@@ -83,6 +83,9 @@ class BaseViewer(TrumpetViewer):
         if hasattr(self, 'css'):
             self.css.need()
         return super(BaseViewer, self).__call__()
+
+    def get_current_user_id(self):
+        return self.request.session['user'].id
 
     def get_current_user(self):
         db = self.request.db

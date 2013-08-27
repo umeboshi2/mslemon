@@ -140,7 +140,7 @@ class CaseJSONViewer(BaseViewer):
         if end - start < thirty_minutes:
             end = start + thirty_minutes
             
-        title = "hard named case"
+        title = cstatus.case.name
         data = dict(id=case.id, start=start.isoformat(),
                     end=end.isoformat(),
                     title=title, url=url)
@@ -218,8 +218,8 @@ class MainCaseViewer(BaseViewer):
     def main_view(self):
         template = 'mslemon:templates/consult/msl-main-cases-view.mako'
         default_view = 'month'
-        case_types = ['assigned', 'delegated', 'unread',
-                     'pending', 'closed']
+        case_types = ['accessible', 'assigned', 'delegated', 'unread',
+                      'pending', 'closed']
         calendar_urls = {}
         list_urls = {}
         c = 'cases'
@@ -244,7 +244,8 @@ class MainCaseViewer(BaseViewer):
                 cfg.set(cfgsection, k, calviews[k])
         env = dict(calendar_urls=calendar_urls,
                    list_urls=list_urls,
-                   calviews=calviews)
+                   calviews=calviews,
+                   casetypes=case_types)
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.main_cases_view.need()

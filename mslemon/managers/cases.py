@@ -115,7 +115,7 @@ class CaseManager(object):
             self.update_case(case_id, user_id, status, reason, handler_id)
         return ticket
 
-    def attached_document(self, case_id, doc_id, user_id):
+    def attach_document(self, case_id, doc_id, user_id):
         document = self.session.query(CaseDocument).get((case_id, doc_id))
         if document is None:
             with transaction.manager:
@@ -153,14 +153,24 @@ class CaseManager(object):
 
     def detach_user(self, case_id, user_id):
         with transaction.manager:
-            cu = self.session.query(CaseUser).get((case_id, user_id))
-            self.session.delete(cu)
-        reason = "Removed User from Case"
-        status = "pending"
-        current = self.session.query(CaseCurrentStatus).get(case_id)
-        handler_id = current.handler_id
-        self.update_case(case_id, user_id, status, reason, handler_id)
-
+            q = self.session.query(CaseUser)
+            q = q.filter(Case.id == CaseUser.case_id)
+            q = q.filter(CaseUser.case_id == case_id)
+            q = q.filter(Case.created_by_id != CaseUser.user_id)
+            q = q.filter(CaseUser.user_id == user_id)
+            deleted = False
+            try:
+                cu = q.one()
+                self.session.delete(cu)
+                deleted = True
+            except NoResultFound:
+                pass
+        if deleted:
+            reason = "Removed User from Case"
+            status = "pending"
+            current = self.session.query(CaseCurrentStatus).get(case_id)
+            handler_id = current.handler_id
+            self.update_case(case_id, user_id, status, reason, handler_id)
 
     def status(self, case_id):
         q = self.session.query(CaseCurrentStatus)
@@ -255,5 +265,16 @@ class CaseManager(object):
                                    start=start, end=end, timestamps=timestamps)
     
 
-
+    def get_accessible(self, user_id,
+                   start=None, end=None, timestamps=False):
+        q = self.session.query(CaseCurrentStatus)
+        q = q.filter(CaseUser.case_id == CaseCurrentStatus.case_id)
+        q = q.filter(CaseUser.user_id == user_id)
+        if start is not None:
+            if timestamps:
+                start, end = convert_range_to_datetime(start, end)
+            q = self._range_filter(q, start, end)
+        q = q.filter(CaseCurrentStatus.status != 'closed')
+        return q.all()
+    
 

@@ -304,6 +304,7 @@ PhoneCall.received_by = relationship(User,
 ScannedDocument.file = relationship(File)
 
 NamedDocument.file = relationship(File)
+NamedDocument.created_by = relationship(User)
 
 UnassignedDocument.doc = relationship(NamedDocument)
 

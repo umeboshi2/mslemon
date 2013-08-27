@@ -11,6 +11,9 @@ from mslemon.util import get_scanned_filenames
 
 from mslemon.managers.util import convert_range_to_datetime
 
+from mslemon.managers.tickets import TicketManager
+from mslemon.managers.cases import CaseManager
+
 #FIXME: better module name
 from mslemon.models.misslemon import File, ScannedDocument
 from mslemon.models.misslemon import NamedDocument, ClientDocument
@@ -112,9 +115,31 @@ class DocumentManager(object):
     def query(self):
         return self.session.query(NamedDocument)
 
+    def get(self, id):
+        return self.query().get(id)
+    
     def all(self):
         return self.query().all()
 
-    def get_unassigned(self):
-        return self.session.query(UnassignedDocument).all()
+    def get_unassigned(self, user_id):
+        q = self.session.query(UnassignedDocument, NamedDocument)
+        q = q.filter(UnassignedDocument.doc_id == NamedDocument.id)
+        q = q.filter(NamedDocument.created_by_id == user_id)
+        return q.all()
+
+
+    def assign_to_case(self, doc_id, case_id, user_id):
+        cases = CaseManager(self.request.db)
+        casedoc = cases.attach_document(case_id, doc_id, user_id)
+        udoc = self.session.query(UnassignedDocument).get(doc_id)
+        if udoc is not None:
+            self.session.delete(udoc)
+            
+
+    def assign_to_ticket(self, doc_id, ticket_id):
+        pass
+
+    def assign_to_client(self, doc_id, client_id):
+        pass
+    
     

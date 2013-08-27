@@ -12,6 +12,10 @@
   <div>
     ${form|n}
   </div>
+  <div class="action-button">
+    <% url = request.route_url('msl_scandocs', context='main', id='all') %>
+    <a href="${url}">Scanned Documents</a>
+  </div>
   <div class="ticket-description">
   </div>
   <div class="ticket-history">

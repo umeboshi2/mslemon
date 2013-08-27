@@ -35,6 +35,17 @@ def configure_mslemon_cases(config, rootpath='mslcases',
                     permission=permission)
 
 
+def configure_mslemon_docs(config, rootpath='msldocs',
+                            permission='consultant'):
+    route_name = 'msl_docs'
+    config.add_route(route_name,
+                     '/%s/docs/{context}/{id}' % rootpath)
+    #FIXME: better module name
+    config.add_view('mslemon.views.documents.MainDocumentViewer',
+                    route_name=route_name,
+                    renderer=basetemplate,
+                    layout='base',
+                    permission=permission)
 
 def configure_consultant(config, rootpath='/consult', permission='consultant'):
     config.add_route('consult', rootpath)

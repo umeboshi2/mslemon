@@ -74,6 +74,8 @@ ViewChoiceLookup = dict([(v, k) for k,v in ViewChoices.items()])
 PhoneCallViews = ['received', 'taken', 'assigned', 'delegated', 'unread',
                   'pending', 'closed']
 TicketViews = ['assigned', 'delegated', 'unread', 'pending', 'closed']
+CaseViews = ['accessible', 'assigned', 'delegated', 'unread',
+             'pending', 'closed']
 
 
 class MainOptionsSchema(colander.Schema):
@@ -119,6 +121,38 @@ class PhoneCallViewOptionsSchema(colander.Schema):
     taken = colander.SchemaNode(
         colander.String(),
         title='Taken',
+        widget=deferred_choices,
+        )
+    assigned = colander.SchemaNode(
+        colander.String(),
+        title='Assigned',
+        widget=deferred_choices,
+        )
+    delegated = colander.SchemaNode(
+        colander.String(),
+        title='Delegated',
+        widget=deferred_choices,
+        )
+    unread = colander.SchemaNode(
+        colander.String(),
+        title='Unread',
+        widget=deferred_choices,
+        )
+    pending = colander.SchemaNode(
+        colander.String(),
+        title='Pending',
+        widget=deferred_choices,
+        )
+    closed = colander.SchemaNode(
+        colander.String(),
+        title='Closed',
+        widget=deferred_choices,
+        )
+    
+class CaseViewOptionsSchema(colander.Schema):
+    accessible = colander.SchemaNode(
+        colander.String(),
+        title='Accessible',
         widget=deferred_choices,
         )
     assigned = colander.SchemaNode(
@@ -320,9 +354,9 @@ class MainViewer(BaseViewer):
                 
         
     def case_preferences(self):
-        schema = TicketViewOptionsSchema()
+        schema = CaseViewOptionsSchema()
         choices = _view_choices
-        for key in TicketViews:
+        for key in CaseViews:
             schema[key].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
@@ -346,7 +380,7 @@ class MainViewer(BaseViewer):
         except deform.ValidationFailure, e:
             self.layout.content = e.render()
             return
-        fields = TicketViews
+        fields = CaseViews
         section = 'case_views'
         values = [ViewChoices[int(data[f])] for f in fields]
         options = dict(zip(fields, values))
