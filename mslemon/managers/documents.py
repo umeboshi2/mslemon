@@ -72,7 +72,12 @@ class ScannedDocumentsManager(object):
         for filename in filenames:
             dt = datetime_from_pdf_filename(filename)
             if latest is None or dt > latest.created:
-                self.insert_scanned_file(filename)
+                q = self.session.query(ScannedDocument)
+                q = q.filter_by(name=filename)
+                try:
+                    q.one()
+                except NoResultFound:
+                    self.insert_scanned_file(filename)
 
     def _range_filter(self, query, start, end):
         query = query.filter(ScannedDocument.created >= start)
