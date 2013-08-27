@@ -14,6 +14,8 @@ from trumpet.views.base import render_rst
 
 
 from mslemon.managers.documents import DocumentManager
+from mslemon.managers.cases import CaseManager
+
 
 from mslemon.views.consultant.base import prepare_base_layout
 
@@ -90,6 +92,14 @@ class AddUserToCaseSchema(colander.Schema):
         description="User to add to case",
         )
     
+
+class AddDocumentToCaseSchema(colander.Schema):
+    case = colander.SchemaNode(
+        colander.Integer(),
+        title="Case",
+        widget=deferred_choices,
+        description="Add document to case",
+        )
     
 def prepare_main_layout(request):
     prepare_base_layout(request)
@@ -110,7 +120,8 @@ class MainDocumentViewer(BaseViewer):
         self._dispatch_table = dict(
             main=self.main_view,
             view=self.view_document,
-            export=self.export_document,)
+            export=self.export_document,
+            to_case=self.assign_to_case,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -151,4 +162,35 @@ class MainDocumentViewer(BaseViewer):
         filename = doc.name
         r.content_disposition = 'attachment; filename="%s"' % filename
         self.response = r
+
+    def _assign_to_case_form_submitted(self, form):
+        db = self.request.db
+        controls = self.request.POST.items()
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        doc_id = int(self.request.matchdict['id'])
+        case_id = data['case']
+        user_id = self.get_current_user_id()
+        self.docs.assign_to_case(doc_id, case_id, user_id)
+        self.response = HTTPFound(self.url(context='main', id='all'))
         
+        
+    def assign_to_case(self):
+        mgr = CaseManager(self.request.db)
+        user_id = self.get_current_user_id()
+        schema = AddDocumentToCaseSchema()
+        choices = [(c.case.id, c.case.name) for c in mgr.get_accessible(user_id)]
+        schema['case'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        if 'submit' in self.request.POST:
+            self._assign_to_case_form_submitted(form)
+        else:
+            self.layout.content = form.render()
+            
+    def assign_to_ticket(self):
+        pass
+    

@@ -332,3 +332,5 @@ CaseCurrentStatus.handler = \
     relationship(User, foreign_keys=[CaseCurrentStatus.handler_id])
 
 CaseUser.user = relationship(User)
+
+CaseDocument.document = relationship(NamedDocument)

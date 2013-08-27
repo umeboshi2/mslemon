@@ -129,12 +129,14 @@ class DocumentManager(object):
 
 
     def assign_to_case(self, doc_id, case_id, user_id):
-        cases = CaseManager(self.request.db)
+        cases = CaseManager(self.session)
         casedoc = cases.attach_document(case_id, doc_id, user_id)
         udoc = self.session.query(UnassignedDocument).get(doc_id)
         if udoc is not None:
-            self.session.delete(udoc)
-            
+            with transaction.manager:
+                self.session.delete(udoc)
+        return casedoc
+    
 
     def assign_to_ticket(self, doc_id, ticket_id):
         pass

@@ -11,6 +11,10 @@
       <a class="action-button" id="download-document" href="${dlurl}">download</a> 
       button to preview the file.
   </div>
+  <div> 
+    <% url = request.route_url('msl_docs', context='to_case', id=doc.id) %>
+    <a class="action-button" href="${url}">Assign to Case</a>
+  </div>
   <div>
     ${form|n}
   </div>

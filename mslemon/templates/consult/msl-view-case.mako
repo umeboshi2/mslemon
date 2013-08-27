@@ -20,6 +20,15 @@
   <div class="ticket-description">
     ${rst(case.description.text)|n}
   </div>
+  <div class="case-document-list">
+    <strong>Documents</strong>
+    %for doc in case.documents:
+    <div class="case-document-list-entry">
+      <% url = request.route_url('msl_docs', context='export', id=doc.doc_id) %>
+      <a href="${url}">${doc.document.name}</a>
+    </div>
+    %endfor
+  </div>
   <div class="ticket-history">
     %for cstatus in case.history:
     <div class="ticket-status-entry">
