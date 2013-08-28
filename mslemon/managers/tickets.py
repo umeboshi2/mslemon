@@ -12,7 +12,7 @@ from mslemon.managers.util import convert_range_to_datetime
 from mslemon.models.misslemon import Description
 from mslemon.models.misslemon import Ticket, TicketCurrentStatus
 from mslemon.models.misslemon import TicketStatusChange
-
+from mslemon.models.misslemon import TicketDocument
 class DescriptionManager(object):
     def __init__(self, session):
         self.session = session
@@ -213,5 +213,24 @@ class TicketManager(object):
                                    start=start, end=end, timestamps=timestamps)
     
 
+    def attach_document(self, ticket_id, doc_id, user_id):
+        document = self.session.query(TicketDocument).get((ticket_id, doc_id))
+        if document is None:
+            with transaction.manager:
+                now = datetime.now()
+                cd = TicketDocument()
+                cd.ticket_id = ticket_id
+                cd.doc_id = doc_id
+                cd.attached = now
+                cd.attached_by_id = user_id
+                self.session.add(cd)
+            document = self.session.merge(cd)
+            reason = "Added Document %d to Ticket" % doc_id
+            status = "pending"
+            current = self.session.query(TicketCurrentStatus).get(ticket_id)
+            handler_id = current.handler_id
+            self.update_ticket(ticket_id, user_id, status, reason, handler_id)
+        return document
+        
 
 
