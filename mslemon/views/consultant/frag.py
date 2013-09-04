@@ -27,24 +27,45 @@ class FragViewer(BaseViewer):
         self.contacts = ContactManager(self.request.db)
         
         self._dispatch_table = dict(
+            usercontactlist=self.list_user_contacts,
+            globalcontactlist=self.list_global_contacts,
             contactlist=self.list_contacts,
             receivedcallscalendar=self.received_calls_calendar,)
         self.context = self.request.matchdict['context']
         self._view = self.context
         #self.response = "NOTHING HAPPENED"
         self.dispatch()
-        
-    def list_contacts(self):
-        id = self.request.matchdict['id']
-        q = self.contacts.query()
+
+    def _contact_name_filter(self, query, id):
         Contact = self.contacts.base
         if id != 'ALL':
             q = q.filter(Contact.lastname.like('%s%%' % id))
-        q = q.order_by(Contact.lastname)
-        contacts = q.all()
+        return q.order_by(Contact.lastname)
+
+    def _render_contact_list(self, contacts):
         env = dict(contacts=contacts)
         template = 'mslemon:templates/consult/contact-list.mako'
         self.response = self.render(template, env)
+        
+    def list_user_contacts(self):
+        id = self.request.matchdict['id']
+        user_id = self.get_current_user_id()
+        q = self.contacts.get_by_user_query(user_id)
+        q = self._contact_name_filter(q, id)
+        contacts = q.all()
+        self._render_contact_list(contacts)
+        
+    def list_global_contacts(self):
+        id = self.request.matchdict['id']
+        q = self.contacts.get_global_query()
+        q = self._contact_name_filter(q, id)
+        contacts = q.all()
+        self._render_contact_list(contacts)
+
+        
+    def list_contacts(self):
+        self.list_user_contacts()
+        
 
     def received_calls_calendar(self):
         template = 'mslemon:templates/consult/calendar-phone.mako'

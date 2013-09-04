@@ -15,7 +15,7 @@ from trumpet.views.base import render_rst
 
 from mslemon.managers.documents import DocumentManager
 from mslemon.managers.cases import CaseManager
-
+from mslemon.managers.tickets import TicketManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 
@@ -101,6 +101,14 @@ class AddDocumentToCaseSchema(colander.Schema):
         description="Add document to case",
         )
     
+class AddDocumentToTicketSchema(colander.Schema):
+    ticket = colander.SchemaNode(
+        colander.Integer(),
+        title="Ticket",
+        widget=deferred_choices,
+        description="Add document to ticket",
+        )
+    
 def prepare_main_layout(request):
     prepare_base_layout(request)
     layout = request.layout_manager.layout
@@ -121,7 +129,8 @@ class MainDocumentViewer(BaseViewer):
             main=self.main_view,
             view=self.view_document,
             export=self.export_document,
-            to_case=self.assign_to_case,)
+            to_case=self.assign_to_case,
+            to_ticket=self.assign_to_ticket,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -192,5 +201,24 @@ class MainDocumentViewer(BaseViewer):
             self.layout.content = form.render()
             
     def assign_to_ticket(self):
-        pass
+        mgr = TicketManager(self.request.db)
+        user_id = self.get_current_user_id()
+        schema = AddDocumentToTicketSchema()
+        possible = set()
+        possible = possible.union(set(mgr.get_assigned(user_id)))
+        possible = possible.union(set(mgr.get_pending(user_id)))
+        possible = possible.union(set(mgr.get_unread(user_id)))
+        possible = possible.union(set(mgr.get_delegated(user_id)))
+        #import pdb ; pdb.set_trace()
+        choices = [(t.ticket.id, t.ticket.title) for t in list(possible)]
+        schema['ticket'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+        if 'submit' in self.request.POST:
+            self._assign_to_ticket_form_submitted(form)
+        else:
+            self.layout.content = form.render()
+            
+        
+        
     

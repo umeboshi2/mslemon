@@ -131,6 +131,7 @@ class ContactViewer(BaseViewer):
         
         
     def add_contact(self):
+        user_id = self.get_current_user_id()
         schema = AddContactSchema()
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
@@ -152,8 +153,10 @@ class ContactViewer(BaseViewer):
             phone = data.get('phone')
             if not phone:
                 phone = None
-            c = self.contacts.add(firstname, lastname, email, phone)
-            name = '%s %s' % (c.firstname, c.lastname)
+            c = self.contacts.add_user_contact(
+                user_id, firstname, lastname, email, phone)
+            contact = c.contact
+            name = '%s %s' % (contact.firstname, contact.lastname)
             content = '<p>Contact %s added.</p>' % name
             self.layout.content = content
             return
@@ -193,7 +196,7 @@ class ContactViewer(BaseViewer):
             kw = dict(firstname=firstname, lastname=lastname,
                       email=email, phone=phone)
             self.contacts.update(contact, **kw)
-            c = self.contacts.get(id)
+            c = self.contacts.get(id).contact
             name = '%s %s' % (c.firstname, c.lastname)
             content = '<p>Contact %s updated.</p>' % name
             self.layout.content = content
@@ -212,7 +215,8 @@ class ContactViewer(BaseViewer):
 
     def confirm_delete_contact(self):
         id = self.request.matchdict['id']
-        self.contacts.delete(id)
+        user_id = self.get_current_user_id()
+        self.contacts.delete_user_contact(user_id, id)
         #self.layout.content = "Deleted"
         url = self.url(context='list', id='all')
         self.response = HTTPFound(url)
@@ -254,6 +258,7 @@ class ContactViewer(BaseViewer):
         
 
     def import_contact_submit(self):
+        user_id = self.get_current_user_id()
         fname = self.request.POST['vcf'].filename
         ifile = self.request.POST['vcf'].file
         stream = ifile.read()
@@ -262,7 +267,7 @@ class ContactViewer(BaseViewer):
         for card in vobject.readComponents(stream):
             cfields = parse_vcard_object(card)
             try:
-                self.contacts.add(*cfields)
+                self.contacts.add_user_contact(*cfields)
                 count += 1
             except IntegrityError:
                 excluded.append(card)

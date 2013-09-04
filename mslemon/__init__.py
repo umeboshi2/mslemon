@@ -11,6 +11,7 @@ from mslemon.config.admin import configure_admin
 from mslemon.config.main import configure_consultant
 from mslemon.config.main import configure_mslemon_cases
 from mslemon.config.main import configure_mslemon_docs
+from mslemon.config.main import configure_wiki
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -40,6 +41,11 @@ def main(global_config, **settings):
         #initialize_sql(engine)
         populate(admin_username)
         #make_test_data(DBSession)
+        from mslemon.models.usergroup import populate_groups
+        populate_groups()
+        from mslemon.models.misslemon import populate_sitetext
+        populate_sitetext()
+        
         
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
@@ -62,6 +68,7 @@ def main(global_config, **settings):
     configure_consultant(config)
     configure_mslemon_cases(config)
     configure_mslemon_docs(config)
+    configure_wiki(config, '/msl_wiki')
     config.add_static_view('static',
                            'mslemon:static', cache_max_age=3600)
     ##################################

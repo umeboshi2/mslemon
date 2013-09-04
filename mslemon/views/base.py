@@ -49,6 +49,9 @@ def make_ctx_menu(request):
         menu.append_new_entry('Sign In', login_url)
     if 'user' in request.session:
         user = request.session['user']
+        url = request.route_url('view_wiki')
+        menu.append_new_entry('Wiki', url)
+        
         url = request.route_url('consult_contacts', context='list', id='all')
         menu.append_new_entry('Contacts', url)
 

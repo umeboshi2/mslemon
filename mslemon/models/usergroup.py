@@ -94,12 +94,15 @@ Group.users = relationship(User, secondary='group_user')
 
 def populate_groups():
     session = DBSession()
-    groups = ['admin', 'manager']
-    with transaction.manager:
-        for gname in groups:
-            group = Group(gname)
-            session.add(group)
-
+    groups = ['editor', 'admin', 'manager']
+    for gname in groups:
+        try:
+            with transaction.manager:
+                group = Group(gname)
+                session.add(group)
+        except IntegrityError:
+            pass
+            
 
 def populate_users(admin_username):
     from trumpet.security import encrypt_password

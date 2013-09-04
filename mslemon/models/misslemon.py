@@ -55,6 +55,30 @@ class Contact(Base):
         if phone:
             self.phone = phone
             
+class GlobalContact(Base):
+    __tablename__ = 'msl_global_contacts'
+    id = Column(Integer,
+                ForeignKey('msl_contacts.id'), primary_key=True)
+    def __init__(self, id):
+        self.id = id
+
+class GroupContact(Base):
+    __tablename__ = 'msl_group_contacts'
+    contact_id = Column(Integer,
+                     ForeignKey('msl_contacts.id'), primary_key=True)
+    group_id = Column(Integer,
+                     ForeignKey('groups.id'), primary_key=True)
+
+    
+class UserContact(Base):
+    __tablename__ = 'msl_user_contacts'
+    contact_id = Column(Integer,
+                     ForeignKey('msl_contacts.id'), primary_key=True)
+    user_id = Column(Integer,
+                     ForeignKey('users.id'), primary_key=True)
+    
+
+
 class Client(Base):
     __tablename__ = 'msl_clients'
     id = Column(Integer, primary_key=True)
@@ -75,7 +99,7 @@ class ClientContact(Base):
                        ForeignKey('msl_clients.id'), primary_key=True)
     contact_id = Column(Integer,
                         ForeignKey('msl_contacts.id'), primary_key=True)
-    
+
 
 class Event(Base):
     __tablename__ = 'msl_events'
@@ -277,7 +301,19 @@ class CaseDocument(Base):
     attached = Column(DateTime)
     attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
+#######################
+# contacts
+#######################
+GlobalContact.contact = relationship(Contact)
+GroupContact.contact = relationship(Contact)
+UserContact.contact = relationship(Contact)
 
+Contact.groups = relationship(GroupContact)
+Contact.users = relationship(UserContact)
+Contact.clients = relationship(ClientContact)
+#######################
+# tickets
+#######################
 # relationships    
 Ticket.description = relationship(Description)
 Ticket.history = relationship(TicketStatusChange,
@@ -295,18 +331,28 @@ TicketCurrentStatus.changed_by = \
 TicketCurrentStatus.handler = \
     relationship(User, foreign_keys=[TicketCurrentStatus.handler_id])
 
+#######################
+# phone calls
+#######################
 
 PhoneCall.ticket = relationship(Ticket)
 PhoneCall.callee = relationship(User, foreign_keys=[PhoneCall.callee_id])
 PhoneCall.received_by = relationship(User,
                                      foreign_keys=[PhoneCall.received_by_id])
 
+#######################
+# documents
+#######################
 ScannedDocument.file = relationship(File)
 
 NamedDocument.file = relationship(File)
 NamedDocument.created_by = relationship(User)
 
 UnassignedDocument.doc = relationship(NamedDocument)
+
+#######################
+# cases
+#######################
 
 
 Case.description = relationship(Description)
@@ -334,3 +380,16 @@ CaseCurrentStatus.handler = \
 CaseUser.user = relationship(User)
 
 CaseDocument.document = relationship(NamedDocument)
+
+            
+def populate_sitetext():
+    from trumpet.models.sitecontent import SiteText
+    session = DBSession()
+    try:
+        with transaction.manager:
+            page = SiteText('FrontPage',
+                            'This is the front page.', type='tutwiki')
+            session.add(page)
+    except IntegrityError:
+        pass
+    

@@ -14,6 +14,8 @@
   <div> 
     <% url = request.route_url('msl_docs', context='to_case', id=doc.id) %>
     <a class="action-button" href="${url}">Assign to Case</a>
+    <% url = request.route_url('msl_docs', context='to_ticket', id=doc.id) %>
+    <a class="action-button" href="${url}">Assign to Ticket</a>
   </div>
   <div>
     ${form|n}

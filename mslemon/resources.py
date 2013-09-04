@@ -51,6 +51,7 @@ class RootGroupFactory(object):
         (Allow, Authenticated, 'user'),
         (Allow, Authenticated, 'consultant'),
         (Allow, 'manager', 'manage'),
+        (Allow, 'editor', ('wiki_add', 'wiki_edit')),
         (Allow, 'admin', ('admin', 'manage')),
         ]
 
