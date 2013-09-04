@@ -200,6 +200,21 @@ class MainDocumentViewer(BaseViewer):
         else:
             self.layout.content = form.render()
             
+    def _assign_to_ticket_form_submitted(self, form):
+        db = self.request.db
+        controls = self.request.POST.items()
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        doc_id = int(self.request.matchdict['id'])
+        ticket_id = data['ticket']
+        user_id = self.get_current_user_id()
+        self.docs.assign_to_ticket(doc_id, ticket_id, user_id)
+        self.response = HTTPFound(self.url(context='main', id='all'))
+        
+        
     def assign_to_ticket(self):
         mgr = TicketManager(self.request.db)
         user_id = self.get_current_user_id()
