@@ -1,5 +1,6 @@
 import os
 from datetime import datetime, timedelta
+from zipfile import ZipFile
 
 import transaction
 from sqlalchemy.orm.exc import NoResultFound
@@ -15,6 +16,12 @@ from mslemon.models.misslemon import Description
 from mslemon.models.misslemon import Ticket, TicketCurrentStatus
 from mslemon.models.misslemon import TicketStatusChange
 from mslemon.models.misslemon import TicketDocument
+
+
+class WikiArchive(ZipFile):
+    def __init__(self, session):
+        pass
+    
 
 class WikiManager(object):
     def __init__(self, session):

@@ -68,7 +68,9 @@ class LoginViewer(BaseViewer):
         if self.came_from == self.request.route_url('login'):
             self.came_from = self.request.route_url('home')
         if formdata is None:
-            formdata = dict(came_from=self.came_from)
+            # never use an empty dict as func/meth arg
+            formdata = dict()
+        formdata.update(dict(came_from=self.came_from))
         rendered = form.render(formdata)
         self.layout.content = rendered
         self.layout.resources.deform_auto_need(form)

@@ -101,7 +101,15 @@ class SiteTextViewer(AdminViewer):
         self.layout.subheader = entry.name
         self.layout.content = '<pre width="80">%s</pre>' % entry.content
 
+
     def list_site_text(self):
+        self._set_menu()
+        template = 'mslemon:templates/list-site-text.mako'
+        entries = self.request.db.query(SiteText).all()
+        env = dict(viewer=self, entries=entries)
+        self.layout.content = self.render(template, env)
+        
+    def list_site_text_orig(self):
         self._set_menu()
         content = '<h1>Here is where we <b>list</b> site text.</h1>'
         self.layout.content = content
