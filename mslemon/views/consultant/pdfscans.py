@@ -50,7 +50,7 @@ class NameDocumentSchema(colander.Schema):
 class ScannedDocumentsFrag(BaseViewer):
     def __init__(self, request):
         super(ScannedDocumentsFrag, self).__init__(request)
-        self._template = 'mslemon:templates/consult/msl-list-phonecalls.mako'
+        self._template = 'mslemon:templates/msl/list-phonecalls.mako'
         self.sdm = ScannedDocumentsManager(self.request.db)
         self.dtformat = '%A - %B %d %H:%m'
         self.env = dict(dtformat=self.dtformat)
@@ -127,7 +127,7 @@ class ScannedDocumentsViewer(BaseViewer):
         self.dispatch()
 
     def main_view(self):
-        template = 'mslemon:templates/consult/msl-main-scandoc-view.mako'
+        template = 'mslemon:templates/msl/main-scandoc-view.mako'
         default_view = 'agendaDay'
         env = dict()
         content = self.render(template, env)
@@ -153,7 +153,7 @@ class ScannedDocumentsViewer(BaseViewer):
         id = self.request.matchdict['id']
         id = datetime.strptime(id, dt_isoformat)
         sdoc = self.sdm.get(id)
-        template = 'mslemon:templates/consult/msl-view-scandoc.mako'
+        template = 'mslemon:templates/msl/view-scandoc.mako'
         scanplace = self.request.registry.settings['mslemon.scans.scanplace']
         schema = NameDocumentSchema()
         form = deform.Form(schema, buttons=('submit',))

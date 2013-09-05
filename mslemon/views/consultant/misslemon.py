@@ -91,7 +91,7 @@ def prepare_main_layout(request):
 class TicketFrag(BaseViewer):
     def __init__(self, request):
         super(TicketFrag, self).__init__(request)
-        self._template = 'mslemon:templates/consult/msl-list-tickets.mako'
+        self._template = 'mslemon:templates/msl/list-tickets.mako'
         self.tickets = TicketManager(self.request.db)
         tkt_types = ['assigned', 'delegated', 'unread',
                      'pending', 'closed']
@@ -361,7 +361,7 @@ class BaseTicketViewer(BaseViewer):
     def view_ticket(self):
         id = int(self.request.matchdict['id'])
         ticket = self.tickets.query().get(id)
-        template = 'mslemon:templates/consult/msl-view-ticket.mako'
+        template = 'mslemon:templates/msl/view-ticket.mako'
         rst = render_rst
         env = dict(ticket=ticket, rst=rst)
         content = self.render(template, env)
@@ -414,7 +414,7 @@ class BaseTicketViewer(BaseViewer):
 class PhoneCallFrag(BaseViewer):
     def __init__(self, request):
         super(PhoneCallFrag, self).__init__(request)
-        self._template = 'mslemon:templates/consult/msl-list-phonecalls.mako'
+        self._template = 'mslemon:templates/msl/list-phonecalls.mako'
         self.pcm = PhoneCallManager(self.request.db)
         call_types = ['received', 'taken',
                       'assigned', 'delegated', 'unread',
@@ -572,7 +572,7 @@ class MSLPhoneViewer(BaseViewer):
         #import pdb ; pdb.set_trace()
 
     def main_phonecall_view(self):
-        template = 'mslemon:templates/consult/msl-main-phone-view.mako'
+        template = 'mslemon:templates/msl/main-phone-view.mako'
         default_view = 'agendaDay'
         call_types = ['received', 'taken',
                       'assigned', 'delegated', 'unread',
@@ -682,7 +682,7 @@ class MSLPhoneViewer(BaseViewer):
     def view_phonecall(self):
         id = int(self.request.matchdict['id'])
         pcall = self.pcm.get(id)
-        template = 'mslemon:templates/consult/msl-view-phonecall.mako'
+        template = 'mslemon:templates/msl/view-phonecall.mako'
         rst = render_rst
         db = self.request.db
         pcm = self.pcm

@@ -103,7 +103,7 @@ def prepare_main_layout(request):
 class CaseFrag(BaseViewer):
     def __init__(self, request):
         super(CaseFrag, self).__init__(request)
-        self._template = 'mslemon:templates/consult/msl-list-cases.mako'
+        self._template = 'mslemon:templates/msl/list-cases.mako'
         self.cases = CaseManager(self.request.db)
         self.dtformat = '%A - %B %d %H:%m'
         self.env = dict(dtformat=self.dtformat)
@@ -216,7 +216,7 @@ class MainCaseViewer(BaseViewer):
     
     
     def main_view(self):
-        template = 'mslemon:templates/consult/msl-main-cases-view.mako'
+        template = 'mslemon:templates/msl/main-cases-view.mako'
         default_view = 'month'
         case_types = ['accessible', 'assigned', 'delegated', 'unread',
                       'pending', 'closed']
@@ -315,7 +315,7 @@ class MainCaseViewer(BaseViewer):
         id = int(self.request.matchdict['id'])
         case = self.cases.query().get(id)
         if self._check_authorized(case):
-            template = 'mslemon:templates/consult/msl-view-case.mako'
+            template = 'mslemon:templates/msl/view-case.mako'
             rst = render_rst
             env = dict(case=case, rst=rst)
             content = self.render(template, env)
@@ -372,7 +372,7 @@ class MainCaseViewer(BaseViewer):
             return
         users = case.users
         case_user_ids = [u.user_id for u in users]
-        template = 'mslemon:templates/consult/msl-view-case-users.mako'
+        template = 'mslemon:templates/msl/view-case-users.mako'
         rst = render_rst
         schema = AddUserToCaseSchema()
         all_users = get_regular_users(self.request)

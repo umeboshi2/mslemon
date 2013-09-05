@@ -156,7 +156,7 @@ class MainDocumentViewer(BaseViewer):
 
     def view_document(self):
         id = int(self.request.matchdict['id'])
-        template = 'mslemon:templates/consult/msl-unassigned-docs-view.mako'
+        template = 'mslemon:templates/msl/unassigned-docs-view.mako'
         doc = self.docs.query().get(id)
         form = "form"
         env = dict(doc=doc, form=form)
