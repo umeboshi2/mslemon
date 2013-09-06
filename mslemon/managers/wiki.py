@@ -1,6 +1,9 @@
 import os
 from datetime import datetime, timedelta
 from zipfile import ZipFile
+from StringIO import StringIO
+import csv
+from io import BytesIO
 
 import transaction
 from sqlalchemy.orm.exc import NoResultFound
@@ -18,12 +21,7 @@ from mslemon.models.misslemon import TicketStatusChange
 from mslemon.models.misslemon import TicketDocument
 
 
-class WikiArchive(ZipFile):
-    def __init__(self, session):
-        pass
-    
-
-class WikiManager(object):
+class BaseWikiManager(object):
     def __init__(self, session):
         self.session = session
 
@@ -40,7 +38,43 @@ class WikiManager(object):
             return q.one()
         except NoResultFound:
             return None
+    
+
+class WikiArchiver(BaseWikiManager):
+    def _serialize_page(self, page):
+        pdict = dict(id=page.id, name=page.name, type=page.type,
+                     created=page.created, modified=page.modified)
+        return pdict
+    
+    def create_new_zipfile(self):
+        fields = ['id', 'name', 'type', 'created', 'modified']
+        self.zipfileobj = BytesIO()
+        self.csvfileobj = StringIO()
+        self.zipfile = ZipFile(self.zipfileobj, 'w')
+        self.csvfile = csv.DictWriter(self.csvfileobj, fields)
         
+    def archive_pages(self):
+        for page in self.query().all():
+            pdict = self._serialize_page(page)
+            self.csvfile.writerow(pdict)
+            filename = 'tutwiki-page-%04d.txt' % page.id
+            self.zipfile.writestr(filename, bytes(page.content))
+        csvfilename = 'tutwiki-dbinfo.csv'
+        self.zipfile.writestr(csvfilename, self.csvfileobj.getvalue())
+        self.zipfile.close()
+        #self.zipfileobj.seek(0)
+        #return self.zipfileobj.read()
+        return self.zipfileobj.getvalue()
+    
+            
+    
+
+class WikiManager(BaseWikiManager):
+    def __init__(self, session):
+        super(WikiManager, self).__init__(session)
+        self.archiver = WikiArchiver(self.session)
+        
+    
     def add_page(self, name, content):
         now = datetime.now()
         page = SiteText(name, content, type='tutwiki')
@@ -61,3 +95,8 @@ class WikiManager(object):
 
     def list_pages(self):
         return self.query().all()
+
+    def get_page_archive(self):
+        self.archiver.create_new_zipfile()
+        return self.archiver.archive_pages()
+    

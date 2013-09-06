@@ -381,6 +381,8 @@ CaseUser.user = relationship(User)
 
 CaseDocument.document = relationship(NamedDocument)
 
+CaseTicket.ticket = relationship(Ticket)
+
             
 def populate_sitetext():
     from trumpet.models.sitecontent import SiteText

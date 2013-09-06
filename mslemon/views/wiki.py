@@ -170,3 +170,4 @@ class WikiViewer(BaseViewer):
             pagelist.append('<li>%s</li>' % anchor)
         ul = '<ul>%s</ul>' % '\n'.join(pagelist)
         self.layout.content = ul
+

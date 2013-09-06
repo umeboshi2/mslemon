@@ -6,6 +6,7 @@ import transaction
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.security import authenticated_userid
 from pyramid.renderers import render
+from pyramid.response import Response
 
 
 from trumpet.models.sitecontent import SiteText
@@ -18,6 +19,9 @@ from trumpet.views.base import NotFound
 from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import AdminViewer, make_main_menu
+from mslemon.managers.wiki import WikiArchiver
+
+
 import colander
 import deform
 
@@ -60,7 +64,8 @@ class SiteTextViewer(AdminViewer):
             confirmdelete=self.main,
             viewentry=self.view_site_text,
             editentry=self.edit_site_text,
-            create=self.create_site_text)
+            create=self.create_site_text,
+            download_wiki_archive=self.download_wiki_archive,)
         self.context = self.request.matchdict['context']
         self._view = self.context
         self.dispatch()
@@ -76,6 +81,9 @@ class SiteTextViewer(AdminViewer):
 
         url = self.url(context='create', id='new')
         menu.append_new_entry('Create New Entry', url)        
+
+        url = self.url(context='download_wiki_archive', id='all')
+        menu.append_new_entry('Download Wiki Archive', url)
         
     def main(self):
         self._set_menu()
@@ -211,4 +219,13 @@ class SiteTextViewer(AdminViewer):
             self.layout.subheader = 'Please edit content'
             
 
+    def download_wiki_archive(self):
+        self._set_menu()
+        archiver = WikiArchiver(self.request.db)
+        archiver.create_new_zipfile()
+        archive = archiver.archive_pages()
+        content_type = 'application/zip'
+        r = Response(content_type=content_type, body=archive)
+        r.content_disposition = 'attachment; filename="tutwiki-archive.zip"'
+        self.response = r
         

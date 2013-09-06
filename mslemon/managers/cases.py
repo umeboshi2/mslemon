@@ -14,6 +14,7 @@ from mslemon.models.misslemon import Ticket, TicketCurrentStatus
 from mslemon.models.misslemon import TicketStatusChange
 
 from mslemon.models.misslemon import Case, CaseTicket, CaseDocument
+from mslemon.models.misslemon import UnassignedDocument
 from mslemon.models.misslemon import CaseUser
 from mslemon.models.misslemon import CaseStatusChange, CaseCurrentStatus
 
@@ -115,6 +116,13 @@ class CaseManager(object):
             self.update_case(case_id, user_id, status, reason, handler_id)
         return ticket
 
+    def get_tickets(self, case_id):
+        q = self.session.query(Ticket)
+        q = q.filter(CaseTicket.ticket_id == Ticket.id)
+        q = q.filter(CaseTicket.case_id == case_id)
+        return q.all()
+    
+        
     def attach_document(self, case_id, doc_id, user_id):
         document = self.session.query(CaseDocument).get((case_id, doc_id))
         if document is None:
@@ -126,6 +134,8 @@ class CaseManager(object):
                 cd.attached = now
                 cd.attached_by_id = user_id
                 self.session.add(cd)
+                udoc = self.session.query(UnassignedDocument).get(doc_id)
+                self.session.delete(udoc)
             document = self.session.merge(cd)
             reason = "Added Document to Case"
             status = "pending"

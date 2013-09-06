@@ -14,6 +14,8 @@ from trumpet.views.base import render_rst
 
 from mslemon.managers.cases import CaseManager
 from mslemon.managers.clients import ClientManager
+from mslemon.managers.documents import DocumentManager
+from mslemon.managers.tickets import TicketManager
 
 from mslemon.views.consultant.base import prepare_base_layout
 
@@ -90,6 +92,20 @@ class AddUserToCaseSchema(colander.Schema):
         description="User to add to case",
         )
     
+    
+class AttachDocumentSchema(colander.Schema):
+    name = colander.SchemaNode(
+        colander.Integer(),
+        title='Name',
+        widget=deferred_choices,
+        )
+
+class AttachTicketSchema(colander.Schema):
+    name = colander.SchemaNode(
+        colander.Integer(),
+        title='Name',
+        widget=deferred_choices,
+        )
     
 def prepare_main_layout(request):
     prepare_base_layout(request)
@@ -179,7 +195,9 @@ class MainCaseViewer(BaseViewer):
             view=self.view_case,
             update=self.update_case,
             manageusers=self.manage_users,
-            detachuser=self.detach_user,)
+            detachuser=self.detach_user,
+            attachdoc=self.attach_document,
+            attachtkt=self.attach_ticket,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -358,12 +376,6 @@ class MainCaseViewer(BaseViewer):
             self.layout.subheader = 'Update status of case'
         
 
-        def attach_document_submitted(self):
-            pass
-        
-        def attach_document(self):
-            pass
-
     def manage_users(self):
         id = int(self.request.matchdict['id'])
         case = self.cases.get(id)
@@ -413,4 +425,75 @@ class MainCaseViewer(BaseViewer):
         self.response = HTTPFound(self.url(context='manageusers', id=case_id))
         
         
+    def _attach_document_form_submitted(self, form):
+        case_id = int(self.request.matchdict['id'])
+        controls = self.request.POST.items()
+        self.layout.subheader = "Case user submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        user_id = self.get_current_user_id()
+        doc_id = data['name']
+        self.cases.attach_document(case_id, doc_id, user_id)
+        self.response = HTTPFound(self.url(context='view', id=case_id))
+        
+    def attach_document(self):
+        case_id = int(self.request.matchdict['id'])
+        user_id = self.get_current_user_id()
+        docmgr = DocumentManager(self.request.db)
+        udocs = docmgr.get_unassigned(user_id)
+        choices = [(u.doc_id, n.name) for u, n in udocs]
+        schema = AttachDocumentSchema()
+        schema['name'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        if 'submit' in self.request.POST:
+            self._attach_document_form_submitted(form)
+        else:
+            formdata = dict()
+            #env = dict(users=users, form=form, rst=rst)
+            #content = self.render(template, env)
+            self.layout.content = form.render(formdata)
+            
+        
+        
+    def _attach_ticket_form_submitted(self, form):
+        case_id = int(self.request.matchdict['id'])
+        controls = self.request.POST.items()
+        self.layout.subheader = "Case user submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        user_id = self.get_current_user_id()
+        ticket_id = data['name']
+        self.cases.attach_ticket(case_id, ticket_id, user_id)
+        self.response = HTTPFound(self.url(context='view', id=case_id))
 
+    def attach_ticket(self):
+        case_id = int(self.request.matchdict['id'])
+        user_id = self.get_current_user_id()
+        schema = AttachTicketSchema()
+        mgr = TicketManager(self.request.db)
+        possible = set()
+        possible = possible.union(set(mgr.get_assigned(user_id)))
+        possible = possible.union(set(mgr.get_pending(user_id)))
+        possible = possible.union(set(mgr.get_unread(user_id)))
+        possible = possible.union(set(mgr.get_delegated(user_id)))
+        case_tickets = self.cases.get_tickets(case_id)
+        case_ticket_ids = [t.id for t in case_tickets]
+        choices = [(t.ticket.id, t.ticket.title) for t in list(possible)
+                   if t.ticket.id not in case_ticket_ids]
+        schema['name'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        if 'submit' in self.request.POST:
+            self._attach_ticket_form_submitted(form)
+        else:
+            formdata = dict()
+            #env = dict(users=users, form=form, rst=rst)
+            #content = self.render(template, env)
+            self.layout.content = form.render(formdata)
+        
+    

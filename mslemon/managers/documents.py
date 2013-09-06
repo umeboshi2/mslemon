@@ -133,18 +133,25 @@ class DocumentManager(object):
         return q.all()
 
 
-    def assign_to_case(self, doc_id, case_id, user_id):
-        cases = CaseManager(self.session)
-        casedoc = cases.attach_document(case_id, doc_id, user_id)
+    def _tidy_assignments(self, doc_id):
         udoc = self.session.query(UnassignedDocument).get(doc_id)
         if udoc is not None:
             with transaction.manager:
                 self.session.delete(udoc)
+                
+    def assign_to_case(self, doc_id, case_id, user_id):
+        cases = CaseManager(self.session)
+        casedoc = cases.attach_document(case_id, doc_id, user_id)
+        self._tidy_assignments(doc_id)
         return casedoc
     
 
-    def assign_to_ticket(self, doc_id, ticket_id):
-        pass
+    def assign_to_ticket(self, doc_id, ticket_id, user_id):
+        tickets = TicketManager(self.session)
+        doc = tickets.attach_document(ticket_id, doc_id, user_id)
+        self._tidy_assignments(doc_id)
+        return doc
+    
 
     def assign_to_client(self, doc_id, client_id):
         pass

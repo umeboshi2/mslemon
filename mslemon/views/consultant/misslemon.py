@@ -222,6 +222,8 @@ class BaseTicketViewer(BaseViewer):
         self._dispatch_table = dict(
             main=self.main_tickets_view,
             add=self.open_ticket,
+            view=self.view_ticket,
+            update=self.update_ticket,
             viewticket=self.view_ticket,
             updateticket=self.update_ticket,)
         self.context = self.request.matchdict['context']

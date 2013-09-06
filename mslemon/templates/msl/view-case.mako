@@ -17,6 +17,16 @@
     <% url = request.route_url('msl_cases', **kw) %>
     <a href="${url}">Manage Users</a>
   </div>
+  <div class="case-attach-ticket action-button">
+    <% kw = dict(context='attachtkt', id=case.id) %>
+    <% url = request.route_url('msl_cases', **kw) %>
+    <a href="${url}">Attach Ticket</a>
+  </div>
+  <div class="case-attach-document action-button">
+    <% kw = dict(context='attachdoc', id=case.id) %>
+    <% url = request.route_url('msl_cases', **kw) %>
+    <a href="${url}">Attach Document</a>
+  </div>
   <div class="ticket-description">
     ${rst(case.description.text)|n}
   </div>
@@ -29,7 +39,17 @@
     </div>
     %endfor
   </div>
+  <div class="case-ticket-list">
+    <strong>Tickets</strong>
+    %for ctkt in case.tickets:
+    <div class="case-ticket-list-entry">
+      <% url = request.route_url('msl_tickets', context='view', id=ctkt.ticket_id) %>
+      <a href="${url}">${ctkt.ticket.title}</a>
+    </div>
+    %endfor
+  </div>
   <div class="ticket-history">
+    <strong>History</strong>
     %for cstatus in case.history:
     <div class="ticket-status-entry">
       <div class="ticket-status-entry-content">
@@ -58,10 +78,5 @@
     <% kw = dict(context='update', id=case.id) %>
     <% url = request.route_url('msl_cases', **kw) %>
     <a href="${url}">Update Status</a>
-  </div>
-  <div class="case-manage-users action-button">
-    <% kw = dict(context='manageusers', id=case.id) %>
-    <% url = request.route_url('msl_cases', **kw) %>
-    <a href="${url}">Manage Users</a>
   </div>
 </div>
