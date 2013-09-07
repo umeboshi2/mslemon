@@ -104,6 +104,11 @@ class ClientContact(Base):
 class Event(Base):
     __tablename__ = 'msl_events'
     id = Column(Integer, primary_key=True)
+    start = Column(DateTime)
+    end = Column(DateTime)
+    # splitting dates and times makes for useful
+    # queries when looking for events in a time range
+    # but not a date range.
     start_date = Column(Date)
     start_time = Column(Time)
     end_date = Column(Date)
@@ -111,6 +116,8 @@ class Event(Base):
     all_day = Column(Boolean, default=False)
     title = Column(Unicode(255))
     description = Column(UnicodeText)
+    created = Column(DateTime)
+    created_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     ext = Column(PickleType)
 
     def __init__(self, title):

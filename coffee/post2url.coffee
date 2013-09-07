@@ -1,6 +1,6 @@
 # http://stackoverflow.com/questions/133925/\
 # javascript-post-request-like-a-form-submit
-post_to_url = (path, params, method) ->
+window.post_to_url = (path, params, method) ->
         method = method || 'post'
         form = document.createElement('form')
         form.setAttribute('method', method)

@@ -88,13 +88,22 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     renderer='string',
                     layout='base',
                     permission=permission)
+
+    route_name = 'consult_caljson'
+    config.add_route(route_name,
+                     '%s/caljson/{context}/{id}' % rootpath)
+    config.add_view('mslemon.views.consultant.calendar.CalendarJSONViewer',
+                    route_name=route_name,
+                    renderer='json',
+                    layout='base',
+                    permission=permission)
     
     ###################################
     route_name = 'msl_tickets'
     config.add_route(route_name,
                      '/msl/tickets/{context}/{id}')
     #FIXME: better module name
-    config.add_view('mslemon.views.consultant.misslemon.MSLViewer',
+    config.add_view('mslemon.views.tickets.MSLViewer',
                     route_name=route_name,
                     renderer=basetemplate,
                     layout='base',
@@ -102,7 +111,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     route_name = 'msl_tktjson'
     config.add_route(route_name,
                      '/msl/tktjson/{context}/{id}')
-    config.add_view('mslemon.views.consultant.misslemon.TicketJSONViewer',
+    config.add_view('mslemon.views.tickets.TicketJSONViewer',
                     route_name=route_name,
                     renderer='json',
                     layout='base',
@@ -110,7 +119,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     route_name = 'msl_tktfrag'
     config.add_route(route_name,
                      '/msl/tktfrag/{context}/{id}')
-    config.add_view('mslemon.views.consultant.misslemon.TicketFrag',
+    config.add_view('mslemon.views.tickets.TicketFrag',
                     route_name=route_name,
                     renderer='string',
                     layout='base',
@@ -118,7 +127,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     route_name = 'msl_phonecalls'
     config.add_route(route_name,
                      '/msl/phonecalls/{context}/{id}')
-    config.add_view('mslemon.views.consultant.misslemon.MSLPhoneViewer',
+    config.add_view('mslemon.views.phonecalls.MSLPhoneViewer',
                     route_name=route_name,
                     renderer=basetemplate,
                     layout='base',
@@ -126,7 +135,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     route_name = 'msl_pcallfrag'
     config.add_route(route_name,
                      '/msl/pcallfrag/{context}/{id}')
-    config.add_view('mslemon.views.consultant.misslemon.PhoneCallFrag',
+    config.add_view('mslemon.views.phonecalls.PhoneCallFrag',
                     route_name=route_name,
                     renderer='string',
                     layout='base',
@@ -134,7 +143,7 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
     route_name = 'msl_pcalljson'
     config.add_route(route_name,
                      '/msl/pcalljson/{context}/{id}')
-    config.add_view('mslemon.views.consultant.misslemon.PhoneCallJSONViewer',
+    config.add_view('mslemon.views.phonecalls.PhoneCallJSONViewer',
                     route_name=route_name,
                     renderer='json',
                     layout='base',

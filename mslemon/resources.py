@@ -17,13 +17,17 @@ main_screen = Resource(css, 'mainscreen.css', depends=[deform_css])
 admin_screen = Resource(css, 'adminscreen.css', depends=[deform_css])
 
 
+post_to_url = Resource(js, 'post2url.js', depends=[jqueryui])
+
 take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])
 main_phone_view = Resource(js, 'main-phone-view.js', depends=[fc_css])
 main_ticket_view = Resource(js, 'main-ticket-view.js', depends=[fc_css])
 main_cases_view = Resource(js, 'main-cases-view.js', depends=[fc_css])
 main_scandoc_view = Resource(js, 'main-scandoc-view.js', depends=[fc_css])
+main_calendar_view = Resource(js, 'main-calendar-view.js', depends=[fc_css, post_to_url])
 
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
+
 
 
 class StaticResources(TrumpetResources):
@@ -39,10 +43,12 @@ class StaticResources(TrumpetResources):
     main_ticket_view = main_ticket_view
     main_cases_view = main_cases_view
     main_scandoc_view = main_scandoc_view
+    main_calendar_view = main_calendar_view
     
     phone_calendar = phone_calendar
     
-
+    post_to_url = post_to_url
+    
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(object):
     __name__ = ""
