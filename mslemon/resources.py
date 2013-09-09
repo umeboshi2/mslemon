@@ -24,7 +24,9 @@ main_phone_view = Resource(js, 'main-phone-view.js', depends=[fc_css])
 main_ticket_view = Resource(js, 'main-ticket-view.js', depends=[fc_css])
 main_cases_view = Resource(js, 'main-cases-view.js', depends=[fc_css])
 main_scandoc_view = Resource(js, 'main-scandoc-view.js', depends=[fc_css])
-main_calendar_view = Resource(js, 'main-calendar-view.js', depends=[fc_css, post_to_url])
+main_calendar_view = Resource(js, 'main-calendar-view.js', depends=[fc_css])
+planevent_calendar_view = Resource(js, 'planevent-calendar-view.js',
+                                   depends=[fc_css, post_to_url])
 
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
 
@@ -38,12 +40,13 @@ class StaticResources(TrumpetResources):
     favicon = favicon
     
 
+    main_calendar_view = main_calendar_view
     take_call_button = take_call_button
+    planevent_calendar_view = planevent_calendar_view
     main_phone_view = main_phone_view
     main_ticket_view = main_ticket_view
     main_cases_view = main_cases_view
     main_scandoc_view = main_scandoc_view
-    main_calendar_view = main_calendar_view
     
     phone_calendar = phone_calendar
     

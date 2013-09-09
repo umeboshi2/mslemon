@@ -126,7 +126,7 @@ class CalendarViewer(BaseViewer):
         template = 'mslemon:templates/consult/calendar-main.mako'
         env = dict()
         self.layout.content = self.render(template, env)
-        self.layout.resources.main_calendar_view.need()
+        self.layout.resources.planevent_calendar_view.need()
         self.layout.resources.azure3.need()
         #self.layout.resources.cornsilk.need()
 
@@ -171,6 +171,12 @@ class CalendarViewer(BaseViewer):
                     formdata['end'] = end
                 except ValueError:
                     formdata['end'] = start + timedelta(hours=1)
+            all_day = self.request.POST['allDay']
+            if all_day == 'false':
+                formdata['all_day'] = False
+            else:
+                formdata['all_day'] = True
+            self.layout.footer = all_day
             rendered = form.render(formdata)
             self.layout.content = rendered
             self.layout.subheader = 'Add an Event'

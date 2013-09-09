@@ -71,6 +71,13 @@ def configure_consultant(config, rootpath='/consult', permission='consultant'):
                     renderer=basetemplate,
                     layout='base',
                     permission=permission)
+    config.add_route('msl_main_json',
+                     '%s/msl_main_json/{context}/{id}' % rootpath)
+    config.add_view('mslemon.views.main.MainCalJSONViewer',
+                    route_name='msl_main_json',
+                    renderer='json',
+                    layout='base',
+                    permission=permission)
     for route in ['contacts', 'clients', 'calendar']:
         route_name = 'consult_%s' % route
         config.add_route(route_name,
