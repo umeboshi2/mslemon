@@ -111,6 +111,9 @@ class MainCalJSONViewer(BaseViewer):
         return data
 
     def serialize_event(self, event):
+        url = self.request.route_url('consult_calendar',
+                                     context='view',
+                                     id=event.id)
         start = event.start
         end = event.end
         thirty_minutes = timedelta(minutes=30)
@@ -120,7 +123,7 @@ class MainCalJSONViewer(BaseViewer):
         id = event.id
         data = dict(id=str(id), title=title,
                     start=start.isoformat(),
-                    end=end.isoformat(), url='foo')
+                    end=end.isoformat(), url=url)
         return data
     
 

@@ -123,7 +123,16 @@ class Event(Base):
     def __init__(self, title):
         self.title = title
 
-        
+class EventUser(Base):
+    __tablename__ = 'msl_event_users'
+    event_id = Column(Integer,
+                      ForeignKey('msl_events.id'), primary_key=True)
+    user_id = Column(Integer,
+                     ForeignKey('users.id'), primary_key=True)
+    attached = Column(DateTime)
+    attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+
+
 class Description(Base):
     __tablename__ = 'msl_descriptions'
     id = Column(Integer, primary_key=True)
@@ -308,6 +317,15 @@ class CaseDocument(Base):
     attached = Column(DateTime)
     attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
+
+class CaseEvent(Base):
+    __tablename__ = 'msl_case_events'
+    case_id = Column(Integer,
+                     ForeignKey('msl_cases.id'), primary_key=True)
+    info = Column(PickleType)
+    attached = Column(DateTime)
+    attached_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    
 #######################
 # contacts
 #######################
@@ -358,10 +376,13 @@ NamedDocument.created_by = relationship(User)
 UnassignedDocument.doc = relationship(NamedDocument)
 
 #######################
+# events
+#######################
+Event.created_by = relationship(User)
+
+#######################
 # cases
 #######################
-
-
 Case.description = relationship(Description)
 Case.users = relationship(CaseUser)
 Case.tickets = relationship(CaseTicket)

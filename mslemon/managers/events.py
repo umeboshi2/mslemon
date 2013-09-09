@@ -5,12 +5,26 @@ import transaction
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
 from sqlalchemy import func
+import vobject
 
 from mslemon.managers.util import convert_range_to_datetime
 
 #FIXME: better module name
 from mslemon.models.misslemon import Event
+
+def make_ical(event):
+    dtime = datetime(2001, 1, 1)
+    cal = vobject.iCalendar()
+    cal.add('vevent')
+    cal.vevent.add('summary').value = event.title
+    cal.vevent.add('description').value = event.description
+    cal.vevent.add('organizer').value = event.created_by.username
+    #cal.vevent.add('location').value = event.venue.name
+    cal.vevent.add('dtstart').value = event.start
+    cal.vevent.add('dtend').value = event.end
+    return cal
     
+
 class EventManager(object):
     def __init__(self, session):
         self.session = session
@@ -85,3 +99,8 @@ class EventManager(object):
     def get_all_events(self, start=None, end=None, timestamps=False):
         q = self._common_range_query(start, end, timestamps)
         return q.all()
+
+    def export_ical(self, id):
+        event = self.get(id)
+        return make_ical(event)
+    

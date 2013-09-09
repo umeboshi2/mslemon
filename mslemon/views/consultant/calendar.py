@@ -64,6 +64,9 @@ class CalendarJSONViewer(BaseViewer):
         return start, end, user_id
 
     def serialize_event(self, event):
+        url = self.request.route_url('consult_calendar',
+                                     context='view',
+                                     id=event.id)
         start = event.start
         end = event.end
         thirty_minutes = timedelta(minutes=30)
@@ -73,10 +76,8 @@ class CalendarJSONViewer(BaseViewer):
         id = event.id
         data = dict(id=str(id), title=title,
                     start=start.isoformat(),
-                    end=end.isoformat(), url='foo')
+                    end=end.isoformat(), url=url)
         return data
-    
-        
     
 
     def render_events(self):
@@ -86,8 +87,6 @@ class CalendarJSONViewer(BaseViewer):
         events = self.events.get_events(user_id, start, end, timestamps=True)
         self.response = [serialize(e) for e in events]
         
-
-
 
 
 def prepare_main_layout(request):
@@ -111,7 +110,9 @@ class CalendarViewer(BaseViewer):
             list=self.list_events,
             add=self.add_event,
             delete=self.delete_event,
-            confirmdelete=self.confirm_delete_event,)
+            confirmdelete=self.confirm_delete_event,
+            view=self.view_event,
+            export=self.export_event)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
@@ -183,7 +184,25 @@ class CalendarViewer(BaseViewer):
             
         
             
-                           
+    def view_event(self):
+        id = int(self.request.matchdict['id'])
+        event = self.events.get(id)
+        template = 'mslemon:templates/msl/view-calendar-event.mako'
+        env = dict(event=event)
+        rendered = self.render(template, env)
+        self.layout.content = rendered
+        
+
+    def export_event(self):
+        id = int(self.request.matchdict['id'])
+        ical = self.events.export_ical(id)
+        r = Response(content_type='text/calendar',
+                     body=ical.serialize())
+        filename = 'event-%04d.ics' % id
+        r.content_disposition = 'attachment; filename="%s"' % filename
+        self.response = r
+        
+    
 
     def delete_event(self):
         pass
