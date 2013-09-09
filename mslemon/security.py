@@ -32,7 +32,7 @@ def check_password(encrypted, password):
 
 
 def authenticate(userid, request):
-    print "called authenticate", request.params
+    #print "called authenticate", request.params
     dbsession = request.db
     user = None
     try:
@@ -42,7 +42,7 @@ def authenticate(userid, request):
     if user is None:
         pass
     else:
-        print "GROUPS--->", user.get_groups()
+        #print "GROUPS--->", user.get_groups()
         return user.get_groups()
 
 
