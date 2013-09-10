@@ -16,6 +16,7 @@ from mslemon.views.base import BaseViewer
 from mslemon.managers.contacts import ContactManager
 
 from mslemon.views.consultant.base import prepare_base_layout
+
 from haberdashery.resources import list_contacts
 
 phone_re = '\((?P<areacode>[1-9][0-9][0-9])\)-(?P<prefix>[0-9][0-9][0-9])-(?P<suffix>[0-9][0-9][0-9][0-9])'

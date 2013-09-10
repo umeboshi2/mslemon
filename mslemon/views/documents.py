@@ -18,6 +18,7 @@ from mslemon.managers.cases import CaseManager
 from mslemon.managers.tickets import TicketManager
 
 from mslemon.views.consultant.base import prepare_base_layout
+from mslemon.views.schema import deferred_choices, make_select_widget
 
 from mslemon.models.usergroup import User
 
@@ -25,13 +26,6 @@ from mslemon.util import send_email_through_smtp_server, make_email_message
 from mslemon.util import get_regular_users
 
 
-
-def deferred_choices(node, kw):
-    choices = kw['choices']
-    return deform.widget.SelectWidget(values=choices)
-
-def make_select_widget(choices):
-    return deform.widget.SelectWidget(values=choices)
 
 class NewCaseSchema(colander.Schema):
     handler = colander.SchemaNode(

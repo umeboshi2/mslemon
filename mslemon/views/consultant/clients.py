@@ -9,14 +9,8 @@ from mslemon.managers.clients import ClientManager
 from mslemon.managers.contacts import ContactManager
 
 from mslemon.views.consultant.base import prepare_base_layout
+from mslemon.views.schema import deferred_choices, make_select_widget
 
-
-def deferred_choices(node, kw):
-    choices = kw['choices']
-    return deform.widget.SelectWidget(values=choices)
-
-def make_select_widget(choices):
-    return deform.widget.SelectWidget(values=choices)
 
 class AddClientSchema(colander.Schema):
     name = colander.SchemaNode(

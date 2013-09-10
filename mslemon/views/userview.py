@@ -13,6 +13,7 @@ from trumpet.security import encrypt_password
 
 from mslemon.managers.admin.users import UserManager
 from mslemon.views.base import BaseViewer
+from mslemon.views.schema import deferred_choices, make_select_widget
 
 from mslemon.models.base import DBSession
 from mslemon.models.usergroup import User, Password
@@ -40,14 +41,6 @@ def get_option(db, user_id, section, option):
 import colander
 import deform
 
-def deferred_choices(node, kw):
-    choices = kw['choices']
-    return deform.widget.SelectWidget(values=choices)
-
-def make_select_widget(choices):
-    return deform.widget.SelectWidget(values=choices)
-
-
 class ChangePasswordSchema(colander.Schema):
     oldpass = colander.SchemaNode(
         colander.String(),
@@ -66,11 +59,11 @@ class ChangePasswordSchema(colander.Schema):
         description="Please confirm the new password.")
 
 
-#_view_choices = ['agendaDay', 'agendaWeek', 'month']
-_view_choices = [(0, 'agendaDay'), (1, 'agendaWeek'), (2, 'month')]
-
-ViewChoices = dict(_view_choices)
+_view_choices = ['agendaDay', 'agendaWeek', 'month']
+ViewChoices = dict(enumerate(_view_choices))
 ViewChoiceLookup = dict([(v, k) for k,v in ViewChoices.items()])
+
+
 PhoneCallViews = ['received', 'taken', 'assigned', 'delegated', 'unread',
                   'pending', 'closed']
 TicketViews = ['assigned', 'delegated', 'unread', 'pending', 'closed']
