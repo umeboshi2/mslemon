@@ -126,6 +126,7 @@ class ContactManager(object):
 
 
     def export_contacts(self, user_id=None):
+        cards = list()
         q = self.query()
         if user_id is not None:
             q = q.filter(UserContact.user_id == user_id)
