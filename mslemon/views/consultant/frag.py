@@ -33,11 +33,11 @@ class FragViewer(BaseViewer):
             receivedcallscalendar=self.received_calls_calendar,)
         self.context = self.request.matchdict['context']
         self._view = self.context
-        #self.response = "NOTHING HAPPENED"
         self.dispatch()
 
     def _contact_name_filter(self, query, id):
         Contact = self.contacts.base
+        q = self.contacts.query()
         if id != 'ALL':
             q = q.filter(Contact.lastname.like('%s%%' % id))
         return q.order_by(Contact.lastname)

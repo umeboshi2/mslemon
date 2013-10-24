@@ -11,6 +11,7 @@ from mslemon.managers.util import convert_range_to_datetime
 
 #FIXME: better module name
 from mslemon.models.misslemon import Event
+from mslemon.models.misslemon import EventUser
 
 def make_ical(event):
     dtime = datetime(2001, 1, 1)
@@ -103,4 +104,16 @@ class EventManager(object):
     def export_ical(self, id):
         event = self.get(id)
         return make_ical(event)
-    
+
+    def attach_user(self, event_id, user_id, attached_by_id):
+        user = self.session.query(EventUser).get((event_id, user_id))
+        if user is None:
+            with transaction.manager:
+                now = datetime.now()
+                eu = EventUser()
+                eu.event_id = event_id
+                eu.user = user_id
+                eu.attached = now
+                eu.attached_by_id = attached_by_id
+                self.session.add(eu)
+                

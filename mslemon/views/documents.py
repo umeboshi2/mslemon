@@ -218,7 +218,6 @@ class MainDocumentViewer(BaseViewer):
         possible = possible.union(set(mgr.get_pending(user_id)))
         possible = possible.union(set(mgr.get_unread(user_id)))
         possible = possible.union(set(mgr.get_delegated(user_id)))
-        #import pdb ; pdb.set_trace()
         choices = [(t.ticket.id, t.ticket.title) for t in list(possible)]
         schema['ticket'].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))

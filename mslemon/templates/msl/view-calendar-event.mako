@@ -8,7 +8,11 @@
   <br>
   <div class="export-event-ical action-button">
     <% url = request.route_url('consult_calendar', context='export', id=event.id) %>
-    <input type="hidden" value=${url} id="export-event">
-    Export iCal
+    <a href="${url}" id="export-event">Export iCal</a>
+  </div>
+  <div class="event-manage-users action-button">
+    <% kw = dict(context='manageusers', id=event.id) %>
+    <% url = request.route_url('consult_calendar', **kw) %>
+    <a href="${url}">Manage Users</a>
   </div>
 </div>
