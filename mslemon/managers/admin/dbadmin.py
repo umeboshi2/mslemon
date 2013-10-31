@@ -1,8 +1,9 @@
 import os
 import cPickle as Pickle
-
+import csv
 from ConfigParser import ConfigParser
 from StringIO import StringIO
+
 from sqlalchemy.orm.exc import NoResultFound
 import transaction
 
@@ -110,13 +111,64 @@ class DBAdminManager(object):
     def backup_files(self, dirname):
         if not os.path.isdir(dirname):
             os.makedirs(dirname)
-        for f in self.session.query(File):
-            filename = 'file-%d.pickle'  % f.id
+        for fid in self.session.query(File.id):
+            filename = 'file-%d.pickle.gz'  % fid.id
             fullname = os.path.join(dirname, filename)
+            f = self.session.query(File).get(fid.id)
             print "Writing", fullname, len(f.content)
-            with file(fullname, 'w') as outfile:
+            with gzip.GzipFile(fullname, 'w') as outfile:
+                #with bz2.BZ2File(fullname, 'w') as outfile:
+                #with file(fullname, 'w') as outfile:
                 data = f.serialize()
                 Pickle.dump(data, outfile)
+
+    def bfiles(self, dirname):
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
+        for fid in self.session.query(File.id):
+            filename = 'file-%d'  % fid.id
+            fullname = os.path.join(dirname, filename)
+            f = self.session.query(File).get(fid.id)
+            print "Writing", fullname, len(f.content)
+            with file(fullname, 'w') as outfile:
+                outfile.write(f.content)
+
                 
+    def backup_documents(self):
+        omap = dict(ScannedDocument=ScannedDocument,
+                    NamedDocument=NamedDocument,
+                    ClientDocument=ClientDocument,
+                    UnassignedDocument=UnassignedDocument)
+        return self._serialize_objects(omap)
+
+    def backup_phonecalls(self):
+        omap = dict(PhoneCall=PhoneCall, ContactCall=ContactCall,
+                    ClientCall=ClientCall)
+        return self._serialize_objects(omap)
+
+    def backup_tickets(self):
+        omap = dict(Description=Description, Ticket=Ticket,
+                    TicketCurrentStatus=TicketCurrentStatus,
+                    TicketStatusChange=TicketStatusChange,
+                    TicketDocument=TicketDocument)
+        return self._serialize_objects(omap)
+
+    def backup_misc(self):
+        omap = dict(Description=Description,
+                    Address=Address)
+        return self._serialize_objects(omap)
+
+    
+
+    def backup(self):
+        data = dict()
+        for bf in [self.backup_usergroup,
+                   self.backup_sitecontent, self.backup_cases,
+                   self.backup_clients, self.backup_events,
+                   self.backup_contacts, self.backup_documents,
+                   self.backup_tickets, self.backup_misc]:
+            data.update(bf())
+        return data
+    
         
         
