@@ -28,6 +28,11 @@ class User(Base):
     def __init__(self, username):
         self.username = username
 
+    def serialize(self):
+        data = dict(id=self.id, username=self.username,
+                    email=self.email, active=self.active)
+        return data
+    
     def __repr__(self):
         return self.username
 
@@ -43,6 +48,9 @@ class UserConfig(Base):
     def __init__(self, user_id, text):
         self.user_id = user_id
         self.text = text
+
+    def serialize(self):
+        return dict(user_id=self.user_id, text=self.text)
 
     def get_config(self):
         c = ConfigParser()
@@ -66,6 +74,9 @@ class Password(Base):
         self.user_id = user_id
         self.password = password
 
+    def serialize(self):
+        return dict(user_id=self.user_id, password=self.password)
+    
 
 class Group(Base):
     __tablename__ = 'groups'
@@ -75,6 +86,9 @@ class Group(Base):
     def __init__(self, name):
         self.name = name
 
+    def serialize(self):
+        return dict(id=self.id, name=self.name)
+    
 
 class UserGroup(Base):
     __tablename__ = 'group_user'
@@ -85,6 +99,9 @@ class UserGroup(Base):
         self.group_id = gid
         self.user_id = uid
 
+    def serialize(self):
+        return dict(group_id=self.group_id, user_id=self.user_id)
+    
 
 User.groups = relationship(Group, secondary='group_user')
 User.config = relationship(UserConfig, uselist=False, lazy='subquery')

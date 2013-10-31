@@ -32,6 +32,11 @@ class SiteImage(Base):
         
     def __repr__(self):
         return self.name
+
+    def serialize(self):
+        data = dict(id=self.id, name=self.name,
+                    content=self.content, thumbnail=self.thumbnail)
+        return data
     
         
 VALID_TEXT_TYPES = ['html',
@@ -58,6 +63,14 @@ class SiteText(Base):
         self.created = datetime.now()
         self.modified = datetime.now()
         
+    def serialize(self):
+        created = self.created.isoformat()
+        modified = self.modified.isoformat()
+        data = dict(id=self.id, name=self.name,
+                    type=self.type,
+                    content=self.content,
+                    created=created, modified=modified)
+        return data
         
 
 def populate_images(imagedir='images'):
