@@ -562,6 +562,7 @@ UnassignedDocument.doc = relationship(NamedDocument)
 # events
 #######################
 Event.created_by = relationship(User)
+Event.users = relationship(EventUser)
 
 #######################
 # cases

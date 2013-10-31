@@ -7,6 +7,11 @@ from mslemon.models.misslemon import Contact
 from mslemon.models.misslemon import ClientContact, GlobalContact
 from mslemon.models.misslemon import GroupContact, UserContact
 
+import vobject
+
+from util import parse_vcard_object, make_vcard
+
+
 class ContactManager(object):
     def __init__(self, session):
         self.session = session
@@ -19,11 +24,24 @@ class ContactManager(object):
         return self.query().get(id)
 
     def add(self, firstname, lastname=None, email=None, phone=None):
+        raise RuntimeError, "don't use this, use add_contact"
         with transaction.manager:
             c = Contact(firstname, lastname, email, phone)
             self.session.add(c)
         return self.session.merge(c)
 
+    def add_contact(self, user_id, firstname, lastname=None, email=None,
+                    phone=None):
+        with transaction.manager:
+            c = Contact(firstname, lastname, email, phone)
+            self.session.add(c)
+            c = self.session.merge(c)
+            uc = UserContact()
+            uc.contact_id = c.id
+            uc.user_id = user_id
+            self.session.add(uc)
+        return self.session.merge(c)
+    
     def update(self, contact, **kw):
         with transaction.manager:
             for key in kw:
@@ -101,7 +119,39 @@ class ContactManager(object):
 
                 
 
+    def export_contact(self, contact_id):
+        c = self.get(id)
+        vcf = make_vcard(c)
+        return vcf
+
+
+    def export_contacts(self, user_id=None):
+        cards = list()
+        q = self.query()
+        if user_id is not None:
+            q = q.filter(UserContact.user_id == user_id)
+        for c in q.all():
+            cards.append(make_vcard(c))
+        return cards
         
+    def export_user_contacts(self, user_id):
+        return self.export_contacts(user_id=user_id)
+    
+    def export_all_contacts(self):
+        return self.export_contacts(user_id=None)
+
+    def import_contacts(self, user_id, stream):
+        count = 0
+        excluded = []
+        for card in vobject.readComponents(stream):
+            cfields = parse_vcard_object(card)
+            try:
+                self.add_user_contact(*cfields)
+                count += 1
+            except IntegrityError:
+                excluded.append(card)
+        return count, excluded
+    
     
 
     

@@ -54,45 +54,7 @@ def prepare_main_layout(request):
     layout.subheader = 'Contacts Area'
     
 
-def make_vcard(contact):
-    card = vobject.vCard()
-    card.add('n')
-    card.n.value = vobject.vcard.Name(family=contact.lastname,
-                                      given=contact.firstname)
-    card.add('fn')
-    fname = contact.lastname
-    if contact.firstname:
-        fname = '%s %s' % (contact.firstname, contact.lastname)
-    card.fn.value = fname
-    card.add('email')
-    card.email.type_param = 'INTERNET'
-    if contact.email is not None:
-        card.email.value = contact.email
-    card.add('tel')
-    card.tel.type_param = 'WORK'
-    if contact.phone is not None:
-        card.tel.value = contact.phone
-    return card
 
-
-def parse_vcard_object(card):
-    firstname = card.n.value.given
-    if not firstname:
-        firstname = None
-    lastname = card.n.value.family
-    email = None
-    if hasattr(card, 'email'):
-        email = card.email.value
-        if not email:
-            email = None
-    phone = None
-    if hasattr(card, 'tel'):
-        phone = card.tel.value
-        if not phone:
-            phone = None
-    return firstname, lastname, email, phone
-
-    
 class ContactViewer(BaseViewer):
     def __init__(self, request):
         BaseViewer.__init__(self, request)
@@ -231,8 +193,7 @@ class ContactViewer(BaseViewer):
 
     def export_contact(self):
         id = self.request.matchdict['id']
-        c = self.contacts.get(id)
-        vcf = make_vcard(c)
+        vcf = self.contacts.export_contact(id)
         r = Response(content_type='text/vcard',
                      body=vcf.serialize())
         if c.firstname is not None:
@@ -245,9 +206,8 @@ class ContactViewer(BaseViewer):
 
 
     def export_all_contacts(self):
-        stream = ''
-        for contact in self.contacts.all():
-            stream += make_vcard(contact).serialize()
+        cards = self.contacts.export_all_contacts()
+        stream = ''.join((c.serialize() for c in cards))
         r = Response(content_type='text/vcard', body=stream)
         r.content_disposition = 'attachment; filename="AllContacts.vcf"'
         self.response = r

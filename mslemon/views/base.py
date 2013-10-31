@@ -88,9 +88,11 @@ class BaseViewer(TrumpetViewer):
         return super(BaseViewer, self).__call__()
 
     def get_current_user_id(self):
+        "Get the user id quickly without db query"
         return self.request.session['user'].id
 
     def get_current_user(self):
+        "Get user db object"
         db = self.request.db
         user_id = self.request.session['user'].id
         return db.query(User).get(user_id)

@@ -111,7 +111,7 @@ Group.users = relationship(User, secondary='group_user')
 
 def populate_groups():
     session = DBSession()
-    groups = ['editor', 'admin', 'manager']
+    groups = ['admin', 'editor', 'manager']
     for gname in groups:
         try:
             with transaction.manager:

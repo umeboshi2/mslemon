@@ -3,6 +3,10 @@ from datetime import datetime, timedelta
 import colander
 import deform
 
+from pyramid.response import Response
+
+from trumpet.views.base import render_rst
+
 from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 
@@ -11,15 +15,12 @@ from mslemon.managers.clients import ClientManager
 from mslemon.managers.contacts import ContactManager
 from mslemon.managers.events import EventManager
 
+from mslemon.views.schema import AddUserSchema
+from mslemon.views.schema import deferred_choices, make_select_widget
+
 from mslemon.views.consultant.base import prepare_base_layout
+from mslemon.util import get_regular_users
 
-
-def deferred_choices(node, kw):
-    choices = kw['choices']
-    return deform.widget.SelectWidget(values=choices)
-
-def make_select_widget(choices):
-    return deform.widget.SelectWidget(values=choices)
 
 class AddEventSchema(colander.Schema):
     title = colander.SchemaNode(
@@ -48,7 +49,6 @@ class AddEventSchema(colander.Schema):
         widget=deform.widget.CheckboxWidget(),
         )
 
-    
 class CalendarJSONViewer(BaseViewer):
     def __init__(self, request):
         super(CalendarJSONViewer, self).__init__(request)
@@ -112,12 +112,21 @@ class CalendarViewer(BaseViewer):
             delete=self.delete_event,
             confirmdelete=self.confirm_delete_event,
             view=self.view_event,
-            export=self.export_event)
+            export=self.export_event,
+            manageusers=self.manage_users,
+            detachuser=self.detach_user,)
         self.context = self.request.matchdict['context']
         self._view = self.context
 
         self.dispatch()
 
+    def _check_authorized(self, event):
+        user_id = self.request.session['user'].id
+        if user_id == event.created_by_id:
+            return True
+        event_user_ids = [u.user_id for u in event.users]
+        return user_id in event_user_ids
+    
     def list_events(self):
         # setup widgetbox
         template = 'mslemon:templates/msl/draggable-event-widget.mako'
@@ -203,6 +212,56 @@ class CalendarViewer(BaseViewer):
         self.response = r
         
     
+    def manage_users(self):
+        id = int(self.request.matchdict['id'])
+        event = self.events.get(id)
+        if not self._check_authorized(event):
+            self.layout.content = "unavailable"
+            return
+        users = event.users
+        event_user_ids = [u.user_id for u in users]
+        template = 'mslemon:templates/msl/view-calendar-event-users.mako'
+        rst = render_rst
+        schema = AddUserSchema()
+        all_users = get_regular_users(self.request)
+        available = [u for u in all_users if u.id not in event_user_ids]
+        available = [u for u in available if u.id != event.created_by_id]
+        choices = [(u.id, u.username) for u in available]
+        schema['user'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        if 'submit' in self.request.POST:
+            self._manage_users_form_submitted(form)
+        else:
+            formdata = dict()
+            env = dict(event=event, users=users, form=form, rst=rst)
+            content = self.render(template, env)
+            self.layout.content = content
+            
+    def _manage_users_form_submitted(self, form):
+        event_id = int(self.request.matchdict['id'])
+        controls = self.request.POST.items()
+        self.layout.subheader = "Event user submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        user_id = data['user']
+        self.events.attach_user(event_id, user_id)
+        self.response = HTTPFound(self.url(context='manageusers', id=event_id))
+        
+    def detach_user(self):
+        event_id, user_id = self.request.matchdict['id'].split('_')
+        event_id = int(event_id)
+        user_id = int(user_id)
+        event = self.events.get(event_id)
+        if not self._check_authorized(event):
+            self.layout.content = "unavailable"
+            return
+        self.events.detach_user(event_id, user_id)
+        self.response = HTTPFound(self.url(context='manageusers', id=event_id))
+        
+        
 
     def delete_event(self):
         pass
