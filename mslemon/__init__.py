@@ -4,6 +4,7 @@ from sqlalchemy import engine_from_config
 from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
+from trumpet.config.base import configure_mobile_layout
 
 from mslemon.security import make_authn_authz_policies, authenticate
 from mslemon.models.base import DBSession, Base
@@ -64,6 +65,7 @@ def main(global_config, **settings):
     config.set_session_factory(session_factory)
 
     configure_base_layout(config)
+    configure_mobile_layout(config)
     configure_admin(config)
     configure_consultant(config)
     configure_mslemon_cases(config)

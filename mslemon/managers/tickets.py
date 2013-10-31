@@ -13,6 +13,7 @@ from mslemon.models.misslemon import Description
 from mslemon.models.misslemon import Ticket, TicketCurrentStatus
 from mslemon.models.misslemon import TicketStatusChange
 from mslemon.models.misslemon import TicketDocument
+
 class DescriptionManager(object):
     def __init__(self, session):
         self.session = session
