@@ -458,6 +458,9 @@ class CaseUser(Base):
                      ForeignKey('msl_cases.id'), primary_key=True)
     user_id = Column(Integer,
                      ForeignKey('users.id'), primary_key=True)
+
+    def serialize(self):
+        return dict(case_id=self.case_id, user_id=self.user_id)
     
 class CaseTicket(Base):
     __tablename__ = 'msl_case_tickets'
