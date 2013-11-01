@@ -72,6 +72,31 @@ DBOBJECTS = ['User', 'Group', 'Password',
              'TicketStatusChange', 'TicketDocument', 'Address']
 
              
+empty_init_objects = ['GroupContact',
+                      'UserContact',
+                      'ClientContact',
+                      'EventUser',
+                      'Description',
+                      'Ticket',
+                      'TicketStatusChange',
+                      'TicketCurrentStatus',
+                      'PhoneCall',
+                      'ContactCall',
+                      'ClientCall',
+                      'File',
+                      'ScannedDocument',
+                      'NamedDocument',
+                      'UnassignedDocument',
+                      'ClientDocument',
+                      'TicketDocument',
+                      'Case',
+                      'CaseStatusChange',
+                      'CaseCurrentStatus',
+                      'CaseUser',
+                      'CaseTicket',
+                      'CaseDocument',
+                      'CaseEvent',
+                      ]
 
 
 class DBAdminManager(object):
@@ -192,6 +217,16 @@ class DBAdminManager(object):
                        'last_change', 'received', 'changed']:
                 value = dtparse(value)
             setattr(dbobject, key, value)
+
+    def restore_files(self, zfile):
+        for f in self.session.query(File):
+            id = f.id
+            filename = 'files/file-%d' % id
+            content = zfile.read(filename)
+            with transaction.manager:
+                f.content = content
+                f = self.session.merge(f)
+                
             
     def restore(self, filename):
         User.metadata.drop_all()
@@ -248,39 +283,24 @@ class DBAdminManager(object):
                 self.session.add(c)
             for data in dbdata['Event']:
                 e = Event(data['title'])
-                self._set_dbobject(e, data)
+                for dtkey in ['start', 'end', 'created']:
+                    setattr(e, dtkey, dtparse(data[dtkey]))
+                for dkey in ['start_date', 'end_date']:
+                    setattr(e, dkey, dtparse(data[dkey]).date())
+                for tkey in ['start_time', 'end_time']:
+                    setattr(e, tkey, dtparse(data[tkey]).time())
+                for field in ['all_day', 'title', 'description',
+                              'created_by_id', 'ext']:
+                    setattr(e, field, data[field])
                 self.session.add(e)
-            empty_init_objects = ['GroupContact',
-                                  'UserContact',
-                                  'ClientContact',
-                                  'EventUser',
-                                  'Description',
-                                  'Ticket',
-                                  'TicketStatusChange',
-                                  'TicketCurrentStatus',
-                                  'PhoneCall',
-                                  'ContactCall',
-                                  'ClientCall',
-                                  'File',
-                                  'ScannedDocument',
-                                  'NamedDocument',
-                                  'UnassignedDocument',
-                                  'ClientDocument',
-                                  'TicketDocument',
-                                  'Case',
-                                  'CaseStatusChange',
-                                  'CaseCurrentStatus',
-                                  'CaseUser',
-                                  'CaseTicket',
-                                  'CaseDocument',
-                                  'CaseEvent',
-                                  ]
             for classname in empty_init_objects:
                 dbclass = eval(classname)
                 for data in dbdata[classname]:
                     dbobj = dbclass()
                     self._set_dbobject(dbobj, data)
                     self.session.add(dbobj)
+        self.restore_files(zipfile)
+                    
                     
             
 
