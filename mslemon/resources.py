@@ -1,8 +1,8 @@
 from pyramid.security import Allow, Everyone, Authenticated
 from fanstatic import Library, Resource
 
-from haberdashery.resources import jqueryui, fc_css, deform_css
-
+from haberdashery.resources import jqueryui, fullcalendar, deform_css
+from haberdashery.resources import fullcalendar
 
 #from trumpet.resources import jqueryui
 from trumpet.resources import StaticResources as TrumpetResources
@@ -20,15 +20,15 @@ admin_screen = Resource(css, 'adminscreen.css', depends=[deform_css])
 post_to_url = Resource(js, 'post2url.js', depends=[jqueryui])
 
 take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])
-main_phone_view = Resource(js, 'main-phone-view.js', depends=[fc_css])
-main_ticket_view = Resource(js, 'main-ticket-view.js', depends=[fc_css])
-main_cases_view = Resource(js, 'main-cases-view.js', depends=[fc_css])
-main_scandoc_view = Resource(js, 'main-scandoc-view.js', depends=[fc_css])
-main_calendar_view = Resource(js, 'main-calendar-view.js', depends=[fc_css])
+main_phone_view = Resource(js, 'main-phone-view.js', depends=[fullcalendar])
+main_ticket_view = Resource(js, 'main-ticket-view.js', depends=[fullcalendar])
+main_cases_view = Resource(js, 'main-cases-view.js', depends=[fullcalendar])
+main_scandoc_view = Resource(js, 'main-scandoc-view.js', depends=[fullcalendar])
+main_calendar_view = Resource(js, 'main-calendar-view.js', depends=[fullcalendar])
 planevent_calendar_view = Resource(js, 'planevent-calendar-view.js',
-                                   depends=[fc_css, post_to_url])
+                                   depends=[fullcalendar, post_to_url])
 
-phone_calendar = Resource(js, 'phone-calendar.js', depends=[fc_css])
+phone_calendar = Resource(js, 'phone-calendar.js', depends=[fullcalendar])
 
 
 
