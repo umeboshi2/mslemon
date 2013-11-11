@@ -3,8 +3,9 @@ from datetime import datetime
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPNotFound
 
-from mslemon.models.sitecontent import SiteImage
 
+from trumpet.models.sitecontent import SiteImage
+from trumpet.models.sitecontent import SiteCSS, SiteJS
 
 
 class BlobViewer(object):
@@ -20,7 +21,9 @@ class BlobViewer(object):
         # make dispatch table
         self._viewmap = dict(
             image=self.get_image,
-            thumb=self.get_thumb,)
+            thumb=self.get_thumb,
+            css=self.get_css,
+            js=self.get_js,)
 
         # dispatch filetype request
         if self.filetype in self._viewmap:
@@ -51,3 +54,24 @@ class BlobViewer(object):
                             content_type=content_type)
         self.content = response
     
+    def get_css(self):
+        id = self.request.matchdict['id']
+        i = self.db.query(SiteCSS).get(id)
+        # FIXME
+        content_type = 'text/css'
+        response = Response(body=i.content,
+                            content_type=content_type)
+        self.content = response
+
+    
+    def get_js(self):
+        id = self.request.matchdict['id']
+        i = self.db.query(SiteJS).get(id)
+        # FIXME
+        content_type = 'text/javascript'
+        response = Response(body=i.content,
+                            content_type=content_type)
+        self.content = response
+
+    
+                
