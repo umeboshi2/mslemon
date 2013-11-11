@@ -27,7 +27,7 @@ class Address(Base):
     state = Column(Unicode(2))
     zip = Column(Unicode(10))
 
-    def __init__(self, street, city=None,
+    def __init__(self, street=None, city=None,
                  state=None, zip=None):
         self.street = street
         self.city = city
@@ -51,7 +51,7 @@ class Contact(Base):
     email = Column(Unicode(50), unique=True)
     phone = Column(Unicode(20))
 
-    def __init__(self, firstname, lastname='', email=None, phone=None):
+    def __init__(self, firstname=None, lastname='', email=None, phone=None):
         if firstname:
             self.firstname = firstname
         if lastname:
@@ -71,7 +71,7 @@ class GlobalContact(Base):
     __tablename__ = 'msl_global_contacts'
     id = Column(Integer,
                 ForeignKey('msl_contacts.id'), primary_key=True)
-    def __init__(self, id):
+    def __init__(self, id=None):
         self.id = id
 
     def serialize(self):
@@ -110,7 +110,7 @@ class Client(Base):
     address = Column(UnicodeText)
     description = Column(UnicodeText)
     
-    def __init__(self, name, contact_id, address='', description=''):
+    def __init__(self, name=None, contact_id=None, address='', description=''):
         self.name = name
         self.contact_id = contact_id
         self.address = address
@@ -155,7 +155,7 @@ class Event(Base):
     created_by_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     ext = Column(PickleType)
 
-    def __init__(self, title):
+    def __init__(self, title=None):
         self.title = title
 
     def serialize(self):
