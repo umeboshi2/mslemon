@@ -1,8 +1,10 @@
 from datetime import datetime
 
 from pyramid.response import Response
+from pyramid.httpexceptions import HTTPNotFound
 
 from mslemon.models.sitecontent import SiteImage
+
 
 
 class BlobViewer(object):

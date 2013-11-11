@@ -16,6 +16,22 @@ def prepare_layout(layout):
     layout.resources.favicon.need()
 
 
+def get_admin_username(request):
+    skey = 'mslemon.admin.admin_username'
+    admin_username = request.registry.settings.get(skey, 'admin')
+    return admin_username
+
+def get_user_id(request, username):
+    db = request.db
+    q = db.query(User).filter_by(username=username)
+    return q.one().id
+
+def get_regular_users(request):
+    users = request.db.query(User).all()
+    admin_username = get_admin_username(request)
+    return [u for u in users if u.username != admin_username]
+
+
 def make_main_menu(request):
     bar = TopBar(request.matched_route.name)
     bar.entries['Home'] = request.route_url('home')
@@ -87,18 +103,19 @@ class BaseViewer(TrumpetViewer):
             self.css.need()
         return super(BaseViewer, self).__call__()
 
-    def get_current_user_id(self):
-        "Get the user id quickly without db query"
-        return self.request.session['user'].id
+    def get_admin_username(self):
+        return get_admin_username(self.request)
+
+    def is_admin_authn(self, authn):
+        username = self.get_admin_username()
+        user_id = get_user_id(self.request, username)
+        return authn == user_id
 
     def get_current_user(self):
-        "Get user db object"
-        db = self.request.db
-        user_id = self.request.session['user'].id
-        return db.query(User).get(user_id)
+        user_id = self.get_current_user_id()
+        return self.request.db.query(User).get(user_id)
+    
 
-    def get_app_settings(self):
-        return self.request.registry.settings
     
 class AdminViewer(BaseViewer):
     def __init__(self, request):

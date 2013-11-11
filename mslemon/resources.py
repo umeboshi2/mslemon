@@ -2,7 +2,7 @@ from pyramid.security import Allow, Everyone, Authenticated
 from fanstatic import Library, Resource
 
 from haberdashery.resources import jqueryui, fullcalendar, deform_css
-from haberdashery.resources import fullcalendar
+from haberdashery.resources import ace
 
 #from trumpet.resources import jqueryui
 from trumpet.resources import StaticResources as TrumpetResources
@@ -30,6 +30,14 @@ planevent_calendar_view = Resource(js, 'planevent-calendar-view.js',
 
 phone_calendar = Resource(js, 'phone-calendar.js', depends=[fullcalendar])
 
+admin_show_path_content = Resource(js, 'admin-show-path-content.js',
+                                   depends=[jqueryui])
+
+admin_list_site_paths = Resource(js, 'list-site-paths.js', depends=[jqueryui])
+admin_list_site_resources = Resource(js, 'admin-list-site-resources.js',
+                                     depends=[jqueryui])
+admin_edit_site_resources = Resource(js, 'admin-edit-site-resources.js',
+                                     depends=[ace.ace, jqueryui])
 
 
 class StaticResources(TrumpetResources):
@@ -49,6 +57,10 @@ class StaticResources(TrumpetResources):
     main_scandoc_view = main_scandoc_view
     
     phone_calendar = phone_calendar
+    admin_list_site_paths = admin_list_site_paths
+    admin_show_path_content = admin_show_path_content
+    admin_list_site_resources = admin_list_site_resources
+    admin_edit_site_resources = admin_edit_site_resources
     
     post_to_url = post_to_url
     

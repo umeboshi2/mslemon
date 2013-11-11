@@ -29,7 +29,7 @@ populate = mslemon.models.usergroup.populate
 
 
 def make_test_data(session):
-    from trumpet.security import encrypt_password
+    from mslemon.security import encrypt_password
     from mslemon.models.usergroup import User, Group, UserGroup
     from mslemon.models.usergroup import Password
     db = session

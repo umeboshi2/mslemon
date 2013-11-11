@@ -10,15 +10,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy import desc
 from sqlalchemy import func
 
-from mslemon.managers.util import convert_range_to_datetime
-
-from trumpet.models.sitecontent import SiteText
-
-#FIXME: better module name
-from mslemon.models.misslemon import Description
-from mslemon.models.misslemon import Ticket, TicketCurrentStatus
-from mslemon.models.misslemon import TicketStatusChange
-from mslemon.models.misslemon import TicketDocument
+from mslemon.models.sitecontent import SiteText
 
 
 class BaseWikiManager(object):

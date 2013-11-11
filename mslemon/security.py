@@ -6,6 +6,8 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from sqlalchemy.orm.exc import NoResultFound
 
+from trumpet.security import make_authn_authz_policies
+
 from mslemon.models.usergroup import User, Password
 
 
@@ -46,28 +48,3 @@ def authenticate(userid, request):
         return user.get_groups()
 
 
-def check_user_password(user, password):
-    return check_password(user.pw.password, password)
-
-
-authn_policy = AuthTktAuthenticationPolicy(
-    secret='v3rys3cret',
-    callback=authenticate)
-
-authz_policy = ACLAuthorizationPolicy()
-
-
-def make_authn_authz_policies(secret, cookie, callback=authenticate,
-                              timeout=None):
-    authn_policy = AuthTktAuthenticationPolicy(
-        secret=secret,
-        callback=callback,
-        cookie_name=cookie,
-        timeout=timeout)
-    authz_policy = ACLAuthorizationPolicy()
-    return authn_policy, authz_policy
-
-
-def get_current_user(request):
-    user_id = request.session['user'].id
-    return request.db.query(User).get(user_id)

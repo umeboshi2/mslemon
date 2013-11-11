@@ -2,6 +2,7 @@ from datetime import datetime, date, timedelta
 
 from docutils.core import publish_parts
 
+from sqlalchemy.exc import OperationalError, ProgrammingError
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.security import authenticated_userid
 from pyramid.renderers import render
@@ -19,6 +20,8 @@ from mslemon.managers.documents import ScannedDocumentsManager
 
 
 from trumpet.views.menus import BaseMenu
+
+from mslemon.models.usergroup import User
 
 from mslemon.views.base import BaseViewer
 from mslemon.views.base import make_main_menu, make_ctx_menu
@@ -196,10 +199,14 @@ class MainViewer(BaseViewer):
         self.route = self.request.matched_route.name
         self.layout.main_menu = make_main_menu(self.request).render()
         self.layout.ctx_menu = make_ctx_menu(self.request).output()
+        self._user_query = self.request.db.query(User)
 
         # begin dispatch
         if self.route == 'home':
             self.main_view()
+            return
+        elif self.route == 'initdb':
+            self.initialize_database()
             return
         if self.route == 'main':
             self.context = self.request.matchdict['context']
@@ -221,7 +228,7 @@ class MainViewer(BaseViewer):
             self.layout.content = '<b>%s</b>' % msg
 
             
-    def main_view(self):
+    def authenticated_view(self):
         #template = 'goout:templates/main-page.mako'
         #env = dict(dates=dates, dc=dc, dformat=dformat)
         #content = render(template, env, request=self.request)
@@ -237,6 +244,52 @@ class MainViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         
+        
+    def main_view(self):
+        authn_policy = self.request.context.authn_policy
+        authn = authn_policy.authenticated_userid(self.request)
+        if authn is None:
+            self.unauthenticated_view()
+        else:
+            self.authenticated_view()
+            
+    def unauthenticated_view(self):
+        dbconn = False
+        try:
+            self._user_query.first()
+            dbconn = True
+        except OperationalError:
+            dbconn = False
+        except ProgrammingError:
+            dbconn = False
+        if not dbconn:
+            mkurl = self.request.route_url
+            url = mkurl('initdb', context='initialize', id='database')
+            msg = "Create Database"
+            anchor = '<a class="action-button" href="%s">%s</a>' % (url, msg)
+            content = anchor
+            self.layout.ctx_menu = ''
+            self.layout.main_menu = ''
+        else:
+            url = self.request.route_url('login')
+            content = '<a href="%s">Login</a>' % url
+        self.layout.content = content
+
+    def initialize_database(self):
+        context = self.request.matchdict['context']
+        if context != 'initialize':
+            self.layout.content = "Bad Call"
+            return
+        id = self.request.matchdict['id']
+        if id != 'database':
+            self.layout.content = "Bad Call"
+            return
+        from mslemon.models.initialize import initialize_database
+        settings = self.get_app_settings()
+        initialize_database(settings)
+        self.layout.content = "Database Initialized"
+    
+    
     def view_event(self):
         pass
     

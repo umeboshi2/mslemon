@@ -33,6 +33,12 @@ def prepare_main_data(request):
     url = request.route_url('admin_dbadmin', context='main', id='main')
     menu.append_new_entry('Manage Database', url)
     
+    url = request.route_url('admin_site_templates',
+                            context='list', id='all')
+    menu.append_new_entry('Site Templates', url)
+    url = request.route_url('admin_sitecontent_mgr',
+                            context='listpaths', id='all')
+    menu.append_new_entry('Site Content', url)
     main_menu = make_main_menu(request)
     layout.title = 'Admin Page'
     layout.header = 'Admin Page'

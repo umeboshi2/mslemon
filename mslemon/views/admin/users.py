@@ -171,7 +171,6 @@ class UserManagementViewer(AdminViewer):
         env = dict(user=user, form=form.render())
         template = 'mslemon:templates/view-user.mako'
         content = self.render(template, env)
-        #self.layout.content = 'View the darned user %s' % form.render()
         self.layout.content = content
         
 
@@ -182,7 +181,6 @@ class UserManagementViewer(AdminViewer):
         template = 'trumpet:templates/group-list.mako'
         env = dict(groups=groups)
         self.layout.content = self.render(template, env)
-        #self.layout.resources.manage_images.need()
         self.layout.resources.manage_users.need()
         
     def view_group(self):

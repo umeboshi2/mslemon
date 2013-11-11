@@ -6,7 +6,19 @@
 @import "partials/basecolors/azure3";
 
 @import "partials/common-page";
+@import "partials/list-styles";
 
+#editor {
+    position: relative;
+    //position: absolute;
+    #top: 0;
+    #right: 0;
+    #bottom: 0;
+    #left: 0;
+    width: 50em;
+    height: 30em;
+
+}
 
 // extra stuff
 @import "partials/imagelist-admin";

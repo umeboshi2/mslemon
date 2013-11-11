@@ -5,6 +5,8 @@ from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
 from trumpet.config.base import configure_mobile_layout
+from trumpet.models.sitecontent import SitePath
+from trumpet.managers.admin.siteviews import PyramidConfigManager
 
 from mslemon.security import make_authn_authz_policies, authenticate
 from mslemon.models.base import DBSession, Base
@@ -20,7 +22,8 @@ def main(global_config, **settings):
     # set app name
     appname = 'mslemon'
     # need to use goout root factory for ACL
-    root_factory = 'mslemon.resources.RootGroupFactory'
+    from mslemon.resources import RootGroupFactory
+    root_factory = RootGroupFactory
     # alchemy request provides .db method
     request_factory = 'trumpet.request.AlchemyRequest'
     # get admin username
@@ -33,19 +36,41 @@ def main(global_config, **settings):
     DBSession.configure(bind=engine)
     # bind objects to engine
     Base.metadata.bind = engine
-
+    from trumpet.models.base import Base as TrumpetBase
+    TrumpetBase.metadata.bind = engine
     if settings.get('db.populate', 'False') == 'True':
         from mslemon.models.main import populate
         from mslemon.models.main import make_test_data
         import mslemon.models.misslemon
         Base.metadata.create_all(engine)
+        TrumpetBase.metadata.create_all(engine)
         #initialize_sql(engine)
         populate(admin_username)
         #make_test_data(DBSession)
-        from mslemon.models.usergroup import populate_groups
-        populate_groups()
-        from mslemon.models.misslemon import populate_sitetext
-        populate_sitetext()
+        from mslemon.models.initialize import initialize_database
+        from mslemon.models.initialize import IntegrityError
+        initialize_database(settings)
+    
+        #vmgr = PyramidConfigManager(DBSession)
+        #try:
+        #    vmgr.add_route('view_wiki', '/foowiki')
+        #    vmgr.add_route('list_pages', '/foowiki/listpages')
+        #    vmgr.add_route('view_page', '/foowiki/{pagename}')
+        #    vmgr.add_route('add_page', '/foowiki/add_page/{pagename}')
+        #    vmgr.add_route('edit_page', '/foowiki/{pagename}/edit_page')
+        #    
+        #    wikiview = 'mslemon.views.wiki.WikiViewer'
+        #    vmgr.add_view(vmgr.get_route_id('view_wiki'), wikiview)
+        #    vmgr.add_view(vmgr.get_route_id('list_pages'), wikiview)
+        #    vmgr.add_view(vmgr.get_route_id('view_page'), wikiview)
+        #    vmgr.add_view(vmgr.get_route_id('add_page'), wikiview,
+        #                  permission='wiki_add')
+        #    vmgr.add_view(vmgr.get_route_id('edit_page'), wikiview,
+        #                  permission='wiki_edit')
+        #except IntegrityError:
+        #    import transaction
+        #    transaction.abort()
+        #    
         
         
     # setup authn and authz
@@ -54,7 +79,13 @@ def main(global_config, **settings):
     timeout = int(settings['%s.authn.timeout' % appname])
     authn_policy, authz_policy = make_authn_authz_policies(
         secret, cookie, callback=authenticate,
-        timeout=timeout)
+        timeout=timeout, tkt=False)
+    root_factory.authn_policy = authn_policy
+
+
+
+
+    
     # create config object
     config = Configurator(settings=settings,
                           root_factory=root_factory,
@@ -64,9 +95,13 @@ def main(global_config, **settings):
     session_factory = session_factory_from_settings(settings)
     config.set_session_factory(session_factory)
 
+    config.include('pyramid_fanstatic')
+
     configure_base_layout(config)
     configure_mobile_layout(config)
     configure_admin(config)
+    #vmgr = PyramidConfigManager(DBSession)
+    #vmgr.configure(config)
     configure_consultant(config)
     configure_mslemon_cases(config)
     configure_mslemon_docs(config)
@@ -86,6 +121,11 @@ def main(global_config, **settings):
                     layout='base',
                     renderer=basetemplate,
                     route_name='main')
+    config.add_route('initdb', '/initdb/{context}/{id}')
+    config.add_view('mslemon.views.main.MainViewer',
+                    layout='base',
+                    renderer=basetemplate,
+                    route_name='initdb')
     ##################################
     # Login Views
     ##################################
