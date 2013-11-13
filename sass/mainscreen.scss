@@ -5,6 +5,17 @@
 //@import "partials/basecolors/darkseagreen";
 @import "partials/basecolors/white-smoke";
 
+
+/* import all colors and variables before bootstrap */
+
+@import "mslemon/bootstrap-variables";
+
+//@import "bootstrap/variables";
+//@import "bootstrap/mixins";
+
+
+@import "bootstrap";
+
 @import "partials/common-page";
 
 @import "partials/list-styles";
@@ -22,3 +33,13 @@
 @import "mslemon/phonecall";
 @import "mslemon/cases-main";
 @import "mslemon/list-styles";
+
+
+
+
+.fc-header-title h2 {
+    font-size: 1.2em;
+}
+
+
+

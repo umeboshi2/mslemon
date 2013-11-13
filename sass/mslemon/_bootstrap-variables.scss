@@ -1,0 +1,29 @@
+
+
+$body-bg: $basecolor3;
+
+
+$btn-primary-color: black;
+$btn-primary-bg: $basecolor2;
+$btn-primary-border: $basecolor4;
+
+$navbar-default-bg: $basecolor3;
+$navbar-default-brand-bg: $basecolor3;
+
+$navbar-default-link-color: $basecolor2;
+$navbar-brand-color: $basecolor2;
+
+$navbar-margin-bottom: 0em;
+
+//$navbar-default-margin-bottom: 0em;
+
+.navbar-default .navbar {
+    margin-bottom: 0em;
+}
+
+header.header > h1 {
+    font-family: "Rambla";
+}
+header.header > h2 {
+    font-family: "Rambla";
+}

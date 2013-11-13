@@ -14,7 +14,8 @@ def prepare_layout(layout):
     layout.footer = ''
     layout.resources = StaticResources()
     layout.resources.favicon.need()
-
+    layout.resources.bootstrap.bootstrap_js.need()
+    layout.resources.bootstrap.bootstrap_theme.need()
 
 def get_admin_username(request):
     skey = 'mslemon.admin.admin_username'

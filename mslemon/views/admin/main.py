@@ -24,6 +24,7 @@ from mslemon.views.base import AdminViewer, make_main_menu
 def prepare_main_data(request):
     layout = request.layout_manager.layout
     menu = layout.ctx_menu
+    menu.set_header('Admin Menu')
     url = request.route_url('admin_users', context='list', id='all')
     menu.append_new_entry('Manage Users', url)
     url = request.route_url('admin_sitetext', context='list', id=None)
@@ -43,7 +44,6 @@ def prepare_main_data(request):
     layout.title = 'Admin Page'
     layout.header = 'Admin Page'
     layout.main_menu = main_menu.render()
-    layout.ctx_menu = menu
 
 
 class MainViewer(AdminViewer):
