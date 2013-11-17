@@ -11,10 +11,9 @@ from pyramid.renderers import render
 from trumpet.resources import MemoryTmpStore
 
 
-from trumpet.views.base import NotFound
 from trumpet.views.menus import BaseMenu
 
-from mslemon.views.base import AdminViewer, make_main_menu
+from mslemon.views.base import AdminViewer
 from mslemon.managers.admin.images import ImageManager
 
 import colander
@@ -30,10 +29,8 @@ def prepare_main_data(request):
     menu.append_new_entry('List Images', url)
     url = request.route_url(imgroute, context='add', id=None)
     menu.append_new_entry('Add Image', url)
-    main_menu = make_main_menu(request)
     layout.title = 'Manage Images'
     layout.header = 'Manage Images' 
-    layout.main_menu = main_menu.render()
     layout.ctx_menu = menu
 
 

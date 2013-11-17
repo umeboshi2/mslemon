@@ -16,10 +16,9 @@ from trumpet.managers.admin.sitecontent import DeleteRestrictedError
 
 from trumpet.resources import MemoryTmpStore
 
-from trumpet.views.base import NotFound
 from trumpet.views.menus import BaseMenu
 
-from mslemon.views.base import AdminViewer, make_main_menu
+from mslemon.views.base import AdminViewer
 from mslemon.views.schema import NameSelectSchema, UploadFileSchema
 from mslemon.views.schema import make_select_widget
 
@@ -41,11 +40,9 @@ def prepare_main_data(request):
     url = mkurl(route, context='listjs', id='all')
     menu.append_new_entry('List JS', url)
     
-    main_menu = make_main_menu(request)
     title = 'Manage Site Content'
     layout.title = title
     layout.header = title
-    layout.main_menu = main_menu.render()
     #layout.ctx_menu = menu
     menu.set_header(title)
     

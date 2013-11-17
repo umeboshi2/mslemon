@@ -4,7 +4,6 @@ from sqlalchemy import engine_from_config
 from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
-from trumpet.config.base import configure_mobile_layout
 from trumpet.models.sitecontent import SitePath
 from trumpet.managers.admin.siteviews import PyramidConfigManager
 
@@ -21,7 +20,6 @@ def main(global_config, **settings):
     """
     # set app name
     appname = 'mslemon'
-    # need to use goout root factory for ACL
     from mslemon.resources import RootGroupFactory
     root_factory = RootGroupFactory
     # alchemy request provides .db method
@@ -39,13 +37,11 @@ def main(global_config, **settings):
     from trumpet.models.base import Base as TrumpetBase
     TrumpetBase.metadata.bind = engine
     if settings.get('db.populate', 'False') == 'True':
-        from mslemon.models.main import populate
         from mslemon.models.main import make_test_data
         import mslemon.models.misslemon
         Base.metadata.create_all(engine)
         TrumpetBase.metadata.create_all(engine)
         #initialize_sql(engine)
-        populate(admin_username)
         #make_test_data(DBSession)
         from mslemon.models.initialize import initialize_database
         from mslemon.models.initialize import IntegrityError
@@ -98,7 +94,6 @@ def main(global_config, **settings):
     config.include('pyramid_fanstatic')
 
     configure_base_layout(config)
-    configure_mobile_layout(config)
     configure_admin(config)
     #vmgr = PyramidConfigManager(DBSession)
     #vmgr.configure(config)

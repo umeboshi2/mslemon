@@ -3,11 +3,12 @@
 
 // colors
 //@import "partials/basecolors/darkseagreen";
-@import "partials/basecolors/azure3";
+//@import "partials/basecolors/azure3";
+@import "partials/basecolors/mistyrose3";
 
 /* import all colors and variables before bootstrap */
 
-@import "mslemon/bootstrap-variables";
+@import "partials/bootstrap-variables";
 
 
 @import "bootstrap";
@@ -34,7 +35,7 @@
 @import "partials/grouplist-admin";
 
 //@import "partials/rssviewer-viewfeed";
-@import "partials/facebook";
+//@import "partials/facebook";
 
 //@import "partials/hubby";
 

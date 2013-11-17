@@ -24,7 +24,7 @@ from trumpet.views.menus import BaseMenu
 from mslemon.models.usergroup import User
 
 from mslemon.views.base import BaseViewer
-from mslemon.views.base import make_main_menu, make_ctx_menu
+from mslemon.views.base import make_ctx_menu
 
 class MainCalJSONViewer(BaseViewer):
     def __init__(self, request):
@@ -197,7 +197,6 @@ class MainViewer(BaseViewer):
     def __init__(self, request):
         super(MainViewer, self).__init__(request)
         self.route = self.request.matched_route.name
-        self.layout.main_menu = make_main_menu(self.request).render()
         self.layout.ctx_menu = make_ctx_menu(self.request).output()
         self._user_query = self.request.db.query(User)
 

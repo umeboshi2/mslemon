@@ -11,20 +11,17 @@ from pyramid.renderers import render
 from trumpet.models.base import DBSession
 from trumpet.models.sitecontent import SiteImage
 
-from trumpet.views.base import NotFound
-#from trumpet.views.base import BaseViewer, make_main_menu
 from trumpet.views.menus import BaseMenu
 
 import colander
 import deform
 
 
-from mslemon.views.base import AdminViewer, make_main_menu
+from mslemon.views.base import AdminViewer
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
     menu = layout.ctx_menu
-    menu.set_header('Admin Menu')
     url = request.route_url('admin_users', context='list', id='all')
     menu.append_new_entry('Manage Users', url)
     url = request.route_url('admin_sitetext', context='list', id=None)
@@ -40,10 +37,9 @@ def prepare_main_data(request):
     url = request.route_url('admin_sitecontent_mgr',
                             context='listpaths', id='all')
     menu.append_new_entry('Site Content', url)
-    main_menu = make_main_menu(request)
     layout.title = 'Admin Page'
     layout.header = 'Admin Page'
-    layout.main_menu = main_menu.render()
+    layout.ctx_menu = menu
 
 
 class MainViewer(AdminViewer):

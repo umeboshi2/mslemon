@@ -1,17 +1,17 @@
 /* -------------------------------------------------------*/
 /* Base Colors */
 /* import all colors and variables before bootstrap */
-/* line 20, ../../../sass/mslemon/_bootstrap-variables.scss */
-.navbar-default .navbar, .main-menu .navbar {
-  margin-bottom: 0em;
+/* line 19, ../../../sass/partials/_bootstrap-variables.scss */
+.navbar-default .navbar, .main-menu .navbar, .status-bar .navbar {
+  margin-bottom: 1em;
 }
 
-/* line 24, ../../../sass/mslemon/_bootstrap-variables.scss */
+/* line 24, ../../../sass/partials/_bootstrap-variables.scss */
 header.header > h1 {
   font-family: "Rambla";
 }
 
-/* line 27, ../../../sass/mslemon/_bootstrap-variables.scss */
+/* line 27, ../../../sass/partials/_bootstrap-variables.scss */
 header.header > h2 {
   font-family: "Rambla";
 }
@@ -4764,7 +4764,7 @@ input[type="button"].btn-block {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 0em;
+  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 /* line 21, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
@@ -5100,109 +5100,111 @@ input[type="button"].btn-block {
 }
 
 /* line 360, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default, .main-menu {
+.navbar-default, .main-menu, .status-bar {
   background-color: darkgrey;
   border-color: #989898;
 }
 /* line 364, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-brand, .main-menu .navbar-brand {
-  color: #c2c2c2;
+.navbar-default .navbar-brand, .main-menu .navbar-brand, .status-bar .navbar-brand {
+  color: #777777;
 }
 /* line 367, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-brand:hover, .main-menu .navbar-brand:hover, .navbar-default .navbar-brand:focus, .main-menu .navbar-brand:focus {
-  color: darkgrey;
+.navbar-default .navbar-brand:hover, .main-menu .navbar-brand:hover, .status-bar .navbar-brand:hover, .navbar-default .navbar-brand:focus, .main-menu .navbar-brand:focus, .status-bar .navbar-brand:focus {
+  color: #5e5e5e;
   background-color: transparent;
 }
 /* line 373, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-text, .main-menu .navbar-text {
+.navbar-default .navbar-text, .main-menu .navbar-text, .status-bar .navbar-text {
   color: #777777;
 }
 /* line 378, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > li > a, .main-menu .navbar-nav > li > a {
-  color: #c2c2c2;
+.navbar-default .navbar-nav > li > a, .main-menu .navbar-nav > li > a, .status-bar .navbar-nav > li > a {
+  color: #777777;
 }
 /* line 382, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > li > a:hover, .main-menu .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .main-menu .navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > li > a:hover, .main-menu .navbar-nav > li > a:hover, .status-bar .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .main-menu .navbar-nav > li > a:focus, .status-bar .navbar-nav > li > a:focus {
   color: #333333;
   background-color: transparent;
 }
 /* line 390, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > .active > a, .main-menu .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .main-menu .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus, .main-menu .navbar-nav > .active > a:focus {
+.navbar-default .navbar-nav > .active > a, .main-menu .navbar-nav > .active > a, .status-bar .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .main-menu .navbar-nav > .active > a:hover, .status-bar .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus, .main-menu .navbar-nav > .active > a:focus, .status-bar .navbar-nav > .active > a:focus {
   color: #555555;
   background-color: #989898;
 }
 /* line 398, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > .disabled > a, .main-menu .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .main-menu .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus, .main-menu .navbar-nav > .disabled > a:focus {
+.navbar-default .navbar-nav > .disabled > a, .main-menu .navbar-nav > .disabled > a, .status-bar .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .main-menu .navbar-nav > .disabled > a:hover, .status-bar .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus, .main-menu .navbar-nav > .disabled > a:focus, .status-bar .navbar-nav > .disabled > a:focus {
   color: #cccccc;
   background-color: transparent;
 }
 /* line 405, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-toggle, .main-menu .navbar-toggle {
+.navbar-default .navbar-toggle, .main-menu .navbar-toggle, .status-bar .navbar-toggle {
   border-color: #dddddd;
 }
 /* line 408, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-toggle:hover, .main-menu .navbar-toggle:hover, .navbar-default .navbar-toggle:focus, .main-menu .navbar-toggle:focus {
+.navbar-default .navbar-toggle:hover, .main-menu .navbar-toggle:hover, .status-bar .navbar-toggle:hover, .navbar-default .navbar-toggle:focus, .main-menu .navbar-toggle:focus, .status-bar .navbar-toggle:focus {
   background-color: #dddddd;
 }
 /* line 411, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-toggle .icon-bar, .main-menu .navbar-toggle .icon-bar {
+.navbar-default .navbar-toggle .icon-bar, .main-menu .navbar-toggle .icon-bar, .status-bar .navbar-toggle .icon-bar {
   background-color: #cccccc;
 }
 /* line 417, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-collapse, .main-menu .navbar-collapse,
+.navbar-default .navbar-collapse, .main-menu .navbar-collapse, .status-bar .navbar-collapse,
 .navbar-default .navbar-form,
-.main-menu .navbar-form {
+.main-menu .navbar-form,
+.status-bar .navbar-form {
   border-color: #989898;
 }
 /* line 425, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > .dropdown > a:hover .caret, .main-menu .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:hover .caret, .main-menu .navbar-nav > .dropdown > a:hover .caret, .status-bar .navbar-nav > .dropdown > a:hover .caret,
 .navbar-default .navbar-nav > .dropdown > a:focus .caret,
-.main-menu .navbar-nav > .dropdown > a:focus .caret {
+.main-menu .navbar-nav > .dropdown > a:focus .caret,
+.status-bar .navbar-nav > .dropdown > a:focus .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
 /* line 434, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > .open > a, .main-menu .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .main-menu .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .main-menu .navbar-nav > .open > a:focus {
+.navbar-default .navbar-nav > .open > a, .main-menu .navbar-nav > .open > a, .status-bar .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .main-menu .navbar-nav > .open > a:hover, .status-bar .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .main-menu .navbar-nav > .open > a:focus, .status-bar .navbar-nav > .open > a:focus {
   background-color: #989898;
   color: #555555;
 }
 /* line 437, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > .open > a .caret, .main-menu .navbar-nav > .open > a .caret, .navbar-default .navbar-nav > .open > a:hover .caret, .main-menu .navbar-nav > .open > a:hover .caret, .navbar-default .navbar-nav > .open > a:focus .caret, .main-menu .navbar-nav > .open > a:focus .caret {
+.navbar-default .navbar-nav > .open > a .caret, .main-menu .navbar-nav > .open > a .caret, .status-bar .navbar-nav > .open > a .caret, .navbar-default .navbar-nav > .open > a:hover .caret, .main-menu .navbar-nav > .open > a:hover .caret, .status-bar .navbar-nav > .open > a:hover .caret, .navbar-default .navbar-nav > .open > a:focus .caret, .main-menu .navbar-nav > .open > a:focus .caret, .status-bar .navbar-nav > .open > a:focus .caret {
   border-top-color: #555555;
   border-bottom-color: #555555;
 }
 /* line 443, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-nav > .dropdown > a .caret, .main-menu .navbar-nav > .dropdown > a .caret {
-  border-top-color: #c2c2c2;
-  border-bottom-color: #c2c2c2;
+.navbar-default .navbar-nav > .dropdown > a .caret, .main-menu .navbar-nav > .dropdown > a .caret, .status-bar .navbar-nav > .dropdown > a .caret {
+  border-top-color: #777777;
+  border-bottom-color: #777777;
 }
 @media (max-width: 767px) {
   /* line 452, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a, .main-menu .navbar-nav .open .dropdown-menu > li > a {
-    color: #c2c2c2;
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a, .main-menu .navbar-nav .open .dropdown-menu > li > a, .status-bar .navbar-nav .open .dropdown-menu > li > a {
+    color: #777777;
   }
   /* line 455, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .main-menu .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .main-menu .navbar-nav .open .dropdown-menu > li > a:focus {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .main-menu .navbar-nav .open .dropdown-menu > li > a:hover, .status-bar .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .main-menu .navbar-nav .open .dropdown-menu > li > a:focus, .status-bar .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #333333;
     background-color: transparent;
   }
   /* line 463, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .main-menu .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .active > a:focus {
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .main-menu .navbar-nav .open .dropdown-menu > .active > a, .status-bar .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .active > a:hover, .status-bar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .active > a:focus, .status-bar .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #555555;
     background-color: #989898;
   }
   /* line 471, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:hover, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:focus, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
     color: #cccccc;
     background-color: transparent;
   }
 }
 /* line 485, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-link, .main-menu .navbar-link {
-  color: #c2c2c2;
+.navbar-default .navbar-link, .main-menu .navbar-link, .status-bar .navbar-link {
+  color: #777777;
 }
 /* line 487, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
-.navbar-default .navbar-link:hover, .main-menu .navbar-link:hover {
+.navbar-default .navbar-link:hover, .main-menu .navbar-link:hover, .status-bar .navbar-link:hover {
   color: #333333;
 }
 
@@ -7765,11 +7767,11 @@ li.top-bar-button {
 }
 
 /* line 56, ../../../sass/partials/_baselayout.scss */
-.navbar-default .navbar-nav li a, .main-menu .navbar-nav li a {
+.navbar-default .navbar-nav li a, .main-menu .navbar-nav li a, .status-bar .navbar-nav li a {
   color: gainsboro;
 }
 /* line 59, ../../../sass/partials/_baselayout.scss */
-.navbar-default .navbar-nav li a:hover, .main-menu .navbar-nav li a:hover {
+.navbar-default .navbar-nav li a:hover, .main-menu .navbar-nav li a:hover, .status-bar .navbar-nav li a:hover {
   color: white;
   background: #c2c2c2;
   border-style: solid;
@@ -7783,7 +7785,8 @@ li.top-bar-button {
 
 /* line 71, ../../../sass/partials/_baselayout.scss */
 .main-menu {
-  margin-bottom: 3em;
+  height: 4em;
+  margin-bottom: 0.1em;
   background: #8f8f8f;
   padding: 0.15em;
   -webkit-border-radius: 0.5em;
@@ -7795,16 +7798,8 @@ li.top-bar-button {
   font-family: "Rambla";
   border-style: solid;
   border-color: #c2c2c2;
-    /*
-    a {
-	@include sassy-button("simple");
-    }
-    a:hover {
-	@include sassy-button;
-    }
-    */
 }
-/* line 87, ../../../sass/partials/_baselayout.scss */
+/* line 86, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand {
   background-image: linear-gradient(to bottom, #c2c2c2 0%, #767676 100%);
   color: gainsboro;
@@ -7816,20 +7811,65 @@ li.top-bar-button {
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
 }
-/* line 95, ../../../sass/partials/_baselayout.scss */
+/* line 94, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand:hover {
   background-image: linear-gradient(to bottom, #767676 0%, #c2c2c2 100%);
 }
-/* line 98, ../../../sass/partials/_baselayout.scss */
+/* line 97, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu {
   background: #8f8f8f;
 }
-/* line 100, ../../../sass/partials/_baselayout.scss */
+/* line 99, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu li > a:hover {
   background-image: linear-gradient(to bottom, #c2c2c2 0%, #a9a9a9 100%);
 }
 
-/* line 114, ../../../sass/partials/_baselayout.scss */
+/* line 105, ../../../sass/partials/_baselayout.scss */
+.main-content {
+  margin-top: 4em;
+  margin-bottom: 40em;
+}
+
+/* line 110, ../../../sass/partials/_baselayout.scss */
+.status-bar {
+  background: #8f8f8f;
+  padding: 0.15em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+  font-weight: bold;
+  font-family: "Rambla";
+  border-style: solid;
+  border-color: #c2c2c2;
+}
+/* line 124, ../../../sass/partials/_baselayout.scss */
+.status-bar a.navbar-brand {
+  background-image: linear-gradient(to bottom, #c2c2c2 0%, #767676 100%);
+  color: gainsboro;
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+/* line 132, ../../../sass/partials/_baselayout.scss */
+.status-bar a.navbar-brand:hover {
+  background-image: linear-gradient(to bottom, #767676 0%, #c2c2c2 100%);
+}
+/* line 135, ../../../sass/partials/_baselayout.scss */
+.status-bar .dropdown-menu {
+  background: #8f8f8f;
+}
+/* line 137, ../../../sass/partials/_baselayout.scss */
+.status-bar .dropdown-menu li > a:hover {
+  background-image: linear-gradient(to bottom, #c2c2c2 0%, #a9a9a9 100%);
+}
+
+/* line 145, ../../../sass/partials/_baselayout.scss */
 .two-col {
   width: 100%;
   float: left;
@@ -7837,13 +7877,13 @@ li.top-bar-button {
   display: inline;
 }
 
-/* line 118, ../../../sass/partials/_baselayout.scss */
+/* line 149, ../../../sass/partials/_baselayout.scss */
 .content {
   background: darkgrey;
   margin-bottom: 5em;
 }
 
-/* line 125, ../../../sass/partials/_baselayout.scss */
+/* line 156, ../../../sass/partials/_baselayout.scss */
 .sidebar {
   /*@include background-size('cover');*/
   width: 23.7288135593%;
@@ -7862,33 +7902,33 @@ li.top-bar-button {
   -webkit-border-bottom-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
 }
-/* line 127, ../../../sass/partials/_baselayout.scss */
+/* line 158, ../../../sass/partials/_baselayout.scss */
 .sidebar a {
   color: #212121;
 }
-/* line 138, ../../../sass/partials/_baselayout.scss */
+/* line 169, ../../../sass/partials/_baselayout.scss */
 .sidebar a:hover {
   background: #c2c2c2;
   border-radius: 0.5em;
   -moz-border-radius: 0.5em;
 }
-/* line 143, ../../../sass/partials/_baselayout.scss */
+/* line 174, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu-header {
   font-family: "Rambla";
   font-size: 1.5em;
   background: #8f8f8f;
   color: whitesmoke;
 }
-/* line 149, ../../../sass/partials/_baselayout.scss */
+/* line 180, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu {
   margin-left: 0.5em;
 }
-/* line 152, ../../../sass/partials/_baselayout.scss */
+/* line 183, ../../../sass/partials/_baselayout.scss */
 .sidebar #sidebar-logout {
   margin-left: 0.5em;
 }
 
-/* line 157, ../../../sass/partials/_baselayout.scss */
+/* line 188, ../../../sass/partials/_baselayout.scss */
 .footer {
   width: 100%;
   float: left;

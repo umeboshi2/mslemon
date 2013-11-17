@@ -15,14 +15,13 @@ from trumpet.models.usergroup import UserGroup
 
 
 
-from trumpet.views.base import NotFound
 from trumpet.views.menus import BaseMenu
 
 from trumpet.managers.admin.users import UserManager
 
 from trumpet.security import encrypt_password
 
-from mslemon.views.base import AdminViewer, make_main_menu
+from mslemon.views.base import AdminViewer
 
 import colander
 import deform
@@ -46,10 +45,8 @@ def prepare_main_data(request):
     menu.append_new_entry('Add User', url)
     url = request.route_url(route, context='listgroups', id='all')
     menu.append_new_entry('List Groups', url)
-    main_menu = make_main_menu(request)
     layout.title = 'Manage Users'
     layout.header = 'Manage Users' 
-    layout.main_menu = main_menu.render()
     layout.ctx_menu = menu
 
 

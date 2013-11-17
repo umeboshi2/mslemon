@@ -4,7 +4,7 @@ from datetime import datetime
 import transaction
 from PIL import Image
 
-from trumpet.models.sitecontent import SiteImage
+from mslemon.models.sitecontent import SiteImage
 
 
 

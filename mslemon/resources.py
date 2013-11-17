@@ -42,28 +42,19 @@ def make_resource(filename, depends=None):
 
 favicon = Resource(library, 'favicon.ico')
 
-#main_screen = Resource(css, 'mainscreen.css',
-#                       depends=[bootstrap.bootstrap_theme])
 main_screen = make_resource('mainscreen.css',
-                           depends=[bootstrap.bootstrap_theme])
+                           depends=[bootstrap.bootstrap])
 
-#admin_screen = Resource(css, 'adminscreen.css')
 admin_screen = make_resource('adminscreen.css',
-                             depends=[bootstrap.bootstrap_theme])
-#post_to_url = Resource(js, 'post2url.js', depends=[jqueryui])
+                             depends=[bootstrap.bootstrap])
+
 post_to_url = make_resource('post2url.js', depends=[jqueryui])
 
 
 
 
-#take_call_button = Resource(js, 'take-call-button.js', depends=[jqueryui])
-#main_phone_view = Resource(js, 'main-phone-view.js', depends=[fullcalendar])
-#main_ticket_view = Resource(js, 'main-ticket-view.js', depends=[fullcalendar])
-#main_cases_view = Resource(js, 'main-cases-view.js', depends=[fullcalendar])
-#main_scandoc_view = Resource(js, 'main-scandoc-view.js', depends=[fullcalendar])
-#main_calendar_view = Resource(js, 'main-calendar-view.js', depends=[fullcalendar])
-#planevent_calendar_view = Resource(js, 'planevent-calendar-view.js',
-#                                   depends=[fullcalendar, post_to_url])
+common_page = make_resource('common-page.js', depends=[jqueryui,
+                                                       bootstrap.bootstrap])
 
 take_call_button = make_resource('take-call-button.js', depends=[jqueryui])
 main_phone_view = make_resource('main-phone-view.js', depends=[fullcalendar])
@@ -84,17 +75,9 @@ phone_calendar = make_resource('phone-calendar.js', depends=[fullcalendar])
 #                                   depends=[jqueryui])
 admin_show_path_content = make_resource('admin-show-path-content.js',
                                         depends=[jqueryui])
-
-#admin_list_site_paths = Resource(js, 'list-site-paths.js', depends=[jqueryui])
 admin_list_site_paths = make_resource('list-site-paths.js', depends=[jqueryui])
-
-#admin_list_site_resources = Resource(js, 'admin-list-site-resources.js',
-#                                     depends=[jqueryui])
 admin_list_site_resources = make_resource('admin-list-site-resources.js',
                                           depends=[jqueryui])
-
-#admin_edit_site_resources = Resource(js, 'admin-edit-site-resources.js',
-#                                     depends=[ace.ace, jqueryui])
 admin_edit_site_resources = make_resource('admin-edit-site-resources.js',
                                           depends=[ace.ace, jqueryui])
 
@@ -106,6 +89,7 @@ class StaticResources(TrumpetResources):
     # override trumpet favicon
     favicon = favicon
     
+    common_page = common_page
 
     main_calendar_view = main_calendar_view
     take_call_button = take_call_button
