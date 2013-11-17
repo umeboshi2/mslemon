@@ -124,3 +124,67 @@ class RootGroupFactory(object):
         pass
 
 
+
+#####################################################
+#####################################################
+# New resource system for traversal and sqlalchemy
+# Modified from cookbook:
+# http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/routing/traversal_sqlalchemy.html
+#
+#####################################################
+#####################################################
+
+class Resource(dict):
+    def __init__(self, name, parent):
+        self.__name__ = name
+        self.__parent__ = parent
+
+class Root(Resource):
+    "The root resource."
+
+    __acl__ = [
+        (Allow, Everyone, 'public'),
+        (Allow, Authenticated, 'user'),
+        (Allow, Authenticated, 'consultant'),
+        (Allow, 'manager', 'manage'),
+        (Allow, 'editor', ('wiki_add', 'wiki_edit')),
+        (Allow, 'admin', ('admin', 'manage')),
+        ]
+
+    def add_resource(self, name, orm_class):
+        self[name] = ORMContainer(name, self, self.request, orm_class)
+
+    def __init__(self, request):
+        self.request = request
+        from mslemon.models.usergroup import User
+        self.add_resource('users', User)
+        
+    
+    
+
+class ORMContainer(dict):
+    """Traversal component tied to a SQLAlchemy ORM class.
+
+    Calling .__getitem__ fetches a record as an ORM instance, adds certain
+    attributes to the object, and returns it.
+    """
+    def __init__(self, name, parent, request, orm_class):
+        self.__name__ = name
+        self.__parent__ = parent
+        self.request = request
+        self.db = request.db
+        self.orm_class = orm_class
+
+    def __getitem__(self, key):
+        try:
+            key = int(key)
+        except ValueError:
+            raise KeyError(key)
+        obj = self.db.query(self.orm_class).get(key)
+        if obj is None:
+            raise KeyError(key)
+        obj.__name__ = key
+        obj.__parent__ = self
+        return obj
+    
+

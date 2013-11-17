@@ -309,3 +309,13 @@ class MainViewer(BaseViewer):
         
 
 
+class TraversalViewer(BaseViewer):
+    def __init__(self, request):
+        super(TraversalViewer, self).__init__(request)
+        self.route = self.request.matched_route.name
+        self.layout.ctx_menu = make_ctx_menu(self.request).output()
+        self._user_query = self.request.db.query(User)
+        context = self.request.context
+        self.layout.content = str(context)
+            
+            

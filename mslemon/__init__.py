@@ -21,7 +21,10 @@ def main(global_config, **settings):
     # set app name
     appname = 'mslemon'
     from mslemon.resources import RootGroupFactory
+    from mslemon.resources import Root, Resource
+    from mslemon.resources import ORMContainer
     root_factory = RootGroupFactory
+    root_factory = Root
     # alchemy request provides .db method
     request_factory = 'trumpet.request.AlchemyRequest'
     # get admin username
@@ -111,6 +114,14 @@ def main(global_config, **settings):
                     layout='base',
                     renderer=basetemplate,
                     route_name='home')
+
+    config.add_route('traverse', '/trv/*traverse')
+    config.add_view('mslemon.views.main.TraversalViewer',
+                    layout='base',
+                    renderer=basetemplate,
+                    route_name='traverse')
+
+
     config.add_route('main', '/main/{context}/{id}')
     config.add_view('mslemon.views.main.MainViewer',
                     layout='base',
