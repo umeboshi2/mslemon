@@ -22,6 +22,7 @@ from trumpet.managers.admin.users import UserManager
 from trumpet.security import encrypt_password
 
 from mslemon.views.base import AdminViewer
+from mslemon.views.admin.base import make_main_menu
 
 import colander
 import deform
@@ -37,7 +38,10 @@ def make_select_widget(choices):
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
-    menu = layout.ctx_menu
+    layout.main_menu = make_main_menu(request)
+    
+    menu = BaseMenu()
+    menu.set_header('Actions')
     route = 'admin_users'
     url = request.route_url(route, context='list', id='all')
     menu.append_new_entry('List Users', url)
@@ -47,7 +51,8 @@ def prepare_main_data(request):
     menu.append_new_entry('List Groups', url)
     layout.title = 'Manage Users'
     layout.header = 'Manage Users' 
-    layout.ctx_menu = menu
+    layout.options_menus = dict(actions=menu)
+    
 
 
 class AddUserSchema(colander.Schema):

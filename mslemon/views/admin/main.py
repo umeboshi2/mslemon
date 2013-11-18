@@ -18,29 +18,19 @@ import deform
 
 
 from mslemon.views.base import AdminViewer
+from mslemon.views.admin.base import make_main_menu
+
+
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
-    menu = layout.ctx_menu
-    url = request.route_url('admin_users', context='list', id='all')
-    menu.append_new_entry('Manage Users', url)
-    url = request.route_url('admin_sitetext', context='list', id=None)
-    menu.append_new_entry('Manage Text', url)
-    url = request.route_url('admin_images', context='list', id=None)
-    menu.append_new_entry('Manage Images', url)
-    url = request.route_url('admin_dbadmin', context='main', id='main')
-    menu.append_new_entry('Manage Database', url)
-    
-    url = request.route_url('admin_site_templates',
-                            context='list', id='all')
-    menu.append_new_entry('Site Templates', url)
-    url = request.route_url('admin_sitecontent_mgr',
-                            context='listpaths', id='all')
-    menu.append_new_entry('Site Content', url)
+
     layout.title = 'Admin Page'
     layout.header = 'Admin Page'
-    layout.ctx_menu = menu
-
+    menu = make_main_menu(request)
+    #layout.options_menus = dict(admin=menu)
+    layout.main_menu = menu
+    
 
 class MainViewer(AdminViewer):
     def __init__(self, request):

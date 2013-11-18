@@ -9,6 +9,8 @@ from sqlalchemy.exc import IntegrityError
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 
+from trumpet.views.menus import BaseMenu
+
 from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 
@@ -74,14 +76,17 @@ class ContactViewer(BaseViewer):
         self.context = self.request.matchdict['context']
         self._view = self.context
 
+        menu = BaseMenu()
+        menu.set_header('Actions')
         url = self.url(context='add', id='somebody')
-        self.layout.ctx_menu.append_new_entry("Add Contact", url)
+        menu.append_new_entry("Add Contact", url)
 
         url = self.url(context='exportall', id='everybody')
-        self.layout.ctx_menu.append_new_entry("Export Contacts", url)
+        menu.append_new_entry("Export Contacts", url)
 
         url = self.url(context='importcontact', id='somebody')
-        self.layout.ctx_menu.append_new_entry("Import Contacts", url)
+        menu.append_new_entry("Import Contacts", url)
+        self.layout.options_menus = dict(actions=menu)
         
         self.dispatch()
 

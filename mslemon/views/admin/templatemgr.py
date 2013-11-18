@@ -16,6 +16,7 @@ from trumpet.resources import MemoryTmpStore
 from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import AdminViewer
+from mslemon.views.admin.base import make_main_menu
 from mslemon.managers.wiki import WikiArchiver
 
 
@@ -26,15 +27,19 @@ tmpstore = MemoryTmpStore()
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
-    menu = layout.ctx_menu
+    layout.main_menu = make_main_menu(request)
+    
+    menu = BaseMenu()
+    menu.set_header('Actions')
     imgroute = 'admin_images'
     url = request.route_url(imgroute, context='list', id=None)
     menu.append_new_entry('List Images', url)
     url = request.route_url(imgroute, context='add', id=None)
     menu.append_new_entry('Add Image', url)
-    layout.title = 'Manage Images'
-    layout.header = 'Manage Images' 
-    layout.ctx_menu = menu
+    layout.options_menus = dict(actions=menu)
+    
+    layout.title = 'Manage Site Templates'
+    layout.header = 'Manage Site Templates' 
 
 class TextSchema(colander.Schema):
     name = colander.SchemaNode(
@@ -50,7 +55,7 @@ class TextSchema(colander.Schema):
 class MainViewer(AdminViewer):
     def __init__(self, request):
         super(MainViewer, self).__init__(request)
-        
+        self.layout.main_menu = make_main_menu(self.request)
         self._dispatch_table = dict(
             list=self.list_templates,
             create=self.create_template,
@@ -61,10 +66,11 @@ class MainViewer(AdminViewer):
             )
         self.context = self.request.matchdict['context']
         self._view = self.context
+        self._set_menu()
         self.dispatch()
 
     def _set_menu(self):
-        menu = self.layout.ctx_menu
+        menu = BaseMenu()
         menu.set_header('Site Text Menu')
 
         url = self.url(context='list', id='all')
@@ -72,11 +78,11 @@ class MainViewer(AdminViewer):
 
         url = self.url(context='create', id='new')
         menu.append_new_entry('Create New Entry', url)        
-
+        self.layout.options_menus = dict(actions=menu)
+        
             
 
     def list_templates(self):
-        self._set_menu()
         templates = self.content_mgr.tmpl_query().all()
         env = dict(templates=templates)
         rtemplate = 'mslemon:templates/list-site-templates.mako'
@@ -124,7 +130,6 @@ class MainViewer(AdminViewer):
 
     
     def edit_template(self):
-        self._set_menu()
         form = self._text_form()
         id = self.request.matchdict['id']
         t = self.content_mgr.tmpl_query().get(int(id))

@@ -14,7 +14,8 @@ from trumpet.resources import MemoryTmpStore
 from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import AdminViewer
-from mslemon.managers.admin.images import ImageManager
+from mslemon.views.admin.base import make_main_menu
+
 
 import colander
 import deform
@@ -23,27 +24,11 @@ tmpstore = MemoryTmpStore()
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
-    menu = layout.ctx_menu
-    imgroute = 'admin_images'
-    url = request.route_url(imgroute, context='list', id=None)
-    menu.append_new_entry('List Images', url)
-    url = request.route_url(imgroute, context='add', id=None)
-    menu.append_new_entry('Add Image', url)
+    layout.main_menu = make_main_menu(request)
     layout.title = 'Manage Images'
     layout.header = 'Manage Images' 
-    layout.ctx_menu = menu
 
 
-class AddImageSchema(colander.Schema):
-    name = colander.SchemaNode(
-        colander.String(),
-        title = 'Image Name',
-        )
-    upload = colander.SchemaNode(
-        deform.FileData(),
-        widget=deform.widget.FileUploadWidget(tmpstore)
-        )
-    
     
         
 class DBAdminViewer(AdminViewer):

@@ -11,7 +11,7 @@ from mslemon.views.util import get_regular_users
 
 
 
-def make_ctx_menu(request):
+def make_main_menu(request):
     menu = BaseMenu(header='Main Menu', class_='submenu')
     user = request.session.get('user', None)
     logged_in = user is not None
@@ -49,6 +49,7 @@ class BaseViewer(TrumpetViewer):
         prepare_layout(self.layout)
         self.layout.user_menu = prepare_user_menu(request)
         self.css = self.layout.resources.main_screen
+        self.layout.brand = 'Miss Lemon'
         
     def __call__(self):
         if hasattr(self, 'css'):

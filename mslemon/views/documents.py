@@ -11,7 +11,7 @@ import deform
 from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 from trumpet.views.base import render_rst
-
+from trumpet.views.menus import BaseMenu
 
 from mslemon.managers.documents import DocumentManager
 from mslemon.managers.cases import CaseManager
@@ -128,11 +128,14 @@ class MainDocumentViewer(BaseViewer):
         self.context = self.request.matchdict['context']
         self._view = self.context
 
+        menu = BaseMenu()
+        menu.set_header('Options')
         url = request.route_url('msl_scandocs', context='main', id='all')
-        self.layout.ctx_menu.append_new_entry('Scanned Docs', url)
+        menu.append_new_entry('Scanned Docs', url)
 
         url = self.url(context='add', id='something')
-        self.layout.ctx_menu.append_new_entry('New Document', url)
+        menu.append_new_entry('New Document', url)
+        self.layout.options_menus = dict(options=menu)
         
         self.dispatch()
         

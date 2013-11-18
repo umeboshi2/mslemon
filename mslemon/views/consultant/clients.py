@@ -1,6 +1,8 @@
 import colander
 import deform
 
+from trumpet.views.menus import BaseMenu
+
 from mslemon.views.base import prepare_layout
 from mslemon.views.base import BaseViewer
 
@@ -61,8 +63,11 @@ class ClientViewer(BaseViewer):
         self.context = self.request.matchdict['context']
         self._view = self.context
 
+        menu = BaseMenu()
+        menu.set_header('Actions')
         url = self.url(context='add', id='somebody')
-        self.layout.ctx_menu.append_new_entry("Add Client", url)
+        menu.append_new_entry("Add Client", url)
+        self.layout.options_menus = dict(actions=menu)
         
         self.dispatch()
 

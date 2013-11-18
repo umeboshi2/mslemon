@@ -1,0 +1,46 @@
+from cStringIO import StringIO
+from datetime import datetime
+
+import transaction
+from PIL import Image
+
+from pyramid.httpexceptions import HTTPFound, HTTPNotFound
+from pyramid.security import authenticated_userid
+from pyramid.renderers import render
+
+from trumpet.models.base import DBSession
+from trumpet.models.sitecontent import SiteImage
+
+from trumpet.views.menus import BaseMenu
+
+
+from mslemon.views.base import AdminViewer
+
+def make_main_menu(request):
+    menu = BaseMenu()
+    menu.set_header('Admin Menu')
+    url = request.route_url('admin_users', context='list', id='all')
+    menu.append_new_entry('Manage Users', url)
+    url = request.route_url('admin_sitetext', context='list', id=None)
+    menu.append_new_entry('Manage Text', url)
+    url = request.route_url('admin_images', context='list', id=None)
+    menu.append_new_entry('Manage Images', url)
+    url = request.route_url('admin_dbadmin', context='main', id='main')
+    menu.append_new_entry('Manage Database', url)
+    
+    url = request.route_url('admin_site_templates',
+                            context='list', id='all')
+    menu.append_new_entry('Site Templates', url)
+    url = request.route_url('admin_sitecontent_mgr',
+                            context='listpaths', id='all')
+    menu.append_new_entry('Site Content', url)
+    return menu
+
+    
+
+class MainViewer(AdminViewer):
+    def __init__(self, request):
+        super(MainViewer, self).__init__(request)
+        self.layout.main_menu = make_main_menu(self.request)
+        
+

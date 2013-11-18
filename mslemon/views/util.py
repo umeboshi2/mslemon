@@ -30,7 +30,6 @@ def prepare_layout(layout):
     layout.header = layout.title
     layout.subheader = ''
     layout.content = ''
-    layout.ctx_menu = BaseMenu(header=' ')
     layout.footer = ''
     layout.resources = StaticResources()
     layout.resources.favicon.need()

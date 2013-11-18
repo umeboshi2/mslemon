@@ -225,13 +225,7 @@ class BaseTicketViewer(BaseViewer):
         self.context = self.request.matchdict['context']
         self._view = self.context
 
-        #user_id = self.request.session['user'].id
-        #url = self.url(context='takencalls', id=user_id)
-        #label = "Calls I've taken"
-        #self.layout.ctx_menu.append_new_entry(label, url)
-
         self.dispatch()
-        #import pdb ; pdb.set_trace()
         
     def _make_text_message(self, ticket):
         settings = self.request.registry.settings
@@ -242,7 +236,6 @@ class BaseTicketViewer(BaseViewer):
         return text
     
     def _send_text_notification(self, ticket):
-        #callee = self.request.db.query(User).get(pcall.callee)
         settings = self.request.registry.settings
         cfg = ticket.current_status.handler.config.get_config()
         if cfg.get('main', 'sms_email_address'):
@@ -291,10 +284,8 @@ class BaseTicketViewer(BaseViewer):
                    calviews=calviews)
         content = self.render(template, env)
         self.layout.content = content
-        #self.layout.resources.phone_calendar.need()
         self.layout.resources.main_ticket_view.need()
         self.layout.resources.cornsilk.need()
-        #self.layout.resources.azure3.need()
 
     def _open_ticket_form_submitted(self, form):
         controls = self.request.POST.items()

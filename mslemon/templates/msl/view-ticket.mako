@@ -1,5 +1,5 @@
 <div class="ticket-view">
-  <div class="ticket-header">
+  <div class="listview-header">
     <% the_date = ticket.created.strftime('%A, %d %B, %Y') %>
     <% first_change = ticket.history[0] %>
     <% handler = first_change.handler.username %>
@@ -10,12 +10,12 @@
   <div class="ticket-description">
     ${rst(ticket.description.text)|n}
   </div>
-  <div class="ticket-history">
+  <div class="listview-history">
     %for tstatus in ticket.history:
-    <div class="ticket-status-entry">
+    <div class="listview-status-entry">
       <div class="ticket-status-entry-content">
 	<% c = tstatus %>
-	<div class="ticket-status-entry-changedate">
+	<div class="listview-status-entry-changedate">
 	  <% format = '%a %H:%M       -----       %d %B, %Y' %>
 	  ${c.changed.strftime(format)}
 	</div>
@@ -24,10 +24,10 @@
 	<% handler = c.handler.username %>
 	<% msg = '%s(%s)' % (status, chng_by) %>
 	<% handle_msg = 'This ticket is being handled by %s' % handler %>
-	<div class="ticket-status-entry-changed">
+	<div class="listview-status-entry-changed">
 	  ${msg}
 	</div>
-	<div class="ticket-status-entry-reason">
+	<div class="listview-status-entry-reason">
 	  ${rst(c.reason)|n}
 	</div>
 	${handle_msg}
@@ -35,7 +35,7 @@
     </div>
     %endfor
   </div>
-  <div class="ticket-update-ticket">
+  <div class="ticket-update-ticket action-button">
     <% kw = dict(context='updateticket', id=ticket.id) %>
     <% url = request.route_url('msl_tickets', **kw) %>
     <a href="${url}">Update Status</a>

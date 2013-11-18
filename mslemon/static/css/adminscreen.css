@@ -7801,7 +7801,6 @@ li.top-bar-button {
 }
 /* line 86, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand {
-  background-image: linear-gradient(to bottom, #a47c78 0%, #4e3735 100%);
   color: #b89997;
   padding-left: 0.1em;
   padding-right: 0.1em;
@@ -7813,24 +7812,25 @@ li.top-bar-button {
 }
 /* line 94, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand:hover {
-  background-image: linear-gradient(to bottom, #4e3735 0%, #a47c78 100%);
+  border-style: solid;
+  border-color: #a47c78;
 }
-/* line 97, ../../../sass/partials/_baselayout.scss */
+/* line 99, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu {
   background: #6d4c49;
 }
-/* line 99, ../../../sass/partials/_baselayout.scss */
+/* line 101, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu li > a:hover {
   background-image: linear-gradient(to bottom, #a47c78 0%, #8b625e 100%);
 }
 
-/* line 105, ../../../sass/partials/_baselayout.scss */
+/* line 107, ../../../sass/partials/_baselayout.scss */
 .main-content {
   margin-top: 4em;
   margin-bottom: 40em;
 }
 
-/* line 110, ../../../sass/partials/_baselayout.scss */
+/* line 112, ../../../sass/partials/_baselayout.scss */
 .status-bar {
   background: #6d4c49;
   padding: 0.15em;
@@ -7844,7 +7844,7 @@ li.top-bar-button {
   border-style: solid;
   border-color: #a47c78;
 }
-/* line 124, ../../../sass/partials/_baselayout.scss */
+/* line 126, ../../../sass/partials/_baselayout.scss */
 .status-bar a.navbar-brand {
   background-image: linear-gradient(to bottom, #a47c78 0%, #4e3735 100%);
   color: #b89997;
@@ -7856,20 +7856,20 @@ li.top-bar-button {
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
 }
-/* line 132, ../../../sass/partials/_baselayout.scss */
+/* line 134, ../../../sass/partials/_baselayout.scss */
 .status-bar a.navbar-brand:hover {
   background-image: linear-gradient(to bottom, #4e3735 0%, #a47c78 100%);
 }
-/* line 135, ../../../sass/partials/_baselayout.scss */
+/* line 137, ../../../sass/partials/_baselayout.scss */
 .status-bar .dropdown-menu {
   background: #6d4c49;
 }
-/* line 137, ../../../sass/partials/_baselayout.scss */
+/* line 139, ../../../sass/partials/_baselayout.scss */
 .status-bar .dropdown-menu li > a:hover {
   background-image: linear-gradient(to bottom, #a47c78 0%, #8b625e 100%);
 }
 
-/* line 145, ../../../sass/partials/_baselayout.scss */
+/* line 147, ../../../sass/partials/_baselayout.scss */
 .two-col {
   width: 100%;
   float: left;
@@ -7877,13 +7877,13 @@ li.top-bar-button {
   display: inline;
 }
 
-/* line 149, ../../../sass/partials/_baselayout.scss */
+/* line 151, ../../../sass/partials/_baselayout.scss */
 .content {
   background: #8b625e;
   margin-bottom: 5em;
 }
 
-/* line 156, ../../../sass/partials/_baselayout.scss */
+/* line 158, ../../../sass/partials/_baselayout.scss */
 .sidebar {
   /*@include background-size('cover');*/
   width: 23.7288135593%;
@@ -7902,33 +7902,33 @@ li.top-bar-button {
   -webkit-border-bottom-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
 }
-/* line 158, ../../../sass/partials/_baselayout.scss */
+/* line 160, ../../../sass/partials/_baselayout.scss */
 .sidebar a {
   color: #212121;
 }
-/* line 169, ../../../sass/partials/_baselayout.scss */
+/* line 171, ../../../sass/partials/_baselayout.scss */
 .sidebar a:hover {
   background: #a47c78;
   border-radius: 0.5em;
   -moz-border-radius: 0.5em;
 }
-/* line 174, ../../../sass/partials/_baselayout.scss */
+/* line 176, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu-header {
   font-family: "Rambla";
   font-size: 1.5em;
   background: #6d4c49;
   color: #cdb7b5;
 }
-/* line 180, ../../../sass/partials/_baselayout.scss */
+/* line 182, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu {
   margin-left: 0.5em;
 }
-/* line 183, ../../../sass/partials/_baselayout.scss */
+/* line 185, ../../../sass/partials/_baselayout.scss */
 .sidebar #sidebar-logout {
   margin-left: 0.5em;
 }
 
-/* line 188, ../../../sass/partials/_baselayout.scss */
+/* line 190, ../../../sass/partials/_baselayout.scss */
 .footer {
   width: 100%;
   float: left;
@@ -7951,7 +7951,6 @@ li.top-bar-button {
 .action-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -7970,15 +7969,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -7987,13 +7987,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button.disabled, .action-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8003,7 +8003,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .action-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8184,7 +8184,6 @@ li.top-bar-button {
 .imagelist-delete-image {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8203,15 +8202,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -8220,13 +8220,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image.disabled, .imagelist-delete-image[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8236,7 +8236,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .imagelist-delete-image::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8251,7 +8251,6 @@ li.top-bar-button {
 .delete-image-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8270,15 +8269,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -8287,13 +8287,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button.disabled, .delete-image-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8303,7 +8303,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .delete-image-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8347,7 +8347,6 @@ li.top-bar-button {
 .userlist-delete-user {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8366,15 +8365,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -8383,13 +8383,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user.disabled, .userlist-delete-user[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8399,7 +8399,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .userlist-delete-user::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8414,7 +8414,6 @@ li.top-bar-button {
 .delete-user-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8433,15 +8432,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -8450,13 +8450,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button.disabled, .delete-user-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8466,7 +8466,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .delete-user-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8510,7 +8510,6 @@ li.top-bar-button {
 .grouplist-delete-group {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8529,15 +8528,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -8546,13 +8546,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group.disabled, .grouplist-delete-group[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8562,7 +8562,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .grouplist-delete-group::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8577,7 +8577,6 @@ li.top-bar-button {
 .delete-group-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #d7c6c4;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8596,15 +8595,16 @@ li.top-bar-button {
   -moz-box-shadow: #9a6d69 0 1px 0 inset;
   box-shadow: #9a6d69 0 1px 0 inset;
   border: 1px solid #3f2c2b;
+  color: #d7c6c4;
   text-shadow: #1d1514 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:hover {
   background-color: #3f2c2b;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5d423f), color-stop(100%, #3f2c2b));
@@ -8613,13 +8613,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#5d423f, #3f2c2b);
   background: linear-gradient(#5d423f, #3f2c2b);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:active {
   -webkit-box-shadow: #362624 0 1px 2px inset;
   -moz-box-shadow: #362624 0 1px 2px inset;
   box-shadow: #362624 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button.disabled, .delete-group-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8629,7 +8629,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .delete-group-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;

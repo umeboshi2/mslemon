@@ -187,13 +187,7 @@ class MSLPhoneViewer(BaseViewer):
         self.context = self.request.matchdict['context']
         self._view = self.context
 
-        #user_id = self.request.session['user'].id
-        #url = self.url(context='takencalls', id=user_id)
-        #label = "Calls I've taken"
-        #self.layout.ctx_menu.append_new_entry(label, url)
-
         self.dispatch()
-        #import pdb ; pdb.set_trace()
 
     def main_phonecall_view(self):
         template = 'mslemon:templates/msl/main-phone-view.mako'
@@ -225,7 +219,6 @@ class MSLPhoneViewer(BaseViewer):
                    calviews=calviews)
         content = self.render(template, env)
         self.layout.content = content
-        #self.layout.resources.phone_calendar.need()
         self.layout.resources.main_phone_view.need()
         self.layout.resources.cornsilk.need()
 

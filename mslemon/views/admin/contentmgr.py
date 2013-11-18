@@ -19,6 +19,7 @@ from trumpet.resources import MemoryTmpStore
 from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import AdminViewer
+from mslemon.views.admin.base import make_main_menu
 from mslemon.views.schema import NameSelectSchema, UploadFileSchema
 from mslemon.views.schema import make_select_widget
 
@@ -29,7 +30,9 @@ tmpstore = MemoryTmpStore()
 
 def prepare_main_data(request):
     layout = request.layout_manager.layout
-    menu = layout.ctx_menu
+    layout.main_menu = make_main_menu(request)
+    
+    menu = BaseMenu()
     route = 'admin_sitecontent_mgr'
     mkurl = request.route_url
 
@@ -39,12 +42,12 @@ def prepare_main_data(request):
     menu.append_new_entry('List CSS', url)
     url = mkurl(route, context='listjs', id='all')
     menu.append_new_entry('List JS', url)
+    menu.set_header('Actions')
+    layout.options_menus = dict(actions=menu)
     
     title = 'Manage Site Content'
     layout.title = title
     layout.header = title
-    #layout.ctx_menu = menu
-    menu.set_header(title)
     
 class TextSchema(colander.Schema):
     name = colander.SchemaNode(
@@ -79,10 +82,15 @@ class MainViewer(AdminViewer):
             )
         self.context = self.request.matchdict['context']
         self._view = self.context
+
+        self.layout.main_menu = make_main_menu(self.request)
+        self._set_menu()
+        
         self.dispatch()
 
     def _set_menu(self):
-        menu = self.layout.ctx_menu
+        menu = BaseMenu()
+        menu.set_header("Actions")
         route = 'admin_sitecontent_mgr'
         mkurl = self.request.route_url
         
@@ -100,12 +108,12 @@ class MainViewer(AdminViewer):
         menu.append_new_entry('Site Archive', url)
         url = mkurl(route, context='importarchive', id='new')
         menu.append_new_entry('Import Archive', url)
+        self.layout.options_menus = dict(actions=menu)
         
         
 
             
     def list_paths(self):
-        self._set_menu()
         template = 'mslemon:templates/admin-list-site-paths.mako'
         paths = self.content_mgr.ordered_path_list()
         env = dict(paths=paths)
@@ -137,7 +145,6 @@ class MainViewer(AdminViewer):
         if self.request.method == 'POST':
             self._update_resource()
             return
-        self._set_menu()
         if self.context == 'listcss':
             ctype = 'css'
             rlist = self.content_mgr.css_query().all()
@@ -172,7 +179,6 @@ class MainViewer(AdminViewer):
             self.content_mgr.add_js(name, content)
 
     def _add_content(self, ctype):
-        self._set_menu()
         form = self._text_form()
         if 'submit' in self.request.POST:
             self._add_content_submitted(form, ctype)
@@ -186,7 +192,6 @@ class MainViewer(AdminViewer):
         self._add_content('js')
         
     def show_path_content(self):
-        self._set_menu()
         self.layout.resources.admin_show_path_content.need()
         path_id = int(self.request.matchdict['id'])
         path = self.content_mgr.path_query().get(path_id)
@@ -206,11 +211,8 @@ class MainViewer(AdminViewer):
             self.content_mgr.update_js(id, content)
         url = self.url(context='show%s' % ctype, id=id)
         self.response = HTTPFound(url)
-        
-
     
     def show_css(self):
-        self._set_menu()
         form = self._text_form()
         css_id = int(self.request.matchdict['id'])
         css = self.content_mgr.css_query().get(css_id)
@@ -229,7 +231,6 @@ class MainViewer(AdminViewer):
             self.layout.content = self.render(template, env)
         
     def show_js(self):
-        self._set_menu()
         form = self._text_form()
         js_id = int(self.request.matchdict['id'])
         js = self.content_mgr.js_query().get(js_id)
@@ -273,7 +274,6 @@ class MainViewer(AdminViewer):
         self.response = HTTPFound(url)
 
     def _attach_to_path(self, ctype):
-        self._set_menu()
         path_id = int(self.request.matchdict['id'])
         path = self.content_mgr.path_query().get(path_id)
         if ctype == 'css':
@@ -295,7 +295,6 @@ class MainViewer(AdminViewer):
         self._attach_to_path('js')
 
     def detach_file(self):
-        self._set_menu()
         id = self.request.matchdict['id']
         ctype, p, o = id.split('-')
         p = int(p)
@@ -309,7 +308,6 @@ class MainViewer(AdminViewer):
         
            
     def make_archive(self):
-        self._set_menu()
         archive = self.content_mgr.make_archive()
         content_type = 'application/zip'
         r = Response(content_type=content_type, body=archive)
@@ -330,7 +328,6 @@ class MainViewer(AdminViewer):
         
     
     def import_archive(self):
-        self._set_menu()
         schema = UploadFileSchema()
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
