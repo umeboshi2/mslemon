@@ -122,7 +122,8 @@ class DBAdminManager(object):
     
 
     def backup_sitecontent(self):
-        omap = dict(SiteImage=SiteImage, SiteText=SiteText)
+        #omap = dict(SiteImage=SiteImage, SiteText=SiteText)
+        omap = dict(SiteImage=SiteImage)
         return self._serialize_objects(omap)
     
 
@@ -236,6 +237,7 @@ class DBAdminManager(object):
         with transaction.manager:
             # usergroup objects
             for data in dbdata['User']:
+                print "CREATING USER", data
                 user = User(data['username'])
                 self._set_dbobject(user, data)
                 self.session.add(user)
@@ -259,10 +261,10 @@ class DBAdminManager(object):
                 si = SiteImage(data['name'], data['content'])
                 self._set_dbobject(si, data)
                 self.session.add(si)
-            for data in dbdata['SiteText']:
-                st = SiteText(data['name'], data['content'])
-                self._set_dbobject(st, data)
-                self.session.add(st)
+            #for data in dbdata['SiteText']:
+            #    st = SiteText(data['name'], data['content'])
+            #    self._set_dbobject(st, data)
+            #    self.session.add(st)
             #########################################
             # mslemon objects
             #########################################

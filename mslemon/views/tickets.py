@@ -254,7 +254,7 @@ class BaseTicketViewer(BaseViewer):
     
     
     def main_tickets_view(self):
-        template = 'mslemon:templates/consult/main-ticket-view.mako'
+        template = 'mslemon:templates/consult/main-ticket-view-content.mako'
         default_view = 'agendaDay'
         tkt_types = ['assigned', 'delegated', 'unread',
                      'pending', 'closed']
@@ -287,6 +287,12 @@ class BaseTicketViewer(BaseViewer):
         self.layout.resources.main_ticket_view.need()
         self.layout.resources.cornsilk.need()
 
+        # create sidebar
+        template = 'mslemon:templates/consult/main-ticket-view-sidebar.mako'
+        sidebar = self.render(template, env)
+        self.layout.sidebar = sidebar
+
+        
     def _open_ticket_form_submitted(self, form):
         controls = self.request.POST.items()
         self.layout.subheader = "New ticket submitted to database"

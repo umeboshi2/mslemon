@@ -41,3 +41,22 @@
 .fc-header-title h2 {
     font-size: 1.2em;
 }
+
+/*
+.ticket-main-view-button-bar {
+    display: block
+}
+
+*/
+
+#list-button {
+    display: block;
+    text-align: center;
+}
+
+.ticket-main-view-button-sidebar {
+    .query-button {
+	display: block;
+	text-align: center;
+    }
+}

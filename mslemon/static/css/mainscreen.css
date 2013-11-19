@@ -7870,6 +7870,12 @@ li.top-bar-button {
 }
 
 /* line 147, ../../../sass/partials/_baselayout.scss */
+.content {
+  background: #8b7e66;
+  margin-bottom: 5em;
+}
+
+/* line 152, ../../../sass/partials/_baselayout.scss */
 .two-col {
   width: 100%;
   float: left;
@@ -7877,13 +7883,21 @@ li.top-bar-button {
   display: inline;
 }
 
-/* line 151, ../../../sass/partials/_baselayout.scss */
-.content {
+/* line 156, ../../../sass/partials/_baselayout.scss */
+.right-column-content {
+  width: 74.5762711864%;
+  float: left;
+  margin-right: 1.6949152542%;
+  display: inline;
+  float: right;
+  margin-right: 0;
+  *margin-left: -1em;
+  display: inline;
   background: #8b7e66;
   margin-bottom: 5em;
 }
 
-/* line 158, ../../../sass/partials/_baselayout.scss */
+/* line 163, ../../../sass/partials/_baselayout.scss */
 .sidebar {
   /*@include background-size('cover');*/
   width: 23.7288135593%;
@@ -7902,33 +7916,33 @@ li.top-bar-button {
   -webkit-border-bottom-right-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
 }
-/* line 160, ../../../sass/partials/_baselayout.scss */
+/* line 165, ../../../sass/partials/_baselayout.scss */
 .sidebar a {
   color: #212121;
 }
-/* line 171, ../../../sass/partials/_baselayout.scss */
+/* line 176, ../../../sass/partials/_baselayout.scss */
 .sidebar a:hover {
   background: #a39781;
   border-radius: 0.5em;
   -moz-border-radius: 0.5em;
 }
-/* line 176, ../../../sass/partials/_baselayout.scss */
+/* line 181, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu-header {
   font-family: "Rambla";
   font-size: 1.5em;
   background: #6e6350;
   color: #cec8bc;
 }
-/* line 182, ../../../sass/partials/_baselayout.scss */
+/* line 187, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu {
   margin-left: 0.5em;
 }
-/* line 185, ../../../sass/partials/_baselayout.scss */
+/* line 190, ../../../sass/partials/_baselayout.scss */
 .sidebar #sidebar-logout {
   margin-left: 0.5em;
 }
 
-/* line 190, ../../../sass/partials/_baselayout.scss */
+/* line 195, ../../../sass/partials/_baselayout.scss */
 .footer {
   width: 100%;
   float: left;
@@ -8741,4 +8755,22 @@ li.top-bar-button {
 /* line 41, ../../../sass/mainscreen.scss */
 .fc-header-title h2 {
   font-size: 1.2em;
+}
+
+/*
+.ticket-main-view-button-bar {
+    display: block
+}
+
+*/
+/* line 52, ../../../sass/mainscreen.scss */
+#list-button {
+  display: block;
+  text-align: center;
+}
+
+/* line 58, ../../../sass/mainscreen.scss */
+.ticket-main-view-button-sidebar .query-button {
+  display: block;
+  text-align: center;
 }
