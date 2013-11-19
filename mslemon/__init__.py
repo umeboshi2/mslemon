@@ -81,10 +81,6 @@ def main(global_config, **settings):
         timeout=timeout, tkt=False)
     root_factory.authn_policy = authn_policy
 
-
-
-
-    
     # create config object
     config = Configurator(settings=settings,
                           root_factory=root_factory,
@@ -96,13 +92,13 @@ def main(global_config, **settings):
 
     config.include('pyramid_fanstatic')
 
-    configure_base_layout(config)
-    configure_admin(config)
+    config.include(configure_base_layout)
+    config.include(configure_admin)
     #vmgr = PyramidConfigManager(DBSession)
     #vmgr.configure(config)
-    configure_consultant(config)
-    configure_mslemon_cases(config)
-    configure_mslemon_docs(config)
+    config.include(configure_consultant)
+    config.include(configure_mslemon_cases)
+    config.include(configure_mslemon_docs)
     configure_wiki(config, '/msl_wiki')
     config.add_static_view('static',
                            'mslemon:static', cache_max_age=3600)
@@ -178,8 +174,10 @@ def main(global_config, **settings):
     ##################################
     
     
-    # wrap app with Fanstatic
     app = config.make_wsgi_app()
+
+    # FIXME: maybe do this somewhere else?
+    # wrap app with Fanstatic
     from fanstatic import Fanstatic
     return Fanstatic(app)
 

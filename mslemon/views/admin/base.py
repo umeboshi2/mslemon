@@ -19,6 +19,30 @@ from mslemon.views.base import AdminViewer
 def make_main_menu(request):
     menu = BaseMenu()
     menu.set_header('Admin Menu')
+    #url = request.route_url('admin_users', context='list', id='all')
+    url = request.route_url('admin', traverse='users')
+    menu.append_new_entry('Manage Users', url)
+    url = request.route_url('admin', resource='sitetext', context='list',
+                            traverse=[])
+    menu.append_new_entry('Manage Text', url)
+    url = request.route_url('admin', resource='images', context='list',
+                            traverse=[])
+    menu.append_new_entry('Manage Images', url)
+    url = request.route_url('admin', resource='dbadmin', context='main',
+                            traverse=[])
+    menu.append_new_entry('Manage Database', url)
+    
+    url = request.route_url('admin', resource='site_templates',
+                            context='list', traverse=[])
+    menu.append_new_entry('Site Templates', url)
+    url = request.route_url('admin', resource='sitecontent_mgr',
+                            context='listpaths', traverse=[])
+    menu.append_new_entry('Site Content', url)
+    return menu
+
+def make_main_menuOrig(request):
+    menu = BaseMenu()
+    menu.set_header('Admin Menu')
     url = request.route_url('admin_users', context='list', id='all')
     menu.append_new_entry('Manage Users', url)
     url = request.route_url('admin_sitetext', context='list', id=None)

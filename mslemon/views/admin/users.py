@@ -43,11 +43,13 @@ def prepare_main_data(request):
     menu = BaseMenu()
     menu.set_header('Actions')
     route = 'admin_users'
-    url = request.route_url(route, context='list', id='all')
+    kw = dict(traverse='', resource='users')
+    route = 'admin'
+    url = request.route_url(route, context='list', **kw)
     menu.append_new_entry('List Users', url)
-    url = request.route_url(route, context='add', id='somebody')
+    url = request.route_url(route, context='add', **kw)
     menu.append_new_entry('Add User', url)
-    url = request.route_url(route, context='listgroups', id='all')
+    url = request.route_url(route, context='listgroups', **kw)
     menu.append_new_entry('List Groups', url)
     layout.title = 'Manage Users'
     layout.header = 'Manage Users' 

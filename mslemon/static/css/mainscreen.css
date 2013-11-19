@@ -7951,6 +7951,7 @@ li.top-bar-button {
 .action-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
+  color: white;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -7969,16 +7970,15 @@ li.top-bar-button {
   -moz-box-shadow: #b5b5b5 0 1px 0 inset;
   box-shadow: #b5b5b5 0 1px 0 inset;
   border: 1px solid dimgrey;
-  color: white;
   text-shadow: #4d4d4d 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
   background-color: dimgrey;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
@@ -7987,13 +7987,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#828282, #696969);
   background: linear-gradient(#828282, #696969);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:active {
   -webkit-box-shadow: #616161 0 1px 2px inset;
   -moz-box-shadow: #616161 0 1px 2px inset;
   box-shadow: #616161 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button.disabled, .action-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8003,7 +8003,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
 .action-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8148,6 +8148,7 @@ li.top-bar-button {
 .ticket-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
+  color: white;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8166,16 +8167,15 @@ li.top-bar-button {
   -moz-box-shadow: #b5b5b5 0 1px 0 inset;
   box-shadow: #b5b5b5 0 1px 0 inset;
   border: 1px solid dimgrey;
-  color: white;
   text-shadow: #4d4d4d 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:hover {
   background-color: dimgrey;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
@@ -8184,13 +8184,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#828282, #696969);
   background: linear-gradient(#828282, #696969);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:active {
   -webkit-box-shadow: #616161 0 1px 2px inset;
   -moz-box-shadow: #616161 0 1px 2px inset;
   box-shadow: #616161 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket.disabled, .ticket-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8200,7 +8200,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
 .ticket-update-ticket::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8294,6 +8294,7 @@ li.top-bar-button {
 .phonecall-update-phonecall {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
+  color: white;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8312,16 +8313,15 @@ li.top-bar-button {
   -moz-box-shadow: #b5b5b5 0 1px 0 inset;
   box-shadow: #b5b5b5 0 1px 0 inset;
   border: 1px solid dimgrey;
-  color: white;
   text-shadow: #4d4d4d 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
   background-color: dimgrey;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
@@ -8330,13 +8330,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#828282, #696969);
   background: linear-gradient(#828282, #696969);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:active {
   -webkit-box-shadow: #616161 0 1px 2px inset;
   -moz-box-shadow: #616161 0 1px 2px inset;
   box-shadow: #616161 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8346,7 +8346,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
 .phonecall-update-phonecall::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8396,6 +8396,7 @@ li.top-bar-button {
 .phonecall-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
+  color: white;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8414,16 +8415,15 @@ li.top-bar-button {
   -moz-box-shadow: #b5b5b5 0 1px 0 inset;
   box-shadow: #b5b5b5 0 1px 0 inset;
   border: 1px solid dimgrey;
-  color: white;
   text-shadow: #4d4d4d 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
   background-color: dimgrey;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
@@ -8432,13 +8432,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#828282, #696969);
   background: linear-gradient(#828282, #696969);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:active {
   -webkit-box-shadow: #616161 0 1px 2px inset;
   -moz-box-shadow: #616161 0 1px 2px inset;
   box-shadow: #616161 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8448,7 +8448,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
 .phonecall-update-ticket::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8509,6 +8509,7 @@ li.top-bar-button {
 .phonecall-update-phonecall {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
+  color: white;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8527,16 +8528,15 @@ li.top-bar-button {
   -moz-box-shadow: #b5b5b5 0 1px 0 inset;
   box-shadow: #b5b5b5 0 1px 0 inset;
   border: 1px solid dimgrey;
-  color: white;
   text-shadow: #4d4d4d 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
   background-color: dimgrey;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
@@ -8545,13 +8545,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#828282, #696969);
   background: linear-gradient(#828282, #696969);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:active {
   -webkit-box-shadow: #616161 0 1px 2px inset;
   -moz-box-shadow: #616161 0 1px 2px inset;
   box-shadow: #616161 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8561,7 +8561,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
 .phonecall-update-phonecall::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8611,6 +8611,7 @@ li.top-bar-button {
 .phonecall-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
+  color: white;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8629,16 +8630,15 @@ li.top-bar-button {
   -moz-box-shadow: #b5b5b5 0 1px 0 inset;
   box-shadow: #b5b5b5 0 1px 0 inset;
   border: 1px solid dimgrey;
-  color: white;
   text-shadow: #4d4d4d 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
   background-color: dimgrey;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
@@ -8647,13 +8647,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#828282, #696969);
   background: linear-gradient(#828282, #696969);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:active {
   -webkit-box-shadow: #616161 0 1px 2px inset;
   -moz-box-shadow: #616161 0 1px 2px inset;
   box-shadow: #616161 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8663,7 +8663,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
+/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
 .phonecall-update-ticket::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;

@@ -142,7 +142,7 @@ class Resource(dict):
 class Root(Resource):
     "The root resource."
 
-    __acl__ = [
+    __default_acl__ = [
         (Allow, Everyone, 'public'),
         (Allow, Authenticated, 'user'),
         (Allow, Authenticated, 'consultant'),
@@ -151,13 +151,20 @@ class Root(Resource):
         (Allow, 'admin', ('admin', 'manage')),
         ]
 
+    @property
+    def __acl__(self):
+        return self.__default_acl__
+    
+
     def add_resource(self, name, orm_class):
         self[name] = ORMContainer(name, self, self.request, orm_class)
 
     def __init__(self, request):
         self.request = request
         from mslemon.models.usergroup import User
-        self.add_resource('users', User)
+        self.add_resource('users2', User)
+        self['main2'] = dict()
+        #self['admin'] = dict(main='foobar')
         
     
     

@@ -16,7 +16,8 @@ def prepare_user_menu(request):
         url = request.route_url('user', context='status')
         menu.append_new_entry('Preferences', url)
         if 'admin' in user.groups:
-            url = request.route_url('admin', context='main')
+            #url = request.route_url('admin', context='main')
+            url = request.route_url('admin', resource='main', traverse=[])
             menu.append_new_entry('Admin', url)
         url = request.route_url('logout')
         menu.append_new_entry('Log Out', url)
