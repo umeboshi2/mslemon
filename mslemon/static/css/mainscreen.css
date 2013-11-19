@@ -394,7 +394,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: darkgrey;
+  background-color: #8b7e66;
 }
 
 /* line 34, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -445,7 +445,7 @@ img {
 .img-thumbnail, .thumbnail {
   padding: 4px;
   line-height: 1.428571429;
-  background-color: darkgrey;
+  background-color: #8b7e66;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -2027,7 +2027,7 @@ th {
 }
 /* line 56, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_tables.scss */
 .table .table {
-  background-color: darkgrey;
+  background-color: #8b7e66;
 }
 
 /* line 70, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_tables.scss */
@@ -2721,20 +2721,20 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 /* line 58, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: black;
-  background-color: #c2c2c2;
-  border-color: #8f8f8f;
+  background-color: #a39781;
+  border-color: #6e6350;
 }
 /* line 470, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
   color: black;
-  background-color: #aeaeae;
-  border-color: #707070;
+  background-color: #91836a;
+  border-color: #4a4337;
 }
 /* line 475, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .open .btn-primary.dropdown-toggle {
   color: black;
-  background-color: #aeaeae;
-  border-color: #707070;
+  background-color: #91836a;
+  border-color: #4a4337;
 }
 /* line 481, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-primary:active, .btn-primary.active {
@@ -2746,8 +2746,8 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 494, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-  background-color: #c2c2c2;
-  border-color: #8f8f8f;
+  background-color: #a39781;
+  border-color: #6e6350;
 }
 
 /* line 62, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4630,7 +4630,7 @@ input[type="button"].btn-block {
 /* line 103, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: darkgrey;
+  background-color: #8b7e66;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -4728,7 +4728,7 @@ input[type="button"].btn-block {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: darkgrey;
+    border-bottom-color: #8b7e66;
   }
 }
 
@@ -5101,8 +5101,8 @@ input[type="button"].btn-block {
 
 /* line 360, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default, .main-menu, .status-bar {
-  background-color: darkgrey;
-  border-color: #989898;
+  background-color: #8b7e66;
+  border-color: #786d58;
 }
 /* line 364, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-brand, .main-menu .navbar-brand, .status-bar .navbar-brand {
@@ -5129,7 +5129,7 @@ input[type="button"].btn-block {
 /* line 390, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .active > a, .main-menu .navbar-nav > .active > a, .status-bar .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .main-menu .navbar-nav > .active > a:hover, .status-bar .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus, .main-menu .navbar-nav > .active > a:focus, .status-bar .navbar-nav > .active > a:focus {
   color: #555555;
-  background-color: #989898;
+  background-color: #786d58;
 }
 /* line 398, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .disabled > a, .main-menu .navbar-nav > .disabled > a, .status-bar .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .main-menu .navbar-nav > .disabled > a:hover, .status-bar .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus, .main-menu .navbar-nav > .disabled > a:focus, .status-bar .navbar-nav > .disabled > a:focus {
@@ -5153,7 +5153,7 @@ input[type="button"].btn-block {
 .navbar-default .navbar-form,
 .main-menu .navbar-form,
 .status-bar .navbar-form {
-  border-color: #989898;
+  border-color: #786d58;
 }
 /* line 425, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .dropdown > a:hover .caret, .main-menu .navbar-nav > .dropdown > a:hover .caret, .status-bar .navbar-nav > .dropdown > a:hover .caret,
@@ -5165,7 +5165,7 @@ input[type="button"].btn-block {
 }
 /* line 434, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .open > a, .main-menu .navbar-nav > .open > a, .status-bar .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .main-menu .navbar-nav > .open > a:hover, .status-bar .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .main-menu .navbar-nav > .open > a:focus, .status-bar .navbar-nav > .open > a:focus {
-  background-color: #989898;
+  background-color: #786d58;
   color: #555555;
 }
 /* line 437, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
@@ -5191,7 +5191,7 @@ input[type="button"].btn-block {
   /* line 463, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .main-menu .navbar-nav .open .dropdown-menu > .active > a, .status-bar .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .active > a:hover, .status-bar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .active > a:focus, .status-bar .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #555555;
-    background-color: #989898;
+    background-color: #786d58;
   }
   /* line 471, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:hover, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:focus, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
@@ -7713,7 +7713,7 @@ td.visible-print {
 /* Layout */
 /* line 24, ../../../sass/partials/_baselayout.scss */
 html {
-  background: darkgrey;
+  background: #8b7e66;
 }
 
 /* line 28, ../../../sass/partials/_baselayout.scss */
@@ -7725,7 +7725,7 @@ html {
   padding-right: 2em;
   margin-left: auto;
   margin-right: auto;
-  background: darkgrey;
+  background: #8b7e66;
   font-family: "Source Sans Pro",sans;
   color: #212121;
 }
@@ -7750,7 +7750,7 @@ html {
 /* line 36, ../../../sass/partials/_baselayout.scss */
 .page a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 /* line 40, ../../../sass/partials/_baselayout.scss */
 .page a:link {
@@ -7768,12 +7768,12 @@ li.top-bar-button {
 
 /* line 56, ../../../sass/partials/_baselayout.scss */
 .navbar-default .navbar-nav li a, .main-menu .navbar-nav li a, .status-bar .navbar-nav li a {
-  color: gainsboro;
+  color: #b8af9f;
 }
 /* line 59, ../../../sass/partials/_baselayout.scss */
 .navbar-default .navbar-nav li a:hover, .main-menu .navbar-nav li a:hover, .status-bar .navbar-nav li a:hover {
-  color: white;
-  background: #c2c2c2;
+  color: #e3e0da;
+  background: #a39781;
   border-style: solid;
   border-width: 0.1em;
   -webkit-border-radius: 0.5em;
@@ -7787,7 +7787,7 @@ li.top-bar-button {
 .main-menu {
   height: 4em;
   margin-bottom: 0.1em;
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.15em;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
@@ -7797,11 +7797,11 @@ li.top-bar-button {
   font-weight: bold;
   font-family: "Rambla";
   border-style: solid;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 /* line 86, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand {
-  color: gainsboro;
+  color: #b8af9f;
   padding-left: 0.1em;
   padding-right: 0.1em;
   -webkit-border-radius: 0.5em;
@@ -7813,15 +7813,15 @@ li.top-bar-button {
 /* line 94, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand:hover {
   border-style: solid;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 /* line 99, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu {
-  background: #8f8f8f;
+  background: #6e6350;
 }
 /* line 101, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu li > a:hover {
-  background-image: linear-gradient(to bottom, #c2c2c2 0%, #a9a9a9 100%);
+  background-image: linear-gradient(to bottom, #a39781 0%, #8b7e66 100%);
 }
 
 /* line 107, ../../../sass/partials/_baselayout.scss */
@@ -7832,7 +7832,7 @@ li.top-bar-button {
 
 /* line 112, ../../../sass/partials/_baselayout.scss */
 .status-bar {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.15em;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
@@ -7842,12 +7842,12 @@ li.top-bar-button {
   font-weight: bold;
   font-family: "Rambla";
   border-style: solid;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 /* line 126, ../../../sass/partials/_baselayout.scss */
 .status-bar a.navbar-brand {
-  background-image: linear-gradient(to bottom, #c2c2c2 0%, #767676 100%);
-  color: gainsboro;
+  background-image: linear-gradient(to bottom, #a39781 0%, #50493b 100%);
+  color: #b8af9f;
   padding-left: 0.1em;
   padding-right: 0.1em;
   -webkit-border-radius: 0.5em;
@@ -7858,15 +7858,15 @@ li.top-bar-button {
 }
 /* line 134, ../../../sass/partials/_baselayout.scss */
 .status-bar a.navbar-brand:hover {
-  background-image: linear-gradient(to bottom, #767676 0%, #c2c2c2 100%);
+  background-image: linear-gradient(to bottom, #50493b 0%, #a39781 100%);
 }
 /* line 137, ../../../sass/partials/_baselayout.scss */
 .status-bar .dropdown-menu {
-  background: #8f8f8f;
+  background: #6e6350;
 }
 /* line 139, ../../../sass/partials/_baselayout.scss */
 .status-bar .dropdown-menu li > a:hover {
-  background-image: linear-gradient(to bottom, #c2c2c2 0%, #a9a9a9 100%);
+  background-image: linear-gradient(to bottom, #a39781 0%, #8b7e66 100%);
 }
 
 /* line 147, ../../../sass/partials/_baselayout.scss */
@@ -7879,7 +7879,7 @@ li.top-bar-button {
 
 /* line 151, ../../../sass/partials/_baselayout.scss */
 .content {
-  background: darkgrey;
+  background: #8b7e66;
   margin-bottom: 5em;
 }
 
@@ -7893,7 +7893,7 @@ li.top-bar-button {
   float: left;
   font-family: "Nunito";
   font-size: 1.1em;
-  background: #8f8f8f;
+  background: #6e6350;
   text-align: left;
   -moz-border-radius-bottomleft: 0.5em;
   -webkit-border-bottom-left-radius: 0.5em;
@@ -7908,7 +7908,7 @@ li.top-bar-button {
 }
 /* line 171, ../../../sass/partials/_baselayout.scss */
 .sidebar a:hover {
-  background: #c2c2c2;
+  background: #a39781;
   border-radius: 0.5em;
   -moz-border-radius: 0.5em;
 }
@@ -7916,8 +7916,8 @@ li.top-bar-button {
 .sidebar .left-menu-header {
   font-family: "Rambla";
   font-size: 1.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
 }
 /* line 182, ../../../sass/partials/_baselayout.scss */
 .sidebar .left-menu {
@@ -7951,7 +7951,7 @@ li.top-bar-button {
 .action-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: white;
+  color: #d9d4cb;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -7960,17 +7960,17 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -7980,24 +7980,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button.disabled, .action-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -8011,33 +8011,33 @@ li.top-bar-button {
 
 /* line 17, ../../../sass/partials/_action-button.scss */
 .action-button-submit {
-  background: #c2c2c2;
+  background: #a39781;
   text-align: center;
 }
 
 /* line 22, ../../../sass/partials/_action-button.scss */
 .action-button-submit:hover {
-  background: gainsboro;
+  background: #b8af9f;
   cursor: pointer;
 }
 
 /* remove these id's later and just use classes */
 /* line 29, ../../../sass/partials/_action-button.scss */
 #action-button-submit {
-  background: #c2c2c2;
+  background: #a39781;
   text-align: center;
 }
 
 /* line 34, ../../../sass/partials/_action-button.scss */
 #action-button-submit:hover {
-  background: gainsboro;
+  background: #b8af9f;
   cursor: pointer;
 }
 
 /* line 5, ../../../sass/partials/_common-page.scss */
 .form-control {
-  background: #c2c2c2;
-  color: #434343;
+  background: #a39781;
+  color: #151310;
   font-size: 0.8em;
   padding: 0.2em;
   margin: 0.2em;
@@ -8063,14 +8063,14 @@ li.top-bar-button {
 
 /* line 30, ../../../sass/partials/_common-page.scss */
 .picker__box {
-  background: #c2c2c2;
-  color: #434343;
+  background: #a39781;
+  color: #151310;
 }
 
 /* line 2, ../../../sass/partials/_list-styles.scss */
 .listview-simple-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -8082,25 +8082,25 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 20, ../../../sass/partials/_list-styles.scss */
 .listview-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 28, ../../../sass/partials/_list-styles.scss */
 .listview-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
@@ -8113,20 +8113,20 @@ li.top-bar-button {
   border-radius: 0.5em;
   font-size: 1.2em;
   text-align: center;
-  background: darkgrey;
+  background: #8b7e66;
   border-style: solid;
   border-width: 0.2em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
 /* line 43, ../../../sass/partials/_list-styles.scss */
 .listview-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -8138,8 +8138,8 @@ li.top-bar-button {
 /*-------- Ticket Management ----------*/
 /* line 5, ../../../sass/partials/_tickets.scss */
 .ticket-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -8148,7 +8148,7 @@ li.top-bar-button {
 .ticket-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: white;
+  color: #d9d4cb;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8157,17 +8157,17 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -8177,24 +8177,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket.disabled, .ticket-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -8208,11 +8208,11 @@ li.top-bar-button {
 
 /* line 18, ../../../sass/partials/_tickets.scss */
 .ticket-status-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.1em;
   border-bottom-style: dashed;
   border-bottom-width: 0.1em;
-  border-bottom-color: #c2c2c2;
+  border-bottom-color: #a39781;
 }
 
 /* line 27, ../../../sass/partials/_tickets.scss */
@@ -8229,25 +8229,25 @@ li.top-bar-button {
 /*-------- Ticket List ----------*/
 /* line 39, ../../../sass/partials/_tickets.scss */
 .tickets-list-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
 
 /* line 45, ../../../sass/partials/_tickets.scss */
 .tickets-list-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 49, ../../../sass/partials/_tickets.scss */
 .tickets-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -8259,12 +8259,12 @@ li.top-bar-button {
 /*-------- Phone Call Management ----------*/
 /* line 5, ../../../sass/mslemon/_phonecall.scss */
 .phone-main-view-button-bar {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 15, ../../../sass/mslemon/_phonecall.scss */
@@ -8274,27 +8274,27 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 26, ../../../sass/mslemon/_phonecall.scss */
 .ticket-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 32, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-update-phonecall {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: white;
+  color: #d9d4cb;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8303,17 +8303,17 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -8323,24 +8323,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -8355,25 +8355,25 @@ li.top-bar-button {
 /*-------- Phonecall List ----------*/
 /* line 41, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
 
 /* line 47, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 51, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -8386,8 +8386,8 @@ li.top-bar-button {
 /*-------- Ticket Management ----------*/
 /* line 71, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -8396,7 +8396,7 @@ li.top-bar-button {
 .phonecall-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: white;
+  color: #d9d4cb;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8405,17 +8405,17 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -8425,24 +8425,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -8456,7 +8456,7 @@ li.top-bar-button {
 
 /* line 84, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-status-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
 }
 
@@ -8474,12 +8474,12 @@ li.top-bar-button {
 /*-------- Case Management ----------*/
 /* line 5, ../../../sass/mslemon/_cases-main.scss */
 .cases-main-view-button-bar {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 15, ../../../sass/mslemon/_cases-main.scss */
@@ -8489,27 +8489,27 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 26, ../../../sass/mslemon/_cases-main.scss */
 .ticket-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 32, ../../../sass/mslemon/_cases-main.scss */
 .phonecall-update-phonecall {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: white;
+  color: #d9d4cb;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8518,17 +8518,17 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -8538,24 +8538,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -8570,25 +8570,25 @@ li.top-bar-button {
 /*-------- Phonecall List ----------*/
 /* line 41, ../../../sass/mslemon/_cases-main.scss */
 .cases-list-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
 
 /* line 47, ../../../sass/mslemon/_cases-main.scss */
 .cases-list-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 51, ../../../sass/mslemon/_cases-main.scss */
 .cases-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -8601,8 +8601,8 @@ li.top-bar-button {
 /*-------- Ticket Management ----------*/
 /* line 71, ../../../sass/mslemon/_cases-main.scss */
 .phonecall-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -8611,7 +8611,7 @@ li.top-bar-button {
 .phonecall-update-ticket {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: white;
+  color: #d9d4cb;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8620,17 +8620,17 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -8640,24 +8640,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -8671,7 +8671,7 @@ li.top-bar-button {
 
 /* line 84, ../../../sass/mslemon/_cases-main.scss */
 .phonecall-status-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
 }
 
@@ -8688,8 +8688,8 @@ li.top-bar-button {
 
 /* line 2, ../../../sass/mslemon/_list-styles.scss */
 .listview-simple-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -8701,35 +8701,35 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 20, ../../../sass/mslemon/_list-styles.scss */
 .listview-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 28, ../../../sass/mslemon/_list-styles.scss */
 .listview-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 33, ../../../sass/mslemon/_list-styles.scss */
 .listview-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -8738,7 +8738,7 @@ li.top-bar-button {
   float: right;
 }
 
-/* line 40, ../../../sass/mainscreen.scss */
+/* line 41, ../../../sass/mainscreen.scss */
 .fc-header-title h2 {
   font-size: 1.2em;
 }
