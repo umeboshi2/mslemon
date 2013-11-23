@@ -103,58 +103,56 @@ def main(global_config, **settings):
     configure_wiki(config, '/msl_wiki')
     config.add_static_view('static',
                            'mslemon:static', cache_max_age=3600)
+    view_defaults = dict(renderer=basetemplate, layout='base')
+    
     ##################################
     # Main Views
     ##################################
-    config.add_route('home', '/')
-    config.add_view('mslemon.views.main.MainViewer',
-                    layout='base',
-                    renderer=basetemplate,
-                    route_name='home')
 
-    config.add_route('traverse', '/trv/*traverse')
+    route_name = 'home'
+    config.add_route(route_name, '/')
+    config.add_view('mslemon.views.main.MainViewer',
+                    route_name=route_name, **view_defaults)
+
+    route_name = 'traverse'
+    config.add_route(route_name, '/trv/*traverse')
     config.add_view('mslemon.views.main.TraversalViewer',
-                    layout='base',
-                    renderer=basetemplate,
-                    route_name='traverse')
+                    route_name=route_name, **view_defaults)
 
 
-    
-    
-    config.add_route('main', '/main/{context}/{id}')
+    route_name = 'test_rest_views'
+    config.add_route(route_name, '/rviews/{model}')
+    config.add_view('mslemon.views.testrest.TestViewer',
+                    route_name=route_name, **view_defaults)
+
+    route_name = 'main'
+    config.add_route(route_name, '/main/{context}/{id}')
     config.add_view('mslemon.views.main.MainViewer',
-                    layout='base',
-                    renderer=basetemplate,
-                    route_name='main')
-    config.add_route('initdb', '/initdb/{context}/{id}')
+                    route_name=route_name, **view_defaults)
+
+    route_name = 'initdb'
+    config.add_route(route_name, '/initdb/{context}/{id}')
     config.add_view('mslemon.views.main.MainViewer',
-                    layout='base',
-                    renderer=basetemplate,
-                    route_name='initdb')
+                    route_name=route_name, **view_defaults)
+
     ##################################
     # Login Views
     ##################################
     login_viewer = 'mslemon.views.login.LoginViewer'
-    config.add_route('login', '/login')
-    config.add_view(login_viewer,
-                    renderer=basetemplate,
-                    layout='base',
-                    route_name='login')
-    
-    
-    config.add_route('logout', '/logout')
-    config.add_view(login_viewer,
-                    renderer=basetemplate,
-                    layout='base',
-                    route_name='logout')
+    route_name = 'login'
+    config.add_route(route_name, '/login')
+    config.add_view(login_viewer, route_name=route_name, **view_defaults)
+
+    route_name = 'logout'
+    config.add_route(route_name, '/logout')
+    config.add_view(login_viewer, route_name=route_name, **view_defaults)
 
     
     # Handle HTTPForbidden errors with a
     # redirect to a login page.
     config.add_view(login_viewer,
                     context='pyramid.httpexceptions.HTTPForbidden',
-                    renderer=basetemplate,
-                    layout='base')
+                    **view_defaults)
     ##################################
 
     ##################################
@@ -167,13 +165,12 @@ def main(global_config, **settings):
     ##################################
     # Views for Users
     ##################################
-    config.add_route('user', '/user/{context}')
+    route_name = 'user'
+    config.add_route(route_name, '/user/{context}')
     config.add_view('mslemon.views.userview.MainViewer',
-                    route_name='user',
-                    renderer=basetemplate,
-                    layout='base',
-                    permission='user')
-    
+                    route_name=route_name,
+                    permission='user',
+                    **view_defaults)
     ##################################
 
     # add REST views

@@ -40,6 +40,9 @@ def make_main_menu(request):
 
         url = request.route_url('msl_cases', context='main', id='all')
         menu.append_new_entry('Cases', url)
+
+        url = request.route_url('test_rest_views', model='sitetext')
+        menu.append_new_entry('test backbone', url)
         
     return menu
     

@@ -5,6 +5,7 @@ from haberdashery.resources import jqueryui, fullcalendar
 from haberdashery.resources import ace
 from haberdashery.resources import bootstrap
 from haberdashery.resources import create_js
+from haberdashery.resources import backbone
 
 
 #from trumpet.resources import jqueryui
@@ -103,6 +104,8 @@ edit_wiki_page_deps = [midgard_notify, midgard_tags,
 edit_wiki_page = make_resource('edit-wiki-page.js',
                                depends=edit_wiki_page_deps)
 
+test_backbone = make_resource('test-backbone.js',
+                              depends=[backbone])
 
 class StaticResources(TrumpetResources):
     main_screen = main_screen
@@ -129,6 +132,8 @@ class StaticResources(TrumpetResources):
     edit_wiki_page = edit_wiki_page
     
     post_to_url = post_to_url
+
+    test_backbone = test_backbone
     
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(object):
