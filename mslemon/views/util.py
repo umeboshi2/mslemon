@@ -29,13 +29,18 @@ def prepare_user_menu(request):
 def prepare_layout(layout):
     layout.title = 'Ms. Lemon'
     layout.header = layout.title
-    layout.subheader = ''
-    layout.content = ''
-    layout.footer = ''
     layout.resources = StaticResources()
     layout.resources.favicon.need()
     layout.resources.common_page.need()
 
+def prepare_plain_layout(layout):
+    layout.title = 'Ms. Lemon'
+    layout.header = layout.title
+    layout.resources = StaticResources()
+    layout.resources.favicon.need()
+    #layout.resources.common_page.need()
+
+    
 def get_admin_username(request):
     skey = 'frenchhorn.admin.admin_username'
     admin_username = request.registry.settings.get(skey, 'admin')

@@ -3,7 +3,7 @@ from trumpet.config.base import add_view
 
 main_view = 'mslemon.views.admin.main.MainViewer'
 
-def configure_admin(config, rootpath='/admin', permission='admin'):
+def configure_adminNew(config, rootpath='/admin', permission='admin'):
     config.add_route('admin', '%s/*traverse' % rootpath,
                      factory='mslemon.views.admin.main.admin_root_factory')
     add_view(config, main_view, 'admin', permission=permission)
@@ -36,3 +36,4 @@ def configure_adminOrig(config, rootpath='/admin', permission='admin'):
     add_view(config, 'mslemon.views.admin.contentmgr.MainViewer',
              route, permission=permission)
     
+configure_admin = configure_adminOrig

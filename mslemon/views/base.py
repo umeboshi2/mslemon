@@ -53,7 +53,8 @@ class BaseViewer(TrumpetViewer):
         
     def __call__(self):
         if hasattr(self, 'css'):
-            self.css.need()
+            if self.css is not None:
+                self.css.need()
         return super(BaseViewer, self).__call__()
 
     def get_admin_username(self):

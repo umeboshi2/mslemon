@@ -91,6 +91,7 @@ def main(global_config, **settings):
     config.set_session_factory(session_factory)
 
     config.include('pyramid_fanstatic')
+    config.include('cornice')
 
     config.include(configure_base_layout)
     config.include(configure_admin)
@@ -118,6 +119,8 @@ def main(global_config, **settings):
                     route_name='traverse')
 
 
+    
+    
     config.add_route('main', '/main/{context}/{id}')
     config.add_view('mslemon.views.main.MainViewer',
                     layout='base',
@@ -172,7 +175,9 @@ def main(global_config, **settings):
                     permission='user')
     
     ##################################
-    
+
+    # add REST views
+    config.scan('mslemon.views.testrest')
     
     app = config.make_wsgi_app()
 

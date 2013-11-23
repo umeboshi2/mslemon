@@ -7,6 +7,7 @@ viewers = dict(contacts='ContactViewer',
 
 
 def configure_wiki(config, rootpath):
+    wiki_view = 'mslemon.views.wiki.PlainWikiViewer'
     wiki_view = 'mslemon.views.wiki.WikiViewer'
     config.add_route('view_wiki', rootpath)
     add_view(config, wiki_view, 'view_wiki')

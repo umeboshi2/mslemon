@@ -16,7 +16,7 @@ from trumpet.views.menus import BaseMenu
 
 from mslemon.views.base import AdminViewer
 
-def make_main_menu(request):
+def make_main_menuNew(request):
     menu = BaseMenu()
     menu.set_header('Admin Menu')
     #url = request.route_url('admin_users', context='list', id='all')
@@ -60,7 +60,8 @@ def make_main_menuOrig(request):
     menu.append_new_entry('Site Content', url)
     return menu
 
-    
+
+make_main_menu = make_main_menuOrig
 
 class MainViewer(AdminViewer):
     def __init__(self, request):

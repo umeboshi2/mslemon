@@ -18,6 +18,7 @@ $(document).ready ->
                 element.css
                         'font-size': '0.7em'
                         'padding': '0.2em'
+                        'background-color' : element.color
         eventless = () ->
                 alert('No events displayed')
                 
@@ -38,7 +39,7 @@ $(document).ready ->
                 allDayDefault: false
                 loading: loading_events
                 eventAfterRender: render_cal_event
-                eventRender: render_cal_event
+                #eventRender: render_cal_event
                 #eventMouseover: mouse_over_event
                 eventColor: '#576B6B'
                 defaultView: 'month'

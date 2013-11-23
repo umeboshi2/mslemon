@@ -1,8 +1,7 @@
-require 'susy'
-require 'bootstrap-sass'
 # Require any additional compass plugins here.
-
+require 'susy'
 require 'sassy-buttons'
+require 'bootstrap-sass'
 
 
 # Set this to the root of your project when deployed:

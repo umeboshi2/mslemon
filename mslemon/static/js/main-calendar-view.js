@@ -17,7 +17,8 @@
     render_cal_event = function(calEvent, element) {
       return element.css({
         'font-size': '0.7em',
-        'padding': '0.2em'
+        'padding': '0.2em',
+        'background-color': element.color
       });
     };
     eventless = function() {
@@ -41,7 +42,6 @@
       allDayDefault: false,
       loading: loading_events,
       eventAfterRender: render_cal_event,
-      eventRender: render_cal_event,
       eventColor: '#576B6B',
       defaultView: 'month'
     });

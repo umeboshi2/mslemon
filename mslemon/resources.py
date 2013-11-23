@@ -4,6 +4,7 @@ from fanstatic import Library, Resource
 from haberdashery.resources import jqueryui, fullcalendar
 from haberdashery.resources import ace
 from haberdashery.resources import bootstrap
+from haberdashery.resources import create_js
 
 
 #from trumpet.resources import jqueryui
@@ -81,6 +82,27 @@ admin_list_site_resources = make_resource('admin-list-site-resources.js',
 admin_edit_site_resources = make_resource('admin-edit-site-resources.js',
                                           depends=[ace.ace, jqueryui])
 
+create_ui_theme = Resource(library, 'themes/create-ui/css/create-ui.css',
+                           depends=[create_js])
+
+midgard_notify = Resource(library,
+                          'themes/midgard-notifications/midgardnotif.css',
+                          depends=[create_ui_theme])
+
+midgard_tags = Resource(library,
+                        'themes/midgard-tags/tags.css',
+                        depends=[create_js])
+
+insert_image = Resource(library,
+                        'themes/insertimage.css',
+                        depends=[create_js])
+
+edit_wiki_page_deps = [midgard_notify, midgard_tags,
+                       insert_image]
+
+edit_wiki_page = make_resource('edit-wiki-page.js',
+                               depends=edit_wiki_page_deps)
+
 
 class StaticResources(TrumpetResources):
     main_screen = main_screen
@@ -104,6 +126,7 @@ class StaticResources(TrumpetResources):
     admin_show_path_content = admin_show_path_content
     admin_list_site_resources = admin_list_site_resources
     admin_edit_site_resources = admin_edit_site_resources
+    edit_wiki_page = edit_wiki_page
     
     post_to_url = post_to_url
     
