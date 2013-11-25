@@ -133,7 +133,7 @@
       };
 
       SiteTextView.prototype.renderForm = function() {
-        $(this.el).html("<div>\n<form>\n<label>Name:</label><input name=\"name\" value='" + (this.model.get('content')) + "'><br>\n<label>Content:</label><textarea type=\"textarea\" name=\"content\" width=\"60\" height=\"10\">" + (this.model.get('content')) + "</textarea>\n</form>\n</div>\n<span class=\"action-button save\">save</span>\n<span class=\"action-button delete\">delete</span>");
+        $(this.el).html("<div>\n<form>\n<label>Name:</label><input name=\"name\" value='" + (this.model.get('name')) + "'><br>\n<label>Content:</label><textarea type=\"textarea\" name=\"content\" width=\"60\" height=\"10\">" + (this.model.get('content')) + "</textarea>\n</form>\n</div>\n<span class=\"action-button save\">save</span>\n<span class=\"action-button delete\">delete</span>");
         return this;
       };
 
@@ -149,9 +149,24 @@
         return this.renderForm();
       };
 
+      SiteTextView.prototype.saveOrig = function() {
+        this.model.set('name', $('input').val());
+        this.model.set('content', $('textarea').val());
+        return this.model.save();
+      };
+
+      SiteTextView.prototype.save = function() {
+        var content;
+        content = $('textarea').val();
+        this.model.set('name', $('input').val());
+        this.model.set('content', content);
+        return this.model.save();
+      };
+
       SiteTextView.prototype.events = {
         'click .delete': 'remove',
-        'click .edit': 'edit'
+        'click .edit': 'edit',
+        'click .save': 'save'
       };
 
       return SiteTextView;

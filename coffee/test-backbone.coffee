@@ -93,11 +93,20 @@ jQuery ->
                 edit: ->
                         @renderForm()
           
-                save: ->
+                saveOrig: ->
                         @model.set('name', $('input').val())
                         @model.set('content', $('textarea').val())
                         @model.save()
-                                      
+
+                                                
+                save: ->
+                        content = $('textarea').val()
+                        #$('.footer').text(content)
+                        @model.set('name', $('input').val())
+                        @model.set('content', content)
+                        @model.save()
+                        
+                        
                 events:
                         'click .delete': 'remove'
                         'click .edit': 'edit'
