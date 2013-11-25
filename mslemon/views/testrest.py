@@ -95,7 +95,7 @@ class SiteTextREST(object):
     def collection_get(self):
         print "CALLED collection_get--------------------"
         doc_ids = [st.id for st in self._query()]
-        return [st.serialize() for st in self._query()]
+        return dict(data=[st.serialize() for st in self._query()])
 
     
 

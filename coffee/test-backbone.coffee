@@ -1,15 +1,59 @@
 jQuery ->
+        fetch_success = (collection, response) ->
+                $('.header').text('success')
+
+        class Router extends Backbone.Router
+                routes:
+                        '': 'home'
+                        
+                
         class SiteText extends Backbone.Model
                 defaults:
                         type: 'tutwiki'
                         name: ''
                         content: ''
+                        # do we need these?
+                        created: ''
+                        modified: ''
                         
 
         class SiteTextList extends Backbone.Collection
                 model: SiteText
                 url: '/rest/sitetext'
-        
+                # wrap the parsing to retrieve the
+                # 'data' attribute from the json response
+                parse: (response) ->
+                        return response.data
+                        
+
+        class EditSiteTextView extends Backbone.View
+                tagName: 'div'
+                className: 'sitetext-entry'
+                
+                initialize: ->
+                        _.bindAll @, 'render', 'unrender', 'remove'
+                        @model.bind 'change', @render
+                        @model.bind 'remove', @unrender
+
+                render: =>
+                        $(@el).html """
+                          <span>Name: #{@model.get 'name'}</span>
+                          <span class="action-button save">save</span>
+                          <span class="action-button delete">delete</span>
+                        """
+                        return @
+
+                unrender: =>
+                        $(@el).remove()
+
+                remove: ->
+                        @model.destroy()
+
+                save: ->
+                        @model.save()
+                events:
+                        'click .save': 'save'
+                
         class SiteTextView extends Backbone.View
                 tagName: 'div'
                 className: 'sitetext-entry'
@@ -21,30 +65,49 @@ jQuery ->
 
                 render: =>
                         $(@el).html """
-                          <div>Name: #{@model.get 'name'}</div>
-                          <div>Content: #{@model.get 'content'}</div>
+                          <span>Name: #{@model.get 'name'}</span>
+                          <span class="action-button edit">edit</span>
                           <span class="action-button delete">delete</span>
                         """
                         return @
 
+                renderForm: =>
+                        $(@el).html """
+                          <div>
+                          <form>
+                          <label>Name:</label><input name="name" value='#{@model.get 'content'}'><br>
+                          <label>Content:</label><textarea type="textarea" name="content" width="60" height="10">#{@model.get 'content'}</textarea>
+                          </form>
+                          </div>
+                          <span class="action-button save">save</span>
+                          <span class="action-button delete">delete</span>
+                        """
+                        return @
+                        
                 unrender: =>
                         $(@el).remove()
 
                 remove: ->
                         @model.destroy()
 
+                edit: ->
+                        @renderForm()
+                        #@unrender()
+                        
                 events:
                         'click .delete': 'remove'
-                        
+                        'click .edit': 'edit'
         
         class SiteTextListView extends Backbone.View
                 el: $ '.something'
 
                 initialize: ->
+                        console.log("Init SiteTextListView")
+                        @counter = 0
                         @collection = new SiteTextList
                         @collection.bind 'add', @appendItem
-                        @counter = 0
-                        @render()
+                        # fetch routine
+                                                                                
                         
                 render: ->
                         $(@el).append '<div class="action-button fetch-site-text-button">Fetch Site Text</div>'
@@ -62,26 +125,41 @@ jQuery ->
 
                 fetchItems: ->
                         $('.header').text('foobar')
-                        item = @collection.get(1)
+                        response = @collection.fetch ->
+                                success: fetch_success
+                        #item = @collection.get(1)
                         #@appendItem @collection.get 1
                         #@appendItem item
-                        bbitem = new SiteText item
-                        bbitem.set(item)
-                        @appendItem bbitem
-                        $('.footer').text(_.keys bbitem.attributes)
+                        #bbitem = new SiteText
+                        #bbitem.set(item)
+                        #@appendItem bbitem
+                        #$('.footer').text(_.values bbitem.attributes)
                                 
 
-                                
+
+                tellmereset:
+                        $('.header').text('tellmereset')
+                        
                 events:
                         'click .new-site-text-button': 'addItem'
                         'click .fetch-site-text-button': 'fetchItems'
+                        
 
                 
                                                 
                         
-        Backbone.sync = (method, model, success, error) ->
-                $('.header').text(method)
-                
+        #Backbone.sync = (method, model, success, error) ->
+        #        #$('.header').text(method)
+        #        $('.header').text(success)
 
-        list_view = new SiteTextListView
+        window.list_view = new SiteTextListView
+        window.router = new Router
+        home_route_run = () ->
+                console.log("Home Route")
+                window.list_view.render()
+                
+        window.router.on 'route:home', home_route_run
+
+        Backbone.history.start()
         
+                
