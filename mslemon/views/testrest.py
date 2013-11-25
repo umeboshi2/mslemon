@@ -29,7 +29,7 @@ from mslemon.util import send_email_through_smtp_server, make_email_message
 from mslemon.util import get_regular_users
 
 
-site_text_service = Service(name='sitetext', path='/rest/sitetext/{id}',
+site_text_service = Service(name='sitetext', path='/rest/sitetext2/{id}',
                             description="Site Text Management")
 
 @site_text_service.get()
@@ -83,7 +83,7 @@ def delete_sitetext(request):
     return dict(result='success')
     
         
-@resource(collection_path='/rest/sitetext2', path='/rest/sitetext2/{id}')
+@resource(collection_path='/rest/sitetext', path='/rest/sitetext/{id}')
 class SiteTextREST(object):
     def __init__(self, request):
         self.request = request
@@ -93,8 +93,11 @@ class SiteTextREST(object):
         return self.db.query(SiteText)
     
     def collection_get(self):
+        print "CALLED collection_get--------------------"
         doc_ids = [st.id for st in self._query()]
-        return dict(docs=doc_ids)
+        return [st.serialize() for st in self._query()]
+
+    
 
     def collection_post(self):
         return self.post()

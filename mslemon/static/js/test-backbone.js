@@ -5,134 +5,139 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var Item, ItemView, List, ListView, list_view, _ref, _ref1, _ref2, _ref3;
-    Item = (function(_super) {
-      __extends(Item, _super);
+    var SiteText, SiteTextList, SiteTextListView, SiteTextView, list_view, _ref, _ref1, _ref2, _ref3;
+    SiteText = (function(_super) {
+      __extends(SiteText, _super);
 
-      function Item() {
-        _ref = Item.__super__.constructor.apply(this, arguments);
+      function SiteText() {
+        _ref = SiteText.__super__.constructor.apply(this, arguments);
         return _ref;
       }
 
-      Item.prototype.defaults = {
-        part1: 'Hello',
-        part2: 'Backbone'
+      SiteText.prototype.defaults = {
+        type: 'tutwiki',
+        name: '',
+        content: ''
       };
 
-      return Item;
+      return SiteText;
 
     })(Backbone.Model);
-    List = (function(_super) {
-      __extends(List, _super);
+    SiteTextList = (function(_super) {
+      __extends(SiteTextList, _super);
 
-      function List() {
-        _ref1 = List.__super__.constructor.apply(this, arguments);
+      function SiteTextList() {
+        _ref1 = SiteTextList.__super__.constructor.apply(this, arguments);
         return _ref1;
       }
 
-      List.prototype.model = Item;
+      SiteTextList.prototype.model = SiteText;
 
-      return List;
+      SiteTextList.prototype.url = '/rest/sitetext';
+
+      return SiteTextList;
 
     })(Backbone.Collection);
-    ItemView = (function(_super) {
-      __extends(ItemView, _super);
+    SiteTextView = (function(_super) {
+      __extends(SiteTextView, _super);
 
-      function ItemView() {
+      function SiteTextView() {
         this.unrender = __bind(this.unrender, this);
         this.render = __bind(this.render, this);
-        _ref2 = ItemView.__super__.constructor.apply(this, arguments);
+        _ref2 = SiteTextView.__super__.constructor.apply(this, arguments);
         return _ref2;
       }
 
-      ItemView.prototype.tagName = 'li';
+      SiteTextView.prototype.tagName = 'div';
 
-      ItemView.prototype.initialize = function() {
-        _.bindAll(this, 'render', 'unrender', 'swap', 'remove');
+      SiteTextView.prototype.className = 'sitetext-entry';
+
+      SiteTextView.prototype.initialize = function() {
+        _.bindAll(this, 'render', 'unrender', 'remove');
         this.model.bind('change', this.render);
         return this.model.bind('remove', this.unrender);
       };
 
-      ItemView.prototype.render = function() {
-        $(this.el).html("<span>" + (this.model.get('part1')) + " " + (this.model.get('part2')) + "!</span>\n<span class=\"action-button swap\">swap</span>\n<span class=\"action-button delete\">delete</span>");
+      SiteTextView.prototype.render = function() {
+        $(this.el).html("<div>Name: " + (this.model.get('name')) + "</div>\n<div>Content: " + (this.model.get('content')) + "</div>\n<span class=\"action-button delete\">delete</span>");
         return this;
       };
 
-      ItemView.prototype.unrender = function() {
+      SiteTextView.prototype.unrender = function() {
         return $(this.el).remove();
       };
 
-      ItemView.prototype.swap = function() {
-        return this.model.set({
-          part1: this.model.get('part2'),
-          part2: this.model.get('part1')
-        });
-      };
-
-      ItemView.prototype.remove = function() {
+      SiteTextView.prototype.remove = function() {
         return this.model.destroy();
       };
 
-      ItemView.prototype.events = {
-        'click .swap': 'swap',
+      SiteTextView.prototype.events = {
         'click .delete': 'remove'
       };
 
-      return ItemView;
+      return SiteTextView;
 
     })(Backbone.View);
-    ListView = (function(_super) {
-      __extends(ListView, _super);
+    SiteTextListView = (function(_super) {
+      __extends(SiteTextListView, _super);
 
-      function ListView() {
-        _ref3 = ListView.__super__.constructor.apply(this, arguments);
+      function SiteTextListView() {
+        _ref3 = SiteTextListView.__super__.constructor.apply(this, arguments);
         return _ref3;
       }
 
-      ListView.prototype.el = $('.something');
+      SiteTextListView.prototype.el = $('.something');
 
-      ListView.prototype.initialize = function() {
-        _.bindAll(this, 'appendItem', 'addItem', 'render');
-        this.collection = new List;
+      SiteTextListView.prototype.initialize = function() {
+        this.collection = new SiteTextList;
         this.collection.bind('add', this.appendItem);
         this.counter = 0;
         return this.render();
       };
 
-      ListView.prototype.render = function() {
-        $(this.el).append('<button class="action-button">Add</button>');
-        return $(this.el).append('<ul class="mylist"></ul>');
+      SiteTextListView.prototype.render = function() {
+        $(this.el).append('<div class="action-button fetch-site-text-button">Fetch Site Text</div>');
+        $(this.el).append('<div class="action-button new-site-text-button">New Site Text</div>');
+        return $(this.el).append('<div class="site-text-list"></div>');
       };
 
-      ListView.prototype.addItem = function() {
+      SiteTextListView.prototype.addItem = function() {
         var item;
         this.counter++;
-        item = new Item;
-        item.set({
-          part2: "" + (item.get('part2')) + " " + this.counter
-        });
+        item = new SiteText;
         return this.collection.add(item);
       };
 
-      ListView.prototype.appendItem = function(item) {
-        var item_view;
-        item_view = new ItemView({
-          model: item
+      SiteTextListView.prototype.appendItem = function(sitetext) {
+        var view;
+        view = new SiteTextView({
+          model: sitetext
         });
-        return $('.mylist').append(item_view.render().el);
+        return $('.site-text-list').append(view.render().el);
       };
 
-      ListView.prototype.events = {
-        'click button': 'addItem'
+      SiteTextListView.prototype.fetchItems = function() {
+        var bbitem, item;
+        $('.header').text('foobar');
+        item = this.collection.get(1);
+        bbitem = new SiteText(item);
+        bbitem.set(item);
+        this.appendItem(bbitem);
+        return $('.footer').text(_.keys(bbitem.attributes));
       };
 
-      return ListView;
+      SiteTextListView.prototype.events = {
+        'click .new-site-text-button': 'addItem',
+        'click .fetch-site-text-button': 'fetchItems'
+      };
+
+      return SiteTextListView;
 
     })(Backbone.View);
     Backbone.sync = function(method, model, success, error) {
-      return success();
+      return $('.header').text(method);
     };
-    return list_view = new ListView;
+    return list_view = new SiteTextListView;
   });
 
 }).call(this);

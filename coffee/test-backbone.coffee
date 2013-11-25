@@ -1,25 +1,28 @@
 jQuery ->
-        class Item extends Backbone.Model
+        class SiteText extends Backbone.Model
                 defaults:
-                        part1: 'Hello'
-                        part2: 'Backbone'
+                        type: 'tutwiki'
+                        name: ''
+                        content: ''
+                        
 
-        class List extends Backbone.Collection
-                model: Item
-
-        class ItemView extends Backbone.View
-                tagName: 'li'
-
+        class SiteTextList extends Backbone.Collection
+                model: SiteText
+                url: '/rest/sitetext'
+        
+        class SiteTextView extends Backbone.View
+                tagName: 'div'
+                className: 'sitetext-entry'
+                
                 initialize: ->
-                        _.bindAll(@, 'render', 'unrender', 'swap', 'remove')
+                        _.bindAll @, 'render', 'unrender', 'remove'
                         @model.bind 'change', @render
                         @model.bind 'remove', @unrender
-                        
-                        
+
                 render: =>
                         $(@el).html """
-                          <span>#{@model.get 'part1'} #{@model.get 'part2'}!</span>
-                          <span class="action-button swap">swap</span>
+                          <div>Name: #{@model.get 'name'}</div>
+                          <div>Content: #{@model.get 'content'}</div>
                           <span class="action-button delete">delete</span>
                         """
                         return @
@@ -27,53 +30,58 @@ jQuery ->
                 unrender: =>
                         $(@el).remove()
 
-                swap: ->
-                        @model.set
-                                part1: @model.get 'part2'
-                                part2: @model.get 'part1'
-
                 remove: ->
                         @model.destroy()
-                        
+
                 events:
-                        'click .swap': 'swap'
                         'click .delete': 'remove'
                         
         
-        class ListView extends Backbone.View
+        class SiteTextListView extends Backbone.View
                 el: $ '.something'
 
                 initialize: ->
-                        #_.bindAll.apply [this].concat _.functions @
-                        #_.bindAll.apply [@].concat _.functions @
-                        #_.bindAll (@, @appendItem, @addItem, @render)
-                        #_.bindAll [@].concat [@appendItem, @addItem]
-                        _.bindAll(@, 'appendItem', 'addItem', 'render')
-                        @collection = new List
+                        @collection = new SiteTextList
                         @collection.bind 'add', @appendItem
-                        
                         @counter = 0
                         @render()
-
+                        
                 render: ->
-                        $(@el).append '<button class="action-button">Add</button>'
-                        $(@el).append '<ul class="mylist"></ul>'
+                        $(@el).append '<div class="action-button fetch-site-text-button">Fetch Site Text</div>'
+                        $(@el).append '<div class="action-button new-site-text-button">New Site Text</div>'
+                        $(@el).append '<div class="site-text-list"></div>'
 
                 addItem: ->
                         @counter++
-                        item = new Item
-                        item.set part2: "#{item.get 'part2'} #{@counter}"
+                        item = new SiteText
                         @collection.add item
 
-                appendItem: (item) ->
-                        item_view = new ItemView model: item
-                        $('.mylist').append item_view.render().el
+                appendItem: (sitetext) ->
+                        view = new SiteTextView model: sitetext
+                        $('.site-text-list').append view.render().el
+
+                fetchItems: ->
+                        $('.header').text('foobar')
+                        item = @collection.get(1)
+                        #@appendItem @collection.get 1
+                        #@appendItem item
+                        bbitem = new SiteText item
+                        bbitem.set(item)
+                        @appendItem bbitem
+                        $('.footer').text(_.keys bbitem.attributes)
+                                
+
+                                
+                events:
+                        'click .new-site-text-button': 'addItem'
+                        'click .fetch-site-text-button': 'fetchItems'
+
+                
+                                                
                         
-
-                events: 'click button': 'addItem'
-
         Backbone.sync = (method, model, success, error) ->
-                success()
+                $('.header').text(method)
+                
 
-        list_view = new ListView
+        list_view = new SiteTextListView
         
