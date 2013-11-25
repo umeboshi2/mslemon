@@ -112,10 +112,11 @@ class SiteTextREST(object):
     def post(self):
         request = self.request
         db = request.db
+        #import pdb ; pdb.set_trace()
         with transaction.manager:
             st = SiteText()
-            st.name = request.POST['name']
-            st.content = request.POST['content']
+            st.name = request.json['name']
+            st.content = request.json['content']
             st.type = 'tutwiki'
             db.add(st)
         st = db.merge(st)
@@ -130,7 +131,7 @@ class SiteTextREST(object):
         with transaction.manager:
             st = db.query(SiteText).get(id)
             if st is not None:
-                st.content = request.POST['content']
+                st.content = request.json['content']
                 st.modified = datetime.now()
                 db.add(st)
                 result = dict(result='success')

@@ -75,7 +75,7 @@ jQuery ->
                         $(@el).html """
                           <div>
                           <form>
-                          <label>Name:</label><input name="name" value='#{@model.get 'content'}'><br>
+                          <label>Name:</label><input name="name" value='#{@model.get 'name'}'><br>
                           <label>Content:</label><textarea type="textarea" name="content" width="60" height="10">#{@model.get 'content'}</textarea>
                           </form>
                           </div>
@@ -92,11 +92,16 @@ jQuery ->
 
                 edit: ->
                         @renderForm()
-                        #@unrender()
-                        
+          
+                save: ->
+                        @model.set('name', $('input').val())
+                        @model.set('content', $('textarea').val())
+                        @model.save()
+                                      
                 events:
                         'click .delete': 'remove'
                         'click .edit': 'edit'
+                        'click .save': 'save'
         
         class SiteTextListView extends Backbone.View
                 el: $ '.something'
