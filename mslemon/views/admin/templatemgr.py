@@ -62,7 +62,7 @@ class MainViewer(AdminViewer):
             delete=self.delete_template,
             confirmdelete=self.delete_template,
             viewentry=self.view_template,
-            editentry=self.edit_template,
+            editentry=self.edit_content,
             )
         self.context = self.request.matchdict['context']
         self._view = self.context
@@ -138,7 +138,33 @@ class MainViewer(AdminViewer):
             self._edit_template_submitted(form)
         else:
             self.layout.content = form.render(data)
+
+    def _edit_content_submitted(self):
+        data = self.request.POST
+        content = data['content']
+        id = int(self.request.matchdict['id'])
+        t = self.content_mgr.update_template(id, content)
+        # make response to edit content
+        url = self.url(context=self.context, id=id)
+        self.response = HTTPFound(url)
+
+    def edit_content(self):
+        if 'update' in self.request.POST:
+            self._edit_content_submitted()
+            return
+        else:
+            id = int(self.request.matchdict['id'])
+            t = self.content_mgr.tmpl_query().get(int(id))
+            env = dict(id=t.id, name=t.name, content=t.content)
+            template = 'mslemon:templates/admin-edit-sitetemplate.mako'
+            self.layout.content = self.render(template, env)
+            # setup resources
+            self.layout.resources.admin_edit_site_template.need()
+            ace = self.layout.resources.ace
+            ace.mode_ejs.need()
+            ace.theme_cobalt.need()
             
+        
     def delete_template(self):
         pass
     def view_template(self):

@@ -152,6 +152,7 @@ def main(global_config, **settings):
     # redirect to a login page.
     config.add_view(login_viewer,
                     context='pyramid.httpexceptions.HTTPForbidden',
+                    xhr=False,
                     **view_defaults)
     ##################################
 

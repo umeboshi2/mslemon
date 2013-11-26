@@ -213,7 +213,6 @@ class MainViewer(AdminViewer):
         self.response = HTTPFound(url)
     
     def show_css(self):
-        form = self._text_form()
         css_id = int(self.request.matchdict['id'])
         css = self.content_mgr.css_query().get(css_id)
         #data = dict(name=css.name, content=css.content)
@@ -231,7 +230,6 @@ class MainViewer(AdminViewer):
             self.layout.content = self.render(template, env)
         
     def show_js(self):
-        form = self._text_form()
         js_id = int(self.request.matchdict['id'])
         js = self.content_mgr.js_query().get(js_id)
         if 'update' in self.request.POST:

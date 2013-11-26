@@ -83,7 +83,8 @@ def delete_sitetext(request):
     return dict(result='success')
     
         
-@resource(collection_path='/rest/sitetext', path='/rest/sitetext/{id}')
+@resource(collection_path='/rest/sitetext', path='/rest/sitetext/{id}',
+          permission='admin')
 class SiteTextREST(object):
     def __init__(self, request):
         self.request = request

@@ -6,6 +6,7 @@ from haberdashery.resources import ace
 from haberdashery.resources import bootstrap
 from haberdashery.resources import create_js
 from haberdashery.resources import backbone
+from haberdashery.resources import ejs
 
 
 #from trumpet.resources import jqueryui
@@ -56,7 +57,8 @@ post_to_url = make_resource('post2url.js', depends=[jqueryui])
 
 
 common_page = make_resource('common-page.js', depends=[jqueryui,
-                                                       bootstrap.bootstrap])
+                                                       bootstrap.bootstrap,
+                                                       ejs])
 
 take_call_button = make_resource('take-call-button.js', depends=[jqueryui])
 main_phone_view = make_resource('main-phone-view.js', depends=[fullcalendar])
@@ -82,6 +84,9 @@ admin_list_site_resources = make_resource('admin-list-site-resources.js',
                                           depends=[jqueryui])
 admin_edit_site_resources = make_resource('admin-edit-site-resources.js',
                                           depends=[ace.ace, jqueryui])
+
+admin_edit_site_template = make_resource('admin-edit-site-template.js',
+                                         depends=[ace.ace, jqueryui])
 
 create_ui_theme = Resource(library, 'themes/create-ui/css/create-ui.css',
                            depends=[create_js])
@@ -129,6 +134,8 @@ class StaticResources(TrumpetResources):
     admin_show_path_content = admin_show_path_content
     admin_list_site_resources = admin_list_site_resources
     admin_edit_site_resources = admin_edit_site_resources
+    admin_edit_site_template = admin_edit_site_template
+    
     edit_wiki_page = edit_wiki_page
     
     post_to_url = post_to_url

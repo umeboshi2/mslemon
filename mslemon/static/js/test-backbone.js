@@ -5,9 +5,24 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var EditSiteTextView, Router, SiteText, SiteTextList, SiteTextListView, SiteTextView, fetch_success, home_route_run, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    var EditSiteTextView, Router, SiteText, SiteTextList, SiteTextListView, SiteTextView, edit_template, fetch_error, fetch_success, home_route_run, list_template, show_template, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    show_template = new window.EJS({
+      url: '/blob/ejs/1'
+    });
+    window.show_template = show_template;
+    edit_template = new window.EJS({
+      url: '/blob/ejs/3'
+    });
+    window.edit_template = edit_template;
+    list_template = new window.EJS({
+      url: '/blob/ejs/5'
+    });
+    window.list_template = list_template;
     fetch_success = function(collection, response) {
-      return $('.header').text('success');
+      return make_alert('Succesful Transfer', 'success');
+    };
+    fetch_error = function(collection, response) {
+      return make_alert('Error in Transfer', 'error');
     };
     Router = (function(_super) {
       __extends(Router, _super);
@@ -18,7 +33,8 @@
       }
 
       Router.prototype.routes = {
-        '': 'home'
+        '': 'home',
+        '/edit/{id}': 'edit'
       };
 
       return Router;
@@ -35,9 +51,7 @@
       SiteText.prototype.defaults = {
         type: 'tutwiki',
         name: '',
-        content: '',
-        created: '',
-        modified: ''
+        content: ''
       };
 
       return SiteText;
@@ -72,9 +86,7 @@
         return _ref3;
       }
 
-      EditSiteTextView.prototype.tagName = 'div';
-
-      EditSiteTextView.prototype.className = 'sitetext-entry';
+      EditSiteTextView.prototype.el = $('.something');
 
       EditSiteTextView.prototype.initialize = function() {
         _.bindAll(this, 'render', 'unrender', 'remove');
@@ -83,7 +95,12 @@
       };
 
       EditSiteTextView.prototype.render = function() {
-        $(this.el).html("<span>Name: " + (this.model.get('name')) + "</span>\n<span class=\"action-button save\">save</span>\n<span class=\"action-button delete\">delete</span>");
+        var content, name;
+        name = this.model.get('name');
+        content = edit_template.render({
+          name: name
+        });
+        $(this.el).html(content);
         return this;
       };
 
@@ -124,16 +141,30 @@
       SiteTextView.prototype.initialize = function() {
         _.bindAll(this, 'render', 'unrender', 'remove');
         this.model.bind('change', this.render);
-        return this.model.bind('remove', this.unrender);
+        this.model.bind('remove', this.unrender);
+        return $(this.el).addClass('listview-list-entry');
       };
 
       SiteTextView.prototype.render = function() {
-        $(this.el).html("<span>Name: " + (this.model.get('name')) + "</span>\n<span class=\"action-button edit\">edit</span>\n<span class=\"action-button delete\">delete</span>");
+        var content, name;
+        name = this.model.get('name');
+        content = show_template.render({
+          name: name
+        });
+        $(this.el).html(content);
         return this;
       };
 
       SiteTextView.prototype.renderForm = function() {
-        $(this.el).html("<div>\n<form>\n<label>Name:</label><input name=\"name\" value='" + (this.model.get('name')) + "'><br>\n<label>Content:</label><textarea type=\"textarea\" name=\"content\" width=\"60\" height=\"10\">" + (this.model.get('content')) + "</textarea>\n</form>\n</div>\n<span class=\"action-button save\">save</span>\n<span class=\"action-button delete\">delete</span>");
+        var content, data, html, name;
+        name = this.model.get('name');
+        content = this.model.get('content');
+        data = {
+          name: name,
+          content: content
+        };
+        html = edit_template.render(data);
+        $(this.el).html(html);
         return this;
       };
 
@@ -147,12 +178,6 @@
 
       SiteTextView.prototype.edit = function() {
         return this.renderForm();
-      };
-
-      SiteTextView.prototype.saveOrig = function() {
-        this.model.set('name', $('input').val());
-        this.model.set('content', $('textarea').val());
-        return this.model.save();
       };
 
       SiteTextView.prototype.save = function() {
@@ -190,9 +215,10 @@
       };
 
       SiteTextListView.prototype.render = function() {
-        $(this.el).append('<div class="action-button fetch-site-text-button">Fetch Site Text</div>');
-        $(this.el).append('<div class="action-button new-site-text-button">New Site Text</div>');
-        return $(this.el).append('<div class="site-text-list"></div>');
+        var html;
+        html = list_template.render();
+        $(this.el).html(html);
+        return this;
       };
 
       SiteTextListView.prototype.addItem = function() {
@@ -211,16 +237,10 @@
       };
 
       SiteTextListView.prototype.fetchItems = function() {
-        var response;
-        $('.header').text('foobar');
-        return response = this.collection.fetch(function() {
-          return {
-            success: fetch_success
-          };
+        return this.collection.fetch({
+          success: fetch_success
         });
       };
-
-      SiteTextListView.prototype.tellmereset = $('.header').text('tellmereset');
 
       SiteTextListView.prototype.events = {
         'click .new-site-text-button': 'addItem',

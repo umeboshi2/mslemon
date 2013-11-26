@@ -6,6 +6,7 @@ from pyramid.httpexceptions import HTTPNotFound
 
 from trumpet.models.sitecontent import SiteImage
 from trumpet.models.sitecontent import SiteCSS, SiteJS
+from trumpet.models.sitecontent import SiteTemplate
 
 
 class BlobViewer(object):
@@ -23,7 +24,8 @@ class BlobViewer(object):
             image=self.get_image,
             thumb=self.get_thumb,
             css=self.get_css,
-            js=self.get_js,)
+            js=self.get_js,
+            ejs=self.get_ejs,)
 
         # dispatch filetype request
         if self.filetype in self._viewmap:
@@ -73,5 +75,13 @@ class BlobViewer(object):
                             content_type=content_type)
         self.content = response
 
-    
+    def get_ejs(self):
+        id = self.request.matchdict['id']
+        i = self.db.query(SiteTemplate).get(id)
+        # FIXME
+        content_type = 'text/javascript'
+        response = Response(body=i.content,
+                            content_type=content_type)
+        self.content = response
+        
                 

@@ -1,10 +1,25 @@
 jQuery ->
+
+        show_template = new window.EJS({url: '/blob/ejs/1'})
+        window.show_template = show_template
+
+        edit_template = new window.EJS({url: '/blob/ejs/3'})
+        window.edit_template = edit_template
+
+        list_template = new window.EJS({url: '/blob/ejs/5'})
+        window.list_template = list_template
+        
         fetch_success = (collection, response) ->
-                $('.header').text('success')
+                make_alert('Succesful Transfer', 'success')
+                
+        fetch_error = (collection, response) ->
+                make_alert('Error in Transfer', 'error')
+                
 
         class Router extends Backbone.Router
                 routes:
                         '': 'home'
+                        '/edit/{id}': 'edit'
                         
                 
         class SiteText extends Backbone.Model
@@ -12,9 +27,6 @@ jQuery ->
                         type: 'tutwiki'
                         name: ''
                         content: ''
-                        # do we need these?
-                        created: ''
-                        modified: ''
                         
 
         class SiteTextList extends Backbone.Collection
@@ -27,8 +39,7 @@ jQuery ->
                         
 
         class EditSiteTextView extends Backbone.View
-                tagName: 'div'
-                className: 'sitetext-entry'
+                el: $ '.something'
                 
                 initialize: ->
                         _.bindAll @, 'render', 'unrender', 'remove'
@@ -36,11 +47,9 @@ jQuery ->
                         @model.bind 'remove', @unrender
 
                 render: =>
-                        $(@el).html """
-                          <span>Name: #{@model.get 'name'}</span>
-                          <span class="action-button save">save</span>
-                          <span class="action-button delete">delete</span>
-                        """
+                        name = @model.get('name')
+                        content = edit_template.render({name:name})
+                        $(@el).html content
                         return @
 
                 unrender: =>
@@ -62,26 +71,22 @@ jQuery ->
                         _.bindAll @, 'render', 'unrender', 'remove'
                         @model.bind 'change', @render
                         @model.bind 'remove', @unrender
+                        $(@el).addClass('listview-list-entry')
 
                 render: =>
-                        $(@el).html """
-                          <span>Name: #{@model.get 'name'}</span>
-                          <span class="action-button edit">edit</span>
-                          <span class="action-button delete">delete</span>
-                        """
+                        name = @model.get('name')
+                        content = show_template.render({name:name})
+                        $(@el).html content
                         return @
 
                 renderForm: =>
-                        $(@el).html """
-                          <div>
-                          <form>
-                          <label>Name:</label><input name="name" value='#{@model.get 'name'}'><br>
-                          <label>Content:</label><textarea type="textarea" name="content" width="60" height="10">#{@model.get 'content'}</textarea>
-                          </form>
-                          </div>
-                          <span class="action-button save">save</span>
-                          <span class="action-button delete">delete</span>
-                        """
+                        name = @model.get('name')
+                        content = @model.get('content')
+                        data =
+                                name: name
+                                content: content
+                        html = edit_template.render(data)
+                        $(@el).html html
                         return @
                         
                 unrender: =>
@@ -93,19 +98,11 @@ jQuery ->
                 edit: ->
                         @renderForm()
           
-                saveOrig: ->
-                        @model.set('name', $('input').val())
-                        @model.set('content', $('textarea').val())
-                        @model.save()
-
-                                                
                 save: ->
                         content = $('textarea').val()
-                        #$('.footer').text(content)
                         @model.set('name', $('input').val())
                         @model.set('content', content)
                         @model.save()
-                        
                         
                 events:
                         'click .delete': 'remove'
@@ -120,14 +117,14 @@ jQuery ->
                         @counter = 0
                         @collection = new SiteTextList
                         @collection.bind 'add', @appendItem
-                        # fetch routine
-                                                                                
                         
                 render: ->
-                        $(@el).append '<div class="action-button fetch-site-text-button">Fetch Site Text</div>'
-                        $(@el).append '<div class="action-button new-site-text-button">New Site Text</div>'
-                        $(@el).append '<div class="site-text-list"></div>'
-
+                        #name = @model.get('name')
+                        html = list_template.render()
+                        $(@el).html html
+                        return @
+                        
+                           
                 addItem: ->
                         @counter++
                         item = new SiteText
@@ -138,22 +135,9 @@ jQuery ->
                         $('.site-text-list').append view.render().el
 
                 fetchItems: ->
-                        $('.header').text('foobar')
-                        response = @collection.fetch ->
+                        @collection.fetch 
                                 success: fetch_success
-                        #item = @collection.get(1)
-                        #@appendItem @collection.get 1
-                        #@appendItem item
-                        #bbitem = new SiteText
-                        #bbitem.set(item)
-                        #@appendItem bbitem
-                        #$('.footer').text(_.values bbitem.attributes)
                                 
-
-
-                tellmereset:
-                        $('.header').text('tellmereset')
-                        
                 events:
                         'click .new-site-text-button': 'addItem'
                         'click .fetch-site-text-button': 'fetchItems'
@@ -162,10 +146,6 @@ jQuery ->
                 
                                                 
                         
-        #Backbone.sync = (method, model, success, error) ->
-        #        #$('.header').text(method)
-        #        $('.header').text(success)
-
         window.list_view = new SiteTextListView
         window.router = new Router
         home_route_run = () ->

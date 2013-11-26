@@ -7827,7 +7827,7 @@ li.top-bar-button {
 /* line 107, ../../../sass/partials/_baselayout.scss */
 .main-content {
   margin-top: 4em;
-  margin-bottom: 40em;
+  margin-bottom: 4em;
 }
 
 /* line 112, ../../../sass/partials/_baselayout.scss */
@@ -8773,4 +8773,10 @@ li.top-bar-button {
 .ticket-main-view-button-sidebar .query-button {
   display: block;
   text-align: center;
+}
+
+/* line 66, ../../../sass/mainscreen.scss */
+#main-alert {
+  background-color: #6e6350;
+  color: #cec8bc;
 }
