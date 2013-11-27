@@ -176,6 +176,7 @@ def main(global_config, **settings):
 
     # add REST views
     config.scan('mslemon.views.testrest')
+    config.scan('mslemon.views.rest')
     
     app = config.make_wsgi_app()
 
