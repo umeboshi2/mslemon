@@ -38,7 +38,6 @@ def prepare_plain_layout(layout):
     layout.header = layout.title
     layout.resources = StaticResources()
     layout.resources.favicon.need()
-    #layout.resources.common_page.need()
 
     
 def get_admin_username(request):

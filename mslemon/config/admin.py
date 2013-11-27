@@ -35,5 +35,11 @@ def configure_adminOrig(config, rootpath='/admin', permission='admin'):
     config.add_route(route, '%s/sitecontentmgr/{context}/{id}' % rootpath)
     add_view(config, 'mslemon.views.admin.contentmgr.MainViewer',
              route, permission=permission)
+
+    route = 'admin_sitecontent_mgr_bb'
+    config.add_route(route, '%s/sitecontentmgrbb/{context}/{id}' % rootpath)
+    add_view(config, 'mslemon.views.admin.contentmgrbb.AppViewer',
+             route, permission=permission)
+
     
 configure_admin = configure_adminOrig

@@ -114,3 +114,7 @@ class TestViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.test_backbone.need()
+        ace = self.layout.resources.ace
+        ace.ace.need()
+        ace.mode_markdown.need()
+        ace.theme_cobalt.need()

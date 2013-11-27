@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 
 import transaction
-from docutils.core import publish_parts
+import markdown
 
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.security import authenticated_userid
@@ -256,9 +256,13 @@ class WikiViewer(BaseViewer):
         # this is a sad "markup" system
         # good for a tutorial, but needs to be better
         # for actual use.
-        content = render_rst(page.content)
-        content = wikiwords.sub(check, content)
+        #content = render_rst(page.content)
+        #content = wikiwords.sub(check, content)
 
+        # test using markdown
+        content = markdown.markdown(page.content, safe_mode='escape')
+        
+        
         edit_url = self.url(route='edit_page', pagename=pagename)
         # We should check the session here
         # this is from tutorial, but we need better

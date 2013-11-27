@@ -35,10 +35,12 @@ def make_main_menuNew(request):
     url = request.route_url('admin', resource='site_templates',
                             context='list', traverse=[])
     menu.append_new_entry('Site Templates', url)
+
     url = request.route_url('admin', resource='sitecontent_mgr',
                             context='listpaths', traverse=[])
     menu.append_new_entry('Site Content', url)
     return menu
+
 
 def make_main_menuOrig(request):
     menu = BaseMenu()
@@ -58,6 +60,9 @@ def make_main_menuOrig(request):
     url = request.route_url('admin_sitecontent_mgr',
                             context='listpaths', id='all')
     menu.append_new_entry('Site Content', url)
+    url = request.route_url('admin_sitecontent_mgr_bb',
+                            context='listpaths', id='all')
+    menu.append_new_entry('Site Content(backbone)', url)
     return menu
 
 

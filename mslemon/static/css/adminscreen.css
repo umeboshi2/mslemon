@@ -8152,11 +8152,7 @@ li.top-bar-button {
 /* line 20, ../../../sass/adminscreen.scss */
 #editor {
   position: relative;
-  #top: 0;
-  #right: 0;
-  #bottom: 0;
-  #left: 0;
-  width: 50em;
+  width: 60em;
   height: 30em;
 }
 
@@ -8649,7 +8645,7 @@ li.top-bar-button {
   margin: -1px !important;
 }
 
-/* line 44, ../../../sass/adminscreen.scss */
+/* line 38, ../../../sass/adminscreen.scss */
 #main-alert {
   background-color: #395c89;
   color: lightsteelblue;

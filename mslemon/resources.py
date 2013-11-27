@@ -112,6 +112,22 @@ edit_wiki_page = make_resource('edit-wiki-page.js',
 test_backbone = make_resource('test-backbone.js',
                               depends=[backbone])
 
+admin_content_manager_templates = make_resource(
+    'admin-content-manager-templates.js')
+
+
+admin_content_manager_deps = [backbone, ace.ace,
+                              ace.worker_css, ace.mode_css,
+                              ace.worker_javascript, ace.mode_javascript,
+                              ace.mode_ejs, ace.theme_cobalt,
+                              common_page,
+                              admin_content_manager_templates,
+                              ]
+
+admin_content_manager = make_resource('admin-content-manager.js',
+                                      depends=admin_content_manager_deps)
+
+
 class StaticResources(TrumpetResources):
     main_screen = main_screen
     admin_screen = admin_screen
@@ -141,6 +157,7 @@ class StaticResources(TrumpetResources):
     post_to_url = post_to_url
 
     test_backbone = test_backbone
+    admin_content_manager = admin_content_manager
     
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(object):

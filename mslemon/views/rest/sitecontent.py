@@ -2,10 +2,41 @@ from cornice.resource import resource, view
 
 from trumpet.models.sitecontent import SiteTemplate
 from trumpet.models.sitecontent import SiteCSS, SiteJS
+from trumpet.models.sitecontent import SitePath
 
 from trumpet.managers.admin.sitecontent import SiteContentManager
 
 from mslemon.views.rest.base import BaseResource
+
+
+@resource(collection_path='/rest/sitepath', path='/rest/sitepath/{id}',
+          permission='admin')
+class SitePathResource(BaseResource):
+    dbmodel = SitePath
+
+    def __init__(self, request):
+        super(SitePathResource, self).__init__(request)
+        self.mgr = SiteContentManager(self.db)
+        
+    
+    def collection_get(self):
+        q = self.mgr.path_query()
+        return dict(data=[o.serialize() for o in q])
+
+    def collection_post(self):
+        name = self.request.json['name']
+        obj = self.mgr.add_sitepath(name)
+        data = dict(obj=obj.serialize(), result='success')
+        return data
+
+    def delete(self):
+        id = int(self.request.matchdict['id'])
+        db = self.request.db
+        with transaction.manager:
+            t = self.mgr.path_query().get(id)
+            if t is not None:
+                db.delete(t)
+        return dict(result='success')
 
 
 @resource(collection_path='/rest/sitetmpl', path='/rest/sitetmpl/{id}',

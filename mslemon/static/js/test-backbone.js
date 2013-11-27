@@ -6,17 +6,11 @@
 
   jQuery(function() {
     var EditSiteTextView, Router, SiteText, SiteTextList, SiteTextListView, SiteTextView, edit_template, fetch_error, fetch_success, home_route_run, list_template, show_template, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
-    show_template = new window.EJS({
-      url: '/blob/ejs/1'
-    });
+    show_template = get_template('show-site-template-ejs');
     window.show_template = show_template;
-    edit_template = new window.EJS({
-      url: '/blob/ejs/3'
-    });
+    edit_template = get_template('edit-site-template-ejs');
     window.edit_template = edit_template;
-    list_template = new window.EJS({
-      url: '/blob/ejs/5'
-    });
+    list_template = get_template('list-sitetext-entries');
     window.list_template = list_template;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
@@ -86,21 +80,27 @@
         return _ref3;
       }
 
-      EditSiteTextView.prototype.el = $('.something');
+      EditSiteTextView.prototype.el = $('.ace-editor');
 
       EditSiteTextView.prototype.initialize = function() {
-        _.bindAll(this, 'render', 'unrender', 'remove');
         this.model.bind('change', this.render);
         return this.model.bind('remove', this.unrender);
       };
 
       EditSiteTextView.prototype.render = function() {
-        var content, name;
+        var content, html, name;
+        $('.something').hide();
         name = this.model.get('name');
-        content = edit_template.render({
+        html = edit_template.render({
           name: name
         });
-        $(this.el).html(content);
+        $(this.el).html(html);
+        this.editor = ace.edit('editor');
+        this.editor.getSession().setMode('ace/mode/markdown');
+        this.editor.setTheme('ace/theme/cobalt');
+        content = this.model.get('content');
+        this.editor.setValue(content);
+        window.editor = this.editor;
         return this;
       };
 
@@ -113,7 +113,14 @@
       };
 
       EditSiteTextView.prototype.save = function() {
-        return this.model.save();
+        var content;
+        content = this.editor.getValue();
+        this.model.set('name', $('input').val());
+        this.model.set('content', content);
+        this.model.save();
+        this.unrender();
+        $('#site-text-editor').remove();
+        return $('.something').show();
       };
 
       EditSiteTextView.prototype.events = {
@@ -139,7 +146,6 @@
       SiteTextView.prototype.className = 'sitetext-entry';
 
       SiteTextView.prototype.initialize = function() {
-        _.bindAll(this, 'render', 'unrender', 'remove');
         this.model.bind('change', this.render);
         this.model.bind('remove', this.unrender);
         return $(this.el).addClass('listview-list-entry');
@@ -156,15 +162,10 @@
       };
 
       SiteTextView.prototype.renderForm = function() {
-        var content, data, html, name;
-        name = this.model.get('name');
-        content = this.model.get('content');
-        data = {
-          name: name,
-          content: content
-        };
-        html = edit_template.render(data);
-        $(this.el).html(html);
+        this.editor = new EditSiteTextView({
+          model: this.model
+        });
+        this.editor.render();
         return this;
       };
 
@@ -205,7 +206,7 @@
         return _ref5;
       }
 
-      SiteTextListView.prototype.el = $('.something');
+      SiteTextListView.prototype.el = $('.site-text-list');
 
       SiteTextListView.prototype.initialize = function() {
         console.log("Init SiteTextListView");

@@ -8,6 +8,13 @@ from trumpet.models.sitecontent import SiteImage
 from trumpet.models.sitecontent import SiteCSS, SiteJS
 from trumpet.models.sitecontent import SiteTemplate
 
+FILETYPE_MAP = dict(css=SiteCSS, js=SiteJS,
+                    ejs=SiteTemplate, image=SiteImage,
+                    thumb=SiteImage)
+CONTENT_TYPE_MAP = dict(image='image/jpeg', thumb='image/jpeg',
+                        css='text/css', js='text/javascript',
+                        ejs='text/javascript')
+
 
 class BlobViewer(object):
     def __init__(self, request):
@@ -27,61 +34,69 @@ class BlobViewer(object):
             js=self.get_js,
             ejs=self.get_ejs,)
 
-        # dispatch filetype request
-        if self.filetype in self._viewmap:
-            self._viewmap[self.filetype]()
+        # implement search first
+        # if 'id' is search
+        id = self.request.matchdict['id']
+        if id == 'search':
+            self.search()
         else:
-            self.content = HTTPNotFound()
+            # dispatch filetype request
+            if self.filetype in self._viewmap:
+                self._viewmap[self.filetype]()
+            else:
+                self.content = HTTPNotFound()
             
     def __call__(self):
         return self.content
 
-    def get_image(self):
-        id = self.request.matchdict['id']
-        i = self.db.query(SiteImage).get(id)
+    def _get_db_object(self, id):
+        dbmodel = FILETYPE_MAP[self.filetype]
+        return self.db.query(dbmodel).get(id)
+    
+    def _get_object_content(self, obj):
+        att = 'content'
+        if self.filetype == 'thumb':
+            att = 'thumbnail'
+        return getattr(obj, att)
 
-        content = i.content
-        # FIXME
-        content_type = 'image/png'
-        response = Response(body=i.content,
+    def _make_response(self, body):
+        content_type = CONTENT_TYPE_MAP[self.filetype]
+        response = Response(body=body,
                             content_type=content_type)
         self.content = response
+
+    def _get_content(self, id):
+        obj = self._get_db_object(id)
+        content = self._get_object_content(obj)
+        self._make_response(content)
+    
+    def get_image(self):
+        id = self.request.matchdict['id']
+        self._get_content(id)
     
     def get_thumb(self):
         id = self.request.matchdict['id']
-        i = self.db.query(SiteImage).get(id)
-        # FIXME
-        content_type = 'image/jpeg'
-        response = Response(body=i.thumbnail,
-                            content_type=content_type)
-        self.content = response
+        self._get_content(id)
     
     def get_css(self):
         id = self.request.matchdict['id']
-        i = self.db.query(SiteCSS).get(id)
-        # FIXME
-        content_type = 'text/css'
-        response = Response(body=i.content,
-                            content_type=content_type)
-        self.content = response
-
+        self._get_content(id)
     
     def get_js(self):
         id = self.request.matchdict['id']
-        i = self.db.query(SiteJS).get(id)
-        # FIXME
-        content_type = 'text/javascript'
-        response = Response(body=i.content,
-                            content_type=content_type)
-        self.content = response
+        self._get_content(id)
 
     def get_ejs(self):
         id = self.request.matchdict['id']
-        i = self.db.query(SiteTemplate).get(id)
-        # FIXME
-        content_type = 'text/javascript'
-        response = Response(body=i.content,
-                            content_type=content_type)
-        self.content = response
+        self._get_content(id)
         
-                
+    def search(self):
+        name = self.request.GET['name']
+        dbmodel = FILETYPE_MAP[self.filetype]
+        q = self.db.query(dbmodel).filter_by(name=name)
+        obj = q.one()
+        content = self._get_object_content(obj)
+        self._make_response(content)
+        
+        
+    

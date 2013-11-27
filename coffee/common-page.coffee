@@ -10,6 +10,16 @@ $(document).ready ->
                 div = make_alert_div(message, priority)
                 $('.main-content').prepend(div)
 
+
+        get_template = (name) ->
+                prefix = '/blob/ejs/search'
+                params = jQuery.param name: name
+                url = prefix + '?' + params
+                return new EJS({url: url})
+
+
         # attach some functions to window namespace
         window.make_alert_div = make_alert_div
         window.make_alert = make_alert
+        window.get_template = get_template
+        

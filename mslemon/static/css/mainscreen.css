@@ -8780,3 +8780,10 @@ li.top-bar-button {
   background-color: #6e6350;
   color: #cec8bc;
 }
+
+/* line 71, ../../../sass/mainscreen.scss */
+#editor {
+  position: relative;
+  width: 60em;
+  height: 30em;
+}

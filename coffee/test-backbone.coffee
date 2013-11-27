@@ -1,12 +1,12 @@
 jQuery ->
 
-        show_template = new window.EJS({url: '/blob/ejs/1'})
+        show_template = get_template('show-site-template-ejs')
         window.show_template = show_template
 
-        edit_template = new window.EJS({url: '/blob/ejs/3'})
+        edit_template = get_template('edit-site-template-ejs')
         window.edit_template = edit_template
 
-        list_template = new window.EJS({url: '/blob/ejs/5'})
+        list_template = get_template('list-sitetext-entries')
         window.list_template = list_template
         
         fetch_success = (collection, response) ->
@@ -28,6 +28,7 @@ jQuery ->
                         name: ''
                         content: ''
                         
+                        
 
         class SiteTextList extends Backbone.Collection
                 model: SiteText
@@ -39,17 +40,25 @@ jQuery ->
                         
 
         class EditSiteTextView extends Backbone.View
-                el: $ '.something'
+                el: $ '.ace-editor'
                 
                 initialize: ->
-                        _.bindAll @, 'render', 'unrender', 'remove'
+                        #_.bindAll @, 'render', 'unrender', 'remove'
                         @model.bind 'change', @render
                         @model.bind 'remove', @unrender
 
                 render: =>
+                        $('.something').hide()
                         name = @model.get('name')
-                        content = edit_template.render({name:name})
-                        $(@el).html content
+                        html = edit_template.render({name:name})
+                        $(@el).html html
+                        # startup editor
+                        @editor = ace.edit('editor')
+                        @editor.getSession().setMode('ace/mode/markdown')
+                        @editor.setTheme('ace/theme/cobalt')
+                        content = @model.get('content')
+                        @editor.setValue(content)
+                        window.editor = @editor
                         return @
 
                 unrender: =>
@@ -59,7 +68,14 @@ jQuery ->
                         @model.destroy()
 
                 save: ->
+                        content = @editor.getValue()
+                        @model.set('name', $('input').val())
+                        @model.set('content', content)
                         @model.save()
+                        @unrender()
+                        $('#site-text-editor').remove()
+                        $('.something').show()
+                        
                 events:
                         'click .save': 'save'
                 
@@ -68,7 +84,7 @@ jQuery ->
                 className: 'sitetext-entry'
                 
                 initialize: ->
-                        _.bindAll @, 'render', 'unrender', 'remove'
+                        #_.bindAll @, 'render', 'unrender', 'remove'
                         @model.bind 'change', @render
                         @model.bind 'remove', @unrender
                         $(@el).addClass('listview-list-entry')
@@ -80,13 +96,8 @@ jQuery ->
                         return @
 
                 renderForm: =>
-                        name = @model.get('name')
-                        content = @model.get('content')
-                        data =
-                                name: name
-                                content: content
-                        html = edit_template.render(data)
-                        $(@el).html html
+                        @editor = new EditSiteTextView model: @model
+                        @editor.render()
                         return @
                         
                 unrender: =>
@@ -110,7 +121,7 @@ jQuery ->
                         'click .save': 'save'
         
         class SiteTextListView extends Backbone.View
-                el: $ '.something'
+                el: $ '.site-text-list'
 
                 initialize: ->
                         console.log("Init SiteTextListView")
@@ -119,7 +130,6 @@ jQuery ->
                         @collection.bind 'add', @appendItem
                         
                 render: ->
-                        #name = @model.get('name')
                         html = list_template.render()
                         $(@el).html html
                         return @
