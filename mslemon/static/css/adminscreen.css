@@ -7965,7 +7965,6 @@ li.top-bar-button {
 .action-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -7984,15 +7983,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8001,13 +8001,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button.disabled, .action-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8017,7 +8017,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .action-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8194,7 +8194,6 @@ li.top-bar-button {
 .imagelist-delete-image {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8213,15 +8212,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8230,13 +8230,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image.disabled, .imagelist-delete-image[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8246,7 +8246,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .imagelist-delete-image::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8261,7 +8261,6 @@ li.top-bar-button {
 .delete-image-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8280,15 +8279,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8297,13 +8297,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button.disabled, .delete-image-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8313,7 +8313,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .delete-image-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8357,7 +8357,6 @@ li.top-bar-button {
 .userlist-delete-user {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8376,15 +8375,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8393,13 +8393,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user.disabled, .userlist-delete-user[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8409,7 +8409,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .userlist-delete-user::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8424,7 +8424,6 @@ li.top-bar-button {
 .delete-user-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8443,15 +8442,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8460,13 +8460,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button.disabled, .delete-user-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8476,7 +8476,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .delete-user-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8520,7 +8520,6 @@ li.top-bar-button {
 .grouplist-delete-group {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8539,15 +8538,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8556,13 +8556,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group.disabled, .grouplist-delete-group[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8572,7 +8572,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .grouplist-delete-group::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
@@ -8587,7 +8587,6 @@ li.top-bar-button {
 .delete-group-button {
   font-size: 0.7em;
   padding: 0.3em 1.5em;
-  color: #c2d1e6;
   display: inline-block;
   cursor: pointer;
   -webkit-border-radius: 5px;
@@ -8606,15 +8605,16 @@ li.top-bar-button {
   -moz-box-shadow: #5681b8 0 1px 0 inset;
   box-shadow: #5681b8 0 1px 0 inset;
   border: 1px solid #233853;
+  color: #c2d1e6;
   text-shadow: #121d2b 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
-/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 15, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:hover {
   text-decoration: none;
 }
-/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:hover {
   background-color: #233853;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #325077), color-stop(100%, #233853));
@@ -8623,13 +8623,13 @@ li.top-bar-button {
   background: -o-linear-gradient(#325077, #233853);
   background: linear-gradient(#325077, #233853);
 }
-/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:active {
   -webkit-box-shadow: #1e3048 0 1px 2px inset;
   -moz-box-shadow: #1e3048 0 1px 2px inset;
   box-shadow: #1e3048 0 1px 2px inset;
 }
-/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
+/* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button.disabled, .delete-group-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -8639,7 +8639,7 @@ li.top-bar-button {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 76, ../../../../../local/gems/gems/sassy-buttons-0.2/stylesheets/_sassy-buttons.sass */
+/* line 74, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/_sassy-buttons.sass */
 .delete-group-button::-moz-focus-inner {
   padding: 0 !important;
   margin: -1px !important;
