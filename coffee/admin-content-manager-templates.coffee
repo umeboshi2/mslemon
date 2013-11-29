@@ -6,6 +6,9 @@ jQuery ->
                 """
                 <div class="main-content-manager-view">
                 <div>
+                <div class="action-button home-button">Main</div>
+                </div>
+                <div>
                 <div class="action-button sitepaths-button">Paths</div>
                 </div>
                 <div>
@@ -31,14 +34,22 @@ jQuery ->
         sitepath_entry_template =
                 """
                 <div class="listview-list-entry">
-                        <%= path %>
+                        <%= name %>
                         <div class="action-button">show</div>
                 </div>
                 """
         #######################################################
         sitetmpl_view_template =
                 """
-                (INSERT TEMPLATE CONTENT HERE)
+                <div class="listview-header">Site Templates</div>
+                <div class="listview-list"></div>
+                """
+        sitetmpl_entry_template =
+                """
+                <div class="listview-list-entry">
+                        <%= name %>
+                        <div class="action-button">show</div>
+                </div>
                 """
         #######################################################
         sitecss_view_template =
@@ -64,8 +75,10 @@ jQuery ->
                         new EJS text: sitecss_view_template
                 sitejs_view_template:
                         new EJS text: sitejs_view_template
-        window.admin_mgr_tmpl = admin_mgr_tmpl
+        window.TrumpetApp = {}
+        TrumpetApp.admin_mgr_tmpl = admin_mgr_tmpl
 
+        
 
         
                 

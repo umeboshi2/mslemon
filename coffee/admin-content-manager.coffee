@@ -1,4 +1,5 @@
 jQuery ->
+        admin_mgr_tmpl = TrumpetApp.admin_mgr_tmpl
         fetch_success = (collection, response) ->
                 make_alert('Succesful Transfer', 'success')
                 
@@ -10,30 +11,22 @@ jQuery ->
                 'sitetmpl': SiteTemplateListView
                 'sitecss': SiteCSSListView
                 'sitejs': SiteJSListView
+        # FIXME: attached to window for testing
         window.lviews = list_views
+        
         class Router extends Backbone.Router
                 routes:
                         '': 'home'
                         'view/:listview': 'listview'
-                        #'sitepath': 'sitepath'
-                        #'/sitetmpl': 'sitetmpl'
-                        #'sitecss' : 'sitecss'
-                        #'sitejs' : 'sitejs'
                         #'/edit/{id}': 'edit'
 
                 common: ->
                         side_view.render()
                         if side_view.current_view != null
                                 side_view.current_view.remove()
-                        $('.right-listview').remove()
-                        div = '<div class="right-listview"></div>'
-                        $('.right-column-content').html div
-                        
-
 
 
                 home: ->
-                        #console.log('HOMEYYYYYYYYYYYY')
                         @common()
 
                 listview: (lview) ->
@@ -43,30 +36,6 @@ jQuery ->
                         view.render()
                         side_view.current_view = view
                         
-                        
-                sitepath: ->
-                        @common()
-                        #console.log('Hsdfsdfsdfsdfsdf')
-                        view = new SitePathListView
-                        view.render()
-                        
-                sitetmpl: ->
-                        @common()
-                        #console.log('Hsdfsdfsdfsdfsdf')
-                        view = new SiteTemplateListView
-                        view.render()
-                        
-                sitecss: ->
-                        @common()
-                        #console.log('Hsdfsdfsdfsdfsdf')
-                        view = new SiteCSSListView
-                        view.render()
-                        
-                sitejs: ->
-                        @common()
-                        #console.log('Hsdfsdfsdfsdfsdf')
-                        view = new SiteJSListView
-                        view.render()
                         
 
 
@@ -151,10 +120,10 @@ jQuery ->
                         admin_mgr_tmpl.sitepath_entry_template
 
                 render: ->
-                        path = @model.get('name')
+                        name = @model.get('name')
                         template = admin_mgr_tmpl.sitepath_entry_template
                         #$(@el).html template.render({path: path})
-                        html = template.render({path: path})
+                        html = template.render({name: name})
                         this.$el.html html
                         #this.$el.click ->
                         #        $(this).addClass('action-button')
@@ -174,20 +143,24 @@ jQuery ->
         # List Views for collections
         ########################################
         class BaseListView extends Backbone.View
-                #el: $ '.right-column-content'
-                el: $ '.right-listview'
+                el: $ '.right-column-content'
                 
                 render: (data) ->
-                        @$el.html @template.render(data).el
-                        #$(@el).html @template.render data
-                        $('.right-column-content').append(@$el)
+                        @$el.html @template.render(data)
                         return @
+                        
                 events:
                         'click .fetch-button': 'fetch'
+                        
+                #http://stackoverflow.com/questions/10966440/recreating-a-removed-view-in-backbone-js
+                remove: () ->
+                        @undelegateEvents()
+                        @$el.empty()
+                        @stopListening()
+                        return @
+                        
                                         
         class SitePathListView extends BaseListView
-                el: $ '.right-listview'
-                
                 template:
                         admin_mgr_tmpl.sitepath_view_template
                         
@@ -250,15 +223,6 @@ jQuery ->
                         $(@el).html @template.render()
                         return @
 
-                pathview:
-                        new SitePathListView
-                tmplview:
-                        new SiteTemplateListView
-                cssview:
-                        new SiteCSSListView
-                jsview:
-                        new SiteJSListView
-                        
 
                 setup_sitepath_viewer: ->
                         @pathview.render()
@@ -271,17 +235,23 @@ jQuery ->
 
                 setup_sitejs_viewer: ->
                         @jsview.render()
-                        
-                        
+
+                # pull_trigger is to activate views
+                # when the route changes
+                pull_trigger = trigger: true
                 events:
-                        'click .sitepaths-button': ->
-                                #main_router.navigate 'sitepath', trigger: true
-                                main_router.navigate 'view/sitepath', trigger: true
-                        'click .sitetmpl-button': ->
-                                main_router.navigate 'view/sitetmpl', trigger: true
+                        'click .home-button': ->
+                                main_router.navigate '', pull_trigger
                                 
-                        'click .sitecss-button': 'setup_sitecss_viewer'
-                        'click .sitejs-button': 'setup_sitejs_viewer'
+                        'click .sitepaths-button': ->
+                                main_router.navigate 'view/sitepath', pull_trigger
+                        'click .sitetmpl-button': ->
+                                main_router.navigate 'view/sitetmpl', pull_trigger
+                        'click .sitecss-button': ->
+                                main_router.navigate 'view/sitecss', pull_trigger
+                        'click .sitejs-button': ->
+                                main_router.navigate 'view/sitejs', pull_trigger
+                                
                         
 
 
@@ -289,8 +259,8 @@ jQuery ->
 
 
                         
-        window.side_view = new SideView
         window.main_router = new Router
+        window.side_view = new SideView
                 
                 
         Backbone.history.start()

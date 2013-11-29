@@ -5,7 +5,8 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SitePathView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SitePathView, SiteTemplate, SiteTemplateList, SiteTemplateListView, admin_mgr_tmpl, fetch_error, fetch_success, list_views, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    admin_mgr_tmpl = TrumpetApp.admin_mgr_tmpl;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
     };
@@ -35,14 +36,10 @@
       };
 
       Router.prototype.common = function() {
-        var div;
         side_view.render();
         if (side_view.current_view !== null) {
-          side_view.current_view.remove();
+          return side_view.current_view.remove();
         }
-        $('.right-listview').remove();
-        div = '<div class="right-listview"></div>';
-        return $('.right-column-content').html(div);
       };
 
       Router.prototype.home = function() {
@@ -56,34 +53,6 @@
         view = new klass;
         view.render();
         return side_view.current_view = view;
-      };
-
-      Router.prototype.sitepath = function() {
-        var view;
-        this.common();
-        view = new SitePathListView;
-        return view.render();
-      };
-
-      Router.prototype.sitetmpl = function() {
-        var view;
-        this.common();
-        view = new SiteTemplateListView;
-        return view.render();
-      };
-
-      Router.prototype.sitecss = function() {
-        var view;
-        this.common();
-        view = new SiteCSSListView;
-        return view.render();
-      };
-
-      Router.prototype.sitejs = function() {
-        var view;
-        this.common();
-        view = new SiteJSListView;
-        return view.render();
       };
 
       return Router;
@@ -260,11 +229,11 @@
       SitePathView.prototype.template = admin_mgr_tmpl.sitepath_entry_template;
 
       SitePathView.prototype.render = function() {
-        var html, path, template;
-        path = this.model.get('name');
+        var html, name, template;
+        name = this.model.get('name');
         template = admin_mgr_tmpl.sitepath_entry_template;
         html = template.render({
-          path: path
+          name: name
         });
         this.$el.html(html);
         return this;
@@ -291,16 +260,22 @@
         return _ref11;
       }
 
-      BaseListView.prototype.el = $('.right-listview');
+      BaseListView.prototype.el = $('.right-column-content');
 
       BaseListView.prototype.render = function(data) {
-        this.$el.html(this.template.render(data).el);
-        $('.right-column-content').append(this.$el);
+        this.$el.html(this.template.render(data));
         return this;
       };
 
       BaseListView.prototype.events = {
         'click .fetch-button': 'fetch'
+      };
+
+      BaseListView.prototype.remove = function() {
+        this.undelegateEvents();
+        this.$el.empty();
+        this.stopListening();
+        return this;
       };
 
       return BaseListView;
@@ -315,8 +290,6 @@
         _ref12 = SitePathListView.__super__.constructor.apply(this, arguments);
         return _ref12;
       }
-
-      SitePathListView.prototype.el = $('.right-listview');
 
       SitePathListView.prototype.template = admin_mgr_tmpl.sitepath_view_template;
 
@@ -401,6 +374,8 @@
 
     })(BaseListView);
     SideView = (function(_super) {
+      var pull_trigger;
+
       __extends(SideView, _super);
 
       function SideView() {
@@ -422,14 +397,6 @@
         return this;
       };
 
-      SideView.prototype.pathview = new SitePathListView;
-
-      SideView.prototype.tmplview = new SiteTemplateListView;
-
-      SideView.prototype.cssview = new SiteCSSListView;
-
-      SideView.prototype.jsview = new SiteJSListView;
-
       SideView.prototype.setup_sitepath_viewer = function() {
         return this.pathview.render();
       };
@@ -446,26 +413,33 @@
         return this.jsview.render();
       };
 
+      pull_trigger = {
+        trigger: true
+      };
+
       SideView.prototype.events = {
+        'click .home-button': function() {
+          return main_router.navigate('', pull_trigger);
+        },
         'click .sitepaths-button': function() {
-          return main_router.navigate('view/sitepath', {
-            trigger: true
-          });
+          return main_router.navigate('view/sitepath', pull_trigger);
         },
         'click .sitetmpl-button': function() {
-          return main_router.navigate('view/sitetmpl', {
-            trigger: true
-          });
+          return main_router.navigate('view/sitetmpl', pull_trigger);
         },
-        'click .sitecss-button': 'setup_sitecss_viewer',
-        'click .sitejs-button': 'setup_sitejs_viewer'
+        'click .sitecss-button': function() {
+          return main_router.navigate('view/sitecss', pull_trigger);
+        },
+        'click .sitejs-button': function() {
+          return main_router.navigate('view/sitejs', pull_trigger);
+        }
       };
 
       return SideView;
 
     })(Backbone.View);
-    window.side_view = new SideView;
     window.main_router = new Router;
+    window.side_view = new SideView;
     return Backbone.history.start();
   });
 
