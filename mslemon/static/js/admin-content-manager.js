@@ -5,13 +5,22 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SitePathView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SitePathView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
     };
     fetch_error = function(collection, response) {
       return make_alert('Error in Transfer', 'error');
     };
+    list_views = function() {
+      return {
+        'sitepath': SitePathListView,
+        'sitetmpl': SiteTemplateListView,
+        'sitecss': SiteCSSListView,
+        'sitejs': SiteJSListView
+      };
+    };
+    window.lviews = list_views;
     Router = (function(_super) {
       __extends(Router, _super);
 
@@ -22,25 +31,58 @@
 
       Router.prototype.routes = {
         '': 'home',
-        '/sitetmpl': 'sitetmpl',
-        'sitepath': 'sitepath',
-        '/edit/{id}': 'edit'
+        'view/:listview': 'listview'
       };
 
       Router.prototype.common = function() {
-        return side_view.render();
+        var div;
+        side_view.render();
+        if (side_view.current_view !== null) {
+          side_view.current_view.remove();
+        }
+        $('.right-listview').remove();
+        div = '<div class="right-listview"></div>';
+        return $('.right-column-content').html(div);
       };
 
       Router.prototype.home = function() {
-        console.log('HOMEYYYYYYYYYYYY');
         return this.common();
+      };
+
+      Router.prototype.listview = function(lview) {
+        var klass, view;
+        this.common();
+        klass = list_views()[lview];
+        view = new klass;
+        view.render();
+        return side_view.current_view = view;
       };
 
       Router.prototype.sitepath = function() {
         var view;
         this.common();
-        console.log('Hsdfsdfsdfsdfsdf');
         view = new SitePathListView;
+        return view.render();
+      };
+
+      Router.prototype.sitetmpl = function() {
+        var view;
+        this.common();
+        view = new SiteTemplateListView;
+        return view.render();
+      };
+
+      Router.prototype.sitecss = function() {
+        var view;
+        this.common();
+        view = new SiteCSSListView;
+        return view.render();
+      };
+
+      Router.prototype.sitejs = function() {
+        var view;
+        this.common();
+        view = new SiteJSListView;
         return view.render();
       };
 
@@ -215,13 +257,16 @@
         return this.model.bind('remove', this.unrender);
       };
 
+      SitePathView.prototype.template = admin_mgr_tmpl.sitepath_entry_template;
+
       SitePathView.prototype.render = function() {
-        var name;
-        name = this.model.get('name');
-        $(this.el).html(name);
-        this.$el.click(function() {
-          return $(this).hide();
+        var html, path, template;
+        path = this.model.get('name');
+        template = admin_mgr_tmpl.sitepath_entry_template;
+        html = template.render({
+          path: path
         });
+        this.$el.html(html);
         return this;
       };
 
@@ -230,7 +275,7 @@
       };
 
       SitePathView.prototype.events = {
-        'click this': function() {
+        'click el': function() {
           return $(this.el).hide();
         }
       };
@@ -246,10 +291,11 @@
         return _ref11;
       }
 
-      BaseListView.prototype.el = $('.right-column-content');
+      BaseListView.prototype.el = $('.right-listview');
 
       BaseListView.prototype.render = function(data) {
-        $(this.el).html(this.template.render(data));
+        this.$el.html(this.template.render(data).el);
+        $('.right-column-content').append(this.$el);
         return this;
       };
 
@@ -270,12 +316,15 @@
         return _ref12;
       }
 
+      SitePathListView.prototype.el = $('.right-listview');
+
       SitePathListView.prototype.template = admin_mgr_tmpl.sitepath_view_template;
 
       SitePathListView.prototype.initialize = function() {
         console.log('Init SitePathListView');
         this.collection = new SitePathList;
-        return this.collection.bind('add', this.appendItem);
+        this.collection.bind('add', this.appendItem);
+        return this.collection.fetch();
       };
 
       SitePathListView.prototype.addItem = function() {
@@ -289,8 +338,8 @@
         view = new SitePathView({
           model: sitepath
         });
-        path = view.render().el;
-        return $(this.el).append(path);
+        path = view.render(sitepath).el;
+        return $('.listview-list').append(path);
       };
 
       SitePathListView.prototype.fetch = function() {
@@ -362,7 +411,8 @@
       SideView.prototype.el = $('.sidebar');
 
       SideView.prototype.initialize = function() {
-        return console.log('Init SideView');
+        console.log('Init SideView');
+        return this.current_view = null;
       };
 
       SideView.prototype.template = admin_mgr_tmpl.side_view_template;
@@ -398,11 +448,15 @@
 
       SideView.prototype.events = {
         'click .sitepaths-button': function() {
-          return main_router.navigate('sitepath', {
+          return main_router.navigate('view/sitepath', {
             trigger: true
           });
         },
-        'click .sitetmpl-button': 'setup_sitetmpl_viewer',
+        'click .sitetmpl-button': function() {
+          return main_router.navigate('view/sitetmpl', {
+            trigger: true
+          });
+        },
         'click .sitecss-button': 'setup_sitecss_viewer',
         'click .sitejs-button': 'setup_sitejs_viewer'
       };

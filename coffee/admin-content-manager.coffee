@@ -5,29 +5,67 @@ jQuery ->
         fetch_error = (collection, response) ->
                 make_alert('Error in Transfer', 'error')
                 
-
+        list_views = ->
+                'sitepath': SitePathListView
+                'sitetmpl': SiteTemplateListView
+                'sitecss': SiteCSSListView
+                'sitejs': SiteJSListView
+        window.lviews = list_views
         class Router extends Backbone.Router
                 routes:
                         '': 'home'
-                        '/sitetmpl': 'sitetmpl'
-                        'sitepath': 'sitepath'
-                        '/edit/{id}': 'edit'
+                        'view/:listview': 'listview'
+                        #'sitepath': 'sitepath'
+                        #'/sitetmpl': 'sitetmpl'
+                        #'sitecss' : 'sitecss'
+                        #'sitejs' : 'sitejs'
+                        #'/edit/{id}': 'edit'
 
                 common: ->
                         side_view.render()
+                        if side_view.current_view != null
+                                side_view.current_view.remove()
+                        $('.right-listview').remove()
+                        div = '<div class="right-listview"></div>'
+                        $('.right-column-content').html div
+                        
 
-                
-                
-                                        
+
 
                 home: ->
-                        console.log('HOMEYYYYYYYYYYYY')
+                        #console.log('HOMEYYYYYYYYYYYY')
                         @common()
 
+                listview: (lview) ->
+                        @common()
+                        klass = list_views()[lview]
+                        view = new klass
+                        view.render()
+                        side_view.current_view = view
+                        
+                        
                 sitepath: ->
                         @common()
-                        console.log('Hsdfsdfsdfsdfsdf')
+                        #console.log('Hsdfsdfsdfsdfsdf')
                         view = new SitePathListView
+                        view.render()
+                        
+                sitetmpl: ->
+                        @common()
+                        #console.log('Hsdfsdfsdfsdfsdf')
+                        view = new SiteTemplateListView
+                        view.render()
+                        
+                sitecss: ->
+                        @common()
+                        #console.log('Hsdfsdfsdfsdfsdf')
+                        view = new SiteCSSListView
+                        view.render()
+                        
+                sitejs: ->
+                        @common()
+                        #console.log('Hsdfsdfsdfsdfsdf')
+                        view = new SiteJSListView
                         view.render()
                         
 
@@ -109,18 +147,24 @@ jQuery ->
                         @model.bind 'remove', @unrender
                         
 
+                template:
+                        admin_mgr_tmpl.sitepath_entry_template
+
                 render: ->
-                        name = @model.get('name')
-                        $(@el).html name
-                        this.$el.click ->
-                                $(this).hide()
+                        path = @model.get('name')
+                        template = admin_mgr_tmpl.sitepath_entry_template
+                        #$(@el).html template.render({path: path})
+                        html = template.render({path: path})
+                        this.$el.html html
+                        #this.$el.click ->
+                        #        $(this).addClass('action-button')
                         return @
 
                 unrender: ->
                         $(@el).remove()
 
                 events:
-                        'click this': ->
+                        'click el': ->
                                 $(@el).hide()
                         
                         
@@ -130,15 +174,20 @@ jQuery ->
         # List Views for collections
         ########################################
         class BaseListView extends Backbone.View
-                el: $ '.right-column-content'
-
+                #el: $ '.right-column-content'
+                el: $ '.right-listview'
+                
                 render: (data) ->
-                        $(@el).html @template.render data
+                        @$el.html @template.render(data).el
+                        #$(@el).html @template.render data
+                        $('.right-column-content').append(@$el)
                         return @
                 events:
                         'click .fetch-button': 'fetch'
                                         
         class SitePathListView extends BaseListView
+                el: $ '.right-listview'
+                
                 template:
                         admin_mgr_tmpl.sitepath_view_template
                         
@@ -146,7 +195,7 @@ jQuery ->
                         console.log('Init SitePathListView')
                         @collection = new SitePathList
                         @collection.bind 'add', @appendItem
-                        #@collection.fetch()
+                        @collection.fetch()
 
                 addItem: ->
                         item = new SitePath
@@ -157,8 +206,9 @@ jQuery ->
                 appendItem: (sitepath) =>
                         #make_alert('appended item' + sitepath)
                         view = new SitePathView model: sitepath
-                        path = view.render().el
-                        $(@el).append path
+                        path = view.render(sitepath).el
+                        #$(@el).append path
+                        $('.listview-list').append path
                         
                 fetch: =>
                         @collection.fetch()
@@ -191,7 +241,8 @@ jQuery ->
 
                 initialize: ->
                         console.log('Init SideView')
-                        
+                        @current_view = null
+        
                 template:
                         admin_mgr_tmpl.side_view_template
                         
@@ -225,8 +276,10 @@ jQuery ->
                 events:
                         'click .sitepaths-button': ->
                                 #main_router.navigate 'sitepath', trigger: true
-                                main_router.navigate 'sitepath', trigger: true
-                        'click .sitetmpl-button': 'setup_sitetmpl_viewer'
+                                main_router.navigate 'view/sitepath', trigger: true
+                        'click .sitetmpl-button': ->
+                                main_router.navigate 'view/sitetmpl', trigger: true
+                                
                         'click .sitecss-button': 'setup_sitecss_viewer'
                         'click .sitejs-button': 'setup_sitejs_viewer'
                         

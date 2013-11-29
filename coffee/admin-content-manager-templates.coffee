@@ -25,8 +25,15 @@ jQuery ->
         #######################################################
         sitepath_view_template =
                 """
-                (INSERT CONTENT HERE)
-                <div class="action-button fetch-button">fetch</div>
+                <div class="listview-header">Site Paths</div>
+                <div class="listview-list"></div>
+                """
+        sitepath_entry_template =
+                """
+                <div class="listview-list-entry">
+                        <%= path %>
+                        <div class="action-button">show</div>
+                </div>
                 """
         #######################################################
         sitetmpl_view_template =
@@ -49,6 +56,8 @@ jQuery ->
                         new EJS text: side_view_template
                 sitepath_view_template:
                         new EJS text: sitepath_view_template
+                sitepath_entry_template:
+                        new EJS text: sitepath_entry_template
                 sitetmpl_view_template:
                         new EJS text: sitetmpl_view_template
                 sitecss_view_template:
