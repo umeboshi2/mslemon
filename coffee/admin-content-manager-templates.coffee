@@ -31,11 +31,12 @@ jQuery ->
                 <div class="listview-header">Site Paths</div>
                 <div class="listview-list"></div>
                 """
+
         sitepath_entry_template =
                 """
-                <div class="listview-list-entry">
+                        <div class="listview-list-entry" id="sitepath-<%= id %>">
                         <%= name %>
-                        <div class="action-button">show</div>
+                        <div class="pull-right action-button show-sitepath-btn">show</div>
                 </div>
                 """
         #######################################################
@@ -48,18 +49,20 @@ jQuery ->
                 """
                 <div class="listview-list-entry">
                         <%= name %>
-                        <div class="action-button">show</div>
+          <div class="pull-right action-button show-sitetmpl-btn">show</div>
                 </div>
                 """
         #######################################################
         sitecss_view_template =
                 """
-                (INSERT CSS CONTENT HERE)
+                <div class="listview-header">Site CSS</div>
+                <div class="listview-list"></div>
                 """
         #######################################################
         sitejs_view_template =
                 """
-                (INSERT JAVASCRIPT CONTENT HERE)
+                <div class="listview-header">Site Javascript</div>
+                <div class="listview-list"></div>
                 """
         #######################################################
         admin_mgr_tmpl =
@@ -71,6 +74,8 @@ jQuery ->
                         new EJS text: sitepath_entry_template
                 sitetmpl_view_template:
                         new EJS text: sitetmpl_view_template
+                sitetmpl_entry_template:
+                        new EJS text: sitetmpl_entry_template
                 sitecss_view_template:
                         new EJS text: sitecss_view_template
                 sitejs_view_template:

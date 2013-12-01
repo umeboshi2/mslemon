@@ -5,7 +5,7 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SitePathView, SiteTemplate, SiteTemplateList, SiteTemplateListView, admin_mgr_tmpl, fetch_error, fetch_success, list_views, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteCSSView, SiteJS, SiteJSList, SiteJSListView, SiteJSView, SitePath, SitePathList, SitePathListView, SitePathView, SiteTemplate, SiteTemplateList, SiteTemplateListView, SiteTemplateView, admin_mgr_tmpl, fetch_error, fetch_success, list_views, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
     admin_mgr_tmpl = TrumpetApp.admin_mgr_tmpl;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
@@ -207,6 +207,23 @@
 
       BaseModelView.prototype.tagName = 'div';
 
+      BaseModelView.prototype.initialize = function() {
+        _.bindAll(this, 'render');
+        this.model.bind('change', this.render);
+        return this.model.bind('remove', this.unrender);
+      };
+
+      BaseModelView.prototype.render = function() {
+        var html;
+        html = this.template.render(this.model.attributes);
+        this.$el.html(html);
+        return this;
+      };
+
+      BaseModelView.prototype.unrender = function() {
+        return $(this.el).remove();
+      };
+
       return BaseModelView;
 
     })(Backbone.View);
@@ -218,46 +235,57 @@
         return _ref10;
       }
 
-      SitePathView.prototype.className = 'sitepath-entry';
-
-      SitePathView.prototype.initialize = function() {
-        _.bindAll(this, 'render');
-        this.model.bind('change', this.render);
-        return this.model.bind('remove', this.unrender);
-      };
-
       SitePathView.prototype.template = admin_mgr_tmpl.sitepath_entry_template;
 
-      SitePathView.prototype.render = function() {
-        var html, name, template;
-        name = this.model.get('name');
-        template = admin_mgr_tmpl.sitepath_entry_template;
-        html = template.render({
-          name: name
-        });
-        this.$el.html(html);
-        return this;
-      };
-
-      SitePathView.prototype.unrender = function() {
-        return $(this.el).remove();
-      };
-
-      SitePathView.prototype.events = {
-        'click el': function() {
-          return $(this.el).hide();
-        }
-      };
-
       return SitePathView;
+
+    })(BaseModelView);
+    SiteTemplateView = (function(_super) {
+      __extends(SiteTemplateView, _super);
+
+      function SiteTemplateView() {
+        _ref11 = SiteTemplateView.__super__.constructor.apply(this, arguments);
+        return _ref11;
+      }
+
+      SiteTemplateView.prototype.template = admin_mgr_tmpl.sitetmpl_entry_template;
+
+      return SiteTemplateView;
+
+    })(BaseModelView);
+    SiteCSSView = (function(_super) {
+      __extends(SiteCSSView, _super);
+
+      function SiteCSSView() {
+        _ref12 = SiteCSSView.__super__.constructor.apply(this, arguments);
+        return _ref12;
+      }
+
+      SiteCSSView.prototype.template = admin_mgr_tmpl.sitecss_entry_template;
+
+      return SiteCSSView;
+
+    })(BaseModelView);
+    SiteJSView = (function(_super) {
+      __extends(SiteJSView, _super);
+
+      function SiteJSView() {
+        _ref13 = SiteJSView.__super__.constructor.apply(this, arguments);
+        return _ref13;
+      }
+
+      SiteJSView.prototype.template = admin_mgr_tmpl.sitejs_entry_template;
+
+      return SiteJSView;
 
     })(BaseModelView);
     BaseListView = (function(_super) {
       __extends(BaseListView, _super);
 
       function BaseListView() {
-        _ref11 = BaseListView.__super__.constructor.apply(this, arguments);
-        return _ref11;
+        this.appendItem = __bind(this.appendItem, this);
+        _ref14 = BaseListView.__super__.constructor.apply(this, arguments);
+        return _ref14;
       }
 
       BaseListView.prototype.el = $('.right-column-content');
@@ -267,15 +295,26 @@
         return this;
       };
 
-      BaseListView.prototype.events = {
-        'click .fetch-button': 'fetch'
-      };
-
       BaseListView.prototype.remove = function() {
         this.undelegateEvents();
         this.$el.empty();
         this.stopListening();
         return this;
+      };
+
+      BaseListView.prototype.addItem = function() {
+        var item;
+        item = new this.entryModelClass;
+        return this.collection.add(item);
+      };
+
+      BaseListView.prototype.appendItem = function(model) {
+        var html, view;
+        view = new this.entryViewClass({
+          model: model
+        });
+        html = view.render(model).el;
+        return $('.listview-list').append(html);
       };
 
       return BaseListView;
@@ -286,33 +325,21 @@
 
       function SitePathListView() {
         this.fetch = __bind(this.fetch, this);
-        this.appendItem = __bind(this.appendItem, this);
-        _ref12 = SitePathListView.__super__.constructor.apply(this, arguments);
-        return _ref12;
+        _ref15 = SitePathListView.__super__.constructor.apply(this, arguments);
+        return _ref15;
       }
 
       SitePathListView.prototype.template = admin_mgr_tmpl.sitepath_view_template;
+
+      SitePathListView.prototype.entryViewClass = SitePathView;
+
+      SitePathListView.prototype.entryModelClass = SitePath;
 
       SitePathListView.prototype.initialize = function() {
         console.log('Init SitePathListView');
         this.collection = new SitePathList;
         this.collection.bind('add', this.appendItem);
         return this.collection.fetch();
-      };
-
-      SitePathListView.prototype.addItem = function() {
-        var item;
-        item = new SitePath;
-        return this.collection.add(item);
-      };
-
-      SitePathListView.prototype.appendItem = function(sitepath) {
-        var path, view;
-        view = new SitePathView({
-          model: sitepath
-        });
-        path = view.render(sitepath).el;
-        return $('.listview-list').append(path);
       };
 
       SitePathListView.prototype.fetch = function() {
@@ -326,14 +353,21 @@
       __extends(SiteTemplateListView, _super);
 
       function SiteTemplateListView() {
-        _ref13 = SiteTemplateListView.__super__.constructor.apply(this, arguments);
-        return _ref13;
+        _ref16 = SiteTemplateListView.__super__.constructor.apply(this, arguments);
+        return _ref16;
       }
 
       SiteTemplateListView.prototype.template = admin_mgr_tmpl.sitetmpl_view_template;
 
+      SiteTemplateListView.prototype.entryViewClass = SiteTemplateView;
+
+      SiteTemplateListView.prototype.entryModelClass = SiteTemplate;
+
       SiteTemplateListView.prototype.initialize = function() {
-        return console.log('Init SiteTemplateListView');
+        console.log('Init SiteTemplateListView');
+        this.collection = new SiteTemplateList;
+        this.collection.bind('add', this.appendItem);
+        return this.collection.fetch();
       };
 
       return SiteTemplateListView;
@@ -343,8 +377,8 @@
       __extends(SiteCSSListView, _super);
 
       function SiteCSSListView() {
-        _ref14 = SiteCSSListView.__super__.constructor.apply(this, arguments);
-        return _ref14;
+        _ref17 = SiteCSSListView.__super__.constructor.apply(this, arguments);
+        return _ref17;
       }
 
       SiteCSSListView.prototype.template = admin_mgr_tmpl.sitecss_view_template;
@@ -360,8 +394,8 @@
       __extends(SiteJSListView, _super);
 
       function SiteJSListView() {
-        _ref15 = SiteJSListView.__super__.constructor.apply(this, arguments);
-        return _ref15;
+        _ref18 = SiteJSListView.__super__.constructor.apply(this, arguments);
+        return _ref18;
       }
 
       SiteJSListView.prototype.template = admin_mgr_tmpl.sitejs_view_template;
@@ -379,8 +413,8 @@
       __extends(SideView, _super);
 
       function SideView() {
-        _ref16 = SideView.__super__.constructor.apply(this, arguments);
-        return _ref16;
+        _ref19 = SideView.__super__.constructor.apply(this, arguments);
+        return _ref19;
       }
 
       SideView.prototype.el = $('.sidebar');

@@ -107,38 +107,35 @@ jQuery ->
         class BaseModelView extends Backbone.View
                 tagName: 'div'
 
-        class SitePathView extends BaseModelView
-                className: 'sitepath-entry'
-
                 initialize: ->
                         _.bindAll @, 'render'
                         @model.bind 'change', @render
                         @model.bind 'remove', @unrender
-                        
-
-                template:
-                        admin_mgr_tmpl.sitepath_entry_template
-
+                                
                 render: ->
-                        name = @model.get('name')
-                        template = admin_mgr_tmpl.sitepath_entry_template
-                        #$(@el).html template.render({path: path})
-                        html = template.render({name: name})
+                        html = @template.render @model.attributes
                         this.$el.html html
-                        #this.$el.click ->
-                        #        $(this).addClass('action-button')
                         return @
 
                 unrender: ->
                         $(@el).remove()
 
-                events:
-                        'click el': ->
-                                $(@el).hide()
+        class SitePathView extends BaseModelView
+                template:
+                        admin_mgr_tmpl.sitepath_entry_template
                         
+        class SiteTemplateView extends BaseModelView
+                template:
+                        admin_mgr_tmpl.sitetmpl_entry_template
+
+        class SiteCSSView extends BaseModelView
+                template:
+                        admin_mgr_tmpl.sitecss_entry_template
                         
+        class SiteJSView extends BaseModelView
+                template:
+                        admin_mgr_tmpl.sitejs_entry_template
                         
-                
         ########################################
         # List Views for collections
         ########################################
@@ -149,9 +146,6 @@ jQuery ->
                         @$el.html @template.render(data)
                         return @
                         
-                events:
-                        'click .fetch-button': 'fetch'
-                        
                 #http://stackoverflow.com/questions/10966440/recreating-a-removed-view-in-backbone-js
                 remove: () ->
                         @undelegateEvents()
@@ -159,10 +153,29 @@ jQuery ->
                         @stopListening()
                         return @
                         
-                                        
+                addItem: ->
+                        item = new @entryModelClass
+                        @collection.add item
+
+                # we need the fat arrow to get $(el)
+                # defined properly
+                appendItem: (model) =>
+                        #make_alert('appended item' + sitepath)
+                        view = new @entryViewClass model: model
+                        html = view.render(model).el
+                        #$(@el).append path
+                        $('.listview-list').append html
+                        
+                        
         class SitePathListView extends BaseListView
                 template:
                         admin_mgr_tmpl.sitepath_view_template
+                        
+                entryViewClass:
+                        SitePathView
+
+                entryModelClass:
+                        SitePath
                         
                 initialize: ->
                         console.log('Init SitePathListView')
@@ -170,19 +183,6 @@ jQuery ->
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
 
-                addItem: ->
-                        item = new SitePath
-                        @collection.add item
-
-                # we need the fat arrow to get $(el)
-                # defined properly
-                appendItem: (sitepath) =>
-                        #make_alert('appended item' + sitepath)
-                        view = new SitePathView model: sitepath
-                        path = view.render(sitepath).el
-                        #$(@el).append path
-                        $('.listview-list').append path
-                        
                 fetch: =>
                         @collection.fetch()
                         
@@ -191,8 +191,18 @@ jQuery ->
                 template:
                         admin_mgr_tmpl.sitetmpl_view_template
                         
+                entryViewClass:
+                        SiteTemplateView
+
+                entryModelClass:
+                        SiteTemplate
+                        
                 initialize: ->
                         console.log('Init SiteTemplateListView')
+                        @collection = new SiteTemplateList
+                        @collection.bind 'add', @appendItem
+                        @collection.fetch()
+                        
 
         class SiteCSSListView extends BaseListView
                 template:
