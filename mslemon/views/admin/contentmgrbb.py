@@ -68,6 +68,15 @@ class AppViewer(AdminViewer):
         self._set_menu()
         self.layout.sidebar = ''
         self.layout.content = '<div class="right-listview"></div>'
+        ace = self.layout.resources.ace
+        #self.layout.resources.admin_edit_site_resources.need()
+        ace.worker_css.need()
+        ace.worker_javascript.need()
+        ace.mode_css.need()
+        ace.mode_javascript.need()
+        ace.mode_ejs.need()
+        ace.theme_twilight.need()
+        ace.theme_cobalt.need()
         
     def _set_menu(self):
         menu = BaseMenu()

@@ -1,5 +1,4 @@
 jQuery ->
-        admin_mgr_tmpl = TrumpetApp.admin_mgr_tmpl
         fetch_success = (collection, response) ->
                 make_alert('Succesful Transfer', 'success')
                 
@@ -7,10 +6,10 @@ jQuery ->
                 make_alert('Error in Transfer', 'error')
                 
         list_views = ->
-                'sitepath': SitePathListView
-                'sitetmpl': SiteTemplateListView
-                'sitecss': SiteCSSListView
-                'sitejs': SiteJSListView
+                'path': SitePathListView
+                'tmpl': SiteTemplateListView
+                'css': SiteCSSListView
+                'js': SiteJSListView
         # FIXME: attached to window for testing
         window.lviews = list_views
         
@@ -18,7 +17,6 @@ jQuery ->
                 routes:
                         '': 'home'
                         'view/:listview': 'listview'
-                        #'/edit/{id}': 'edit'
 
                 common: ->
                         side_view.render()
@@ -33,10 +31,8 @@ jQuery ->
                         @common()
                         klass = list_views()[lview]
                         view = new klass
-                        view.render()
+                        view.render type: lview
                         side_view.current_view = view
-                        
-                        
 
 
         ########################################
@@ -45,21 +41,25 @@ jQuery ->
         class SitePath extends Backbone.Model
                 defaults:
                         name: ''
-                
+                        type: 'path'
+                        
         class SiteTemplate extends Backbone.Model
                 defaults:
                         name: ''
                         content: ''
+                        type: 'tmpl'
                         
         class SiteCSS extends Backbone.Model
                 defaults:
                         name: ''
                         content: ''
+                        type: 'css'
                         
         class SiteJS extends Backbone.Model
                 defaults:
                         name: ''
                         content: ''
+                        type: 'js'
                         
 
         ########################################
@@ -105,8 +105,8 @@ jQuery ->
         # Model Views for models
         ########################################
         class BaseModelView extends Backbone.View
-                tagName: 'div'
-
+                template: TrumpetApp.admin_mgr_tmpl.entry_template
+                
                 initialize: ->
                         _.bindAll @, 'render'
                         @model.bind 'change', @render
@@ -120,30 +120,60 @@ jQuery ->
                 unrender: ->
                         $(@el).remove()
 
-        class SitePathView extends BaseModelView
-                template:
-                        admin_mgr_tmpl.sitepath_entry_template
+                events:
+                        'click .show-entry-btn': 'editme'
                         
-        class SiteTemplateView extends BaseModelView
-                template:
-                        admin_mgr_tmpl.sitetmpl_entry_template
 
-        class SiteCSSView extends BaseModelView
-                template:
-                        admin_mgr_tmpl.sitecss_entry_template
-                        
-        class SiteJSView extends BaseModelView
-                template:
-                        admin_mgr_tmpl.sitejs_entry_template
+                editme: ->
+                        tmpl = TrumpetApp.admin_mgr_tmpl.editor_template
+                        html = tmpl.render @model.attributes
+                        el = $('.listview-list')
+                        el.html html
+
+                        # make save button
+                        save_btn = $('#save-content')
+                        save_btn.hide()
+                        save_btn.click =>
+                                @model.set('content', editor.getValue())
+                                response = @model.save()
+                                response.done ->
+                                        make_alert('Saved')
+                                        $('#save-content').hide()
+                                response.fail ->
+                                        make_alert('Failed to save model')
+
+                        # make editor
+                        editor = ace.edit('editor')
+                        session = editor.getSession()
+                        session.setValue @model.get 'content'
+                        session.on('change', () ->
+                                $('#save-content').show()
+                                )
+                        # set editor properties based
+                        # on model type
+                        mtype = @model.get('type')
+                        if mtype == 'path'
+                                el.html "SHOW ME"
+                        else if mtype == 'tmpl'
+                                session.setMode('ace/mode/ejs')
+                        else if mtype == 'css'
+                                session.setMode('ace/mode/css')
+                        else if mtype == 'js'
+                                session.setMode('ace/mode/javascript')
+                        else
+                                el.html "Bad type" + mtype
+                        editor.setTheme('ace/theme/twilight')
+                        return @
                         
         ########################################
         # List Views for collections
         ########################################
         class BaseListView extends Backbone.View
                 el: $ '.right-column-content'
-                
+
                 render: (data) ->
-                        @$el.html @template.render(data)
+                        tmpl = TrumpetApp.admin_mgr_tmpl.listview_template
+                        @$el.html tmpl.render(data)
                         return @
                         
                 #http://stackoverflow.com/questions/10966440/recreating-a-removed-view-in-backbone-js
@@ -153,70 +183,49 @@ jQuery ->
                         @stopListening()
                         return @
                         
-                addItem: ->
-                        item = new @entryModelClass
-                        @collection.add item
-
-                # we need the fat arrow to get $(el)
-                # defined properly
                 appendItem: (model) =>
-                        #make_alert('appended item' + sitepath)
-                        view = new @entryViewClass model: model
+                        view = new BaseModelView model: model
                         html = view.render(model).el
-                        #$(@el).append path
                         $('.listview-list').append html
+
+                events:
+                        'click .add-entry-btn': 'new_entry_view'
+
+                new_entry_view: ->
+                        mclass = @collection.model
+                        model = new mclass()
+                        html = "Make new Entry " + model.get 'type'
+                        $('.listview-list').html html
+                        
                         
                         
         class SitePathListView extends BaseListView
-                template:
-                        admin_mgr_tmpl.sitepath_view_template
-                        
-                entryViewClass:
-                        SitePathView
-
-                entryModelClass:
-                        SitePath
-                        
                 initialize: ->
                         console.log('Init SitePathListView')
                         @collection = new SitePathList
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
 
-                fetch: =>
-                        @collection.fetch()
-                        
-                                                
         class SiteTemplateListView extends BaseListView
-                template:
-                        admin_mgr_tmpl.sitetmpl_view_template
-                        
-                entryViewClass:
-                        SiteTemplateView
-
-                entryModelClass:
-                        SiteTemplate
-                        
                 initialize: ->
                         console.log('Init SiteTemplateListView')
                         @collection = new SiteTemplateList
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
-                        
 
         class SiteCSSListView extends BaseListView
-                template:
-                        admin_mgr_tmpl.sitecss_view_template
-                        
                 initialize: ->
                         console.log('Init SiteCSSListView')
+                        @collection = new SiteCSSList
+                        @collection.bind 'add', @appendItem
+                        @collection.fetch()
 
         class SiteJSListView extends BaseListView
-                template:
-                        admin_mgr_tmpl.sitejs_view_template
-                        
                 initialize: ->
                         console.log('Init SiteJSListView')
+                        @collection = new SiteJSList
+                        @collection.bind 'add', @appendItem
+                        @collection.fetch()
 
 
         class SideView extends Backbone.View
@@ -227,40 +236,39 @@ jQuery ->
                         @current_view = null
         
                 template:
-                        admin_mgr_tmpl.side_view_template
+                        TrumpetApp.admin_mgr_tmpl.side_view_template
                         
                 render: ->
                         $(@el).html @template.render()
                         return @
 
 
-                setup_sitepath_viewer: ->
-                        @pathview.render()
-                        
-                setup_sitetmpl_viewer: ->
-                        @tmplview.render()
-                        
-                setup_sitecss_viewer: ->
-                        @cssview.render()
-
-                setup_sitejs_viewer: ->
-                        @jsview.render()
-
                 # pull_trigger is to activate views
                 # when the route changes
-                pull_trigger = trigger: true
+                pull_trigger = trigger: true, replace: true
                 events:
                         'click .home-button': ->
                                 main_router.navigate '', pull_trigger
                                 
                         'click .sitepaths-button': ->
-                                main_router.navigate 'view/sitepath', pull_trigger
+                                $('.listview-list').remove()
+                                main_router.navigate 'dummy', pull_trigger
+                                main_router.navigate 'view/path', pull_trigger
+                                
                         'click .sitetmpl-button': ->
-                                main_router.navigate 'view/sitetmpl', pull_trigger
+                                $('.listview-list').remove()
+                                main_router.navigate 'dummy', pull_trigger
+                                main_router.navigate 'view/tmpl', pull_trigger
+                                
                         'click .sitecss-button': ->
-                                main_router.navigate 'view/sitecss', pull_trigger
+                                $('.listview-list').remove()
+                                main_router.navigate 'dummy', pull_trigger
+                                main_router.navigate 'view/css', pull_trigger
+                                
                         'click .sitejs-button': ->
-                                main_router.navigate 'view/sitejs', pull_trigger
+                                $('.listview-list').remove()
+                                main_router.navigate 'dummy', pull_trigger
+                                main_router.navigate 'view/js', pull_trigger
                                 
                         
 

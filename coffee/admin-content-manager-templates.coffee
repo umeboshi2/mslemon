@@ -2,6 +2,12 @@ jQuery ->
         ########################################
         # Templates
         ########################################
+        list_titles =
+                path: 'Site Paths'
+                tmpl: 'Site Templates'
+                css: 'Site CSS'
+                js: 'Site Javascript'
+                
         side_view_template =
                 """
                 <div class="main-content-manager-view">
@@ -26,60 +32,38 @@ jQuery ->
                 </div>
                 """
         #######################################################
-        sitepath_view_template =
-                """
-                <div class="listview-header">Site Paths</div>
-                <div class="listview-list"></div>
-                """
-
-        sitepath_entry_template =
-                """
-                        <div class="listview-list-entry" id="sitepath-<%= id %>">
-                        <%= name %>
-                        <div class="pull-right action-button show-sitepath-btn">show</div>
-                </div>
-                """
-        #######################################################
-        sitetmpl_view_template =
-                """
-                <div class="listview-header">Site Templates</div>
-                <div class="listview-list"></div>
-                """
-        sitetmpl_entry_template =
-                """
+        entry_template =
+                '
                 <div class="listview-list-entry">
-                        <%= name %>
-          <div class="pull-right action-button show-sitetmpl-btn">show</div>
+                        <%= name %> 
+          <div class="pull-right action-button show-entry-btn">show</div>
                 </div>
-                """
+                '
         #######################################################
-        sitecss_view_template =
-                """
-                <div class="listview-header">Site CSS</div>
+        editor_template = '
+                <div id="edit-status">Editing <%= name %>
+                <div class="action-button" id="save-content">Save</div>
+                </div>
+                <div id="editor"></div>
+                '
+        listview_template = '
+                <% var title = TrumpetApp.admin_mgr_tmpl.list_titles[type] %>
+                <div class="listview-header"><%= title %>
+                <div class="pull-right action-button add-entry-btn">New Entry</div>
+                </div>
                 <div class="listview-list"></div>
-                """
-        #######################################################
-        sitejs_view_template =
-                """
-                <div class="listview-header">Site Javascript</div>
-                <div class="listview-list"></div>
-                """
+                '
         #######################################################
         admin_mgr_tmpl =
+                list_titles: list_titles
                 side_view_template:
                         new EJS text: side_view_template
-                sitepath_view_template:
-                        new EJS text: sitepath_view_template
-                sitepath_entry_template:
-                        new EJS text: sitepath_entry_template
-                sitetmpl_view_template:
-                        new EJS text: sitetmpl_view_template
-                sitetmpl_entry_template:
-                        new EJS text: sitetmpl_entry_template
-                sitecss_view_template:
-                        new EJS text: sitecss_view_template
-                sitejs_view_template:
-                        new EJS text: sitejs_view_template
+                entry_template:
+                        new EJS text: entry_template
+                editor_template:
+                        new EJS text: editor_template
+                listview_template:
+                        new EJS text: listview_template
         window.TrumpetApp = {}
         TrumpetApp.admin_mgr_tmpl = admin_mgr_tmpl
 

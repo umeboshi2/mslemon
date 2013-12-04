@@ -8152,7 +8152,7 @@ li.top-bar-button {
 /* line 20, ../../../sass/adminscreen.scss */
 #editor {
   position: relative;
-  width: 60em;
+  width: 100%;
   height: 30em;
 }
 

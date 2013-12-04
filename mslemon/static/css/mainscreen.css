@@ -8784,6 +8784,6 @@ li.top-bar-button {
 /* line 71, ../../../sass/mainscreen.scss */
 #editor {
   position: relative;
-  width: 60em;
+  width: 100%;
   height: 30em;
 }
