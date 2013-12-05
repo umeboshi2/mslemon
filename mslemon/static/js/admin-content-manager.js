@@ -5,7 +5,7 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, make_editor, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
     };
@@ -21,6 +21,27 @@
       };
     };
     window.lviews = list_views;
+    make_editor = function(mtype, savebutton, content) {
+      var editor, session;
+      if (content == null) {
+        content = '';
+      }
+      editor = ace.edit('editor');
+      session = editor.getSession();
+      session.setValue(content);
+      session.on('change', function() {
+        return savebutton.show();
+      });
+      if (mtype === 'tmpl') {
+        session.setMode('ace/mode/ejs');
+      } else if (mtype === 'css') {
+        session.setMode('ace/mode/css');
+      } else if (mtype === 'js') {
+        session.setMode('ace/mode/javascript');
+      }
+      editor.setTheme('ace/theme/twilight');
+      return editor;
+    };
     Router = (function(_super) {
       __extends(Router, _super);
 
@@ -234,15 +255,22 @@
       };
 
       BaseModelView.prototype.editme = function() {
-        var editor, el, html, mtype, save_btn, session, tmpl,
+        var button, content, dbutton, dbutton_html, editor, el, html, lvheader, mtype, nbutton, tmpl,
           _this = this;
         tmpl = TrumpetApp.admin_mgr_tmpl.editor_template;
         html = tmpl.render(this.model.attributes);
         el = $('.listview-list');
         el.html(html);
-        save_btn = $('#save-content');
-        save_btn.hide();
-        save_btn.click(function() {
+        mtype = this.model.get('type');
+        if (mtype === 'path') {
+          el.html("SHOW ME");
+          return this;
+        }
+        button = $('#save-content');
+        content = this.model.get('content');
+        editor = make_editor(mtype, button, content);
+        button.hide();
+        button.click(function() {
           var response;
           _this.model.set('content', editor.getValue());
           response = _this.model.save();
@@ -254,25 +282,31 @@
             return make_alert('Failed to save model');
           });
         });
-        editor = ace.edit('editor');
-        session = editor.getSession();
-        session.setValue(this.model.get('content'));
-        session.on('change', function() {
-          return $('#save-content').show();
+        nbutton = $('#new-entry-button');
+        nbutton.remove();
+        dbutton_html = '<div class="pull-right action-button del-entry-btn" id="del-entry-button">Delete</div>';
+        lvheader = $('.listview-header');
+        lvheader.append(dbutton_html);
+        dbutton = $('#del-entry-button');
+        dbutton.click(function() {
+          var name, response;
+          name = _this.model.get('name');
+          response = _this.model.destroy();
+          response.done(function() {
+            var pt, url;
+            make_alert('Deleted ' + name);
+            pt = {
+              trigger: true,
+              replace: true
+            };
+            url = 'view/' + mtype;
+            main_router.navigate('dummy', pt);
+            return main_router.navigate(url, pt);
+          });
+          return response.fail(function() {
+            return make_alert('Failed to delete ' + name);
+          });
         });
-        mtype = this.model.get('type');
-        if (mtype === 'path') {
-          el.html("SHOW ME");
-        } else if (mtype === 'tmpl') {
-          session.setMode('ace/mode/ejs');
-        } else if (mtype === 'css') {
-          session.setMode('ace/mode/css');
-        } else if (mtype === 'js') {
-          session.setMode('ace/mode/javascript');
-        } else {
-          el.html("Bad type" + mtype);
-        }
-        editor.setTheme('ace/theme/twilight');
         return this;
       };
 
@@ -318,11 +352,36 @@
       };
 
       BaseListView.prototype.new_entry_view = function() {
-        var html, mclass, model;
+        var button, editor, html, mclass, model, mtype, tmpl,
+          _this = this;
         mclass = this.collection.model;
         model = new mclass();
-        html = "Make new Entry " + model.get('type');
-        return $('.listview-list').html(html);
+        tmpl = TrumpetApp.admin_mgr_tmpl.create_template;
+        html = tmpl.render(model.attributes);
+        $('.listview-list').html(html);
+        mtype = model.get('type');
+        button = $('#create-content');
+        editor = make_editor(mtype, button, '');
+        button.hide();
+        button.click(function() {
+          var name, response;
+          model.set('content', editor.getValue());
+          name = $('#nameinput').val();
+          model.set('name', name);
+          _this.collection.add(model);
+          response = model.save();
+          response.done(function() {
+            var msg;
+            msg = 'Created ' + name;
+            return make_alert(msg);
+          });
+          return response.fail(function() {
+            var msg;
+            msg = 'Failed to create ' + name;
+            return make_alert(msg);
+          });
+        });
+        return this;
       };
 
       return BaseListView;

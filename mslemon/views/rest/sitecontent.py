@@ -8,6 +8,9 @@ from trumpet.managers.admin.sitecontent import SiteContentManager
 
 from mslemon.views.rest.base import BaseResource
 
+# FIXME: this needs to be in manager
+import transaction
+
 
 @resource(collection_path='/rest/sitepath', path='/rest/sitepath/{id}',
           permission='admin')
@@ -30,6 +33,7 @@ class SitePathResource(BaseResource):
         return data
 
     def delete(self):
+        # FIXME: THIS NEEDS TO BE IN MANAGER 
         id = int(self.request.matchdict['id'])
         db = self.request.db
         with transaction.manager:

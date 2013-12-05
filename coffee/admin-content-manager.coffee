@@ -12,6 +12,26 @@ jQuery ->
                 'js': SiteJSListView
         # FIXME: attached to window for testing
         window.lviews = list_views
+
+        # savebutton is jQuery object
+        make_editor = (mtype, savebutton, content='') ->
+                editor = ace.edit('editor')
+                session = editor.getSession()
+                session.setValue content
+                session.on('change', () ->
+                        savebutton.show()
+                        )
+                if mtype == 'tmpl'
+                        session.setMode('ace/mode/ejs')
+                else if mtype == 'css'
+                        session.setMode('ace/mode/css')
+                else if mtype == 'js'
+                        session.setMode('ace/mode/javascript')
+                editor.setTheme('ace/theme/twilight')
+                return editor
+                
+                
+                
         
         class Router extends Backbone.Router
                 routes:
@@ -129,11 +149,18 @@ jQuery ->
                         html = tmpl.render @model.attributes
                         el = $('.listview-list')
                         el.html html
-
-                        # make save button
-                        save_btn = $('#save-content')
-                        save_btn.hide()
-                        save_btn.click =>
+                        
+                        mtype = @model.get('type')
+                        if mtype == 'path'
+                                el.html "SHOW ME"
+                                return @
+                        button = $('#save-content')
+                        content = @model.get 'content'
+                        editor = make_editor mtype, button, content
+                                
+                        # setup save button
+                        button.hide()
+                        button.click =>
                                 @model.set('content', editor.getValue())
                                 response = @model.save()
                                 response.done ->
@@ -142,27 +169,27 @@ jQuery ->
                                 response.fail ->
                                         make_alert('Failed to save model')
 
-                        # make editor
-                        editor = ace.edit('editor')
-                        session = editor.getSession()
-                        session.setValue @model.get 'content'
-                        session.on('change', () ->
-                                $('#save-content').show()
-                                )
-                        # set editor properties based
-                        # on model type
-                        mtype = @model.get('type')
-                        if mtype == 'path'
-                                el.html "SHOW ME"
-                        else if mtype == 'tmpl'
-                                session.setMode('ace/mode/ejs')
-                        else if mtype == 'css'
-                                session.setMode('ace/mode/css')
-                        else if mtype == 'js'
-                                session.setMode('ace/mode/javascript')
-                        else
-                                el.html "Bad type" + mtype
-                        editor.setTheme('ace/theme/twilight')
+                        # remove new entry button and replace it
+                        # with delete button
+                        nbutton = $('#new-entry-button')
+                        nbutton.remove()
+                        dbutton_html = '<div class="pull-right action-button del-entry-btn" id="del-entry-button">Delete</div>'
+                        lvheader = $('.listview-header')
+                        lvheader.append dbutton_html
+                        dbutton = $('#del-entry-button')
+                        dbutton.click =>
+                                name = @model.get 'name'
+                                response = @model.destroy()
+                                response.done ->
+                                        make_alert 'Deleted ' + name
+                                        pt = trigger: true, replace: true
+                                        url = 'view/' + mtype
+                                        main_router.navigate 'dummy', pt
+                                        main_router.navigate url, pt
+                                response.fail ->
+                                        make_alert 'Failed to delete ' + name
+                                                                
+                                        
                         return @
                         
         ########################################
@@ -194,10 +221,30 @@ jQuery ->
                 new_entry_view: ->
                         mclass = @collection.model
                         model = new mclass()
-                        html = "Make new Entry " + model.get 'type'
+                        tmpl = TrumpetApp.admin_mgr_tmpl.create_template
+                        html = tmpl.render model.attributes
                         $('.listview-list').html html
-                        
-                        
+                        mtype = model.get 'type'
+                        button = $('#create-content')
+
+                        editor = make_editor mtype, button, ''
+
+                        # setup save button
+                        button.hide()
+                        button.click =>
+                                model.set 'content', editor.getValue()
+                                name = $('#nameinput').val()
+                                model.set 'name', name
+                                @collection.add model
+                                response = model.save()
+                                response.done ->
+                                        msg = 'Created ' + name
+                                        make_alert msg
+                                response.fail ->
+                                        msg = 'Failed to create ' + name
+                                        make_alert msg
+                                        
+                        return @
                         
         class SitePathListView extends BaseListView
                 initialize: ->
@@ -271,9 +318,6 @@ jQuery ->
                                 main_router.navigate 'view/js', pull_trigger
                                 
                         
-
-
-
 
 
                         

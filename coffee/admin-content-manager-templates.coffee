@@ -49,9 +49,23 @@ jQuery ->
         listview_template = '
                 <% var title = TrumpetApp.admin_mgr_tmpl.list_titles[type] %>
                 <div class="listview-header"><%= title %>
-                <div class="pull-right action-button add-entry-btn">New Entry</div>
+                <div class="pull-right action-button add-entry-btn" id="new-entry-button">New Entry</div>
                 </div>
                 <div class="listview-list"></div>
+                '
+        create_template = '
+                <div class="listview-header2">
+                </div>
+                <div class="create-form">
+                        <div class="action-button" id="create-content">Save</div>
+                        <span class="form-inline" style="white-space:nowrap">
+                        <label class="form-inline" for="nameinput">Name</label>
+                        <input style="width:80%" class="form-control form-inline pull-right" name="name" id="nameinput">
+                        </span>
+                        <div id="edit-status">
+                        </div>
+                        <div id="editor"></div>
+                </div>        
                 '
         #######################################################
         admin_mgr_tmpl =
@@ -64,6 +78,8 @@ jQuery ->
                         new EJS text: editor_template
                 listview_template:
                         new EJS text: listview_template
+                create_template:
+                        new EJS text: create_template
         window.TrumpetApp = {}
         TrumpetApp.admin_mgr_tmpl = admin_mgr_tmpl
 
