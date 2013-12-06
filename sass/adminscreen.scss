@@ -6,6 +6,11 @@
 //@import "partials/basecolors/azure3";
 @import "partials/basecolors/light-steel-blue";
 
+@import "partials/jq-ui-theme";
+
+@include jquery-ui-base-theme;
+
+
 /* import all colors and variables before bootstrap */
 
 @import "partials/bootstrap-variables";
@@ -40,3 +45,12 @@
 	color: $basecolor;
 }
 
+
+#confirm-delete {
+    display: none;
+}
+
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}

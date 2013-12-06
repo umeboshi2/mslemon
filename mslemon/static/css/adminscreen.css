@@ -1,5 +1,2176 @@
 /* -------------------------------------------------------*/
 /* Base Colors */
+/** 
+ * The Absolution Theme is based on 
+ * Absolution by Michael Vanderheeren
+ * Copyright (c) 2010 Michael Vanderheeren
+ * 
+ * Please follow the his Github project to stay up to date on that theme:
+ * https://github.com/michaelvanderheeren/Absolution
+
+ * I may go back and work with using mixins like
+ * the absolution theme uses.  For now, this file
+ * basically serves to style a theme based on the 
+ * colors already defined for the page.
+ 
+ */
+/*
+ * jQuery UI CSS Framework 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Theming/API
+ */
+/* Layout helpers
+----------------------------------*/
+/*
+ * jQuery UI Resizable 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Resizable#theming
+ */
+/*
+ * jQuery UI Selectable 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Selectable#theming
+ */
+/*
+ * jQuery UI Accordion 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Accordion#theming
+ */
+/* IE/Win - Fix animation bug - #4615 */
+/*
+ * jQuery UI Autocomplete 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Autocomplete#theming
+ */
+/*
+ * jQuery UI Button 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Button#theming
+ */
+/*
+ * jQuery UI Dialog 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Dialog#theming
+ */
+/*
+ * jQuery UI Slider 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Slider#theming
+ */
+/*
+ * jQuery UI Tabs 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Tabs#theming
+ */
+/*
+ * jQuery UI Datepicker 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Datepicker#theming
+ */
+/*
+ * jQuery UI Progressbar 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Progressbar#theming
+ */
+/* line 15, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-hidden {
+  display: none;
+}
+
+/* line 18, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-hidden-accessible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* line 23, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  line-height: 1.3;
+  text-decoration: none;
+  font-size: 100%;
+  list-style: none;
+}
+
+/* line 33, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-clearfix {
+  display: inline-block;
+}
+/* line 34, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* required comment for clearfix to work in Opera \*/
+/* line 44, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+* html .ui-helper-clearfix {
+  height: 1%;
+}
+
+/* line 47, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-clearfix {
+  display: block;
+}
+
+/* end clearfix */
+/* line 52, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-helper-zfix {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+  filter: Alpha(Opacity=0);
+}
+
+/* Interaction Cues
+----------------------------------*/
+/* line 64, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-state-disabled {
+  cursor: default !important;
+}
+
+/* Icons
+----------------------------------*/
+/* states and images */
+/* line 72, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-icon {
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+/* Misc visuals
+----------------------------------*/
+/* Overlays */
+/* line 83, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_core.scss */
+.ui-widget-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable {
+  position: relative;
+}
+
+/* line 14, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-handle {
+  position: absolute;
+  font-size: 0.1px;
+  z-index: 99999;
+  display: block;
+}
+
+/* line 20, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
+  display: none;
+}
+
+/* line 23, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-n {
+  cursor: n-resize;
+  height: 7px;
+  width: 100%;
+  top: -5px;
+  left: 0;
+}
+
+/* line 30, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-s {
+  cursor: s-resize;
+  height: 7px;
+  width: 100%;
+  bottom: -5px;
+  left: 0;
+}
+
+/* line 37, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-e {
+  cursor: e-resize;
+  width: 7px;
+  right: -5px;
+  top: 0;
+  height: 100%;
+}
+
+/* line 44, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-w {
+  cursor: w-resize;
+  width: 7px;
+  left: -5px;
+  top: 0;
+  height: 100%;
+}
+
+/* line 51, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-se {
+  cursor: se-resize;
+  width: 12px;
+  height: 12px;
+  right: 1px;
+  bottom: 1px;
+}
+
+/* line 58, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-sw {
+  cursor: sw-resize;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  bottom: -5px;
+}
+
+/* line 65, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-nw {
+  cursor: nw-resize;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  top: -5px;
+}
+
+/* line 72, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_resizable.scss */
+.ui-resizable-ne {
+  cursor: ne-resize;
+  width: 9px;
+  height: 9px;
+  right: -5px;
+  top: -5px;
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_selectable.scss */
+.ui-selectable-helper {
+  position: absolute;
+  z-index: 100;
+  border: 1px dotted black;
+}
+
+/* line 13, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion {
+  width: 100%;
+}
+/* line 15, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-header {
+  cursor: pointer;
+  position: relative;
+  margin-top: 1px;
+  zoom: 1;
+}
+/* line 20, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-li-fix {
+  display: inline;
+}
+/* line 22, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-header-active {
+  border-bottom: 0 !important;
+}
+/* line 24, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-header a {
+  display: block;
+  font-size: 1em;
+  padding: .5em .5em .5em .7em;
+}
+
+/* line 29, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion-icons .ui-accordion-header a {
+  padding-left: 2.2em;
+}
+
+/* line 33, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-header .ui-icon {
+  position: absolute;
+  left: .5em;
+  top: 50%;
+  margin-top: -8px;
+}
+/* line 38, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-content {
+  padding: 1em 2.2em;
+  border-top: 0;
+  margin-top: -2px;
+  position: relative;
+  top: 1px;
+  margin-bottom: 2px;
+  overflow: auto;
+  display: none;
+  zoom: 1;
+}
+/* line 48, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_accordion.scss */
+.ui-accordion .ui-accordion-content-active {
+  display: block;
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+.ui-autocomplete {
+  position: absolute;
+  cursor: default;
+}
+
+/* workarounds */
+/* line 17, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+* html .ui-autocomplete {
+  width: 1px;
+}
+
+/* without this, the menu expands to 100% in IE6 */
+/*
+ * jQuery UI Menu 1.8.16
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Menu#theming
+ */
+/* line 32, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+.ui-menu {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+  display: block;
+  float: left;
+}
+/* line 38, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+.ui-menu .ui-menu {
+  margin-top: -3px;
+}
+/* line 40, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+.ui-menu .ui-menu-item {
+  margin: 0;
+  padding: 0;
+  zoom: 1;
+  float: left;
+  clear: left;
+  width: 100%;
+}
+/* line 47, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+.ui-menu .ui-menu-item a {
+  text-decoration: none;
+  display: block;
+  padding: .2em .4em;
+  line-height: 1.5;
+  zoom: 1;
+}
+/* line 53, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_autocomplete.scss */
+.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+  font-weight: normal;
+  margin: -1px;
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  margin-right: .1em;
+  text-decoration: none !important;
+  cursor: pointer;
+  text-align: center;
+  zoom: 1;
+  overflow: visible;
+}
+
+/* the overflow property removes extra width in IE */
+/* line 24, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-icon-only {
+  width: 2.2em;
+}
+
+/* to make room for the icon, a width needs to be set here */
+/* line 29, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+button.ui-button-icon-only {
+  width: 2.4em;
+}
+
+/* button elements seem to need a little more width */
+/* line 34, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-icons-only {
+  width: 3.4em;
+}
+
+/* line 37, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+button.ui-button-icons-only {
+  width: 3.7em;
+}
+
+/*button text element */
+/* line 42, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button .ui-button-text {
+  display: block;
+  line-height: 1.4;
+}
+
+/* line 46, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-text-only .ui-button-text {
+  padding: .4em 1em;
+}
+
+/* line 49, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text {
+  padding: .4em;
+  text-indent: -9999999px;
+}
+
+/* line 53, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-text-icon-primary .ui-button-text, .ui-button-text-icons .ui-button-text {
+  padding: .4em 1em .4em 2.1em;
+}
+
+/* line 56, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-text-icon-secondary .ui-button-text {
+  padding: .4em 2.1em .4em 1em;
+}
+
+/* line 59, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-text-icons .ui-button-text {
+  padding: .4em 2.1em .4em 1em;
+  padding-left: 2.1em;
+  padding-right: 2.1em;
+}
+
+/* no icon support for input elements, provide padding by default */
+/* line 66, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+input.ui-button {
+  padding: .4em 1em;
+}
+
+/*button icon element(s) */
+/* line 71, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+}
+
+/* line 76, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-icon-only .ui-icon {
+  left: 50%;
+  margin-left: -8px;
+}
+
+/* line 80, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-text-icon-primary .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary {
+  left: .5em;
+}
+
+/* line 83, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-button-text-icon-secondary .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary {
+  right: .5em;
+}
+
+/*button sets*/
+/* line 88, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-buttonset {
+  margin-right: 7px;
+}
+/* line 90, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+.ui-buttonset .ui-button {
+  margin-left: 0;
+  margin-right: -0.3em;
+}
+
+/* workarounds */
+/* line 96, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_button.scss */
+button.ui-button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* reset extra padding in Firefox */
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog {
+  position: absolute;
+  padding: .2em;
+  width: 300px;
+  overflow: hidden;
+}
+/* line 16, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-titlebar {
+  padding: .4em 1em;
+  position: relative;
+}
+/* line 19, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-title {
+  float: left;
+  margin: .1em 16px .1em 0;
+}
+/* line 22, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-titlebar-close {
+  position: absolute;
+  right: .3em;
+  top: 50%;
+  width: 19px;
+  margin: -10px 0 0 0;
+  padding: 1px;
+  height: 18px;
+}
+/* line 30, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-titlebar-close span {
+  display: block;
+  margin: 1px;
+}
+/* line 33, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus {
+  padding: 0;
+}
+/* line 35, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-content {
+  position: relative;
+  border: 0;
+  padding: .5em 1em;
+  background: none;
+  overflow: auto;
+  zoom: 1;
+}
+/* line 42, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-buttonpane {
+  text-align: left;
+  border-width: 1px 0 0 0;
+  background-image: none;
+  margin: .5em 0 0 0;
+  padding: .3em 1em .5em .4em;
+}
+/* line 48, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: right;
+}
+/* line 50, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-dialog-buttonpane button {
+  margin: .5em .4em .5em 0;
+  cursor: pointer;
+}
+/* line 53, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-dialog .ui-resizable-se {
+  width: 14px;
+  height: 14px;
+  right: 3px;
+  bottom: 3px;
+}
+
+/* line 59, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_dialog.scss */
+.ui-draggable .ui-dialog-titlebar {
+  cursor: move;
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider {
+  position: relative;
+  text-align: left;
+}
+/* line 14, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider .ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  width: 1.2em;
+  height: 1.2em;
+  cursor: default;
+}
+/* line 20, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider .ui-slider-range {
+  position: absolute;
+  z-index: 1;
+  font-size: .7em;
+  display: block;
+  border: 0;
+  background-position: 0 0;
+}
+
+/* line 28, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-horizontal {
+  height: .8em;
+}
+/* line 30, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-horizontal .ui-slider-handle {
+  top: -0.3em;
+  margin-left: -0.6em;
+}
+/* line 33, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-horizontal .ui-slider-range {
+  top: 0;
+  height: 100%;
+}
+/* line 36, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-horizontal .ui-slider-range-min {
+  left: 0;
+}
+/* line 38, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-horizontal .ui-slider-range-max {
+  right: 0;
+}
+
+/* line 41, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-vertical {
+  width: .8em;
+  height: 100px;
+}
+/* line 44, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-vertical .ui-slider-handle {
+  left: -0.3em;
+  margin-left: 0;
+  margin-bottom: -0.6em;
+}
+/* line 48, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-vertical .ui-slider-range {
+  left: 0;
+  width: 100%;
+}
+/* line 51, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-vertical .ui-slider-range-min {
+  bottom: 0;
+}
+/* line 53, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_slider.scss */
+.ui-slider-vertical .ui-slider-range-max {
+  top: 0;
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs {
+  position: relative;
+  padding: .2em;
+  zoom: 1;
+}
+/* line 15, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav {
+  margin: 0;
+  padding: .2em .2em 0;
+}
+/* line 18, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav li {
+  list-style: none;
+  float: left;
+  position: relative;
+  top: 1px;
+  margin: 0 .2em 1px 0;
+  border-bottom: 0 !important;
+  padding: 0;
+  white-space: nowrap;
+}
+/* line 27, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav li a {
+  float: left;
+  padding: .5em 1em;
+  text-decoration: none;
+}
+/* line 31, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+  margin-bottom: 0;
+  padding-bottom: 1px;
+}
+/* line 34, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+  cursor: text;
+}
+/* line 36, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+  cursor: text;
+}
+/* line 38, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-nav li a {
+  cursor: pointer;
+}
+/* line 40, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+  cursor: pointer;
+}
+/* line 42, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-panel {
+  display: block;
+  border-width: 0;
+  padding: 1em 1.4em;
+  background: none;
+}
+/* line 47, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_tabs.scss */
+.ui-tabs .ui-tabs-hide {
+  display: none !important;
+}
+
+/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+/* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker {
+  width: 17em;
+  padding: .2em .2em 0;
+  display: none;
+}
+/* line 15, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-header {
+  position: relative;
+  padding: .2em 0;
+}
+/* line 18, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+  position: absolute;
+  top: 2px;
+  width: 1.8em;
+  height: 1.8em;
+}
+/* line 23, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover {
+  top: 1px;
+}
+/* line 25, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-prev {
+  left: 2px;
+}
+/* line 27, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-next {
+  right: 2px;
+}
+/* line 29, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-prev-hover {
+  left: 1px;
+}
+/* line 31, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-next-hover {
+  right: 1px;
+}
+/* line 33, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+  display: block;
+  position: absolute;
+  left: 50%;
+  margin-left: -8px;
+  top: 50%;
+  margin-top: -8px;
+}
+/* line 40, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-title {
+  margin: 0 2.3em;
+  line-height: 1.8em;
+  text-align: center;
+}
+/* line 44, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-title select {
+  font-size: 1em;
+  margin: 1px 0;
+}
+/* line 48, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker select.ui-datepicker-month-year {
+  width: 100%;
+}
+/* line 50, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+  width: 49%;
+}
+/* line 52, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker table {
+  width: 100%;
+  font-size: .9em;
+  border-collapse: collapse;
+  margin: 0 0 .4em;
+}
+/* line 57, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker th {
+  padding: .7em .3em;
+  text-align: center;
+  font-weight: bold;
+  border: 0;
+}
+/* line 62, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker td {
+  border: 0;
+  padding: 1px;
+}
+/* line 65, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker td span, .ui-datepicker td a {
+  display: block;
+  padding: .2em;
+  text-align: right;
+  text-decoration: none;
+}
+/* line 70, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-buttonpane {
+  background-image: none;
+  margin: .7em 0 0 0;
+  padding: 0 .2em;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+/* line 77, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-buttonpane button {
+  float: right;
+  margin: .5em .2em .4em;
+  cursor: pointer;
+  padding: .2em .6em .3em .6em;
+  width: auto;
+  overflow: visible;
+}
+/* line 84, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+  float: left;
+}
+/* line 86, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker.ui-datepicker-multi {
+  width: auto;
+}
+
+/* with multiple calendars */
+/* line 91, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi .ui-datepicker-group {
+  float: left;
+}
+/* line 93, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi .ui-datepicker-group table {
+  width: 95%;
+  margin: 0 auto .4em;
+}
+
+/* line 97, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi-2 .ui-datepicker-group {
+  width: 50%;
+}
+
+/* line 100, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi-3 .ui-datepicker-group {
+  width: 33.3%;
+}
+
+/* line 103, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi-4 .ui-datepicker-group {
+  width: 25%;
+}
+
+/* line 107, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header, .ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header {
+  border-left-width: 0;
+}
+/* line 109, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-multi .ui-datepicker-buttonpane {
+  clear: left;
+}
+
+/* line 112, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-row-break {
+  clear: both;
+  width: 100%;
+  font-size: 0em;
+}
+
+/* RTL support */
+/* line 119, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl {
+  direction: rtl;
+}
+/* line 121, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-prev {
+  right: 2px;
+  left: auto;
+}
+/* line 124, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-next {
+  left: 2px;
+  right: auto;
+}
+/* line 127, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-prev:hover {
+  right: 1px;
+  left: auto;
+}
+/* line 130, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-next:hover {
+  left: 1px;
+  right: auto;
+}
+/* line 133, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-buttonpane {
+  clear: right;
+}
+/* line 135, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-buttonpane button {
+  float: left;
+}
+/* line 137, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current {
+  float: right;
+}
+/* line 139, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-group {
+  float: right;
+}
+/* line 141, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header, .ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header {
+  border-right-width: 0;
+  border-left-width: 1px;
+}
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+/* line 147, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_datepicker.scss */
+.ui-datepicker-cover {
+  display: none;
+  /*sorry for IE5*/
+  display/**/: block;
+  /*sorry for IE5*/
+  position: absolute;
+  /*must have*/
+  z-index: -1;
+  /*must have*/
+  filter: mask();
+  /*must have*/
+  top: -4px;
+  /*must have*/
+  left: -4px;
+  /*must have*/
+  width: 200px;
+  /*must have*/
+  height: 200px;
+  /*must have*/
+}
+
+/* line 11, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_progressbar.scss */
+.ui-progressbar {
+  height: 2em;
+  text-align: left;
+}
+/* line 14, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_progressbar.scss */
+.ui-progressbar .ui-progressbar-value {
+  margin: -1px;
+  height: 100%;
+}
+
+/* line 53, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget {
+  font-family: "Source Sans Pro", "Trebuchet MS", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 1.1em;
+}
+/* line 56, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget .ui-widget {
+  font-size: 1em;
+}
+/* line 58, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+  font-family: "Source Sans Pro", "Trebuchet MS", Tahoma, Verdana, Arial, sans-serif;
+  font-size: 1em;
+}
+
+/* line 62, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-content {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #2a4465;
+  background: #41689b;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #41689b), color-stop(100%, #395c89));
+  background-image: -webkit-linear-gradient(#41689b, #395c89);
+  background-image: -moz-linear-gradient(#41689b, #395c89);
+  background-image: -o-linear-gradient(#41689b, #395c89);
+  background-image: linear-gradient(#41689b, #395c89);
+  color: #333333;
+}
+/* line 68, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-content a {
+  color: #333333;
+}
+
+/* line 71, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-header {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #2a4465;
+  background: #41689b;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #41689b), color-stop(100%, #395c89));
+  background-image: -webkit-linear-gradient(#41689b, #395c89);
+  background-image: -moz-linear-gradient(#41689b, #395c89);
+  background-image: -o-linear-gradient(#41689b, #395c89);
+  background-image: linear-gradient(#41689b, #395c89);
+  color: #333333;
+  font-weight: bold;
+}
+/* line 78, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-header a {
+  color: #333333;
+}
+
+/* line 87, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #395c89;
+  background: #4874ad;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4874ad), color-stop(100%, #395c89));
+  background-image: -webkit-linear-gradient(#4874ad, #395c89);
+  background-image: -moz-linear-gradient(#4874ad, #395c89);
+  background-image: -o-linear-gradient(#4874ad, #395c89);
+  background-image: linear-gradient(#4874ad, #395c89);
+  font-weight: normal;
+  color: #333333;
+}
+
+/* line 95, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-default a {
+  color: #333333;
+  text-decoration: none;
+}
+/* line 98, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-default a:link, .ui-state-default a:visited {
+  color: #333333;
+  text-decoration: none;
+}
+
+/* line 103, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover {
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightsteelblue;
+  background: #395c89;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #395c89), color-stop(100%, #325077));
+  background-image: -webkit-linear-gradient(#395c89, #325077);
+  background-image: -moz-linear-gradient(#395c89, #325077);
+  background-image: -o-linear-gradient(#395c89, #325077);
+  background-image: linear-gradient(#395c89, #325077);
+  font-weight: normal;
+  color: lightsteelblue;
+}
+
+/* line 111, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-hover a {
+  color: lightsteelblue;
+  text-decoration: none;
+}
+/* line 114, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-hover a:hover {
+  color: lightsteelblue;
+  text-decoration: none;
+}
+
+/* line 119, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #999999;
+  background: #dadada;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e4e4e4), color-stop(100%, #eaeaea));
+  background-image: -webkit-linear-gradient(#e4e4e4, #eaeaea);
+  background-image: -moz-linear-gradient(#e4e4e4, #eaeaea);
+  background-image: -o-linear-gradient(#e4e4e4, #eaeaea);
+  background-image: linear-gradient(#e4e4e4, #eaeaea);
+  font-weight: normal;
+  color: #212121;
+}
+
+/* line 127, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-hover a {
+  color: #212121;
+  text-decoration: none;
+}
+/* line 130, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-hover a:hover {
+  color: #212121;
+  text-decoration: none;
+}
+
+/* line 135, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #688ec0;
+  background: #395c89;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #395c89), color-stop(100%, #2a4465));
+  background-image: -webkit-linear-gradient(#395c89, #2a4465);
+  background-image: -moz-linear-gradient(#395c89, #2a4465);
+  background-image: -o-linear-gradient(#395c89, #2a4465);
+  background-image: linear-gradient(#395c89, #2a4465);
+  font-weight: normal;
+  color: lightsteelblue;
+}
+
+/* line 143, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-active a {
+  color: lightsteelblue;
+  text-decoration: none;
+}
+/* line 146, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-active a:link, .ui-state-active a:visited {
+  color: lightsteelblue;
+  text-decoration: none;
+}
+
+/* line 150, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget :active {
+  outline: none;
+}
+
+/* line 158, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #8ca9cf;
+  background: #688ec0;
+  color: #363636;
+}
+
+/* line 165, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-highlight a, .ui-widget-content .ui-state-highlight a, .ui-widget-header .ui-state-highlight a {
+  color: #363636;
+}
+
+/* line 168, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #953737;
+  background: #f35757;
+  color: #363636;
+}
+
+/* line 176, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a, .ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text {
+  color: #363636;
+}
+
+/* line 179, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-priority-primary, .ui-widget-content .ui-priority-primary, .ui-widget-header .ui-priority-primary {
+  font-weight: bold;
+}
+
+/* line 183, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-priority-secondary, .ui-widget-content .ui-priority-secondary, .ui-widget-header .ui-priority-secondary {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  font-weight: normal;
+}
+
+/* line 188, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=35);
+  opacity: 0.35;
+  background-image: none;
+}
+
+/* states and images */
+/* line 198, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon {
+  width: 16px;
+  height: 16px;
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_222222_256x240.png);
+}
+
+/* line 203, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-content .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_222222_256x240.png);
+}
+
+/* line 206, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-header .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_222222_256x240.png);
+}
+
+/* line 209, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-default .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_222222_256x240.png);
+}
+
+/* line 212, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-hover .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_ffffff_256x240.png);
+}
+
+/* line 215, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-focus .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_ffffff_256x240.png);
+}
+
+/* line 218, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-active .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_ffffff_256x240.png);
+}
+
+/* line 221, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-highlight .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_222222_256x240.png);
+}
+
+/* line 224, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
+  background-image: url(/fanstatic/css/images/absolution/ui-icons_222222_256x240.png);
+}
+
+/* positioning */
+/* line 229, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-n {
+  background-position: 0 0;
+}
+
+/* line 232, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-ne {
+  background-position: -16px 0;
+}
+
+/* line 235, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-e {
+  background-position: -32px 0;
+}
+
+/* line 238, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-se {
+  background-position: -48px 0;
+}
+
+/* line 241, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-s {
+  background-position: -64px 0;
+}
+
+/* line 244, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-sw {
+  background-position: -80px 0;
+}
+
+/* line 247, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-w {
+  background-position: -96px 0;
+}
+
+/* line 250, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-1-nw {
+  background-position: -112px 0;
+}
+
+/* line 253, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-2-n-s {
+  background-position: -128px 0;
+}
+
+/* line 256, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-carat-2-e-w {
+  background-position: -144px 0;
+}
+
+/* line 259, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-n {
+  background-position: 0 -16px;
+}
+
+/* line 262, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-ne {
+  background-position: -16px -16px;
+}
+
+/* line 265, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-e {
+  background-position: -32px -16px;
+}
+
+/* line 268, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-se {
+  background-position: -48px -16px;
+}
+
+/* line 271, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-s {
+  background-position: -64px -16px;
+}
+
+/* line 274, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-sw {
+  background-position: -80px -16px;
+}
+
+/* line 277, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-w {
+  background-position: -96px -16px;
+}
+
+/* line 280, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-1-nw {
+  background-position: -112px -16px;
+}
+
+/* line 283, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-2-n-s {
+  background-position: -128px -16px;
+}
+
+/* line 286, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-triangle-2-e-w {
+  background-position: -144px -16px;
+}
+
+/* line 289, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-n {
+  background-position: 0 -32px;
+}
+
+/* line 292, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-ne {
+  background-position: -16px -32px;
+}
+
+/* line 295, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-e {
+  background-position: -32px -32px;
+}
+
+/* line 298, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-se {
+  background-position: -48px -32px;
+}
+
+/* line 301, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-s {
+  background-position: -64px -32px;
+}
+
+/* line 304, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-sw {
+  background-position: -80px -32px;
+}
+
+/* line 307, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-w {
+  background-position: -96px -32px;
+}
+
+/* line 310, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-1-nw {
+  background-position: -112px -32px;
+}
+
+/* line 313, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-2-n-s {
+  background-position: -128px -32px;
+}
+
+/* line 316, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-2-ne-sw {
+  background-position: -144px -32px;
+}
+
+/* line 319, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-2-e-w {
+  background-position: -160px -32px;
+}
+
+/* line 322, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-2-se-nw {
+  background-position: -176px -32px;
+}
+
+/* line 325, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowstop-1-n {
+  background-position: -192px -32px;
+}
+
+/* line 328, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowstop-1-e {
+  background-position: -208px -32px;
+}
+
+/* line 331, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowstop-1-s {
+  background-position: -224px -32px;
+}
+
+/* line 334, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowstop-1-w {
+  background-position: -240px -32px;
+}
+
+/* line 337, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-n {
+  background-position: 0 -48px;
+}
+
+/* line 340, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-ne {
+  background-position: -16px -48px;
+}
+
+/* line 343, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-e {
+  background-position: -32px -48px;
+}
+
+/* line 346, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-se {
+  background-position: -48px -48px;
+}
+
+/* line 349, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-s {
+  background-position: -64px -48px;
+}
+
+/* line 352, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-sw {
+  background-position: -80px -48px;
+}
+
+/* line 355, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-w {
+  background-position: -96px -48px;
+}
+
+/* line 358, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-1-nw {
+  background-position: -112px -48px;
+}
+
+/* line 361, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-2-n-s {
+  background-position: -128px -48px;
+}
+
+/* line 364, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-2-ne-sw {
+  background-position: -144px -48px;
+}
+
+/* line 367, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-2-e-w {
+  background-position: -160px -48px;
+}
+
+/* line 370, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthick-2-se-nw {
+  background-position: -176px -48px;
+}
+
+/* line 373, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthickstop-1-n {
+  background-position: -192px -48px;
+}
+
+/* line 376, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthickstop-1-e {
+  background-position: -208px -48px;
+}
+
+/* line 379, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthickstop-1-s {
+  background-position: -224px -48px;
+}
+
+/* line 382, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowthickstop-1-w {
+  background-position: -240px -48px;
+}
+
+/* line 385, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturnthick-1-w {
+  background-position: 0 -64px;
+}
+
+/* line 388, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturnthick-1-n {
+  background-position: -16px -64px;
+}
+
+/* line 391, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturnthick-1-e {
+  background-position: -32px -64px;
+}
+
+/* line 394, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturnthick-1-s {
+  background-position: -48px -64px;
+}
+
+/* line 397, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturn-1-w {
+  background-position: -64px -64px;
+}
+
+/* line 400, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturn-1-n {
+  background-position: -80px -64px;
+}
+
+/* line 403, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturn-1-e {
+  background-position: -96px -64px;
+}
+
+/* line 406, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowreturn-1-s {
+  background-position: -112px -64px;
+}
+
+/* line 409, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowrefresh-1-w {
+  background-position: -128px -64px;
+}
+
+/* line 412, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowrefresh-1-n {
+  background-position: -144px -64px;
+}
+
+/* line 415, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowrefresh-1-e {
+  background-position: -160px -64px;
+}
+
+/* line 418, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrowrefresh-1-s {
+  background-position: -176px -64px;
+}
+
+/* line 421, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-4 {
+  background-position: 0 -80px;
+}
+
+/* line 424, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-arrow-4-diag {
+  background-position: -16px -80px;
+}
+
+/* line 427, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-extlink {
+  background-position: -32px -80px;
+}
+
+/* line 430, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-newwin {
+  background-position: -48px -80px;
+}
+
+/* line 433, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-refresh {
+  background-position: -64px -80px;
+}
+
+/* line 436, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-shuffle {
+  background-position: -80px -80px;
+}
+
+/* line 439, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-transfer-e-w {
+  background-position: -96px -80px;
+}
+
+/* line 442, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-transferthick-e-w {
+  background-position: -112px -80px;
+}
+
+/* line 445, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-folder-collapsed {
+  background-position: 0 -96px;
+}
+
+/* line 448, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-folder-open {
+  background-position: -16px -96px;
+}
+
+/* line 451, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-document {
+  background-position: -32px -96px;
+}
+
+/* line 454, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-document-b {
+  background-position: -48px -96px;
+}
+
+/* line 457, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-note {
+  background-position: -64px -96px;
+}
+
+/* line 460, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-mail-closed {
+  background-position: -80px -96px;
+}
+
+/* line 463, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-mail-open {
+  background-position: -96px -96px;
+}
+
+/* line 466, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-suitcase {
+  background-position: -112px -96px;
+}
+
+/* line 469, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-comment {
+  background-position: -128px -96px;
+}
+
+/* line 472, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-person {
+  background-position: -144px -96px;
+}
+
+/* line 475, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-print {
+  background-position: -160px -96px;
+}
+
+/* line 478, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-trash {
+  background-position: -176px -96px;
+}
+
+/* line 481, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-locked {
+  background-position: -192px -96px;
+}
+
+/* line 484, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-unlocked {
+  background-position: -208px -96px;
+}
+
+/* line 487, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-bookmark {
+  background-position: -224px -96px;
+}
+
+/* line 490, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-tag {
+  background-position: -240px -96px;
+}
+
+/* line 493, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-home {
+  background-position: 0 -112px;
+}
+
+/* line 496, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-flag {
+  background-position: -16px -112px;
+}
+
+/* line 499, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-calendar {
+  background-position: -32px -112px;
+}
+
+/* line 502, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-cart {
+  background-position: -48px -112px;
+}
+
+/* line 505, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-pencil {
+  background-position: -64px -112px;
+}
+
+/* line 508, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-clock {
+  background-position: -80px -112px;
+}
+
+/* line 511, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-disk {
+  background-position: -96px -112px;
+}
+
+/* line 514, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-calculator {
+  background-position: -112px -112px;
+}
+
+/* line 517, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-zoomin {
+  background-position: -128px -112px;
+}
+
+/* line 520, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-zoomout {
+  background-position: -144px -112px;
+}
+
+/* line 523, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-search {
+  background-position: -160px -112px;
+}
+
+/* line 526, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-wrench {
+  background-position: -176px -112px;
+}
+
+/* line 529, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-gear {
+  background-position: -192px -112px;
+}
+
+/* line 532, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-heart {
+  background-position: -208px -112px;
+}
+
+/* line 535, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-star {
+  background-position: -224px -112px;
+}
+
+/* line 538, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-link {
+  background-position: -240px -112px;
+}
+
+/* line 541, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-cancel {
+  background-position: 0 -128px;
+}
+
+/* line 544, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-plus {
+  background-position: -16px -128px;
+}
+
+/* line 547, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-plusthick {
+  background-position: -32px -128px;
+}
+
+/* line 550, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-minus {
+  background-position: -48px -128px;
+}
+
+/* line 553, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-minusthick {
+  background-position: -64px -128px;
+}
+
+/* line 556, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-close {
+  background-position: -80px -128px;
+}
+
+/* line 559, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-closethick {
+  background-position: -96px -128px;
+}
+
+/* line 562, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-key {
+  background-position: -112px -128px;
+}
+
+/* line 565, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-lightbulb {
+  background-position: -128px -128px;
+}
+
+/* line 568, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-scissors {
+  background-position: -144px -128px;
+}
+
+/* line 571, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-clipboard {
+  background-position: -160px -128px;
+}
+
+/* line 574, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-copy {
+  background-position: -176px -128px;
+}
+
+/* line 577, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-contact {
+  background-position: -192px -128px;
+}
+
+/* line 580, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-image {
+  background-position: -208px -128px;
+}
+
+/* line 583, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-video {
+  background-position: -224px -128px;
+}
+
+/* line 586, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-script {
+  background-position: -240px -128px;
+}
+
+/* line 589, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-alert {
+  background-position: 0 -144px;
+}
+
+/* line 592, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-info {
+  background-position: -16px -144px;
+}
+
+/* line 595, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-notice {
+  background-position: -32px -144px;
+}
+
+/* line 598, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-help {
+  background-position: -48px -144px;
+}
+
+/* line 601, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-check {
+  background-position: -64px -144px;
+}
+
+/* line 604, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-bullet {
+  background-position: -80px -144px;
+}
+
+/* line 607, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-radio-off {
+  background-position: -96px -144px;
+}
+
+/* line 610, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-radio-on {
+  background-position: -112px -144px;
+}
+
+/* line 613, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-pin-w {
+  background-position: -128px -144px;
+}
+
+/* line 616, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-pin-s {
+  background-position: -144px -144px;
+}
+
+/* line 619, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-play {
+  background-position: 0 -160px;
+}
+
+/* line 622, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-pause {
+  background-position: -16px -160px;
+}
+
+/* line 625, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-seek-next {
+  background-position: -32px -160px;
+}
+
+/* line 628, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-seek-prev {
+  background-position: -48px -160px;
+}
+
+/* line 631, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-seek-end {
+  background-position: -64px -160px;
+}
+
+/* line 634, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-seek-start, .ui-icon-seek-first {
+  background-position: -80px -160px;
+}
+
+/* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead */
+/* line 639, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-stop {
+  background-position: -96px -160px;
+}
+
+/* line 642, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-eject {
+  background-position: -112px -160px;
+}
+
+/* line 645, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-volume-off {
+  background-position: -128px -160px;
+}
+
+/* line 648, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-volume-on {
+  background-position: -144px -160px;
+}
+
+/* line 651, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-power {
+  background-position: 0 -176px;
+}
+
+/* line 654, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-signal-diag {
+  background-position: -16px -176px;
+}
+
+/* line 657, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-signal {
+  background-position: -32px -176px;
+}
+
+/* line 660, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-battery-0 {
+  background-position: -48px -176px;
+}
+
+/* line 663, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-battery-1 {
+  background-position: -64px -176px;
+}
+
+/* line 666, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-battery-2 {
+  background-position: -80px -176px;
+}
+
+/* line 669, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-battery-3 {
+  background-position: -96px -176px;
+}
+
+/* line 672, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-plus {
+  background-position: 0 -192px;
+}
+
+/* line 675, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-minus {
+  background-position: -16px -192px;
+}
+
+/* line 678, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-close {
+  background-position: -32px -192px;
+}
+
+/* line 681, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-triangle-e {
+  background-position: -48px -192px;
+}
+
+/* line 684, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-triangle-s {
+  background-position: -64px -192px;
+}
+
+/* line 687, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-triangle-w {
+  background-position: -80px -192px;
+}
+
+/* line 690, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-triangle-n {
+  background-position: -96px -192px;
+}
+
+/* line 693, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-arrow-e {
+  background-position: -112px -192px;
+}
+
+/* line 696, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-arrow-s {
+  background-position: -128px -192px;
+}
+
+/* line 699, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-arrow-w {
+  background-position: -144px -192px;
+}
+
+/* line 702, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-arrow-n {
+  background-position: -160px -192px;
+}
+
+/* line 705, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-zoomin {
+  background-position: -176px -192px;
+}
+
+/* line 708, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-zoomout {
+  background-position: -192px -192px;
+}
+
+/* line 711, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circle-check {
+  background-position: -208px -192px;
+}
+
+/* line 714, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circlesmall-plus {
+  background-position: 0 -208px;
+}
+
+/* line 717, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circlesmall-minus {
+  background-position: -16px -208px;
+}
+
+/* line 720, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-circlesmall-close {
+  background-position: -32px -208px;
+}
+
+/* line 723, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-squaresmall-plus {
+  background-position: -48px -208px;
+}
+
+/* line 726, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-squaresmall-minus {
+  background-position: -64px -208px;
+}
+
+/* line 729, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-squaresmall-close {
+  background-position: -80px -208px;
+}
+
+/* line 732, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-grip-dotted-vertical {
+  background-position: 0 -224px;
+}
+
+/* line 735, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-grip-dotted-horizontal {
+  background-position: -16px -224px;
+}
+
+/* line 738, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-grip-solid-vertical {
+  background-position: -32px -224px;
+}
+
+/* line 741, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-grip-solid-horizontal {
+  background-position: -48px -224px;
+}
+
+/* line 744, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-gripsmall-diagonal-se {
+  background-position: -64px -224px;
+}
+
+/* line 747, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-icon-grip-diagonal-se {
+  background-position: -80px -224px;
+}
+
+/* line 760, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+  -moz-border-radius-topleft: 0.5em;
+  -webkit-border-top-left-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+}
+
+/* line 764, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+  -moz-border-radius-topright: 0.5em;
+  -webkit-border-top-right-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+/* line 768, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+  -moz-border-radius-bottomleft: 0.5em;
+  -webkit-border-bottom-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+}
+
+/* line 772, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+  -moz-border-radius-bottomright: 0.5em;
+  -webkit-border-bottom-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+/* line 781, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-overlay {
+  background: #aaaaaa;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aaaaaa), color-stop(100%, #9d9d9d));
+  background-image: -webkit-linear-gradient(#aaaaaa, #9d9d9d);
+  background-image: -moz-linear-gradient(#aaaaaa, #9d9d9d);
+  background-image: -o-linear-gradient(#aaaaaa, #9d9d9d);
+  background-image: linear-gradient(#aaaaaa, #9d9d9d);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+
+/* line 786, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
+.ui-widget-shadow {
+  margin-top: -1em;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: -1em;
+  padding: 1em;
+  background: #aaaaaa;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aaaaaa), color-stop(100%, #9d9d9d));
+  background-image: -webkit-linear-gradient(#aaaaaa, #9d9d9d);
+  background-image: -moz-linear-gradient(#aaaaaa, #9d9d9d);
+  background-image: -o-linear-gradient(#aaaaaa, #9d9d9d);
+  background-image: linear-gradient(#aaaaaa, #9d9d9d);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+  border-radius: 1em;
+}
+
 /* import all colors and variables before bootstrap */
 /* line 19, ../../../sass/partials/_bootstrap-variables.scss */
 .navbar-default .navbar, .main-menu .navbar, .status-bar .navbar {
@@ -8149,7 +10320,7 @@ li.top-bar-button {
   float: right;
 }
 
-/* line 20, ../../../sass/adminscreen.scss */
+/* line 25, ../../../sass/adminscreen.scss */
 #editor {
   position: relative;
   width: 100%;
@@ -8645,8 +10816,18 @@ li.top-bar-button {
   margin: -1px !important;
 }
 
-/* line 38, ../../../sass/adminscreen.scss */
+/* line 43, ../../../sass/adminscreen.scss */
 #main-alert {
   background-color: #395c89;
   color: lightsteelblue;
+}
+
+/* line 49, ../../../sass/adminscreen.scss */
+#confirm-delete {
+  display: none;
+}
+
+/* line 54, ../../../sass/adminscreen.scss */
+.no-close .ui-dialog-titlebar-close {
+  display: none;
 }

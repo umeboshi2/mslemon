@@ -21,6 +21,9 @@ def configure_adminOrig(config, rootpath='/admin', permission='admin'):
     config.add_route('admin_users', '%s/users/{context}/{id}' % rootpath)
     add_view(config, 'mslemon.views.admin.users.UserManagementViewer',
                'admin_users', permission=permission)
+    config.add_route('admin_users_bb', '%s/usersbb' % rootpath)
+    add_view(config, 'mslemon.views.admin.usersbb.AppViewer',
+               'admin_users_bb', permission=permission)
     route_name = 'admin_dbadmin'
     config.add_route(route_name, '%s/dbadmin/{context}/{id}' % rootpath)
     add_view(config, 'mslemon.views.admin.dbadmin.DBAdminViewer',

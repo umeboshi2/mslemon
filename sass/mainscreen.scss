@@ -3,8 +3,19 @@
 
 // colors
 //@import "partials/basecolors/darkseagreen";
-//@import "partials/basecolors/white-smoke";
-@import "partials/basecolors/wheat4";
+//@import "partials/basecolors/darkseagreen";
+//@import "partials/basecolors/azure3";
+//@import "partials/basecolors/light-steel-blue";
+
+
+
+@import "partials/basecolors/white-smoke";
+//@import "partials/basecolors/wheat4";
+
+@import "partials/jq-ui-theme";
+
+@include jquery-ui-base-theme;
+
 
 
 /* import all colors and variables before bootstrap */
@@ -40,6 +51,7 @@
 
 
 
+
 .fc-header-title h2 {
     font-size: 1.2em;
 }
@@ -50,6 +62,10 @@
 }
 
 */
+
+
+
+
 
 #list-button {
     display: block;

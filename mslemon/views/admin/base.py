@@ -47,6 +47,8 @@ def make_main_menuOrig(request):
     menu.set_header('Admin Menu')
     url = request.route_url('admin_users', context='list', id='all')
     menu.append_new_entry('Manage Users', url)
+    url = request.route_url('admin_users_bb')
+    menu.append_new_entry('Manage Users bb', url)
     url = request.route_url('admin_sitetext', context='list', id=None)
     menu.append_new_entry('Manage Text', url)
     url = request.route_url('admin_images', context='list', id=None)

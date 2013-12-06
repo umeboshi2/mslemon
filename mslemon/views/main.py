@@ -236,7 +236,7 @@ class MainViewer(BaseViewer):
         self.layout.subheader = 'Ms. Lemon'
         #self.layout.resources.maincalendar.need()
         self.layout.resources.main_calendar_view.need()
-        self.layout.resources.cornsilk.need()
+        #self.layout.resources.cornsilk.need()
         
         template = 'mslemon:templates/mainview-calendar.mako'
         env = {}

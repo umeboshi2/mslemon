@@ -255,7 +255,7 @@
       };
 
       BaseModelView.prototype.editme = function() {
-        var button, content, dbutton, dbutton_html, editor, el, html, lvheader, mtype, nbutton, tmpl,
+        var button, confirm_div, content, dbutton, dbutton_html, delete_model, editor, el, html, lvheader, mtype, nbutton, tmpl,
           _this = this;
         tmpl = TrumpetApp.admin_mgr_tmpl.editor_template;
         html = tmpl.render(this.model.attributes);
@@ -287,10 +287,11 @@
         dbutton_html = '<div class="pull-right action-button del-entry-btn" id="del-entry-button">Delete</div>';
         lvheader = $('.listview-header');
         lvheader.append(dbutton_html);
+        confirm_div = '<div id="confirm-delete"><span class="ui-icon ui-icon-alert"></span>Delete this object?</div>';
+        $('.sidebar').append(confirm_div);
         dbutton = $('#del-entry-button');
-        dbutton.click(function() {
-          var name, response;
-          name = _this.model.get('name');
+        delete_model = function() {
+          var response;
           response = _this.model.destroy();
           response.done(function() {
             var pt, url;
@@ -306,6 +307,26 @@
           return response.fail(function() {
             return make_alert('Failed to delete ' + name);
           });
+        };
+        dbutton.click(function() {
+          var name;
+          $('#editor').hide();
+          el = $('#confirm-delete');
+          el.dialog({
+            dialogClass: 'no-close',
+            modal: true,
+            buttons: {
+              "delete": function() {
+                $(this).dialog('close');
+                return delete_model();
+              },
+              'cancel': function() {
+                $(this).dialog('close');
+                return $('#editor').show();
+              }
+            }
+          });
+          return name = _this.model.get('name');
         });
         return this;
       };

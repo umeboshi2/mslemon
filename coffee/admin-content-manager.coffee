@@ -176,9 +176,10 @@ jQuery ->
                         dbutton_html = '<div class="pull-right action-button del-entry-btn" id="del-entry-button">Delete</div>'
                         lvheader = $('.listview-header')
                         lvheader.append dbutton_html
+                        confirm_div = '<div id="confirm-delete"><span class="ui-icon ui-icon-alert"></span>Delete this object?</div>'
+                        $('.sidebar').append confirm_div
                         dbutton = $('#del-entry-button')
-                        dbutton.click =>
-                                name = @model.get 'name'
+                        delete_model = =>
                                 response = @model.destroy()
                                 response.done ->
                                         make_alert 'Deleted ' + name
@@ -188,6 +189,22 @@ jQuery ->
                                         main_router.navigate url, pt
                                 response.fail ->
                                         make_alert 'Failed to delete ' + name
+                                        
+                        dbutton.click =>
+                                $('#editor').hide()
+                                el = $('#confirm-delete')
+                                el.dialog
+                                        dialogClass: 'no-close'
+                                        modal: true
+                                        buttons:
+                                                "delete": ->
+                                                        $(this).dialog 'close'
+                                                        delete_model()
+                                                'cancel': ->
+                                                        $(this).dialog 'close'
+                                                        $('#editor').show()
+                                                        
+                                name = @model.get 'name'
                                                                 
                                         
                         return @
