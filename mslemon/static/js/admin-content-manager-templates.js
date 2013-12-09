@@ -60,7 +60,6 @@
         text: create_template
       })
     };
-    window.TrumpetApp = {};
     return TrumpetApp.admin_mgr_tmpl = admin_mgr_tmpl;
   });
 

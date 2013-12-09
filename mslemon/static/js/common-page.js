@@ -2,6 +2,7 @@
 (function() {
   $(document).ready(function() {
     var get_template, make_alert, make_alert_div;
+    window.TrumpetApp = {};
     $('.status-bar').hide();
     make_alert_div = function(message, priority) {
       var alert_div, div;
@@ -26,9 +27,9 @@
         url: url
       });
     };
-    window.make_alert_div = make_alert_div;
-    window.make_alert = make_alert;
-    return window.get_template = get_template;
+    TrumpetApp.make_alert_div = make_alert_div;
+    TrumpetApp.make_alert = make_alert;
+    return TrumpetApp.get_template = get_template;
   });
 
 }).call(this);

@@ -1,4 +1,6 @@
 jQuery ->
+        make_alert = TrumpetApp.make_alert
+        
         fetch_success = (collection, response) ->
                 make_alert('Succesful Transfer', 'success')
                 

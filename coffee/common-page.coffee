@@ -1,4 +1,6 @@
 $(document).ready ->
+        window.TrumpetApp = {}
+        
         $('.status-bar').hide()
 
         make_alert_div = (message, priority) ->
@@ -18,8 +20,8 @@ $(document).ready ->
                 return new EJS({url: url})
 
 
-        # attach some functions to window namespace
-        window.make_alert_div = make_alert_div
-        window.make_alert = make_alert
-        window.get_template = get_template
+        # attach some functions to TrumpetApp namespace
+        TrumpetApp.make_alert_div = make_alert_div
+        TrumpetApp.make_alert = make_alert
+        TrumpetApp.get_template = get_template
         

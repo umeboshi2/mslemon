@@ -80,7 +80,7 @@ jQuery ->
                         new EJS text: listview_template
                 create_template:
                         new EJS text: create_template
-        window.TrumpetApp = {}
+        
         TrumpetApp.admin_mgr_tmpl = admin_mgr_tmpl
 
         

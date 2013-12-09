@@ -5,7 +5,8 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, make_editor, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, make_alert, make_editor, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    make_alert = TrumpetApp.make_alert;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
     };

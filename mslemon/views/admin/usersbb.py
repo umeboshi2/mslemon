@@ -56,7 +56,16 @@ def prepare_main_data(request):
     layout.options_menus = dict(actions=menu)
     
 
-
+class AppViewer(AdminViewer):
+    def __init__(self, request):
+        super(AppViewer, self).__init__(request)
+        prepare_main_data(self.request)
+        self.layout.sidebar = ''
+        self.layout.content = ''
+        self.layout.resources.admin_user_manager.need()
+        
+        
+        
 class AddUserSchema(colander.Schema):
     name = colander.SchemaNode(
         colander.String(),
@@ -82,13 +91,6 @@ class AddtoGroupSchema(colander.Schema):
         widget=deferred_choices,
         title='Add to Group',
         )
-
-class AppViewer(AdminViewer):
-    def __init__(self, request):
-        super(AppViewer, self).__init__(request)
-        prepare_main_data(self.request)
-        self.layout.sidebar = ''
-        self.layout.content = ''
 
 
 

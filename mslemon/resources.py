@@ -113,7 +113,8 @@ test_backbone = make_resource('test-backbone.js',
                               depends=[backbone])
 
 admin_content_manager_templates = make_resource(
-    'admin-content-manager-templates.js')
+    'admin-content-manager-templates.js',
+    depends=[common_page])
 
 
 admin_content_manager_deps = [backbone, ace.ace,
@@ -127,7 +128,12 @@ admin_content_manager_deps = [backbone, ace.ace,
 admin_content_manager = make_resource('admin-content-manager.js',
                                       depends=admin_content_manager_deps)
 
+admin_user_manager_deps = [backbone, common_page]
 
+admin_user_manager = make_resource('admin-user-manager.js',
+                                   depends=admin_user_manager_deps)
+
+                                   
 class StaticResources(TrumpetResources):
     main_screen = main_screen
     admin_screen = admin_screen
@@ -158,6 +164,7 @@ class StaticResources(TrumpetResources):
 
     test_backbone = test_backbone
     admin_content_manager = admin_content_manager
+    admin_user_manager = admin_user_manager
     
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(object):
