@@ -21,7 +21,6 @@
         'js': SiteJSListView
       };
     };
-    window.lviews = list_views;
     make_editor = function(mtype, savebutton, content) {
       var editor, session;
       if (content == null) {

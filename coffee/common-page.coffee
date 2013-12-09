@@ -1,6 +1,8 @@
 $(document).ready ->
+        # Create TrumpetApp as a namespace object
         window.TrumpetApp = {}
-        
+
+        # hide the status bar
         $('.status-bar').hide()
 
         make_alert_div = (message, priority) ->

@@ -12,8 +12,6 @@ jQuery ->
                 'tmpl': SiteTemplateListView
                 'css': SiteCSSListView
                 'js': SiteJSListView
-        # FIXME: attached to window for testing
-        window.lviews = list_views
 
         # savebutton is jQuery object
         make_editor = (mtype, savebutton, content='') ->
