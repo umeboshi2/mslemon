@@ -47,7 +47,8 @@ jQuery ->
                         return response.data
 
                          
-
+        class BaseListView extends Backbone.View
+                
 
         class SideView extends Backbone.View
                 el: $ '.sidebar'
@@ -57,7 +58,8 @@ jQuery ->
                         @current_view = null
 
                 render: ->
-                        $(@el).text 'Hello world!!!'
+                        tmpl = TrumpetApp.admin_usrmgr_tmpl.side_view_template
+                        $(@el).html tmpl.render()
                         return @
 
 
