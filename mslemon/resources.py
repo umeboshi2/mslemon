@@ -116,6 +116,10 @@ admin_content_manager_templates = make_resource(
     'admin-content-manager-templates.js',
     depends=[common_page])
 
+admin_user_manager_templates = make_resource(
+    'admin-user-manager-templates.js',
+    depends=[common_page])
+
 
 admin_content_manager_deps = [backbone, ace.ace,
                               ace.worker_css, ace.mode_css,
@@ -128,7 +132,7 @@ admin_content_manager_deps = [backbone, ace.ace,
 admin_content_manager = make_resource('admin-content-manager.js',
                                       depends=admin_content_manager_deps)
 
-admin_user_manager_deps = [backbone, common_page]
+admin_user_manager_deps = [backbone, admin_user_manager_templates]
 
 admin_user_manager = make_resource('admin-user-manager.js',
                                    depends=admin_user_manager_deps)
