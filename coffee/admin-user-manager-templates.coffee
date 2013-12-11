@@ -3,10 +3,9 @@ jQuery ->
         # Templates
         ########################################
         list_titles =
-                path: 'Site Paths'
-                tmpl: 'Site Templates'
-                css: 'Site CSS'
-                js: 'Site Javascript'
+                user: 'Users'
+                group: 'Groups'
+
                 
         side_view_template =
                 '
@@ -15,7 +14,10 @@ jQuery ->
                 <div class="action-button home-button">Main</div>
                 </div>
                 <div>
-                <div class="action-button sitefoo-button">nothing</div>
+                <div class="action-button users-button">Users</div>
+                </div>
+                <div>
+                <div class="action-button groups-button">Groups</div>
                 </div>
                 </div>
                 '
@@ -27,6 +29,13 @@ jQuery ->
           <div class="pull-right action-button show-entry-btn">show</div>
                 </div>
                 '
+        user_entry_template =
+                '
+                <div class="listview-list-entry">
+                        <%= username %> 
+          <div class="pull-right action-button show-entry-btn">show</div>
+                </div>
+                '
         #######################################################
         editor_template = '
                 <div id="edit-status">Editing <%= name %>
@@ -35,7 +44,7 @@ jQuery ->
                 <div id="editor"></div>
                 '
         listview_template = '
-                <% var title = TrumpetApp.admin_mgr_tmpl.list_titles[type] %>
+                <% var title = TrumpetApp.admin_usrmgr_tmpl.list_titles[type] %>
                 <div class="listview-header"><%= title %>
                 <div class="pull-right action-button add-entry-btn" id="new-entry-button">New Entry</div>
                 </div>
@@ -58,15 +67,17 @@ jQuery ->
         #######################################################
         admin_usrmgr_tmpl =
                 list_titles: list_titles
-                side_view_template:
+                side_view:
                         new EJS text: side_view_template
-                entry_template:
+                entry:
                         new EJS text: entry_template
-                editor_template:
+                user_entry:
+                        new EJS text: user_entry_template
+                editor:
                         new EJS text: editor_template
-                listview_template:
+                listview:
                         new EJS text: listview_template
-                create_template:
+                create:
                         new EJS text: create_template
         
         TrumpetApp.admin_usrmgr_tmpl = admin_usrmgr_tmpl
