@@ -5,7 +5,8 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var EditSiteTextView, Router, SiteText, SiteTextList, SiteTextListView, SiteTextView, edit_template, fetch_error, fetch_success, home_route_run, list_template, show_template, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    var EditSiteTextView, Router, SiteText, SiteTextList, SiteTextListView, SiteTextView, edit_template, fetch_error, fetch_success, get_template, home_route_run, list_template, show_template, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    get_template = TrumpetApp.get_template;
     show_template = get_template('show-site-template-ejs');
     window.show_template = show_template;
     edit_template = get_template('edit-site-template-ejs');

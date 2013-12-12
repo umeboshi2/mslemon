@@ -8,11 +8,20 @@
       css: 'Site CSS',
       js: 'Site Javascript'
     };
-    side_view_template = "<div class=\"main-content-manager-view\">\n<div>\n<div class=\"action-button home-button\">Main</div>\n</div>\n<div>\n<div class=\"action-button sitepaths-button\">Paths</div>\n</div>\n<div>\n<div class=\"action-button sitetmpl-button\">Templates</div>\n</div>\n<div>\n<div class=\"action-button sitecss-button\">CSS</div>\n</div>\n<div>\n<div class=\"action-button sitejs-button\">JS</div>\n</div>\n<div>\n<div class=\"action-button sitefoo-button\">nothing</div>\n</div>\n</div>";
+    side_view_template = '\
+                <div class="main-content-manager-view btn-group-vertical">\
+                <div class="btn btn-default home-button">Main</div>\
+                <div class="btn btn-default sitepaths-button">Paths</div>\
+                <div class="btn btn-default sitetmpl-button">Templates</div>\
+                <div class="btn btn-default sitecss-button">CSS</div>\
+                <div class="btn btn-default sitejs-button">JS</div>\
+                <div class="btn btn-default sitefoo-button">nothing</div>\
+                </div>\
+                ';
     entry_template = '\
                 <div class="listview-list-entry">\
                         <%= name %> \
-          <div class="pull-right action-button show-entry-btn">show</div>\
+          <div class="pull-right btn btn-default btn-xs show-entry-btn"><i class="fa fa-pencil"></i></div>\
                 </div>\
                 ';
     editor_template = '\
@@ -24,7 +33,7 @@
     listview_template = '\
                 <% var title = TrumpetApp.admin_mgr_tmpl.list_titles[type] %>\
                 <div class="listview-header"><%= title %>\
-                <div class="pull-right action-button add-entry-btn" id="new-entry-button">New Entry</div>\
+                <div class="pull-right btn btn-default btn-xs add-entry-btn" id="new-entry-button"><i class="fa fa-plus-square"></i></div>\
                 </div>\
                 <div class="listview-list"></div>\
                 ';

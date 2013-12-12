@@ -1,5 +1,6 @@
 jQuery ->
-
+        get_template = TrumpetApp.get_template
+        
         show_template = get_template('show-site-template-ejs')
         window.show_template = show_template
 

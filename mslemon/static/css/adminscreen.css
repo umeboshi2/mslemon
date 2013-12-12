@@ -2172,17 +2172,17 @@ button.ui-button::-moz-focus-inner {
 }
 
 /* import all colors and variables before bootstrap */
-/* line 19, ../../../sass/partials/_bootstrap-variables.scss */
+/* line 24, ../../../sass/partials/_bootstrap-variables.scss */
 .navbar-default .navbar, .main-menu .navbar, .status-bar .navbar {
   margin-bottom: 1em;
 }
 
-/* line 24, ../../../sass/partials/_bootstrap-variables.scss */
+/* line 29, ../../../sass/partials/_bootstrap-variables.scss */
 header.header > h1 {
   font-family: "Rambla";
 }
 
-/* line 27, ../../../sass/partials/_bootstrap-variables.scss */
+/* line 32, ../../../sass/partials/_bootstrap-variables.scss */
 header.header > h2 {
   font-family: "Rambla";
 }
@@ -4860,20 +4860,20 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 /* line 55, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-default {
   color: #333333;
-  background-color: white;
-  border-color: #cccccc;
+  background-color: #688ec0;
+  border-color: #395c89;
 }
 /* line 470, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
   color: #333333;
-  background-color: #ebebeb;
-  border-color: #adadad;
+  background-color: #4b79b4;
+  border-color: #273f5e;
 }
 /* line 475, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .open .btn-default.dropdown-toggle {
   color: #333333;
-  background-color: #ebebeb;
-  border-color: #adadad;
+  background-color: #4b79b4;
+  border-color: #273f5e;
 }
 /* line 481, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-default:active, .btn-default.active {
@@ -4885,8 +4885,8 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 494, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
-  background-color: white;
-  border-color: #cccccc;
+  background-color: #688ec0;
+  border-color: #395c89;
 }
 
 /* line 58, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
@@ -10069,7 +10069,7 @@ li.top-bar-button {
 }
 
 /* line 163, ../../../sass/partials/_baselayout.scss */
-.sidebar {
+.sidebarOrig {
   /*@include background-size('cover');*/
   width: 23.7288135593%;
   float: left;
@@ -10088,32 +10088,48 @@ li.top-bar-button {
   border-bottom-right-radius: 0.5em;
 }
 /* line 165, ../../../sass/partials/_baselayout.scss */
-.sidebar a {
+.sidebarOrig a {
   color: #212121;
 }
 /* line 176, ../../../sass/partials/_baselayout.scss */
-.sidebar a:hover {
+.sidebarOrig a:hover {
   background: #688ec0;
   border-radius: 0.5em;
   -moz-border-radius: 0.5em;
 }
 /* line 181, ../../../sass/partials/_baselayout.scss */
-.sidebar .left-menu-header {
+.sidebarOrig .left-menu-header {
   font-family: "Rambla";
   font-size: 1.5em;
   background: #395c89;
   color: lightsteelblue;
 }
 /* line 187, ../../../sass/partials/_baselayout.scss */
-.sidebar .left-menu {
+.sidebarOrig .left-menu {
   margin-left: 0.5em;
 }
 /* line 190, ../../../sass/partials/_baselayout.scss */
-.sidebar #sidebar-logout {
+.sidebarOrig #sidebar-logout {
   margin-left: 0.5em;
 }
 
 /* line 195, ../../../sass/partials/_baselayout.scss */
+.sidebar {
+  /*@include background-size('cover');*/
+  width: 23.7288135593%;
+  float: left;
+  margin-right: 1.6949152542%;
+  display: inline;
+  float: left;
+  font-family: "Nunito";
+  font-size: 1.1em;
+}
+/* line 197, ../../../sass/partials/_baselayout.scss */
+.sidebar a {
+  color: #212121;
+}
+
+/* line 207, ../../../sass/partials/_baselayout.scss */
 .footer {
   width: 100%;
   float: left;
@@ -10830,4 +10846,10 @@ li.top-bar-button {
 /* line 54, ../../../sass/adminscreen.scss */
 .no-close .ui-dialog-titlebar-close {
   display: none;
+}
+
+/* line 59, ../../../sass/adminscreen.scss */
+.add-entry-btn {
+  margin-top: 0.1em;
+  margin-right: 0.075em;
 }

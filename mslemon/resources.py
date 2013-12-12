@@ -7,6 +7,7 @@ from haberdashery.resources import bootstrap
 from haberdashery.resources import create_js
 from haberdashery.resources import backbone
 from haberdashery.resources import ejs
+from haberdashery.resources import font_awesome_css
 
 
 #from trumpet.resources import jqueryui
@@ -46,18 +47,19 @@ def make_resource(filename, depends=None):
 favicon = Resource(library, 'favicon.ico')
 
 main_screen = make_resource('mainscreen.css',
-                           depends=[bootstrap.bootstrap])
+                           depends=[bootstrap.bootstrap_js])
 
 admin_screen = make_resource('adminscreen.css',
-                             depends=[bootstrap.bootstrap])
+                             depends=[bootstrap.bootstrap_js])
 
 post_to_url = make_resource('post2url.js', depends=[jqueryui])
 
 
 
 
-common_page = make_resource('common-page.js', depends=[jqueryui,
-                                                       bootstrap.bootstrap,
+common_page = make_resource('common-page.js', depends=[font_awesome_css,
+                                                       jqueryui,
+                                                       bootstrap.bootstrap_js,
                                                        ejs])
 
 take_call_button = make_resource('take-call-button.js', depends=[jqueryui])

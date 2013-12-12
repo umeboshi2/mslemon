@@ -7,28 +7,22 @@
       group: 'Groups'
     };
     side_view_template = '\
-                <div class="main-content-manager-view">\
-                <div>\
-                <div class="action-button home-button">Main</div>\
-                </div>\
-                <div>\
-                <div class="action-button users-button">Users</div>\
-                </div>\
-                <div>\
-                <div class="action-button groups-button">Groups</div>\
-                </div>\
+                <div class="main-content-manager-view btn-group-vertical">\
+                <div class="btn btn-default home-button">Main</div>\
+                <div class="btn btn-default users-button">Users</div>\
+                <div class="btn btn-default groups-button">Groups</div>\
                 </div>\
                 ';
     entry_template = '\
                 <div class="listview-list-entry">\
                         <%= name %> \
-          <div class="pull-right action-button show-entry-btn">show</div>\
+          <div class="pull-right btn btn-default btn-xs show-entry-btn"><i class="fa fa-folder-open"></i></div>\
                 </div>\
                 ';
     user_entry_template = '\
                 <div class="listview-list-entry">\
                         <%= username %> \
-          <div class="pull-right action-button show-entry-btn">show</div>\
+          <div class="pull-right btn btn-default btn-xs show-entry-btn"><i class="fa fa-folder-open"></i></div>\
                 </div>\
                 ';
     editor_template = '\
@@ -40,7 +34,7 @@
     listview_template = '\
                 <% var title = TrumpetApp.admin_usrmgr_tmpl.list_titles[type] %>\
                 <div class="listview-header"><%= title %>\
-                <div class="pull-right action-button add-entry-btn" id="new-entry-button">New Entry</div>\
+                <div class="pull-right btn btn-default btn-xs add-entry-btn" id="new-entry-button"><i class="fa fa-plus-square"></i></div>\
                 </div>\
                 <div class="listview-list"></div>\
                 ';
