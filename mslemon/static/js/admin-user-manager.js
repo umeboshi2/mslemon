@@ -5,7 +5,7 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseMainContentView, BaseModelView, Group, GroupList, GroupListView, MainUserView, Router, SideView, User, UserList, UserListView, list_views, main_router, side_view, _ref, _ref1, _ref10, _ref11, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseCollection, BaseListView, BaseMainContentView, BaseModelView, Group, GroupList, GroupListView, MainGroupView, MainUserView, Router, SideView, User, UserGroupListView, UserList, UserListView, list_views, main_router, make_ug_collection, side_view, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
     list_views = function() {
       return {
         'user': UserListView,
@@ -62,13 +62,19 @@
         return _ref1;
       }
 
+      User.prototype.type = Backbone.HasMany;
+
+      User.prototype.relatedModel = 'Group';
+
+      User.prototype.collectionType = 'UserList';
+
       User.prototype.defaults = {
-        type: 'user'
+        objtype: 'user'
       };
 
       return User;
 
-    })(Backbone.Model);
+    })(Supermodel.Model);
     Group = (function(_super) {
       __extends(Group, _super);
 
@@ -78,37 +84,48 @@
       }
 
       Group.prototype.defaults = {
-        type: 'group'
+        objtype: 'group'
       };
 
       return Group;
 
-    })(Backbone.Model);
+    })(Backbone.RelationalModel);
+    BaseCollection = (function(_super) {
+      __extends(BaseCollection, _super);
+
+      function BaseCollection() {
+        _ref3 = BaseCollection.__super__.constructor.apply(this, arguments);
+        return _ref3;
+      }
+
+      BaseCollection.prototype.parse = function(response) {
+        return response.data;
+      };
+
+      return BaseCollection;
+
+    })(Backbone.Collection);
     UserList = (function(_super) {
       __extends(UserList, _super);
 
       function UserList() {
-        _ref3 = UserList.__super__.constructor.apply(this, arguments);
-        return _ref3;
+        _ref4 = UserList.__super__.constructor.apply(this, arguments);
+        return _ref4;
       }
 
       UserList.prototype.model = User;
 
       UserList.prototype.url = '/rest/users';
 
-      UserList.prototype.parse = function(response) {
-        return response.data;
-      };
-
       return UserList;
 
-    })(Backbone.Collection);
+    })(BaseCollection);
     GroupList = (function(_super) {
       __extends(GroupList, _super);
 
       function GroupList() {
-        _ref4 = GroupList.__super__.constructor.apply(this, arguments);
-        return _ref4;
+        _ref5 = GroupList.__super__.constructor.apply(this, arguments);
+        return _ref5;
       }
 
       GroupList.prototype.model = Group;
@@ -121,13 +138,32 @@
 
       return GroupList;
 
-    })(Backbone.Collection);
+    })(BaseCollection);
+    make_ug_collection = function(user_id) {
+      var uglist, _ref6;
+      uglist = (function(_super) {
+        __extends(uglist, _super);
+
+        function uglist() {
+          _ref6 = uglist.__super__.constructor.apply(this, arguments);
+          return _ref6;
+        }
+
+        uglist.prototype.model = Group;
+
+        uglist.prototype.url = '/rest/users/' + user_id + '/groups';
+
+        return uglist;
+
+      })(BaseCollection);
+      return new uglist;
+    };
     BaseModelView = (function(_super) {
       __extends(BaseModelView, _super);
 
       function BaseModelView() {
-        _ref5 = BaseModelView.__super__.constructor.apply(this, arguments);
-        return _ref5;
+        _ref6 = BaseModelView.__super__.constructor.apply(this, arguments);
+        return _ref6;
       }
 
       BaseModelView.prototype.template = TrumpetApp.admin_usrmgr_tmpl.entry;
@@ -160,9 +196,15 @@
       };
 
       BaseModelView.prototype.showentry = function() {
-        var el;
+        var el, html, view;
         el = $('.listview-list');
-        return el.html("HEllo");
+        if (this.model.get('objtype') === 'user') {
+          view = new MainUserView;
+        } else {
+          view = new MainGroupView;
+        }
+        html = view.render(this.model.attributes);
+        return el.html(html);
       };
 
       return BaseModelView;
@@ -172,8 +214,8 @@
       __extends(BaseMainContentView, _super);
 
       function BaseMainContentView() {
-        _ref6 = BaseMainContentView.__super__.constructor.apply(this, arguments);
-        return _ref6;
+        _ref7 = BaseMainContentView.__super__.constructor.apply(this, arguments);
+        return _ref7;
       }
 
       BaseMainContentView.prototype.el = $('.right-column-content');
@@ -192,16 +234,36 @@
       __extends(MainUserView, _super);
 
       function MainUserView() {
-        _ref7 = MainUserView.__super__.constructor.apply(this, arguments);
-        return _ref7;
+        _ref8 = MainUserView.__super__.constructor.apply(this, arguments);
+        return _ref8;
       }
 
       MainUserView.prototype.render = function(user) {
         var tmpl;
-        return tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view;
+        tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view;
+        this.$el.html(tmpl.render(user));
+        return this;
       };
 
       return MainUserView;
+
+    })(BaseMainContentView);
+    MainGroupView = (function(_super) {
+      __extends(MainGroupView, _super);
+
+      function MainGroupView() {
+        _ref9 = MainGroupView.__super__.constructor.apply(this, arguments);
+        return _ref9;
+      }
+
+      MainGroupView.prototype.render = function(group) {
+        var tmpl;
+        tmpl = TrumpetApp.admin_usrmgr_tmpl.main_group_view;
+        this.$el.html(tmpl.render(group));
+        return this;
+      };
+
+      return MainGroupView;
 
     })(BaseMainContentView);
     BaseListView = (function(_super) {
@@ -209,8 +271,8 @@
 
       function BaseListView() {
         this.appendItem = __bind(this.appendItem, this);
-        _ref8 = BaseListView.__super__.constructor.apply(this, arguments);
-        return _ref8;
+        _ref10 = BaseListView.__super__.constructor.apply(this, arguments);
+        return _ref10;
       }
 
       BaseListView.prototype.render = function(data) {
@@ -252,8 +314,8 @@
 
       function UserListView() {
         this.appendItem = __bind(this.appendItem, this);
-        _ref9 = UserListView.__super__.constructor.apply(this, arguments);
-        return _ref9;
+        _ref11 = UserListView.__super__.constructor.apply(this, arguments);
+        return _ref11;
       }
 
       UserListView.prototype.initialize = function() {
@@ -280,8 +342,8 @@
       __extends(GroupListView, _super);
 
       function GroupListView() {
-        _ref10 = GroupListView.__super__.constructor.apply(this, arguments);
-        return _ref10;
+        _ref12 = GroupListView.__super__.constructor.apply(this, arguments);
+        return _ref12;
       }
 
       GroupListView.prototype.initialize = function() {
@@ -294,14 +356,32 @@
       return GroupListView;
 
     })(BaseListView);
+    UserGroupListView = (function(_super) {
+      __extends(UserGroupListView, _super);
+
+      function UserGroupListView() {
+        _ref13 = UserGroupListView.__super__.constructor.apply(this, arguments);
+        return _ref13;
+      }
+
+      UserGroupListView.prototype.initialize = function(user_id) {
+        console.log('Init UserGroupListView');
+        this.collection = make_ug_collection(user_id);
+        this.collection.bind('add', this.appendItem);
+        return this.collection.fetch();
+      };
+
+      return UserGroupListView;
+
+    })(Backbone.View);
     SideView = (function(_super) {
       var pull_trigger;
 
       __extends(SideView, _super);
 
       function SideView() {
-        _ref11 = SideView.__super__.constructor.apply(this, arguments);
-        return _ref11;
+        _ref14 = SideView.__super__.constructor.apply(this, arguments);
+        return _ref14;
       }
 
       SideView.prototype.el = $('.sidebar');

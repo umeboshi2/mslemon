@@ -17,6 +17,7 @@ jQuery ->
                         
                 home: ->
                         @common()
+                        
 
                 listview: (lview) ->
                         @common()
@@ -31,26 +32,32 @@ jQuery ->
         ########################################
         # Models
         ########################################
-        class User extends Backbone.Model
+        class User extends Supermodel.Model
+                type: Backbone.HasMany
+                relatedModel: 'Group'
+                collectionType: 'UserList'
+                
                 defaults:
-                        type: 'user'
+                        objtype: 'user'
                         
-        class Group extends Backbone.Model
+        class Group extends Backbone.RelationalModel
                 defaults:
-                        type: 'group'
+                        objtype: 'group'
 
         ########################################
         # Collections
         ########################################
-        class UserList extends Backbone.Collection
-                model: User
-                url: '/rest/users'
+        class BaseCollection extends Backbone.Collection
                 # wrap the parsing to retrieve the
                 # 'data' attribute from the json response
                 parse: (response) ->
                         return response.data
+                
+        class UserList extends BaseCollection
+                model: User
+                url: '/rest/users'
 
-        class GroupList extends Backbone.Collection
+        class GroupList extends BaseCollection
                 model: Group
                 url: '/rest/groups'
                 # wrap the parsing to retrieve the
@@ -58,7 +65,12 @@ jQuery ->
                 parse: (response) ->
                         return response.data
 
-                         
+        make_ug_collection = (user_id) ->
+                class uglist extends BaseCollection
+                        model: Group
+                        url: '/rest/users/' + user_id + '/groups'
+                return new uglist
+                
         ########################################
         # Views
         ########################################
@@ -100,7 +112,13 @@ jQuery ->
 
                 showentry: ->
                         el = $('.listview-list')
-                        el.html "HEllo"
+                        if @model.get('objtype') == 'user'
+                                view = new MainUserView
+                        else
+                                view = new MainGroupView
+                        html = view.render @model.attributes
+                        el.html html
+                        
 
         class BaseMainContentView extends Backbone.View
                 el: $ '.right-column-content'
@@ -114,7 +132,15 @@ jQuery ->
         class MainUserView extends BaseMainContentView
                 render: (user) ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view
-
+                        
+                        @$el.html tmpl.render user
+                        return @
+                                                                        
+        class MainGroupView extends BaseMainContentView
+                render: (group) ->
+                        tmpl = TrumpetApp.admin_usrmgr_tmpl.main_group_view
+                        @$el.html tmpl.render group
+                        return @
                                                                         
         class BaseListView extends BaseMainContentView
                 render: (data) ->
@@ -153,11 +179,18 @@ jQuery ->
                         window.mbview = view
                         html = view.render(model).el
                         $('.listview-list').append html
-                
+
         class GroupListView extends BaseListView
                 initialize: ->
                         console.log('Init GroupListView')
                         @collection = new GroupList
+                        @collection.bind 'add', @appendItem
+                        @collection.fetch()
+                        
+        class UserGroupListView extends Backbone.View
+                initialize: (user_id) ->
+                        console.log('Init UserGroupListView')
+                        @collection = make_ug_collection user_id
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
                         

@@ -22,10 +22,12 @@ class UserResource(BaseResource):
         super(UserResource, self).__init__(request)
         self.mgr = UserManager(self.db)
         
-    
     def collection_get(self):
+        get=None
+        if self.request.GET:
+            get=dict(self.request.GET)
         q = self.mgr.user_query()
-        return dict(data=[o.serialize() for o in q])
+        return dict(data=[o.serialize() for o in q], get=get)
 
     def collection_post(self):
         name = self.request.json['name']
@@ -79,12 +81,35 @@ class UserGroupResource(BaseResource):
         return dict(data=data)
 
     def collection_post(self):
-        name = self.request.json['name']
-        g = self.mgr.add_group(name)
-        return dict(obj=g.serialize(), result='success')
+        gid = self.request.json['id']
+        uid = int(self.request.matchdict['id'])
+        self.mgr.add_user_to_group(uid, gid)
+        return dict(result='success')
 
     def delete(self):
-        id = int(self.request.matchdict['id'])
-        self.mgr.delete_group(id)
+        uid = int(self.request.matchdict['uid'])
+        gid = int(self.request.matchdict['id'])
+        self.mgr.remove_user_from_group(uid, gid)
         return dict(result='success')
+
+    def get(self):
+        gid = int(self.request.matchdict['id'])
+        return dict(data=self.mgr.get_group(gid).serialize())
+    
+    
+@resource(collection_path='/rest/groups/{gid}/members', path='/rest/groups/{gid}/members/{uid}',
+          permission='admin')
+class GroupMemberResource(BaseResource):
+    dbmodel = UserGroup
+    
+    def __init__(self, request):
+        super(GroupMemberResource, self).__init__(request)
+        self.mgr = UserManager(self.db)
+
+    def collection_get(self):
+        gid = int(self.request.matchdict['gid'])
+        users = self.mgr.list_members_of_group(gid)
+        data = [u.serialize() for u in users]
+        return dict(data=data)
+
     

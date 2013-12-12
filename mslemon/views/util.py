@@ -55,4 +55,11 @@ def get_regular_users(request):
     admin_username = get_admin_username(request)
     return [u for u in users if u.username != admin_username]
 
+def page_query(query, page, limit):
+        # limit numrows, offset rownum
+        offset = page * limit
+        query = query.limit(limit)
+        query = query.offset(offset)
+        return query
+    
 

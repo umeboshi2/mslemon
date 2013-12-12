@@ -8,6 +8,8 @@ from haberdashery.resources import create_js
 from haberdashery.resources import backbone
 from haberdashery.resources import ejs
 from haberdashery.resources import font_awesome_css
+from haberdashery.resources import backbone_relational
+from haberdashery.resources import supermodel
 
 
 #from trumpet.resources import jqueryui
@@ -134,7 +136,9 @@ admin_content_manager_deps = [backbone, ace.ace,
 admin_content_manager = make_resource('admin-content-manager.js',
                                       depends=admin_content_manager_deps)
 
-admin_user_manager_deps = [backbone, admin_user_manager_templates]
+admin_user_manager_deps = [backbone_relational,
+                           supermodel,
+                           admin_user_manager_templates]
 
 admin_user_manager = make_resource('admin-user-manager.js',
                                    depends=admin_user_manager_deps)

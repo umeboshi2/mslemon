@@ -31,11 +31,26 @@ jQuery ->
                 </div>
                 '
         #######################################################
+        main_user_view = '
+                <div class="main-user-view">
+                        view user <strong><%= username %></strong>
+                        <div class="user-group-list">
+                        </div>
+                </div>
+                '
+                
+        main_group_view = '
+                <div class="main-group-view">
+                        view group <strong><%= name %></strong>
+                        <div class="group-members-list">
+                        </div>
+                </div>
+                '
+                
         editor_template = '
                 <div id="edit-status">Editing <%= name %>
                 <div class="action-button" id="save-content">Save</div>
                 </div>
-                <div id="editor"></div>
                 '
         listview_template = '
                 <% var title = TrumpetApp.admin_usrmgr_tmpl.list_titles[type] %>
@@ -53,9 +68,6 @@ jQuery ->
                         <label class="form-inline" for="nameinput">Name</label>
                         <input style="width:80%" class="form-control form-inline pull-right" name="name" id="nameinput">
                         </span>
-                        <div id="edit-status">
-                        </div>
-                        <div id="editor"></div>
                 </div>        
                 '
         #######################################################
@@ -73,6 +85,11 @@ jQuery ->
                         new EJS text: listview_template
                 create:
                         new EJS text: create_template
+                main_user_view:
+                        new EJS text: main_user_view
+                main_group_view:
+                        new EJS text: main_group_view
+                        
         
         TrumpetApp.admin_usrmgr_tmpl = admin_usrmgr_tmpl
 
