@@ -101,11 +101,22 @@ jQuery ->
                 showentry: ->
                         el = $('.listview-list')
                         el.html "HEllo"
-                        
-        
-        class BaseListView extends Backbone.View
-                el: $ '.right-column-content'
 
+        class BaseMainContentView extends Backbone.View
+                el: $ '.right-column-content'
+                                        
+                remove: () ->
+                        @undelegateEvents()
+                        @$el.empty()
+                        @stopListening()
+                        return @a
+
+        class MainUserView extends BaseMainContentView
+                render: (user) ->
+                        tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view
+
+                                                                        
+        class BaseListView extends BaseMainContentView
                 render: (data) ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.listview
                         @$el.html tmpl.render data
@@ -114,12 +125,6 @@ jQuery ->
                 modelView: BaseModelView
 
                 
-                remove: () ->
-                        @undelegateEvents()
-                        @$el.empty()
-                        @stopListening()
-                        return @
-
                 appendItem: (model) =>
                         view = new @modelView model: model
                         html = view.render(model).el

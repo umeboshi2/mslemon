@@ -63,18 +63,20 @@ class GroupResource(BaseResource):
         self.mgr.delete_group(id)
         return dict(result='success')
 
-@resource(collection_path='/rest/user/{uid}/groups', path='/rest/user/{uid}/groups/{id}',
+@resource(collection_path='/rest/users/{uid}/groups', path='/rest/users/{uid}/groups/{id}',
           permission='admin')
 class UserGroupResource(BaseResource):
     dbmodel = UserGroup
     
     def __init__(self, request):
-        super(GroupResource, self).__init__(request)
+        super(UserGroupResource, self).__init__(request)
         self.mgr = UserManager(self.db)
 
     def collection_get(self):
-        q = self.mgr.group_query()
-        return dict(data=[o.serialize() for o in q])
+        uid = int(self.request.matchdict['uid'])
+        groups = self.mgr.list_groups_for_user(uid)
+        data = [g.serialize() for g in groups]
+        return dict(data=data)
 
     def collection_post(self):
         name = self.request.json['name']
