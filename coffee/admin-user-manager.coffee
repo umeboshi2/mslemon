@@ -3,6 +3,21 @@ jQuery ->
         list_views = ->
                 'user': UserListView
                 'group': GroupListView
+
+        make_group_select_dlg = ->
+                console.log("make_group_select_dlg")
+                html = '<div id="select-group-dialog"></div>'
+                page = $ '.main-content'
+                page.append html
+                dl = $ '#select-group-dialog'
+                dl.dialog
+                        dialogClass: 'no-close'
+                        modal: true
+                        buttons:
+                                'cancel': ->
+                                        $(this).dialog 'close'
+                                        
+                
                 
         class Router extends Backbone.Router
                 routes:
@@ -28,6 +43,14 @@ jQuery ->
                         view = new klass
                         view.render type: lview
                         side_view.current_view = view
+
+
+
+
+
+
+
+
                         
         ########################################
         # Models
@@ -43,6 +66,21 @@ jQuery ->
         class Group extends Backbone.RelationalModel
                 defaults:
                         objtype: 'group'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         ########################################
         # Collections
@@ -70,6 +108,9 @@ jQuery ->
                         model: Group
                         url: '/rest/users/' + user_id + '/groups'
                 return new uglist
+
+
+                
                 
         ########################################
         # Views
@@ -113,13 +154,13 @@ jQuery ->
                 showentry: ->
                         el = $('.listview-list')
                         if @model.get('objtype') == 'user'
-                                view = new MainUserView
+                                view = new MainUserView main_model: @model
                         else
-                                view = new MainGroupView
+                                view = new MainGroupView main_model: @model
                         html = view.render @model.attributes
                         el.html html
                         
-
+        
         class BaseMainContentView extends Backbone.View
                 el: $ '.right-column-content'
                                         
@@ -127,13 +168,14 @@ jQuery ->
                         @undelegateEvents()
                         @$el.empty()
                         @stopListening()
-                        return @a
+                        return @
 
         class MainUserView extends BaseMainContentView
                 render: (user) ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view
                         
                         @$el.html tmpl.render user
+                        uview = new UserGroupListView  user
                         return @
                                                                         
         class MainGroupView extends BaseMainContentView
@@ -186,13 +228,79 @@ jQuery ->
                         @collection = new GroupList
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
+
+        class UserGroupView extends Backbone.View
+                template: TrumpetApp.admin_usrmgr_tmpl.entry
+
+                initialize: ->
+                        _.bindAll @, 'render'
+                        @model.bind 'change', @render
+                        @model.bind 'remove', @unrender
+
+                render: ->
+                        #html = @model.get 'name'
+                        # FIXME This is a HACK
+                        tmplbox = TrumpetApp.admin_usrmgr_tmpl
+                        tmpl = tmplbox.user_group_entry
+                        window.tmpl = tmpl
+                        html = tmpl.render @model.attributes
+                        this.$el.html html
+                        addgrpbutton = $ '#addgroup'
+                        addgrpbutton.click =>
+                                this.add_group()
+                        this.events
+                        return @
+
+                unrender: ->
+                        $(@el).remove()
                         
+                events:
+                        'click #addgroup': 'add_group'
+
+                add_group: ->
+                        console.log('add_group')
+                        make_group_select_dlg()
+
+                
+        # this is part of MainUserView     
         class UserGroupListView extends Backbone.View
-                initialize: (user_id) ->
-                        console.log('Init UserGroupListView')
-                        @collection = make_ug_collection user_id
+                el: $ '.user-group-list'
+                
+                initialize: (user) ->
+                        #console.log('Init UserGroupListView ' + user.id)
+                        @collection = make_ug_collection user.id
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
+
+                render: ->
+                        html = "hello world"
+                        @$el.html html
+                                
+                        return @
+                        
+                oldrender: (data) ->
+                        tmpl = TrumpetApp.admin_usrmgr_tmpl.listview
+                        @$el.html tmpl.render data
+                        return @
+
+                modelView: UserGroupView
+
+                
+                appendItem: (model) =>
+                        view = new @modelView model: model
+                        html = view.render(model).el
+                        $('.user-group-list').append html
+
+                        
+
+
+
+
+
+
+        ########################################
+        # Side View
+        ########################################
                         
         class SideView extends Backbone.View
                 el: $ '.sidebar'

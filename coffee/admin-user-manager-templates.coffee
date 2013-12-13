@@ -34,15 +34,21 @@ jQuery ->
         main_user_view = '
                 <div class="main-user-view">
                         view user <strong><%= username %></strong>
-                        <div class="user-group-list">
+                        <div class="listview-header">Groups for <%= username %><div class="btn btn-default btn-xs pull-right" id="addgroup">Add Group</div></div>
+                       <div class="user-group-list listview-list">
                         </div>
                 </div>
                 '
-                
+        user_group_entry = '
+                <div>
+                        <%= name %>
+                        <div class="btn btn-default btn-xs">remove</div>
+                </div>
+                '
         main_group_view = '
                 <div class="main-group-view">
-                        view group <strong><%= name %></strong>
-                        <div class="group-members-list">
+                        view group <strong><%= name %></strong><br>
+                         <div class="group-members-list">
                         </div>
                 </div>
                 '
@@ -89,6 +95,8 @@ jQuery ->
                         new EJS text: main_user_view
                 main_group_view:
                         new EJS text: main_group_view
+                user_group_entry:
+                        new EJS text: user_group_entry
                         
         
         TrumpetApp.admin_usrmgr_tmpl = admin_usrmgr_tmpl

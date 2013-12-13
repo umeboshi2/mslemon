@@ -5,12 +5,29 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseCollection, BaseListView, BaseMainContentView, BaseModelView, Group, GroupList, GroupListView, MainGroupView, MainUserView, Router, SideView, User, UserGroupListView, UserList, UserListView, list_views, main_router, make_ug_collection, side_view, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseCollection, BaseListView, BaseMainContentView, BaseModelView, Group, GroupList, GroupListView, MainGroupView, MainUserView, Router, SideView, User, UserGroupListView, UserGroupView, UserList, UserListView, list_views, main_router, make_group_select_dlg, make_ug_collection, side_view, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
     list_views = function() {
       return {
         'user': UserListView,
         'group': GroupListView
       };
+    };
+    make_group_select_dlg = function() {
+      var dl, html, page;
+      console.log("make_group_select_dlg");
+      html = '<div id="select-group-dialog"></div>';
+      page = $('.main-content');
+      page.append(html);
+      dl = $('#select-group-dialog');
+      return dl.dialog({
+        dialogClass: 'no-close',
+        modal: true,
+        buttons: {
+          'cancel': function() {
+            return $(this).dialog('close');
+          }
+        }
+      });
     };
     Router = (function(_super) {
       __extends(Router, _super);
@@ -199,9 +216,13 @@
         var el, html, view;
         el = $('.listview-list');
         if (this.model.get('objtype') === 'user') {
-          view = new MainUserView;
+          view = new MainUserView({
+            main_model: this.model
+          });
         } else {
-          view = new MainGroupView;
+          view = new MainGroupView({
+            main_model: this.model
+          });
         }
         html = view.render(this.model.attributes);
         return el.html(html);
@@ -224,7 +245,7 @@
         this.undelegateEvents();
         this.$el.empty();
         this.stopListening();
-        return this.a;
+        return this;
       };
 
       return BaseMainContentView;
@@ -239,9 +260,10 @@
       }
 
       MainUserView.prototype.render = function(user) {
-        var tmpl;
+        var tmpl, uview;
         tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view;
         this.$el.html(tmpl.render(user));
+        uview = new UserGroupListView(user);
         return this;
       };
 
@@ -356,19 +378,94 @@
       return GroupListView;
 
     })(BaseListView);
+    UserGroupView = (function(_super) {
+      __extends(UserGroupView, _super);
+
+      function UserGroupView() {
+        _ref13 = UserGroupView.__super__.constructor.apply(this, arguments);
+        return _ref13;
+      }
+
+      UserGroupView.prototype.template = TrumpetApp.admin_usrmgr_tmpl.entry;
+
+      UserGroupView.prototype.initialize = function() {
+        _.bindAll(this, 'render');
+        this.model.bind('change', this.render);
+        return this.model.bind('remove', this.unrender);
+      };
+
+      UserGroupView.prototype.render = function() {
+        var addgrpbutton, html, tmpl, tmplbox,
+          _this = this;
+        tmplbox = TrumpetApp.admin_usrmgr_tmpl;
+        tmpl = tmplbox.user_group_entry;
+        window.tmpl = tmpl;
+        html = tmpl.render(this.model.attributes);
+        this.$el.html(html);
+        addgrpbutton = $('#addgroup');
+        addgrpbutton.click(function() {
+          return _this.add_group();
+        });
+        this.events;
+        return this;
+      };
+
+      UserGroupView.prototype.unrender = function() {
+        return $(this.el).remove();
+      };
+
+      UserGroupView.prototype.events = {
+        'click #addgroup': 'add_group'
+      };
+
+      UserGroupView.prototype.add_group = function() {
+        console.log('add_group');
+        return make_group_select_dlg();
+      };
+
+      return UserGroupView;
+
+    })(Backbone.View);
     UserGroupListView = (function(_super) {
       __extends(UserGroupListView, _super);
 
       function UserGroupListView() {
-        _ref13 = UserGroupListView.__super__.constructor.apply(this, arguments);
-        return _ref13;
+        this.appendItem = __bind(this.appendItem, this);
+        _ref14 = UserGroupListView.__super__.constructor.apply(this, arguments);
+        return _ref14;
       }
 
-      UserGroupListView.prototype.initialize = function(user_id) {
-        console.log('Init UserGroupListView');
-        this.collection = make_ug_collection(user_id);
+      UserGroupListView.prototype.el = $('.user-group-list');
+
+      UserGroupListView.prototype.initialize = function(user) {
+        this.collection = make_ug_collection(user.id);
         this.collection.bind('add', this.appendItem);
         return this.collection.fetch();
+      };
+
+      UserGroupListView.prototype.render = function() {
+        var html;
+        html = "hello world";
+        this.$el.html(html);
+        return this;
+      };
+
+      UserGroupListView.prototype.oldrender = function(data) {
+        var tmpl;
+        tmpl = TrumpetApp.admin_usrmgr_tmpl.listview;
+        this.$el.html(tmpl.render(data));
+        return this;
+      };
+
+      UserGroupListView.prototype.modelView = UserGroupView;
+
+      UserGroupListView.prototype.appendItem = function(model) {
+        var html, view;
+        view = new this.modelView({
+          model: model
+        });
+        html = view.render(model).el;
+        return $('.user-group-list').append(html);
       };
 
       return UserGroupListView;
@@ -380,8 +477,8 @@
       __extends(SideView, _super);
 
       function SideView() {
-        _ref14 = SideView.__super__.constructor.apply(this, arguments);
-        return _ref14;
+        _ref15 = SideView.__super__.constructor.apply(this, arguments);
+        return _ref15;
       }
 
       SideView.prototype.el = $('.sidebar');
