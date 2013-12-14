@@ -42,7 +42,7 @@ jQuery ->
         user_group_entry = '
                 <div>
                         <%= name %>
-                        <div class="btn btn-default btn-xs">remove</div>
+                        <div class="detach-group btn btn-default btn-xs">remove</div>
                 </div>
                 '
         main_group_view = '

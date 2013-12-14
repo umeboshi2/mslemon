@@ -10,14 +10,20 @@ jQuery ->
                 page = $ '.main-content'
                 page.append html
                 dl = $ '#select-group-dialog'
+                view = new GroupSelectView
+                html = view.render
                 dl.dialog
                         dialogClass: 'no-close'
                         modal: true
                         buttons:
                                 'cancel': ->
                                         $(this).dialog 'close'
+                                        dl.remove()
+                                        
+                #dl.append view.el
                                         
                 
+                                
                 
         class Router extends Backbone.Router
                 routes:
@@ -229,6 +235,34 @@ jQuery ->
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
 
+        class GroupSelectView extends Backbone.View
+                el: $ '#select-group-dialog'
+                                        
+                initialize: ->
+                        console.log('Init GroupSelectView')
+                        @collection = new GroupList
+                        @collection.bind 'add', @appendItem
+                        @collection.fetch()
+
+                remove: () ->
+                        @undelegateEvents()
+                        @$el.empty()
+                        @stopListening()
+                        return @
+                        
+                render: (data) ->
+                        tmpl = TrumpetApp.admin_usrmgr_tmpl.listview
+                        @$el.html tmpl.render data
+                        return @
+
+                modelView: BaseModelView
+
+                
+                appendItem: (model) =>
+                        view = new @modelView model: model
+                        html = view.render(model).el
+                        $('#select-group-dialog').append html
+
         class UserGroupView extends Backbone.View
                 template: TrumpetApp.admin_usrmgr_tmpl.entry
 
@@ -242,21 +276,26 @@ jQuery ->
                         # FIXME This is a HACK
                         tmplbox = TrumpetApp.admin_usrmgr_tmpl
                         tmpl = tmplbox.user_group_entry
-                        window.tmpl = tmpl
                         html = tmpl.render @model.attributes
                         this.$el.html html
+                        # FIXME: I want to use the
+                        # declarative events instead
+                        # of implementing a callback here
                         addgrpbutton = $ '#addgroup'
                         addgrpbutton.click =>
                                 this.add_group()
-                        this.events
                         return @
 
                 unrender: ->
                         $(@el).remove()
                         
                 events:
-                        'click #addgroup': 'add_group'
+                        'click .detach-group': 'detach_group'
 
+                detach_group: ->
+                        @model.destroy()
+                        @unrender()
+                        
                 add_group: ->
                         console.log('add_group')
                         make_group_select_dlg()
@@ -272,17 +311,6 @@ jQuery ->
                         @collection.bind 'add', @appendItem
                         @collection.fetch()
 
-                render: ->
-                        html = "hello world"
-                        @$el.html html
-                                
-                        return @
-                        
-                oldrender: (data) ->
-                        tmpl = TrumpetApp.admin_usrmgr_tmpl.listview
-                        @$el.html tmpl.render data
-                        return @
-
                 modelView: UserGroupView
 
                 
@@ -292,6 +320,13 @@ jQuery ->
                         $('.user-group-list').append html
 
                         
+                events:
+                        'click #addgroup': 'add_group'
+                        
+                add_group: ->
+                        console.log('add_group')
+                        #make_group_select_dlg()
+
 
 
 
