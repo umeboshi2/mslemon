@@ -1,107 +1,118 @@
 jQuery ->
         ########################################
-        # Templates
+        # Variables
         ########################################
         list_titles =
                 user: 'Users'
                 group: 'Groups'
 
+
+        #{renderable, ul, li, input, div} = require 'teacup'
+        renderable = teacup.renderable
+
+        div = teacup.div
+        icon = teacup.i
+        strong = teacup.strong
+        span = teacup.span
+        label = teacup.label
+        input = teacup.input
+        
+        text = teacup.text
+        
+        ########################################
+        # Templates
+        ########################################
+        side_view_template = renderable () ->
+                div '.main-content-manager-view.btn-group-vertical', ->
+                        div '.btn.btn-default.home-button', 'Main'
+                        div '.btn.btn-default.users-button', 'Users'
+                        div '.btn.btn-default.groups-button', 'Groups'
+                                
+
+        _btnclass = '.btn.btn-default.btn-xs.pull-right.show-entry-btn'
+        
+        entry_template = renderable (atts) ->
+                div '.listview-list-entry', ->
+                        text atts.name
+                        div _btnclass, ->
+                                icon '.fa.fa-folder-open'
+                                
                 
-        side_view_template =
-                '
-                <div class="main-content-manager-view btn-group-vertical">
-                <div class="btn btn-default home-button">Main</div>
-                <div class="btn btn-default users-button">Users</div>
-                <div class="btn btn-default groups-button">Groups</div>
-                </div>
-                '
+        user_entry_template = renderable (atts) ->
+                div '.listview-list-entry', ->
+                        text atts.username
+                        div _btnclass, ->
+                                icon '.fa.fa-folder-open'
+
+        create_template = renderable () ->
+                _nameinput = '#nameinput.form-inline.form-control.pull-right'
+                div '.create-form', ->
+                        div '#create-content.action-button', ->
+                                text 'Save'
+                        span '.form-inline', style:'white-space:nowrap', ->
+                                label '.form-inline', for: 'nameinput', ->
+                                        text 'Name'
+                                input  _nameinput, style: 'width:80%', name: 'name'
+                                
+                                        
         #######################################################
-        entry_template =
-                '
-                <div class="listview-list-entry">
-                        <%= name %> 
-          <div class="pull-right btn btn-default btn-xs show-entry-btn"><i class="fa fa-folder-open"></i></div>
-                </div>
-                '
-        user_entry_template =
-                '
-                <div class="listview-list-entry">
-                        <%= username %> 
-          <div class="pull-right btn btn-default btn-xs show-entry-btn"><i class="fa fa-folder-open"></i></div>
-                </div>
-                '
-        #######################################################
-        main_user_view = '
-                <div class="main-user-view">
-                        view user <strong><%= username %></strong>
-                        <div class="listview-header">Groups for <%= username %><div class="btn btn-default btn-xs pull-right" id="addgroup">Add Group</div></div>
-                       <div class="user-group-list listview-list">
-                        </div>
-                </div>
-                '
-        user_group_entry = '
-                <div>
-                        <%= name %>
-                        <div class="detach-group btn btn-default btn-xs">remove</div>
-                </div>
-                '
-        main_group_view = '
-                <div class="main-group-view">
-                        view group <strong><%= name %></strong><br>
-                         <div class="group-members-list">
-                        </div>
-                </div>
-                '
+        _addgroup = '#addgroup.btn.btn-default.btn-xs.pull-right'
+        main_user_view = renderable (user) ->
+                div '.main-user-view', ->
+                        text 'view user '
+                        strong user.username
+                        div '.listview-header', ->
+                                text "Groups for " + user.username
+                                # add group button
+                                div _addgroup, ->
+                                        text "Add Group"
+                        div '.listview-list.user-group-list'
+        user_group_entry = renderable (group) ->
+                div ->
+                        text group.name
+                        div '.detach-group.btn.btn-default.btn-xs', ->
+                                text "remove"
+                                
+        main_group_view = renderable (group) ->
+                div '.main-group-view', ->
+                        div '.listview-header', ->
+                                text 'view group '
+                                strong group.name
+                        div '.listview-list.group-members-list'
+
+        listview_template = renderable (data) ->
+                nbtn = '#new-entry-button.pull-right.btn.btn-default.btn-xs.add-entry-btn'
+                div '.listview-header', ->
+                        text list_titles[data.type]
+                        div nbtn, ->
+                                icon '.fa.fa-plus-square'
+                div '.listview-list'
                 
-        editor_template = '
-                <div id="edit-status">Editing <%= name %>
-                <div class="action-button" id="save-content">Save</div>
-                </div>
-                '
-        listview_template = '
-                <% var title = TrumpetApp.admin_usrmgr_tmpl.list_titles[type] %>
-                <div class="listview-header"><%= title %>
-                <div class="pull-right btn btn-default btn-xs add-entry-btn" id="new-entry-button"><i class="fa fa-plus-square"></i></div>
-                </div>
-                <div class="listview-list"></div>
-                '
-        create_template = '
-                <div class="listview-header2">
-                </div>
-                <div class="create-form">
-                        <div class="action-button" id="create-content">Save</div>
-                        <span class="form-inline" style="white-space:nowrap">
-                        <label class="form-inline" for="nameinput">Name</label>
-                        <input style="width:80%" class="form-control form-inline pull-right" name="name" id="nameinput">
-                        </span>
-                </div>        
-                '
+                        
         #######################################################
         admin_usrmgr_tmpl =
-                list_titles: list_titles
                 side_view:
-                        new EJS text: side_view_template
+                        side_view_template
                 entry:
-                        new EJS text: entry_template
+                        entry_template
                 user_entry:
-                        new EJS text: user_entry_template
-                editor:
-                        new EJS text: editor_template
-                listview:
-                        new EJS text: listview_template
+                        user_entry_template
                 create:
-                        new EJS text: create_template
+                        create_template
+                listview:
+                        listview_template
                 main_user_view:
-                        new EJS text: main_user_view
+                        main_user_view
                 main_group_view:
-                        new EJS text: main_group_view
+                        main_group_view
                 user_group_entry:
-                        new EJS text: user_group_entry
-                        
+                        user_group_entry
+        
         
         TrumpetApp.admin_usrmgr_tmpl = admin_usrmgr_tmpl
 
         
 
         
-                
+
+                                

@@ -146,7 +146,7 @@ jQuery ->
                                 tmpl = tmplbox.entry
                                 
                         #@model.set 'name', @model.get 'username'
-                        html = tmpl.render @model.attributes
+                        html = tmpl @model.attributes
                         #html = @template.render @model.attributes
                         this.$el.html html
                         return @
@@ -179,21 +179,21 @@ jQuery ->
         class MainUserView extends BaseMainContentView
                 render: (user) ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.main_user_view
-                        
-                        @$el.html tmpl.render user
+                        html = tmpl(user)
+                        @$el.html html
                         uview = new UserGroupListView  user
                         return @
                                                                         
         class MainGroupView extends BaseMainContentView
                 render: (group) ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.main_group_view
-                        @$el.html tmpl.render group
+                        @$el.html tmpl group
                         return @
                                                                         
         class BaseListView extends BaseMainContentView
                 render: (data) ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.listview
-                        @$el.html tmpl.render data
+                        @$el.html tmpl data
                         return @
 
                 modelView: BaseModelView
@@ -211,7 +211,7 @@ jQuery ->
                         mclass = @collection.model
                         model = new mclass()
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.create
-                        html = tmpl.render model.attributes
+                        html = tmpl model.attributes
                         $('.listview-list').html html
                         
         class UserListView extends BaseListView
@@ -276,7 +276,7 @@ jQuery ->
                         # FIXME This is a HACK
                         tmplbox = TrumpetApp.admin_usrmgr_tmpl
                         tmpl = tmplbox.user_group_entry
-                        html = tmpl.render @model.attributes
+                        html = tmpl @model.attributes
                         this.$el.html html
                         # FIXME: I want to use the
                         # declarative events instead
@@ -346,7 +346,8 @@ jQuery ->
 
                 render: ->
                         tmpl = TrumpetApp.admin_usrmgr_tmpl.side_view
-                        $(@el).html tmpl.render()
+                        html = tmpl()
+                        $(@el).html html
                         return @
 
                 # pull_trigger is to activate views

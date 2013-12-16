@@ -56,13 +56,14 @@ admin_screen = make_resource('adminscreen.css',
 
 post_to_url = make_resource('post2url.js', depends=[jqueryui])
 
-
+teacup = make_resource('teacup.js')
 
 
 common_page = make_resource('common-page.js', depends=[font_awesome_css,
                                                        jqueryui,
                                                        bootstrap.bootstrap_js,
-                                                       ejs])
+                                                       ejs,
+                                                       teacup,])
 
 take_call_button = make_resource('take-call-button.js', depends=[jqueryui])
 main_phone_view = make_resource('main-phone-view.js', depends=[fullcalendar])
