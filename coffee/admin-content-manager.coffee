@@ -125,7 +125,7 @@ jQuery ->
         # Model Views for models
         ########################################
         class BaseModelView extends Backbone.View
-                template: TrumpetApp.admin_mgr_tmpl.entry_template
+                template: TrumpetApp.admin_mgr_tmpl.entry
                 
                 initialize: ->
                         _.bindAll @, 'render'
@@ -133,11 +133,12 @@ jQuery ->
                         @model.bind 'remove', @unrender
                                 
                 render: ->
-                        html = @template.render @model.attributes
+                        html = @template @model.attributes
                         this.$el.html html
                         return @
 
                 unrender: ->
+                        console.log('unrender ' + @model.attributes)
                         $(@el).remove()
 
                 events:
@@ -145,8 +146,8 @@ jQuery ->
                         
 
                 editme: ->
-                        tmpl = TrumpetApp.admin_mgr_tmpl.editor_template
-                        html = tmpl.render @model.attributes
+                        tmpl = TrumpetApp.admin_mgr_tmpl.editor
+                        html = tmpl @model.attributes
                         el = $('.listview-list')
                         el.html html
                         
@@ -216,8 +217,8 @@ jQuery ->
                 el: $ '.right-column-content'
 
                 render: (data) ->
-                        tmpl = TrumpetApp.admin_mgr_tmpl.listview_template
-                        @$el.html tmpl.render(data)
+                        tmpl = TrumpetApp.admin_mgr_tmpl.listview
+                        @$el.html tmpl(data)
                         return @
                         
                 #http://stackoverflow.com/questions/10966440/recreating-a-removed-view-in-backbone-js
@@ -238,8 +239,8 @@ jQuery ->
                 new_entry_view: ->
                         mclass = @collection.model
                         model = new mclass()
-                        tmpl = TrumpetApp.admin_mgr_tmpl.create_template
-                        html = tmpl.render model.attributes
+                        tmpl = TrumpetApp.admin_mgr_tmpl.create
+                        html = tmpl model.attributes
                         $('.listview-list').html html
                         mtype = model.get 'type'
                         button = $('#create-content')
@@ -292,6 +293,11 @@ jQuery ->
                         @collection.fetch()
 
 
+        class SitePathMainView extends Backbone.View
+
+        class SitePathCssListView extends Backbone.View
+                
+                
         class SideView extends Backbone.View
                 el: $ '.sidebar'
 
@@ -300,10 +306,10 @@ jQuery ->
                         @current_view = null
         
                 template:
-                        TrumpetApp.admin_mgr_tmpl.side_view_template
+                        TrumpetApp.admin_mgr_tmpl.side_view
                         
                 render: ->
-                        $(@el).html @template.render()
+                        $(@el).html @template()
                         return @
 
 

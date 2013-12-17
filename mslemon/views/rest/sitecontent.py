@@ -4,6 +4,8 @@ from trumpet.models.sitecontent import SiteTemplate
 from trumpet.models.sitecontent import SiteCSS, SiteJS
 from trumpet.models.sitecontent import SitePath
 
+from trumpet.models.sitecontent import SitePathCSS, SitePathJS
+
 from trumpet.managers.admin.sitecontent import SiteContentManager
 
 from mslemon.views.rest.base import BaseResource
@@ -42,7 +44,72 @@ class SitePathResource(BaseResource):
                 db.delete(t)
         return dict(result='success')
 
+@resource(collection_path='/rest/sitepath/{path_id}/css',
+          path='/rest/sitepath/{path_id}/css/{id}',
+          permission='admin')
+class SitePathCSSResource(BaseResource):
+    dbmodel = SitePathCSS
 
+    def __init__(self, request):
+        super(SitePathCSSResource, self).__init__(request)
+        self.mgr = SiteContentManager(self.db)
+
+    def collection_get(self):
+        path_id = int(self.request.matchdict['path_id'])
+        csslist = self.mgr.get_css_for_path(path_id)
+        csslist = [o.serialize() for o in csslist]
+        return dict(data=csslist, result='success')
+
+    def collection_post(self):
+        css_id = self.request.json['id']
+        path_id = int(self.request.matchdict['path_id'])
+        obj = self.mgr.attach_css_to_path(path_id, css_id)
+        return dict(obj=obj.serialize(), result='success')
+
+    def delete(self):
+        path_id = int(self.request.matchdict['path_id'])
+        css_id = int(self.request.matchdict['id'])
+        self.mgr.detach_css(path_id, css_id)
+
+    def get(self):
+        css_id = int(self.request.matchdict['id'])
+        css = self.mgr.css_query().get(css_id)
+        return dict(data=css.serialize(), result='success')
+    
+        
+@resource(collection_path='/rest/sitepath/{path_id}/js',
+          path='/rest/sitepath/{path_id}/js/{id}',
+          permission='admin')
+class SitePathJSResource(BaseResource):
+    dbmodel = SitePathJS
+
+    def __init__(self, request):
+        super(SitePathJSResource, self).__init__(request)
+        self.mgr = SiteContentManager(self.db)
+
+    def collection_get(self):
+        path_id = int(self.request.matchdict['path_id'])
+        jslist = self.mgr.get_js_for_path(path_id)
+        jslist = [o.serialize() for o in jslist]
+        return dict(data=jslist, result='success')
+
+    def collection_post(self):
+        js_id = self.request.json['id']
+        path_id = int(self.request.matchdict['path_id'])
+        obj = self.mgr.attach_js_to_path(path_id, js_id)
+        return dict(obj=obj.serialize(), result='success')
+
+    def delete(self):
+        path_id = int(self.request.matchdict['path_id'])
+        js_id = int(self.request.matchdict['id'])
+        self.mgr.detach_js(path_id, js_id)
+
+    def get(self):
+        js_id = int(self.request.matchdict['id'])
+        js = self.mgr.js_query().get(js_id)
+        return dict(data=js.serialize(), result='success')
+    
+        
 @resource(collection_path='/rest/sitetmpl', path='/rest/sitetmpl/{id}',
           permission='admin')
 class SiteTemplateResource(BaseResource):

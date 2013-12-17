@@ -5,7 +5,7 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   jQuery(function() {
-    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathList, SitePathListView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, make_alert, make_editor, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+    var BaseListView, BaseModelView, Router, SideView, SiteCSS, SiteCSSList, SiteCSSListView, SiteJS, SiteJSList, SiteJSListView, SitePath, SitePathCssListView, SitePathList, SitePathListView, SitePathMainView, SiteTemplate, SiteTemplateList, SiteTemplateListView, fetch_error, fetch_success, list_views, make_alert, make_editor, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
     make_alert = TrumpetApp.make_alert;
     fetch_success = function(collection, response) {
       return make_alert('Succesful Transfer', 'success');
@@ -231,7 +231,7 @@
         return _ref9;
       }
 
-      BaseModelView.prototype.template = TrumpetApp.admin_mgr_tmpl.entry_template;
+      BaseModelView.prototype.template = TrumpetApp.admin_mgr_tmpl.entry;
 
       BaseModelView.prototype.initialize = function() {
         _.bindAll(this, 'render');
@@ -241,12 +241,13 @@
 
       BaseModelView.prototype.render = function() {
         var html;
-        html = this.template.render(this.model.attributes);
+        html = this.template(this.model.attributes);
         this.$el.html(html);
         return this;
       };
 
       BaseModelView.prototype.unrender = function() {
+        console.log('unrender ' + this.model.attributes);
         return $(this.el).remove();
       };
 
@@ -257,8 +258,8 @@
       BaseModelView.prototype.editme = function() {
         var button, confirm_div, content, dbutton, dbutton_html, delete_model, editor, el, html, lvheader, mtype, nbutton, tmpl,
           _this = this;
-        tmpl = TrumpetApp.admin_mgr_tmpl.editor_template;
-        html = tmpl.render(this.model.attributes);
+        tmpl = TrumpetApp.admin_mgr_tmpl.editor;
+        html = tmpl(this.model.attributes);
         el = $('.listview-list');
         el.html(html);
         mtype = this.model.get('type');
@@ -347,8 +348,8 @@
 
       BaseListView.prototype.render = function(data) {
         var tmpl;
-        tmpl = TrumpetApp.admin_mgr_tmpl.listview_template;
-        this.$el.html(tmpl.render(data));
+        tmpl = TrumpetApp.admin_mgr_tmpl.listview;
+        this.$el.html(tmpl(data));
         return this;
       };
 
@@ -377,8 +378,8 @@
           _this = this;
         mclass = this.collection.model;
         model = new mclass();
-        tmpl = TrumpetApp.admin_mgr_tmpl.create_template;
-        html = tmpl.render(model.attributes);
+        tmpl = TrumpetApp.admin_mgr_tmpl.create;
+        html = tmpl(model.attributes);
         $('.listview-list').html(html);
         mtype = model.get('type');
         button = $('#create-content');
@@ -480,14 +481,36 @@
       return SiteJSListView;
 
     })(BaseListView);
+    SitePathMainView = (function(_super) {
+      __extends(SitePathMainView, _super);
+
+      function SitePathMainView() {
+        _ref15 = SitePathMainView.__super__.constructor.apply(this, arguments);
+        return _ref15;
+      }
+
+      return SitePathMainView;
+
+    })(Backbone.View);
+    SitePathCssListView = (function(_super) {
+      __extends(SitePathCssListView, _super);
+
+      function SitePathCssListView() {
+        _ref16 = SitePathCssListView.__super__.constructor.apply(this, arguments);
+        return _ref16;
+      }
+
+      return SitePathCssListView;
+
+    })(Backbone.View);
     SideView = (function(_super) {
       var pull_trigger;
 
       __extends(SideView, _super);
 
       function SideView() {
-        _ref15 = SideView.__super__.constructor.apply(this, arguments);
-        return _ref15;
+        _ref17 = SideView.__super__.constructor.apply(this, arguments);
+        return _ref17;
       }
 
       SideView.prototype.el = $('.sidebar');
@@ -497,10 +520,10 @@
         return this.current_view = null;
       };
 
-      SideView.prototype.template = TrumpetApp.admin_mgr_tmpl.side_view_template;
+      SideView.prototype.template = TrumpetApp.admin_mgr_tmpl.side_view;
 
       SideView.prototype.render = function() {
-        $(this.el).html(this.template.render());
+        $(this.el).html(this.template());
         return this;
       };
 
