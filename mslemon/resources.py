@@ -6,8 +6,10 @@ from haberdashery.resources import ace
 from haberdashery.resources import bootstrap
 from haberdashery.resources import create_js
 from haberdashery.resources import backbone
-from haberdashery.resources import ejs
+from haberdashery.resources import teacup
 from haberdashery.resources import font_awesome_css
+
+from haberdashery.resources import ejs
 from haberdashery.resources import backbone_relational
 from haberdashery.resources import supermodel
 
@@ -55,8 +57,6 @@ admin_screen = make_resource('adminscreen.css',
                              depends=[bootstrap.bootstrap_js])
 
 post_to_url = make_resource('post2url.js', depends=[jqueryui])
-
-teacup = make_resource('teacup.js')
 
 
 common_page = make_resource('common-page.js', depends=[font_awesome_css,
@@ -144,7 +144,13 @@ admin_user_manager_deps = [backbone_relational,
 admin_user_manager = make_resource('admin-user-manager.js',
                                    depends=admin_user_manager_deps)
 
-                                   
+
+# webview stuff
+admin_list_layout_fields = make_resource('admin-list-layout-fields.js',
+                                         depends=[common_page])
+
+
+
 class StaticResources(TrumpetResources):
     main_screen = main_screen
     admin_screen = admin_screen
@@ -176,6 +182,11 @@ class StaticResources(TrumpetResources):
     test_backbone = test_backbone
     admin_content_manager = admin_content_manager
     admin_user_manager = admin_user_manager
+
+
+    # webview stuff
+    admin_list_layout_fields = admin_list_layout_fields
+    
     
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(object):
@@ -211,7 +222,7 @@ class Resource(dict):
 
 class Root(Resource):
     "The root resource."
-
+    static_resources = StaticResources()
     __default_acl__ = [
         (Allow, Everyone, 'public'),
         (Allow, Authenticated, 'user'),

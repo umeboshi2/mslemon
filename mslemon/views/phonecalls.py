@@ -220,7 +220,6 @@ class MSLPhoneViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.main_phone_view.need()
-        self.layout.resources.cornsilk.need()
 
 
     def _make_text_message(self, pcall):

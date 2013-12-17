@@ -264,7 +264,6 @@ class MainCaseViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.main_cases_view.need()
-        self.layout.resources.cornsilk.need()
 
     def _open_case_form_submitted(self, form):
         controls = self.request.POST.items()

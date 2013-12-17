@@ -45,6 +45,12 @@ def make_main_menuNew(request):
 def make_main_menuOrig(request):
     menu = BaseMenu()
     menu.set_header('Admin Menu')
+
+    url = request.route_url('admin_webviews', context='listpaths',
+                            id='all')
+    menu.append_new_entry('webviews', url)
+    
+    
     url = request.route_url('admin_users', context='list', id='all')
     menu.append_new_entry('Manage Users', url)
     url = request.route_url('admin_users_bb')

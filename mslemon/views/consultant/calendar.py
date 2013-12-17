@@ -137,8 +137,6 @@ class CalendarViewer(BaseViewer):
         env = dict()
         self.layout.content = self.render(template, env)
         self.layout.resources.planevent_calendar_view.need()
-        self.layout.resources.azure3.need()
-        #self.layout.resources.cornsilk.need()
 
     def _add_event_form_submitted(self, form):
         controls = self.request.POST.items()
@@ -163,7 +161,6 @@ class CalendarViewer(BaseViewer):
         schema = AddEventSchema()
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
-        self.layout.resources.azure3.need()
         if 'submit' in self.request.POST:
             self._add_event_form_submitted(form)
         else:

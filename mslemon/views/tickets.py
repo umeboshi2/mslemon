@@ -285,7 +285,6 @@ class BaseTicketViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.main_ticket_view.need()
-        self.layout.resources.cornsilk.need()
 
         # create sidebar
         template = 'mslemon:templates/consult/main-ticket-view-sidebar.mako'
