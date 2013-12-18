@@ -239,9 +239,10 @@
       };
 
       SiteTextListView.prototype.fetchItems = function() {
-        return this.collection.fetch({
+        this.collection.fetch;
+        return {
           success: fetch_success
-        });
+        };
       };
 
       SiteTextListView.prototype.events = {

@@ -16,15 +16,14 @@
     }
     if (ctype === 'js') {
       editor.getSession().setMode('ace/mode/javascript');
+      editor.setTheme('ace/theme/twilight');
     }
-    editor.setTheme('ace/theme/twilight');
     return $('#save-content').click(function() {
       var formdata;
       formdata = {
         update: 'submit',
         content: editor.getValue()
       };
-      $(this).hide();
       return $.post(window.location, formdata, fresh_edit);
     });
   });

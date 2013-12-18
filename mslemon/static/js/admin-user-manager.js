@@ -152,10 +152,6 @@
 
       GroupList.prototype.url = '/rest/groups';
 
-      GroupList.prototype.parse = function(response) {
-        return response.data;
-      };
-
       return GroupList;
 
     })(BaseCollection);

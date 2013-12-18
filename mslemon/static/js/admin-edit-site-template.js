@@ -19,7 +19,6 @@
         update: 'submit',
         content: editor.getValue()
       };
-      $(this).hide();
       return $.post(window.location, formdata, fresh_edit);
     });
   });
