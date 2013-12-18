@@ -8,8 +8,9 @@
     <% route = 'admin_webviews' %>
     <% mkurl = request.route_url %>
     %for model in models:
+    <% url = mkurl(route, context='viewmodel', id=model.id) %>
     <div class="listview-list-entry" id="entry-${model.id}">
-      <span>${model.name}</span>
+      <span><a href="${url}">${model.name}</a></span>
       <div class="action-button delete-button" id="delete-${model.id}">
 	Delete
       </div>

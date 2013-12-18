@@ -13,15 +13,18 @@ from mslemon.views.rest.base import BaseResource
 # FIXME: this needs to be in manager
 import transaction
 
-@resource(collection_path='/rest/users', path='/rest/users/{id}',
-          permission='admin')
-class UserResource(BaseResource):
-    dbmodel = User
-
+class BaseUserResource(BaseResource):
     def __init__(self, request):
-        super(UserResource, self).__init__(request)
+        super(BaseUserResource, self).__init__(request)
         self.mgr = UserManager(self.db)
         
+    
+
+@resource(collection_path='/rest/users', path='/rest/users/{id}',
+          permission='admin')
+class UserResource(BaseUserResource):
+    dbmodel = User
+
     def collection_get(self):
         get=None
         if self.request.GET:
@@ -44,12 +47,8 @@ class UserResource(BaseResource):
 
 @resource(collection_path='/rest/groups', path='/rest/groups/{id}',
           permission='admin')
-class GroupResource(BaseResource):
+class GroupResource(BaseUserResource):
     dbmodel = Group
-
-    def __init__(self, request):
-        super(GroupResource, self).__init__(request)
-        self.mgr = UserManager(self.db)
 
     def collection_get(self):
         q = self.mgr.group_query()
@@ -67,13 +66,9 @@ class GroupResource(BaseResource):
 
 @resource(collection_path='/rest/users/{uid}/groups', path='/rest/users/{uid}/groups/{id}',
           permission='admin')
-class UserGroupResource(BaseResource):
+class UserGroupResource(BaseUserResource):
     dbmodel = UserGroup
     
-    def __init__(self, request):
-        super(UserGroupResource, self).__init__(request)
-        self.mgr = UserManager(self.db)
-
     def collection_get(self):
         uid = int(self.request.matchdict['uid'])
         groups = self.mgr.list_groups_for_user(uid)
@@ -99,13 +94,9 @@ class UserGroupResource(BaseResource):
     
 @resource(collection_path='/rest/groups/{gid}/members', path='/rest/groups/{gid}/members/{uid}',
           permission='admin')
-class GroupMemberResource(BaseResource):
+class GroupMemberResource(BaseUserResource):
     dbmodel = UserGroup
     
-    def __init__(self, request):
-        super(GroupMemberResource, self).__init__(request)
-        self.mgr = UserManager(self.db)
-
     def collection_get(self):
         gid = int(self.request.matchdict['gid'])
         users = self.mgr.list_members_of_group(gid)

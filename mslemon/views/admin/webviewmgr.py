@@ -381,7 +381,18 @@ class MainViewer(AdminViewer):
         
 
     def _update_model(self):
-        pass
+        data = dict()
+        if 'update' in self.request.POST:
+            data = dict(self.request.POST)
+            if data['update'] == 'delete':
+                id = int(data['id'])
+                f = self.mgr.session.query(self.mgr.dbmodel).get(id)
+                if f is not None:
+                    with transaction.manager:
+                        self.mgr.session.delete(f)
+                    data['update'] = 'deleted'
+        self.response = HTTPFound(self.request.url)
+
     
     def list_models(self):
         if self.request.method == 'POST':
@@ -445,10 +456,15 @@ class MainViewer(AdminViewer):
         self._add_model()
         
 
-
-
     def view_model(self):
         id = int(self.request.matchdict['id'])
+        model = self.mgr.model_query().get(id)
+        template = 'mslemon:templates/admin-show-layout-model.mako'
+        env = dict(model=model)
+        self.layout.content = self.render(template, env)
+        #self.layout.resources.admin_list_layout_fields.need()
+        self.layout.resources.admin_show_layout_model.need()
+        
         
 
     def add_field_to_model(self):

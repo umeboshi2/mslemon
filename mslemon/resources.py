@@ -148,6 +148,11 @@ admin_user_manager = make_resource('admin-user-manager.js',
 # webview stuff
 admin_list_layout_fields = make_resource('admin-list-layout-fields.js',
                                          depends=[common_page])
+admin_list_layout_models = make_resource('admin-list-layout-models.js',
+                                         depends=[common_page])
+
+admin_show_layout_model = make_resource('admin-show-layout-model.js',
+                                        depends=[common_page])
 
 
 
@@ -186,6 +191,8 @@ class StaticResources(TrumpetResources):
 
     # webview stuff
     admin_list_layout_fields = admin_list_layout_fields
+    admin_list_layout_models = admin_list_layout_models
+    admin_show_layout_model = admin_show_layout_model
     
     
 # the acl entries are allow/deny, group, permission
