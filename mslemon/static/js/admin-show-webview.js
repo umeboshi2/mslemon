@@ -55,13 +55,14 @@
       });
       session.setMode('ace/mode/coffee');
       session.setTabSize(4);
-      editor.setTheme('ace/theme/twilight');
+      editor.setTheme('ace/theme/trumpet');
       url = '/rest/admin/webviews/' + webview_id;
       content_callback = function(data, status, xhr) {
         if (status === 'success') {
           window.rdata = data;
           if (data.template !== null) {
-            return editor.setValue(data.template);
+            editor.setValue(data.template);
+            return save_button.hide();
           }
         }
       };

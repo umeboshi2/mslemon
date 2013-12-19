@@ -56,14 +56,16 @@ $(document).ready ->
             )
         session.setMode('ace/mode/coffee')
         session.setTabSize(4)
-        editor.setTheme('ace/theme/twilight')
-
+        editor.setTheme('ace/theme/trumpet')
+        #editor.setTheme('ace/theme/merbivore')
         url = '/rest/admin/webviews/' + webview_id
         content_callback = (data, status, xhr) ->
             if status == 'success'
                 window.rdata = data
                 if data.template != null
                     editor.setValue data.template
+                    save_button.hide()
+                    
         response = $.get url, {}, content_callback
         
                 

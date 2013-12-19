@@ -104,13 +104,14 @@
         session.setMode('ace/mode/coffee');
         session.setTabSize(4);
       }
-      editor.setTheme('ace/theme/twilight');
+      editor.setTheme('ace/theme/trumpet');
       url = model_field_url(model_id, field_id);
       content_callback = function(data, status, xhr) {
         if (status === 'success') {
           window.rdata = data;
           if (data.content !== null) {
-            return editor.setValue(data.content);
+            editor.setValue(data.content);
+            return save_button.hide();
           }
         }
       };

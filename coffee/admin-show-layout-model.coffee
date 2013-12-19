@@ -90,7 +90,7 @@ $(document).ready ->
         else if ftype == 'teacup'
             session.setMode('ace/mode/coffee')
             session.setTabSize(4)
-        editor.setTheme('ace/theme/twilight')
+        editor.setTheme('ace/theme/trumpet')
 
         url = model_field_url(model_id, field_id)
         content_callback = (data, status, xhr) ->
@@ -98,6 +98,7 @@ $(document).ready ->
                 window.rdata = data
                 if data.content != null
                     editor.setValue data.content
+                    save_button.hide()
         response = $.get url, {}, content_callback
         
                 

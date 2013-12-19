@@ -150,6 +150,7 @@ class MainViewer(AdminViewer):
         
         ace.theme_twilight.need()
 
+        self.layout.resources.ace_theme_trumpet.need()
         
         self.dispatch()
 
@@ -193,7 +194,7 @@ class MainViewer(AdminViewer):
         menu.append_new_entry('Import Archive', url)
         self.layout.options_menus = dict(actions=menu)
         
-        self.layout.sidebar = menu.render()
+        #self.layout.sidebar = menu.render()
         
 
             

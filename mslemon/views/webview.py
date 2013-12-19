@@ -6,5 +6,6 @@ class WebView(BaseWebView):
         resources = self.request.root.static_resources
         resources.initialize_webview_layout.need()
         resources.favicon.need()
+        resources.fullcalendar.need()
         
         
