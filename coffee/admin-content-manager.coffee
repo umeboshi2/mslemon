@@ -26,7 +26,9 @@ jQuery ->
         else if mtype == 'css'
             session.setMode('ace/mode/css')
         else if mtype == 'js'
-            session.setMode('ace/mode/javascript')
+            #session.setMode('ace/mode/javascript')
+            session.setMode('ace/mode/coffee')
+            
         editor.setTheme('ace/theme/twilight')
         return editor
                 

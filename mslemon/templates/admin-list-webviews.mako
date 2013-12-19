@@ -1,24 +1,28 @@
-<div class="admin-list-site-paths-view">
-  <% dtformat = '%b %d %Y - %H:%M:%S' %>
-  <% timeformat = '%I:%M %p' %>
+<div class="admin-list-site-view">
   <div class="listview-header">
-    Site Paths
+    Web Views
+    <div class="action-button pull-right add-webview-button">add webview</div>
   </div>
   <div class="listview-list">
-    <% route = 'admin_sitecontent_mgr' %>
-    <% ctxt = 'showcontent' %>
+    <% route = 'admin_webviews' %>
     <% mkurl = request.route_url %>
-    %for p in paths:
-    <% url = mkurl(route, context=ctxt, id=p.id) %>
-    <div class="listview-list-entry">
-      <a href="${url}">${p.name}</a>
-      %if p.css:
-      <span>(CSS)</span>
-      %endif
-      %if p.js:
-      <span>(JS)</span>
-      %endif
-      <div class="action-button delete-button" id="delete-path-${p.id}">Delete</div>
+    <% models = [] %>
+    %for webview in webviews:
+    <% url = mkurl(route, context='showwebview', id=webview.id) %>
+    <div class="listview-list-entry" id="entry-${webview.id}">
+      <span><a href="${url}">${webview.name}</a></span>
+      <div class="action-button delete-button" id="delete-${webview.id}">
+	Delete
+      </div>
+      <div class="delete-confirm" id="div-confirm-${webview.id}">
+	<strong>Confirm Deletion</strong>
+	<div class="action-button confirm-button" id="confirm-${webview.id}">
+	  Confirm
+	</div>
+	<div class="action-button cancel-button" id="cancel-${webview.id}">
+	  Cancel
+	</div>
+      </div>
     </div>
     %endfor
   </div>

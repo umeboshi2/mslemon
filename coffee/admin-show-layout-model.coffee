@@ -17,7 +17,10 @@ $(document).ready ->
     add_new_field_button = $ '.add-field-button'
         
         
-        
+    model_field_url = (model_id, field_id) ->
+            url = '/rest/admin/layoutmodels/' + model_id
+            url = url + '/fields/' + field_id
+            return url
 
     header_template = renderable (content) ->
         div '.btn.btn-default.btn-xs', ->
@@ -71,6 +74,10 @@ $(document).ready ->
                         
         save_button = $ '#save-content'
         save_button.hide()
+        cancel_button = $ '#cancel-button'
+        cancel_button.click ->
+            window.location.reload()
+            
                 
         editor = ace.edit('field-editor')
         TrumpetApp.editor = editor
@@ -82,7 +89,17 @@ $(document).ready ->
             session.setMode('ace/mode/html')
         else if ftype == 'teacup'
             session.setMode('ace/mode/coffee')
+            session.setTabSize(4)
         editor.setTheme('ace/theme/twilight')
+
+        url = model_field_url(model_id, field_id)
+        content_callback = (data, status, xhr) ->
+            if status == 'success'
+                window.rdata = data
+                if data.content != null
+                    editor.setValue data.content
+        response = $.get url, {}, content_callback
+        
                 
         fresh_edit = (data, status, xhr) ->
             if status == 'success'
@@ -143,15 +160,32 @@ $(document).ready ->
 
                 
     $('.delete-button').click ->
+        model_id = $('input[name=model_id]').val()
         btnid = $(this).attr('id')
         elist = btnid.split('-')
         id = elist[1]
+        field_id = id
         oldtext = $('.header').text()
         if oldtext == 'Ms. Lemon'
             $('.header').html header_template('Delete-' + id)
         else
             $('.header').html header_template('Ms. Lemon')
+    
+        formdata =
+            update: 'submit'
+            model_id: model_id
+            field_id: field_id
+        url = '/rest/admin/layoutmodels/'
+        url = url + model_id + '/fields/' + field_id
 
+        delete_field_success = (data, status, xhr) ->
+            window.location.reload()
+            
+        $.ajax url,
+            type: 'DELETE'
+            data: formdata
+            success: delete_field_success
+            dataType: 'json'
         
     # do stuff
     editing_space.hide()

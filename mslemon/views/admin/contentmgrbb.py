@@ -77,8 +77,9 @@ class AppViewer(AdminViewer):
         ace.mode_ejs.need()
         ace.theme_twilight.need()
         ace.theme_cobalt.need()
+        ace.worker_coffee.need()
+        ace.mode_coffee.need()
         self.layout.resources.jqueryui.need()
-        self.layout.resources.cornsilk.need()
         
     def _set_menu(self):
         menu = BaseMenu()

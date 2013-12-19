@@ -46,7 +46,7 @@ def make_main_menuOrig(request):
     menu = BaseMenu()
     menu.set_header('Admin Menu')
 
-    url = request.route_url('admin_webviews', context='listpaths',
+    url = request.route_url('admin_webviews', context='listwebviews',
                             id='all')
     menu.append_new_entry('webviews', url)
     

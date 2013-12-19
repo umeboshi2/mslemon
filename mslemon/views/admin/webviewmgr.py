@@ -23,7 +23,8 @@ from trumpet.views.menus import BaseMenu
 from mslemon.views.base import AdminViewer
 from mslemon.views.admin.base import make_main_menu
 from mslemon.views.schema import NameSelectSchema, UploadFileSchema
-from mslemon.views.schema import make_select_widget
+from mslemon.views.schema import make_select_widget, deferred_choices
+
 
 import colander
 import deform
@@ -60,6 +61,11 @@ class TextSchema(colander.Schema):
         title='Content',
         widget=deform.widget.TextAreaWidget(rows=10, cols=60))
 
+fieldtypes = (
+    ('text', 'text'),
+    ('html', 'html'),
+    ('teacup', 'teacup'),
+    )
 
 class FieldSchema(colander.Schema):
     name = colander.SchemaNode(
@@ -67,6 +73,7 @@ class FieldSchema(colander.Schema):
         title='Name')
     type = colander.SchemaNode(
         colander.String(),
+        widget=deform.widget.SelectWidget(values=fieldtypes),
         title='type')
 
 
@@ -74,7 +81,18 @@ class ModelSchema(colander.Schema):
     name = colander.SchemaNode(
         colander.String(),
         title='Name')
+
+
+class WebViewSchema(colander.Schema):
+    name = colander.SchemaNode(
+        colander.String(),
+        title='Name')
+    model_id = colander.SchemaNode(
+        colander.Integer(),
+        title='Model',
+        widget=deferred_choices,)
     
+        
     
 class MainViewer(AdminViewer):
     def __init__(self, request):
@@ -107,6 +125,8 @@ class MainViewer(AdminViewer):
             viewmodel=self.view_model,
             addfieldtomodel=self.add_field_to_model,
             detachfieldfrommodel=self.detach_field_from_model,
+            listwebviews=self.list_webviews,
+            showwebview=self.show_webview,
             addwebview=self.add_webview,
             )
         self._dispatch_table.update(webview_dispatch)
@@ -116,6 +136,20 @@ class MainViewer(AdminViewer):
 
         self.layout.main_menu = make_main_menu(self.request)
         self._set_menu()
+
+        # ace stuff
+        ace = self.layout.resources.ace
+        ace.ace.need()
+        ace.worker_css.need()
+        ace.worker_javascript.need()
+        ace.worker_coffee.need()
+        ace.mode_css.need()
+        ace.mode_coffee.need()
+        ace.mode_html.need()
+        ace.mode_scss.need()
+        
+        ace.theme_twilight.need()
+
         
         self.dispatch()
 
@@ -136,6 +170,11 @@ class MainViewer(AdminViewer):
         url = mkurl(route, context='addmodel', id='new')
         menu.append_new_entry('Create New Model', url)
 
+        url = mkurl(route, context='listwebviews', id='all')
+        menu.append_new_entry('List Web Views', url)
+        url = mkurl(route, context='addwebview', id='new')
+        menu.append_new_entry('Add New Web View', url)
+        
         
         
         url = mkurl(route, context='listpaths', id='all')
@@ -154,6 +193,7 @@ class MainViewer(AdminViewer):
         menu.append_new_entry('Import Archive', url)
         self.layout.options_menus = dict(actions=menu)
         
+        self.layout.sidebar = menu.render()
         
 
             
@@ -465,7 +505,24 @@ class MainViewer(AdminViewer):
         #self.layout.resources.admin_list_layout_fields.need()
         self.layout.resources.admin_show_layout_model.need()
         
+
+    def list_webviews(self):
+        template = 'mslemon:templates/admin-list-webviews.mako'
+        webviews = self.mgr.session.query(self.mgr.dbwebview).all()
+        env = dict(webviews=webviews)
+        self.layout.content = self.render(template, env)
+        self.layout.resources.admin_list_webviews.need()
         
+
+    def show_webview(self):
+        id = int(self.request.matchdict['id'])
+        template = 'mslemon:templates/admin-show-webview-content.mako'
+        webview = self.mgr.webview_query().get(id)
+        env = dict(webview=webview)
+        self.layout.content = self.render(template, env)
+        self.layout.resources.admin_show_webview.need()
+        
+    
 
     def add_field_to_model(self):
         pass
@@ -473,8 +530,37 @@ class MainViewer(AdminViewer):
     def detach_field_from_model(self):
         pass
     
+    def _add_webview_submitted(self, form):
+        controls = self.request.POST.items()
+        self.layout.subheader = "submitted to database"
+        try:
+            data = form.validate(controls)
+        except deform.ValidationFailure, e:
+            self.layout.content = e.render()
+            return
+        name = data['name']
+        model_id = data['model_id']
+        template = None
+        static_resources = []
+        w = self.mgr.add_webview(name, model_id, template)
+        url = self.url(context='listwebviews', id='all')
+        self.response = HTTPFound(url)
+        
+    def _add_webview(self):
+        schema = WebViewSchema()
+        models = self.mgr.list_models()
+        choices = [(m.id, m.name) for m in models]
+        schema['model_id'].widget = make_select_widget(choices)
+        form = deform.Form(schema, buttons=('submit',))
+        self.layout.resources.deform_auto_need(form)
+
+        if 'submit' in self.request.POST:
+            self._add_webview_submitted(form)
+        else:
+            self.layout.content = form.render()
+
     def add_webview(self):
-        pass
+        self._add_webview()
 
     
 

@@ -10343,6 +10343,13 @@ li.top-bar-button {
   height: 30em;
 }
 
+/* line 31, ../../../sass/adminscreen.scss */
+#field-editor {
+  position: relative;
+  width: 100%;
+  height: 30em;
+}
+
 /*-------- Image Management ----------*/
 /* line 3, ../../../sass/partials/_imagelist-admin.scss */
 .imagelist-header {
@@ -10832,23 +10839,23 @@ li.top-bar-button {
   margin: -1px !important;
 }
 
-/* line 43, ../../../sass/adminscreen.scss */
+/* line 49, ../../../sass/adminscreen.scss */
 #main-alert {
   background-color: #395c89;
   color: lightsteelblue;
 }
 
-/* line 49, ../../../sass/adminscreen.scss */
+/* line 55, ../../../sass/adminscreen.scss */
 #confirm-delete {
   display: none;
 }
 
-/* line 54, ../../../sass/adminscreen.scss */
+/* line 60, ../../../sass/adminscreen.scss */
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
 
-/* line 59, ../../../sass/adminscreen.scss */
+/* line 65, ../../../sass/adminscreen.scss */
 .add-entry-btn {
   margin-top: 0.1em;
   margin-right: 0.075em;

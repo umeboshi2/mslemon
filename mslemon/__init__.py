@@ -174,9 +174,21 @@ def main(global_config, **settings):
                     **view_defaults)
     ##################################
 
+    route_name = 'webviews'
+    config.add_route(route_name, '/views/webviews/{id}')
+    config.add_view('mslemon.views.webview.WebView',
+                    route_name=route_name,
+                    renderer='mslemon:templates/webview-main.mako')
+    
+                    
+                     
+    
     # add REST views
     config.scan('mslemon.views.testrest')
     config.scan('mslemon.views.rest')
+    config.scan('trumpet.views.rest.webview')
+
+    
     
     app = config.make_wsgi_app()
 

@@ -28,6 +28,12 @@
     height: 30em;
 }
 
+#field-editor {
+    position: relative;
+    width: 100%;
+    height: 30em;
+}
+
 // extra stuff
 @import "partials/imagelist-admin";
 @import "partials/userlist-admin";
