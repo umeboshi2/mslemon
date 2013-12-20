@@ -33,13 +33,14 @@
         return savebutton.show();
       });
       if (mtype === 'tmpl') {
-        session.setMode('ace/mode/ejs');
+        session.setMode('ace/mode/coffee');
       } else if (mtype === 'css') {
         session.setMode('ace/mode/css');
       } else if (mtype === 'js') {
         session.setMode('ace/mode/coffee');
       }
       editor.setTheme('ace/theme/twilight');
+      editor.setKeyboardHandler('ace/keyboard/emacs');
       return editor;
     };
     Router = (function(_super) {

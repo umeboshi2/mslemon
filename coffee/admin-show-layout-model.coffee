@@ -31,6 +31,8 @@ $(document).ready ->
             text 'Editing field'
             div '#save-content.action-button', ->
                 text 'Save'
+            div '#keybinding.action-button', ->
+                text 'emacs'
             div '#cancel-button.action-button.pull-right', ->
                 text 'Cancel'
             div '#field-editor'
@@ -74,13 +76,18 @@ $(document).ready ->
                         
         save_button = $ '#save-content'
         save_button.hide()
+        keybinding_button = $ '#keybinding'
+        
         cancel_button = $ '#cancel-button'
         cancel_button.click ->
             window.location.reload()
-            
+
+        toggle_keybinding = TrumpetApp.functions.toggle_ace_keybinding
+        
                 
         editor = ace.edit('field-editor')
         TrumpetApp.editor = editor
+        toggle_keybinding(keybinding_button, editor)
         session = editor.getSession()
         session.on('change', () ->
             save_button.show()
@@ -91,6 +98,7 @@ $(document).ready ->
             session.setMode('ace/mode/coffee')
             session.setTabSize(4)
         editor.setTheme('ace/theme/trumpet')
+        editor.setKeyboardHandler('ace/keyboard/emacs')
 
         url = model_field_url(model_id, field_id)
         content_callback = (data, status, xhr) ->

@@ -163,6 +163,8 @@ class MainViewer(AdminViewer):
             ace = self.layout.resources.ace
             ace.mode_ejs.need()
             ace.theme_cobalt.need()
+            ace.keybinding_emacs.need()
+            self.layout.resources.ace_theme_trumpet.need()
             
         
     def delete_template(self):

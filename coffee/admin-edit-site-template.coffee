@@ -9,13 +9,20 @@ $(document).ready ->
 
     # init editor
     editor = ace.edit('editor')
-    editor.getSession().on('change', () ->
+    session = editor.getSession()
+    session.on('change', () ->
         $('#save-content').show()
         )
     # set editor mode
-    editor.getSession().setMode('ace/mode/ejs')
+    session.setMode('ace/mode/coffee')
     # set editor theme
-    editor.setTheme('ace/theme/twilight')
+    editor.setTheme('ace/theme/trumpet')
+    editor.setKeyboardHandler('ace/keyboard/emacs')
+
+    button = $ '#keybinding'
+    togglefun = TrumpetApp.functions.toggle_ace_keybinding
+    togglefun(button, editor)
+    
 
     # click save button
     $('#save-content').click ->

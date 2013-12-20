@@ -223,8 +223,7 @@ class MainViewer(AdminViewer):
             self.layout.resources.admin_edit_site_resources.need()
             ace.worker_css.need()
             ace.mode_css.need()
-            ace.theme_twilight.need()
-            ace.theme_cobalt.need()
+            self.layout.resources.ace_theme_trumpet.need()
             template = 'mslemon:templates/admin-edit-sitecontent.mako'
             env = dict(content=css.content, name=css.name, ctype='css')
             self.layout.content = self.render(template, env)
@@ -237,10 +236,9 @@ class MainViewer(AdminViewer):
         else:
             ace = self.layout.resources.ace
             self.layout.resources.admin_edit_site_resources.need()
-            ace.worker_javascript.need()
-            ace.mode_javascript.need()
-            ace.theme_twilight.need()
-            ace.theme_cobalt.need()
+            ace.worker_coffee.need()
+            ace.mode_coffee.need()
+            self.layout.resources.ace_theme_trumpet.need()
             template = 'mslemon:templates/admin-edit-sitecontent.mako'
             env = dict(content=js.content, name=js.name, ctype='js')
             self.layout.content = self.render(template, env)

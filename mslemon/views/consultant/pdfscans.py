@@ -133,7 +133,7 @@ class ScannedDocumentsViewer(BaseViewer):
         content = self.render(template, env)
         self.layout.content = content
         self.layout.resources.main_scandoc_view.need()
-        self.layout.resources.cornsilk.need()
+        #self.layout.resources.cornsilk.need()
 
 
     def _name_document_form_submitted(self, sdoc, form):

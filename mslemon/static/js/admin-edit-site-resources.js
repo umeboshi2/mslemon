@@ -15,8 +15,8 @@
       editor.getSession().setMode('ace/mode/css');
     }
     if (ctype === 'js') {
-      editor.getSession().setMode('ace/mode/javascript');
-      editor.setTheme('ace/theme/twilight');
+      editor.getSession().setMode('ace/mode/coffee');
+      editor.setTheme('ace/theme/trumpet');
     }
     return $('#save-content').click(function() {
       var formdata;

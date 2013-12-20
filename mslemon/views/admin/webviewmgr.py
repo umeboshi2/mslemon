@@ -91,8 +91,23 @@ class WebViewSchema(colander.Schema):
         colander.Integer(),
         title='Model',
         widget=deferred_choices,)
+    template_id = colander.SchemaNode(
+        colander.Integer(),
+        title='Template',
+        widget=deferred_choices,)
     
-        
+class CSSSchema(colander.Schema):
+    css_id = colander.SchemaNode(
+        colander.Integer(),
+        title='CSS',
+        widget=deferred_choices,)
+
+class JSSchema(colander.Schema):
+    js_id = colander.SchemaNode(
+        colander.Integer(),
+        title='JS',
+        widget=deferred_choices,)
+    
     
 class MainViewer(AdminViewer):
     def __init__(self, request):
@@ -128,6 +143,7 @@ class MainViewer(AdminViewer):
             listwebviews=self.list_webviews,
             showwebview=self.show_webview,
             addwebview=self.add_webview,
+            updatewebview=self.update_webview,
             )
         self._dispatch_table.update(webview_dispatch)
         
@@ -140,6 +156,8 @@ class MainViewer(AdminViewer):
         # ace stuff
         ace = self.layout.resources.ace
         ace.ace.need()
+        ace.keybinding_emacs.need()
+        #ace.ext_keybinding_menu.need()
         ace.worker_css.need()
         ace.worker_javascript.need()
         ace.worker_coffee.need()
@@ -161,37 +179,35 @@ class MainViewer(AdminViewer):
         mkurl = self.request.route_url
 
         # webview urls
-        url = mkurl(route, context='listfields', id='all')
-        menu.append_new_entry('List Layout Fields', url)
-        url = mkurl(route, context='addfield', id='new')
-        menu.append_new_entry('Create New Layout Field', url)
-        
+        url = mkurl(route, context='listwebviews', id='all')
+        menu.append_new_entry('List Web Views', url)
+        url = mkurl(route, context='addwebview', id='new')
+        menu.append_new_entry('Add New Web View', url)
+
         url = mkurl(route, context='listmodels', id='all')
         menu.append_new_entry('List Layout Models', url)
         url = mkurl(route, context='addmodel', id='new')
         menu.append_new_entry('Create New Model', url)
 
-        url = mkurl(route, context='listwebviews', id='all')
-        menu.append_new_entry('List Web Views', url)
-        url = mkurl(route, context='addwebview', id='new')
-        menu.append_new_entry('Add New Web View', url)
+        url = mkurl(route, context='listfields', id='all')
+        menu.append_new_entry('List Layout Fields', url)
+        url = mkurl(route, context='addfield', id='new')
+        menu.append_new_entry('Create New Layout Field', url)
         
-        
-        
-        url = mkurl(route, context='listpaths', id='all')
-        menu.append_new_entry('List Paths', url)
-        url = mkurl(route, context='listcss', id='all')
-        menu.append_new_entry('List CSS', url)
-        url = mkurl(route, context='addcss', id='new')
-        menu.append_new_entry('Add New CSS', url)
-        url = mkurl(route, context='listjs', id='all')
-        menu.append_new_entry('List JS', url)
-        url = mkurl(route, context='addjs', id='new')
-        menu.append_new_entry('Add New JS', url)
-        url = mkurl(route, context='mkarchive', id='all')
-        menu.append_new_entry('Site Archive', url)
-        url = mkurl(route, context='importarchive', id='new')
-        menu.append_new_entry('Import Archive', url)
+        #url = mkurl(route, context='listpaths', id='all')
+        #menu.append_new_entry('List Paths', url)
+        #url = mkurl(route, context='listcss', id='all')
+        #menu.append_new_entry('List CSS', url)
+        #url = mkurl(route, context='addcss', id='new')
+        #menu.append_new_entry('Add New CSS', url)
+        #url = mkurl(route, context='listjs', id='all')
+        #menu.append_new_entry('List JS', url)
+        #url = mkurl(route, context='addjs', id='new')
+        #menu.append_new_entry('Add New JS', url)
+        #url = mkurl(route, context='mkarchive', id='all')
+        #menu.append_new_entry('Site Archive', url)
+        #url = mkurl(route, context='importarchive', id='new')
+        #menu.append_new_entry('Import Archive', url)
         self.layout.options_menus = dict(actions=menu)
         
         #self.layout.sidebar = menu.render()
@@ -519,7 +535,25 @@ class MainViewer(AdminViewer):
         id = int(self.request.matchdict['id'])
         template = 'mslemon:templates/admin-show-webview-content.mako'
         webview = self.mgr.webview_query().get(id)
-        env = dict(webview=webview)
+
+        schema = CSSSchema()
+        objs = self.mgr.css_query().all()
+        current = [c.css.id for c in webview.css]
+        choices = [(o.id, o.name) for o in objs if o.id not in current]
+        schema['css_id'].widget = make_select_widget(choices)
+        cssform = deform.Form(schema)
+        
+        schema = JSSchema()
+        objs = self.mgr.js_query().all()
+        current = [j.js.id for j in webview.js]
+        choices = [(o.id, o.name) for o in objs if o.id not in current]
+        schema['js_id'].widget = make_select_widget(choices)
+        jsform = deform.Form(schema)
+        
+        #self.layout.resources.deform_auto_need(cssform)
+        
+        env = dict(webview=webview, cssform=cssform,
+                   jsform=jsform)
         self.layout.content = self.render(template, env)
         self.layout.resources.admin_show_webview.need()
         
@@ -531,7 +565,7 @@ class MainViewer(AdminViewer):
     def detach_field_from_model(self):
         pass
     
-    def _add_webview_submitted(self, form):
+    def _webview_form_submitted(self, form, action):
         controls = self.request.POST.items()
         self.layout.subheader = "submitted to database"
         try:
@@ -541,27 +575,58 @@ class MainViewer(AdminViewer):
             return
         name = data['name']
         model_id = data['model_id']
-        template = None
-        static_resources = []
-        w = self.mgr.add_webview(name, model_id, template)
+        template_id = data['template_id']
+        if action == 'add':
+            static_resources = []
+            w = self.mgr.add_webview(name, model_id, template_id)
+        elif action == 'update':
+            id = int(self.request.matchdict['id'])
+            
+            w = self.mgr.update_webview(id, name=name, model_id=model_id,
+                                        template_id=template_id)
+            
         url = self.url(context='listwebviews', id='all')
         self.response = HTTPFound(url)
+
+    
+    def _add_webview_submitted(self, form):
+        self._webview_form_submitted(form, 'add')
         
-    def _add_webview(self):
+    def _make_webview_form(self):
         schema = WebViewSchema()
         models = self.mgr.list_models()
         choices = [(m.id, m.name) for m in models]
         schema['model_id'].widget = make_select_widget(choices)
+        templates = self.mgr.tmpl_query().all()
+        choices = [(t.id, t.name) for t in templates]
+        schema['template_id'].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
-
+        return form
+    
+    def _add_webview(self):
+        form = self._make_webview_form()
         if 'submit' in self.request.POST:
             self._add_webview_submitted(form)
         else:
             self.layout.content = form.render()
 
+    def _update_webview(self):
+        form = self._make_webview_form()
+        id = int(self.request.matchdict['id'])
+        w = self.mgr.webview_query().get(id)
+        formdata = w.serialize()
+        if 'submit' in self.request.POST:
+            self._webview_form_submitted(form, 'update')
+        else:
+            self.layout.content = form.render(formdata)
+            
     def add_webview(self):
         self._add_webview()
+
+    def update_webview(self):
+        self._update_webview()
+        
 
     
 

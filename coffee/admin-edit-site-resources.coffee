@@ -14,9 +14,9 @@ $(document).ready ->
     if ctype == 'css'
         editor.getSession().setMode('ace/mode/css')
     if ctype == 'js'
-        editor.getSession().setMode('ace/mode/javascript')
+        editor.getSession().setMode('ace/mode/coffee')
     # set editor theme
-        editor.setTheme('ace/theme/twilight')
+        editor.setTheme('ace/theme/trumpet')
 
     # click save button
     $('#save-content').click ->

@@ -32,6 +32,9 @@
         div('#save-content.action-button', function() {
           return text('Save');
         });
+        div('#keybinding.action-button', function() {
+          return text('emacs');
+        });
         div('#cancel-button.action-button.pull-right', function() {
           return text('Cancel');
         });
@@ -80,7 +83,7 @@
       });
     };
     create_editor = function(model_id, field_id, ftype) {
-      var cancel_button, content_callback, editor, fresh_edit, html, response, save_button, save_edit_error, session, url;
+      var cancel_button, content_callback, editor, fresh_edit, html, keybinding_button, response, save_button, save_edit_error, session, toggle_keybinding, url;
       html = editor_template(field_id);
       editing_space.html(html);
       field_list.hide();
@@ -88,12 +91,15 @@
       editing_space.show();
       save_button = $('#save-content');
       save_button.hide();
+      keybinding_button = $('#keybinding');
       cancel_button = $('#cancel-button');
       cancel_button.click(function() {
         return window.location.reload();
       });
+      toggle_keybinding = TrumpetApp.functions.toggle_ace_keybinding;
       editor = ace.edit('field-editor');
       TrumpetApp.editor = editor;
+      toggle_keybinding(keybinding_button, editor);
       session = editor.getSession();
       session.on('change', function() {
         return save_button.show();
@@ -105,6 +111,7 @@
         session.setTabSize(4);
       }
       editor.setTheme('ace/theme/trumpet');
+      editor.setKeyboardHandler('ace/keyboard/emacs');
       url = model_field_url(model_id, field_id);
       content_callback = function(data, status, xhr) {
         if (status === 'success') {

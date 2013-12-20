@@ -22,7 +22,7 @@ jQuery ->
             savebutton.show()
         )
         if mtype == 'tmpl'
-            session.setMode('ace/mode/ejs')
+            session.setMode('ace/mode/coffee')
         else if mtype == 'css'
             session.setMode('ace/mode/css')
         else if mtype == 'js'
@@ -30,6 +30,7 @@ jQuery ->
             session.setMode('ace/mode/coffee')
             
         editor.setTheme('ace/theme/twilight')
+        editor.setKeyboardHandler('ace/keyboard/emacs')
         return editor
                 
     class Router extends Backbone.Router
