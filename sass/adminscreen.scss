@@ -11,6 +11,7 @@
 @include jquery-ui-base-theme;
 
 
+
 /* import all colors and variables before bootstrap */
 
 @import "partials/bootstrap-variables";
@@ -18,39 +19,37 @@
 
 @import "bootstrap";
 
-
 @import "partials/common-page";
 @import "partials/list-styles";
 
-#editor {
-    position: relative;
-    width: 100%;
-    height: 30em;
-}
-
-#field-editor {
-    position: relative;
-    width: 100%;
-    height: 30em;
-}
-
 // extra stuff
+@import "partials/tickets";
+@import "mslemon/phonecall";
+@import "mslemon/cases-main";
+@import "mslemon/list-styles";
+
+// extra admin stuff
 @import "partials/imagelist-admin";
 @import "partials/userlist-admin";
 @import "partials/grouplist-admin";
 
-//@import "partials/rssviewer-viewfeed";
-//@import "partials/facebook";
-
-//@import "partials/hubby";
-
-//@import "partials/tickets";
-
-#main-alert {
-	background-color: $basecolor4;
-	color: $basecolor;
+.fc-header-title h2 {
+    font-size: 1.2em;
 }
 
+
+
+#list-button {
+    display: block;
+    text-align: center;
+}
+
+.ticket-main-view-button-sidebar {
+    .query-button {
+	display: block;
+	text-align: center;
+    }
+}
 
 #confirm-delete {
     display: none;
@@ -66,3 +65,21 @@
     margin-top: 0.1em;
     margin-right: 0.075em;
 }
+
+#main-alert {
+	background-color: $basecolor4;
+	color: $basecolor;
+}
+
+#editor {
+    position: relative;
+    width: 100%;
+    height: 30em;
+}
+
+#field-editor {
+    position: relative;
+    width: 100%;
+    height: 30em;
+}
+

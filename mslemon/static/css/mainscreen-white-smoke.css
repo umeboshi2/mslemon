@@ -11428,53 +11428,53 @@ li.top-bar-button {
   margin: -1px !important;
 }
 
-/* line 41, ../../../sass/mainscreen.scss */
+/* line 34, ../../../sass/mainscreen-white-smoke.scss */
 .fc-header-title h2 {
   font-size: 1.2em;
 }
 
-/* line 47, ../../../sass/mainscreen.scss */
+/* line 40, ../../../sass/mainscreen-white-smoke.scss */
 #list-button {
   display: block;
   text-align: center;
 }
 
-/* line 53, ../../../sass/mainscreen.scss */
+/* line 46, ../../../sass/mainscreen-white-smoke.scss */
 .ticket-main-view-button-sidebar .query-button {
   display: block;
   text-align: center;
 }
 
-/* line 59, ../../../sass/mainscreen.scss */
+/* line 52, ../../../sass/mainscreen-white-smoke.scss */
 #confirm-delete {
   display: none;
 }
 
-/* line 64, ../../../sass/mainscreen.scss */
+/* line 57, ../../../sass/mainscreen-white-smoke.scss */
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
 
-/* line 69, ../../../sass/mainscreen.scss */
+/* line 62, ../../../sass/mainscreen-white-smoke.scss */
 .add-entry-btn {
   margin-top: 0.1em;
   margin-right: 0.075em;
 }
 
-/* line 74, ../../../sass/mainscreen.scss */
+/* line 67, ../../../sass/mainscreen-white-smoke.scss */
 #main-alert {
   background-color: #8f8f8f;
   color: whitesmoke;
 }
 
-/* line 79, ../../../sass/mainscreen.scss */
+/* line 72, ../../../sass/mainscreen-white-smoke.scss */
 #editor {
   position: relative;
   width: 100%;
   height: 30em;
 }
 
-/* line 85, ../../../sass/mainscreen.scss */
+/* line 78, ../../../sass/mainscreen-white-smoke.scss */
 #field-editor {
   position: relative;
   width: 100%;

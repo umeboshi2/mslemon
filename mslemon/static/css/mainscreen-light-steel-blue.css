@@ -1005,13 +1005,13 @@ button.ui-button::-moz-focus-inner {
 .ui-widget-content {
   border-width: 1px;
   border-style: solid;
-  border-color: #767676;
-  background: #9c9c9c;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #9c9c9c), color-stop(100%, #8f8f8f));
-  background-image: -webkit-linear-gradient(#9c9c9c, #8f8f8f);
-  background-image: -moz-linear-gradient(#9c9c9c, #8f8f8f);
-  background-image: -o-linear-gradient(#9c9c9c, #8f8f8f);
-  background-image: linear-gradient(#9c9c9c, #8f8f8f);
+  border-color: #50493b;
+  background: #7c715b;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7c715b), color-stop(100%, #6e6350));
+  background-image: -webkit-linear-gradient(#7c715b, #6e6350);
+  background-image: -moz-linear-gradient(#7c715b, #6e6350);
+  background-image: -o-linear-gradient(#7c715b, #6e6350);
+  background-image: linear-gradient(#7c715b, #6e6350);
   color: #333333;
 }
 /* line 68, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
@@ -1023,13 +1023,13 @@ button.ui-button::-moz-focus-inner {
 .ui-widget-header {
   border-width: 1px;
   border-style: solid;
-  border-color: #767676;
-  background: #9c9c9c;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #9c9c9c), color-stop(100%, #8f8f8f));
-  background-image: -webkit-linear-gradient(#9c9c9c, #8f8f8f);
-  background-image: -moz-linear-gradient(#9c9c9c, #8f8f8f);
-  background-image: -o-linear-gradient(#9c9c9c, #8f8f8f);
-  background-image: linear-gradient(#9c9c9c, #8f8f8f);
+  border-color: #50493b;
+  background: #7c715b;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7c715b), color-stop(100%, #6e6350));
+  background-image: -webkit-linear-gradient(#7c715b, #6e6350);
+  background-image: -moz-linear-gradient(#7c715b, #6e6350);
+  background-image: -o-linear-gradient(#7c715b, #6e6350);
+  background-image: linear-gradient(#7c715b, #6e6350);
   color: #333333;
   font-weight: bold;
 }
@@ -1042,13 +1042,13 @@ button.ui-button::-moz-focus-inner {
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   border-width: 1px;
   border-style: solid;
-  border-color: #8f8f8f;
-  background: darkgrey;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a9a9a9), color-stop(100%, #8f8f8f));
-  background-image: -webkit-linear-gradient(#a9a9a9, #8f8f8f);
-  background-image: -moz-linear-gradient(#a9a9a9, #8f8f8f);
-  background-image: -o-linear-gradient(#a9a9a9, #8f8f8f);
-  background-image: linear-gradient(#a9a9a9, #8f8f8f);
+  border-color: #6e6350;
+  background: #8b7e66;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8b7e66), color-stop(100%, #6e6350));
+  background-image: -webkit-linear-gradient(#8b7e66, #6e6350);
+  background-image: -moz-linear-gradient(#8b7e66, #6e6350);
+  background-image: -o-linear-gradient(#8b7e66, #6e6350);
+  background-image: linear-gradient(#8b7e66, #6e6350);
   font-weight: normal;
   color: #333333;
 }
@@ -1068,25 +1068,25 @@ button.ui-button::-moz-focus-inner {
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover {
   border-width: 1px;
   border-style: solid;
-  border-color: whitesmoke;
-  background: #8f8f8f;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #828282));
-  background-image: -webkit-linear-gradient(#8f8f8f, #828282);
-  background-image: -moz-linear-gradient(#8f8f8f, #828282);
-  background-image: -o-linear-gradient(#8f8f8f, #828282);
-  background-image: linear-gradient(#8f8f8f, #828282);
+  border-color: #cec8bc;
+  background: #6e6350;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #5f5646));
+  background-image: -webkit-linear-gradient(#6e6350, #5f5646);
+  background-image: -moz-linear-gradient(#6e6350, #5f5646);
+  background-image: -o-linear-gradient(#6e6350, #5f5646);
+  background-image: linear-gradient(#6e6350, #5f5646);
   font-weight: normal;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 
 /* line 111, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
 .ui-state-hover a {
-  color: whitesmoke;
+  color: #cec8bc;
   text-decoration: none;
 }
 /* line 114, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
 .ui-state-hover a:hover {
-  color: whitesmoke;
+  color: #cec8bc;
   text-decoration: none;
 }
 
@@ -1120,25 +1120,25 @@ button.ui-button::-moz-focus-inner {
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
   border-width: 1px;
   border-style: solid;
-  border-color: #c2c2c2;
-  background: #8f8f8f;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background-image: -webkit-linear-gradient(#8f8f8f, #767676);
-  background-image: -moz-linear-gradient(#8f8f8f, #767676);
-  background-image: -o-linear-gradient(#8f8f8f, #767676);
-  background-image: linear-gradient(#8f8f8f, #767676);
+  border-color: #a39781;
+  background: #6e6350;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background-image: -webkit-linear-gradient(#6e6350, #50493b);
+  background-image: -moz-linear-gradient(#6e6350, #50493b);
+  background-image: -o-linear-gradient(#6e6350, #50493b);
+  background-image: linear-gradient(#6e6350, #50493b);
   font-weight: normal;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 
 /* line 143, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
 .ui-state-active a {
-  color: whitesmoke;
+  color: #cec8bc;
   text-decoration: none;
 }
 /* line 146, ../../../../../local/gems/gems/compass-ui-0.0.5/stylesheets/compass-ui/jquery-ui/_theme.scss */
 .ui-state-active a:link, .ui-state-active a:visited {
-  color: whitesmoke;
+  color: #cec8bc;
   text-decoration: none;
 }
 
@@ -1151,8 +1151,8 @@ button.ui-button::-moz-focus-inner {
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
   border-width: 1px;
   border-style: solid;
-  border-color: gainsboro;
-  background: #c2c2c2;
+  border-color: #b8af9f;
+  background: #a39781;
   color: #363636;
 }
 
@@ -2565,7 +2565,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: darkgrey;
+  background-color: #8b7e66;
 }
 
 /* line 34, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -2616,7 +2616,7 @@ img {
 .img-thumbnail, .thumbnail {
   padding: 4px;
   line-height: 1.428571429;
-  background-color: darkgrey;
+  background-color: #8b7e66;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -4198,7 +4198,7 @@ th {
 }
 /* line 56, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_tables.scss */
 .table .table {
-  background-color: darkgrey;
+  background-color: #8b7e66;
 }
 
 /* line 70, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_tables.scss */
@@ -4860,20 +4860,20 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 /* line 55, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-default {
   color: #333333;
-  background-color: #c2c2c2;
-  border-color: #8f8f8f;
+  background-color: #a39781;
+  border-color: #6e6350;
 }
 /* line 470, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
   color: #333333;
-  background-color: #aeaeae;
-  border-color: #707070;
+  background-color: #91836a;
+  border-color: #4a4337;
 }
 /* line 475, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .open .btn-default.dropdown-toggle {
   color: #333333;
-  background-color: #aeaeae;
-  border-color: #707070;
+  background-color: #91836a;
+  border-color: #4a4337;
 }
 /* line 481, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-default:active, .btn-default.active {
@@ -4885,27 +4885,27 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 494, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
-  background-color: #c2c2c2;
-  border-color: #8f8f8f;
+  background-color: #a39781;
+  border-color: #6e6350;
 }
 
 /* line 58, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: black;
-  background-color: #c2c2c2;
-  border-color: #8f8f8f;
+  background-color: #a39781;
+  border-color: #6e6350;
 }
 /* line 470, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
   color: black;
-  background-color: #aeaeae;
-  border-color: #707070;
+  background-color: #91836a;
+  border-color: #4a4337;
 }
 /* line 475, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .open .btn-primary.dropdown-toggle {
   color: black;
-  background-color: #aeaeae;
-  border-color: #707070;
+  background-color: #91836a;
+  border-color: #4a4337;
 }
 /* line 481, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-primary:active, .btn-primary.active {
@@ -4917,8 +4917,8 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 /* line 494, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_mixins.scss */
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-  background-color: #c2c2c2;
-  border-color: #8f8f8f;
+  background-color: #a39781;
+  border-color: #6e6350;
 }
 
 /* line 62, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_buttons.scss */
@@ -6801,7 +6801,7 @@ input[type="button"].btn-block {
 /* line 103, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: darkgrey;
+  background-color: #8b7e66;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -6899,7 +6899,7 @@ input[type="button"].btn-block {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: darkgrey;
+    border-bottom-color: #8b7e66;
   }
 }
 
@@ -7272,8 +7272,8 @@ input[type="button"].btn-block {
 
 /* line 360, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default, .main-menu, .status-bar {
-  background-color: darkgrey;
-  border-color: #989898;
+  background-color: #8b7e66;
+  border-color: #786d58;
 }
 /* line 364, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-brand, .main-menu .navbar-brand, .status-bar .navbar-brand {
@@ -7300,7 +7300,7 @@ input[type="button"].btn-block {
 /* line 390, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .active > a, .main-menu .navbar-nav > .active > a, .status-bar .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .main-menu .navbar-nav > .active > a:hover, .status-bar .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus, .main-menu .navbar-nav > .active > a:focus, .status-bar .navbar-nav > .active > a:focus {
   color: #555555;
-  background-color: #989898;
+  background-color: #786d58;
 }
 /* line 398, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .disabled > a, .main-menu .navbar-nav > .disabled > a, .status-bar .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .main-menu .navbar-nav > .disabled > a:hover, .status-bar .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus, .main-menu .navbar-nav > .disabled > a:focus, .status-bar .navbar-nav > .disabled > a:focus {
@@ -7324,7 +7324,7 @@ input[type="button"].btn-block {
 .navbar-default .navbar-form,
 .main-menu .navbar-form,
 .status-bar .navbar-form {
-  border-color: #989898;
+  border-color: #786d58;
 }
 /* line 425, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .dropdown > a:hover .caret, .main-menu .navbar-nav > .dropdown > a:hover .caret, .status-bar .navbar-nav > .dropdown > a:hover .caret,
@@ -7336,7 +7336,7 @@ input[type="button"].btn-block {
 }
 /* line 434, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-default .navbar-nav > .open > a, .main-menu .navbar-nav > .open > a, .status-bar .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .main-menu .navbar-nav > .open > a:hover, .status-bar .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus, .main-menu .navbar-nav > .open > a:focus, .status-bar .navbar-nav > .open > a:focus {
-  background-color: #989898;
+  background-color: #786d58;
   color: #555555;
 }
 /* line 437, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
@@ -7362,7 +7362,7 @@ input[type="button"].btn-block {
   /* line 463, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .main-menu .navbar-nav .open .dropdown-menu > .active > a, .status-bar .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .active > a:hover, .status-bar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .active > a:focus, .status-bar .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #555555;
-    background-color: #989898;
+    background-color: #786d58;
   }
   /* line 471, ../../../../../local/gems/gems/bootstrap-sass-3.0.2.1/vendor/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:hover, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus, .main-menu .navbar-nav .open .dropdown-menu > .disabled > a:focus, .status-bar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
@@ -9884,7 +9884,7 @@ td.visible-print {
 /* Layout */
 /* line 24, ../../../sass/partials/_baselayout.scss */
 html {
-  background: darkgrey;
+  background: #8b7e66;
 }
 
 /* line 28, ../../../sass/partials/_baselayout.scss */
@@ -9896,7 +9896,7 @@ html {
   padding-right: 2em;
   margin-left: auto;
   margin-right: auto;
-  background: darkgrey;
+  background: #8b7e66;
   font-family: "Source Sans Pro",sans;
   color: #212121;
 }
@@ -9921,7 +9921,7 @@ html {
 /* line 36, ../../../sass/partials/_baselayout.scss */
 .page a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 /* line 40, ../../../sass/partials/_baselayout.scss */
 .page a:link {
@@ -9939,12 +9939,12 @@ li.top-bar-button {
 
 /* line 56, ../../../sass/partials/_baselayout.scss */
 .navbar-default .navbar-nav li a, .main-menu .navbar-nav li a, .status-bar .navbar-nav li a {
-  color: gainsboro;
+  color: #b8af9f;
 }
 /* line 59, ../../../sass/partials/_baselayout.scss */
 .navbar-default .navbar-nav li a:hover, .main-menu .navbar-nav li a:hover, .status-bar .navbar-nav li a:hover {
-  color: white;
-  background: #c2c2c2;
+  color: #e3e0da;
+  background: #a39781;
   border-style: solid;
   border-width: 0.1em;
   -webkit-border-radius: 0.5em;
@@ -9958,7 +9958,7 @@ li.top-bar-button {
 .main-menu {
   height: 4em;
   margin-bottom: 0.1em;
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.15em;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
@@ -9968,11 +9968,11 @@ li.top-bar-button {
   font-weight: bold;
   font-family: "Rambla";
   border-style: solid;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 /* line 86, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand {
-  color: gainsboro;
+  color: #b8af9f;
   padding-left: 0.1em;
   padding-right: 0.1em;
   -webkit-border-radius: 0.5em;
@@ -9984,15 +9984,15 @@ li.top-bar-button {
 /* line 94, ../../../sass/partials/_baselayout.scss */
 .main-menu a.navbar-brand:hover {
   border-style: solid;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 /* line 99, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu {
-  background: #8f8f8f;
+  background: #6e6350;
 }
 /* line 101, ../../../sass/partials/_baselayout.scss */
 .main-menu .dropdown-menu li > a:hover {
-  background-image: linear-gradient(to bottom, #c2c2c2 0%, #a9a9a9 100%);
+  background-image: linear-gradient(to bottom, #a39781 0%, #8b7e66 100%);
 }
 
 /* line 107, ../../../sass/partials/_baselayout.scss */
@@ -10003,7 +10003,7 @@ li.top-bar-button {
 
 /* line 112, ../../../sass/partials/_baselayout.scss */
 .status-bar {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.15em;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
@@ -10013,12 +10013,12 @@ li.top-bar-button {
   font-weight: bold;
   font-family: "Rambla";
   border-style: solid;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 /* line 126, ../../../sass/partials/_baselayout.scss */
 .status-bar a.navbar-brand {
-  background-image: linear-gradient(to bottom, #c2c2c2 0%, #767676 100%);
-  color: gainsboro;
+  background-image: linear-gradient(to bottom, #a39781 0%, #50493b 100%);
+  color: #b8af9f;
   padding-left: 0.1em;
   padding-right: 0.1em;
   -webkit-border-radius: 0.5em;
@@ -10029,20 +10029,20 @@ li.top-bar-button {
 }
 /* line 134, ../../../sass/partials/_baselayout.scss */
 .status-bar a.navbar-brand:hover {
-  background-image: linear-gradient(to bottom, #767676 0%, #c2c2c2 100%);
+  background-image: linear-gradient(to bottom, #50493b 0%, #a39781 100%);
 }
 /* line 137, ../../../sass/partials/_baselayout.scss */
 .status-bar .dropdown-menu {
-  background: #8f8f8f;
+  background: #6e6350;
 }
 /* line 139, ../../../sass/partials/_baselayout.scss */
 .status-bar .dropdown-menu li > a:hover {
-  background-image: linear-gradient(to bottom, #c2c2c2 0%, #a9a9a9 100%);
+  background-image: linear-gradient(to bottom, #a39781 0%, #8b7e66 100%);
 }
 
 /* line 147, ../../../sass/partials/_baselayout.scss */
 .content {
-  background: darkgrey;
+  background: #8b7e66;
   margin-bottom: 5em;
 }
 
@@ -10064,7 +10064,7 @@ li.top-bar-button {
   margin-right: 0;
   *margin-left: -1em;
   display: inline;
-  background: darkgrey;
+  background: #8b7e66;
   margin-bottom: 5em;
 }
 
@@ -10078,7 +10078,7 @@ li.top-bar-button {
   float: left;
   font-family: "Nunito";
   font-size: 1.1em;
-  background: #8f8f8f;
+  background: #6e6350;
   text-align: left;
   -moz-border-radius-bottomleft: 0.5em;
   -webkit-border-bottom-left-radius: 0.5em;
@@ -10093,7 +10093,7 @@ li.top-bar-button {
 }
 /* line 176, ../../../sass/partials/_baselayout.scss */
 .sidebarOrig a:hover {
-  background: #c2c2c2;
+  background: #a39781;
   border-radius: 0.5em;
   -moz-border-radius: 0.5em;
 }
@@ -10101,8 +10101,8 @@ li.top-bar-button {
 .sidebarOrig .left-menu-header {
   font-family: "Rambla";
   font-size: 1.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
 }
 /* line 187, ../../../sass/partials/_baselayout.scss */
 .sidebarOrig .left-menu {
@@ -10160,18 +10160,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -10181,24 +10181,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .action-button.disabled, .action-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -10212,33 +10212,33 @@ li.top-bar-button {
 
 /* line 17, ../../../sass/partials/_action-button.scss */
 .action-button-submit {
-  background: #c2c2c2;
+  background: #a39781;
   text-align: center;
 }
 
 /* line 22, ../../../sass/partials/_action-button.scss */
 .action-button-submit:hover {
-  background: gainsboro;
+  background: #b8af9f;
   cursor: pointer;
 }
 
 /* remove these id's later and just use classes */
 /* line 29, ../../../sass/partials/_action-button.scss */
 #action-button-submit {
-  background: #c2c2c2;
+  background: #a39781;
   text-align: center;
 }
 
 /* line 34, ../../../sass/partials/_action-button.scss */
 #action-button-submit:hover {
-  background: gainsboro;
+  background: #b8af9f;
   cursor: pointer;
 }
 
 /* line 5, ../../../sass/partials/_common-page.scss */
 .form-control {
-  background: #c2c2c2;
-  color: #434343;
+  background: #a39781;
+  color: #151310;
   font-size: 0.8em;
   padding: 0.2em;
   margin: 0.2em;
@@ -10264,14 +10264,14 @@ li.top-bar-button {
 
 /* line 30, ../../../sass/partials/_common-page.scss */
 .picker__box {
-  background: #c2c2c2;
-  color: #434343;
+  background: #a39781;
+  color: #151310;
 }
 
 /* line 2, ../../../sass/partials/_list-styles.scss */
 .listview-simple-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -10283,25 +10283,25 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 20, ../../../sass/partials/_list-styles.scss */
 .listview-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 28, ../../../sass/partials/_list-styles.scss */
 .listview-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
@@ -10314,20 +10314,20 @@ li.top-bar-button {
   border-radius: 0.5em;
   font-size: 1.2em;
   text-align: center;
-  background: darkgrey;
+  background: #8b7e66;
   border-style: solid;
   border-width: 0.2em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
 /* line 43, ../../../sass/partials/_list-styles.scss */
 .listview-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -10339,8 +10339,8 @@ li.top-bar-button {
 /*-------- Ticket Management ----------*/
 /* line 5, ../../../sass/partials/_tickets.scss */
 .ticket-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -10357,18 +10357,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -10378,24 +10378,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .ticket-update-ticket.disabled, .ticket-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -10409,11 +10409,11 @@ li.top-bar-button {
 
 /* line 18, ../../../sass/partials/_tickets.scss */
 .ticket-status-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.1em;
   border-bottom-style: dashed;
   border-bottom-width: 0.1em;
-  border-bottom-color: #c2c2c2;
+  border-bottom-color: #a39781;
 }
 
 /* line 27, ../../../sass/partials/_tickets.scss */
@@ -10430,25 +10430,25 @@ li.top-bar-button {
 /*-------- Ticket List ----------*/
 /* line 39, ../../../sass/partials/_tickets.scss */
 .tickets-list-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
 
 /* line 45, ../../../sass/partials/_tickets.scss */
 .tickets-list-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 49, ../../../sass/partials/_tickets.scss */
 .tickets-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -10460,12 +10460,12 @@ li.top-bar-button {
 /*-------- Phone Call Management ----------*/
 /* line 5, ../../../sass/mslemon/_phonecall.scss */
 .phone-main-view-button-bar {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 15, ../../../sass/mslemon/_phonecall.scss */
@@ -10475,20 +10475,20 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 26, ../../../sass/mslemon/_phonecall.scss */
 .ticket-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 32, ../../../sass/mslemon/_phonecall.scss */
@@ -10503,18 +10503,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -10524,24 +10524,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -10556,25 +10556,25 @@ li.top-bar-button {
 /*-------- Phonecall List ----------*/
 /* line 41, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
 
 /* line 47, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 51, ../../../sass/mslemon/_phonecall.scss */
 .phonecalls-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -10587,8 +10587,8 @@ li.top-bar-button {
 /*-------- Ticket Management ----------*/
 /* line 71, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -10605,18 +10605,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -10626,24 +10626,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -10657,7 +10657,7 @@ li.top-bar-button {
 
 /* line 84, ../../../sass/mslemon/_phonecall.scss */
 .phonecall-status-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
 }
 
@@ -10675,12 +10675,12 @@ li.top-bar-button {
 /*-------- Case Management ----------*/
 /* line 5, ../../../sass/mslemon/_cases-main.scss */
 .cases-main-view-button-bar {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 15, ../../../sass/mslemon/_cases-main.scss */
@@ -10690,20 +10690,20 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 26, ../../../sass/mslemon/_cases-main.scss */
 .ticket-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 32, ../../../sass/mslemon/_cases-main.scss */
@@ -10718,18 +10718,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -10739,24 +10739,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-phonecall.disabled, .phonecall-update-phonecall[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -10771,25 +10771,25 @@ li.top-bar-button {
 /*-------- Phonecall List ----------*/
 /* line 41, ../../../sass/mslemon/_cases-main.scss */
 .cases-list-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
 
 /* line 47, ../../../sass/mslemon/_cases-main.scss */
 .cases-list-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 51, ../../../sass/mslemon/_cases-main.scss */
 .cases-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -10802,8 +10802,8 @@ li.top-bar-button {
 /*-------- Ticket Management ----------*/
 /* line 71, ../../../sass/mslemon/_cases-main.scss */
 .phonecall-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -10820,18 +10820,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -10841,24 +10841,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .phonecall-update-ticket.disabled, .phonecall-update-ticket[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -10872,7 +10872,7 @@ li.top-bar-button {
 
 /* line 84, ../../../sass/mslemon/_cases-main.scss */
 .phonecall-status-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
 }
 
@@ -10889,8 +10889,8 @@ li.top-bar-button {
 
 /* line 2, ../../../sass/mslemon/_list-styles.scss */
 .listview-simple-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -10902,35 +10902,35 @@ li.top-bar-button {
   -ms-border-radius: 0.5em;
   -o-border-radius: 0.5em;
   border-radius: 0.5em;
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.25em;
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 20, ../../../sass/mslemon/_list-styles.scss */
 .listview-history {
   border-style: solid;
   border-width: 0.3em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
 }
 
 /* line 28, ../../../sass/mslemon/_list-styles.scss */
 .listview-list {
-  background: #8f8f8f;
+  background: #6e6350;
   padding: 0.3em;
 }
 
 /* line 33, ../../../sass/mslemon/_list-styles.scss */
 .listview-list-entry {
-  background: #8f8f8f;
+  background: #6e6350;
   margin: 0.5em;
   border-style: solid;
   border-width: 0.1em;
-  border-color: #c2c2c2;
+  border-color: #a39781;
   padding: 0.3em;
 }
 
@@ -10942,8 +10942,8 @@ li.top-bar-button {
 /*-------- Image Management ----------*/
 /* line 3, ../../../sass/partials/_imagelist-admin.scss */
 .imagelist-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -10951,7 +10951,7 @@ li.top-bar-button {
 /* line 10, ../../../sass/partials/_imagelist-admin.scss */
 .imagelist-entry {
   text-align: center;
-  background: #8f8f8f;
+  background: #6e6350;
   display: inline-block;
   position: relative;
   margin: 0.5em;
@@ -10966,7 +10966,7 @@ li.top-bar-button {
   border-radius: 0.2em;
   font-family: "Questrial";
   font-size: 0.8em;
-  background: #9c9c9c;
+  background: #7c715b;
   padding: 0.2em;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -10985,18 +10985,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -11006,24 +11006,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .imagelist-delete-image.disabled, .imagelist-delete-image[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -11037,7 +11037,7 @@ li.top-bar-button {
 /* line 32, ../../../sass/partials/_imagelist-admin.scss */
 .imagelist-delete-image a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 
 /* line 38, ../../../sass/partials/_imagelist-admin.scss */
@@ -11052,18 +11052,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -11073,24 +11073,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-image-button.disabled, .delete-image-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -11105,8 +11105,8 @@ li.top-bar-button {
 /*-------- User Management ----------*/
 /* line 3, ../../../sass/partials/_userlist-admin.scss */
 .userlist-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -11114,7 +11114,7 @@ li.top-bar-button {
 /* line 10, ../../../sass/partials/_userlist-admin.scss */
 .userlist-entry {
   text-align: center;
-  background: #8f8f8f;
+  background: #6e6350;
   display: inline-block;
   position: relative;
   margin: 0.5em;
@@ -11129,7 +11129,7 @@ li.top-bar-button {
   border-radius: 0.2em;
   font-family: "Questrial";
   font-size: 0.8em;
-  background: #9c9c9c;
+  background: #7c715b;
   padding: 0.2em;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -11148,18 +11148,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -11169,24 +11169,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .userlist-delete-user.disabled, .userlist-delete-user[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -11200,7 +11200,7 @@ li.top-bar-button {
 /* line 32, ../../../sass/partials/_userlist-admin.scss */
 .userlist-delete-user a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 
 /* line 38, ../../../sass/partials/_userlist-admin.scss */
@@ -11215,18 +11215,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -11236,24 +11236,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-user-button.disabled, .delete-user-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -11268,8 +11268,8 @@ li.top-bar-button {
 /*-------- Group Management ----------*/
 /* line 3, ../../../sass/partials/_grouplist-admin.scss */
 .grouplist-header {
-  background: #8f8f8f;
-  color: whitesmoke;
+  background: #6e6350;
+  color: #cec8bc;
   text-align: center;
   font-size: 1.5em;
 }
@@ -11277,7 +11277,7 @@ li.top-bar-button {
 /* line 10, ../../../sass/partials/_grouplist-admin.scss */
 .grouplist-entry {
   text-align: center;
-  background: #8f8f8f;
+  background: #6e6350;
   display: inline-block;
   position: relative;
   margin: 0.5em;
@@ -11292,7 +11292,7 @@ li.top-bar-button {
   border-radius: 0.2em;
   font-family: "Questrial";
   font-size: 0.8em;
-  background: #9c9c9c;
+  background: #7c715b;
   padding: 0.2em;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -11311,18 +11311,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -11332,24 +11332,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .grouplist-delete-group.disabled, .grouplist-delete-group[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -11363,7 +11363,7 @@ li.top-bar-button {
 /* line 32, ../../../sass/partials/_grouplist-admin.scss */
 .grouplist-delete-group a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #cec8bc;
 }
 
 /* line 38, ../../../sass/partials/_grouplist-admin.scss */
@@ -11378,18 +11378,18 @@ li.top-bar-button {
   -o-border-radius: 5px;
   border-radius: 5px;
   *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF8F8F8F', endColorstr='#FF5C5C5C');
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8f8f8f), color-stop(100%, #767676));
-  background: -webkit-linear-gradient(#8f8f8f, #767676);
-  background: -moz-linear-gradient(#8f8f8f, #767676);
-  background: -o-linear-gradient(#8f8f8f, #767676);
-  background: linear-gradient(#8f8f8f, #767676);
-  -webkit-box-shadow: #b5b5b5 0 1px 0 inset;
-  -moz-box-shadow: #b5b5b5 0 1px 0 inset;
-  box-shadow: #b5b5b5 0 1px 0 inset;
-  border: 1px solid dimgrey;
-  color: white;
-  text-shadow: #4d4d4d 0 -1px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6E6350', endColorstr='#FF332E25');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6e6350), color-stop(100%, #50493b));
+  background: -webkit-linear-gradient(#6e6350, #50493b);
+  background: -moz-linear-gradient(#6e6350, #50493b);
+  background: -o-linear-gradient(#6e6350, #50493b);
+  background: linear-gradient(#6e6350, #50493b);
+  -webkit-box-shadow: #988b73 0 1px 0 inset;
+  -moz-box-shadow: #988b73 0 1px 0 inset;
+  box-shadow: #988b73 0 1px 0 inset;
+  border: 1px solid #413b30;
+  color: #d9d4cb;
+  text-shadow: #211e18 0 -1px 0;
   font-weight: bold;
   font-family: "Droid Sans Bold";
 }
@@ -11399,24 +11399,24 @@ li.top-bar-button {
 }
 /* line 36, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:hover {
-  background-color: dimgrey;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #828282), color-stop(100%, #696969));
-  background: -webkit-linear-gradient(#828282, #696969);
-  background: -moz-linear-gradient(#828282, #696969);
-  background: -o-linear-gradient(#828282, #696969);
-  background: linear-gradient(#828282, #696969);
+  background-color: #413b30;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5f5646), color-stop(100%, #413b30));
+  background: -webkit-linear-gradient(#5f5646, #413b30);
+  background: -moz-linear-gradient(#5f5646, #413b30);
+  background: -o-linear-gradient(#5f5646, #413b30);
+  background: linear-gradient(#5f5646, #413b30);
 }
 /* line 39, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button:active {
-  -webkit-box-shadow: #616161 0 1px 2px inset;
-  -moz-box-shadow: #616161 0 1px 2px inset;
-  box-shadow: #616161 0 1px 2px inset;
+  -webkit-box-shadow: #39332a 0 1px 2px inset;
+  -moz-box-shadow: #39332a 0 1px 2px inset;
+  box-shadow: #39332a 0 1px 2px inset;
 }
 /* line 6, ../../../../../local/gems/gems/sassy-buttons-0.2.6/stylesheets/sassy-buttons/_sassy-button-pseudo-states.sass */
 .delete-group-button.disabled, .delete-group-button[disabled] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  background: #767676;
+  background: #50493b;
   cursor: default;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -11428,53 +11428,53 @@ li.top-bar-button {
   margin: -1px !important;
 }
 
-/* line 41, ../../../sass/mainscreen.scss */
+/* line 34, ../../../sass/mainscreen-light-steel-blue.scss */
 .fc-header-title h2 {
   font-size: 1.2em;
 }
 
-/* line 47, ../../../sass/mainscreen.scss */
+/* line 40, ../../../sass/mainscreen-light-steel-blue.scss */
 #list-button {
   display: block;
   text-align: center;
 }
 
-/* line 53, ../../../sass/mainscreen.scss */
+/* line 46, ../../../sass/mainscreen-light-steel-blue.scss */
 .ticket-main-view-button-sidebar .query-button {
   display: block;
   text-align: center;
 }
 
-/* line 59, ../../../sass/mainscreen.scss */
+/* line 52, ../../../sass/mainscreen-light-steel-blue.scss */
 #confirm-delete {
   display: none;
 }
 
-/* line 64, ../../../sass/mainscreen.scss */
+/* line 57, ../../../sass/mainscreen-light-steel-blue.scss */
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
 
-/* line 69, ../../../sass/mainscreen.scss */
+/* line 62, ../../../sass/mainscreen-light-steel-blue.scss */
 .add-entry-btn {
   margin-top: 0.1em;
   margin-right: 0.075em;
 }
 
-/* line 74, ../../../sass/mainscreen.scss */
+/* line 67, ../../../sass/mainscreen-light-steel-blue.scss */
 #main-alert {
-  background-color: #8f8f8f;
-  color: whitesmoke;
+  background-color: #6e6350;
+  color: #cec8bc;
 }
 
-/* line 79, ../../../sass/mainscreen.scss */
+/* line 72, ../../../sass/mainscreen-light-steel-blue.scss */
 #editor {
   position: relative;
   width: 100%;
   height: 30em;
 }
 
-/* line 85, ../../../sass/mainscreen.scss */
+/* line 78, ../../../sass/mainscreen-light-steel-blue.scss */
 #field-editor {
   position: relative;
   width: 100%;

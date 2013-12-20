@@ -17,7 +17,7 @@
     };
     TrumpetApp.handle_teacup_field = handle_teacup_field;
     TrumpetApp.CurrentLayoutTemplate = null;
-    check_timeout = 300;
+    check_timeout = 200;
     check_for_mainloop_one = function() {
       if (TrumpetApp.main_loop === null) {
         return window.setTimeout(check_for_mainloop_two, check_timeout);
