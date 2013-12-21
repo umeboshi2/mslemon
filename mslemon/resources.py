@@ -80,18 +80,6 @@ planevent_calendar_view = make_resource('planevent-calendar-view.js',
 #phone_calendar = Resource(js, 'phone-calendar.js', depends=[fullcalendar])
 phone_calendar = make_resource('phone-calendar.js', depends=[fullcalendar])
 
-#admin_show_path_content = Resource(js, 'admin-show-path-content.js',
-#                                   depends=[jqueryui])
-admin_show_path_content = make_resource('admin-show-path-content.js',
-                                        depends=[jqueryui])
-admin_list_site_paths = make_resource('list-site-paths.js', depends=[jqueryui])
-admin_list_site_resources = make_resource('admin-list-site-resources.js',
-                                          depends=[jqueryui])
-admin_edit_site_resources = make_resource('admin-edit-site-resources.js',
-                                          depends=[ace.ace, jqueryui])
-
-admin_edit_site_template = make_resource('admin-edit-site-template.js',
-                                         depends=[ace.ace, jqueryui])
 
 create_ui_theme = Resource(library, 'themes/create-ui/css/create-ui.css',
                            depends=[create_js])
@@ -117,52 +105,6 @@ edit_wiki_page = make_resource('edit-wiki-page.js',
 test_backbone = make_resource('test-backbone.js',
                               depends=[backbone])
 
-admin_content_manager_templates = make_resource(
-    'admin-content-manager-templates.js',
-    depends=[common_page])
-
-admin_user_manager_templates = make_resource(
-    'admin-user-manager-templates.js',
-    depends=[common_page])
-
-
-admin_content_manager_deps = [backbone, ace.ace,
-                              ace.worker_css, ace.mode_css,
-                              ace.worker_javascript, ace.mode_javascript,
-                              ace.mode_ejs, ace.theme_cobalt,
-                              common_page,
-                              admin_content_manager_templates,
-                              ]
-
-admin_content_manager = make_resource('admin-content-manager.js',
-                                      depends=admin_content_manager_deps)
-
-admin_user_manager_deps = [backbone_relational,
-                           supermodel,
-                           admin_user_manager_templates]
-
-admin_user_manager = make_resource('admin-user-manager.js',
-                                   depends=admin_user_manager_deps)
-
-
-# webview stuff
-admin_list_layout_fields = make_resource('admin-list-layout-fields.js',
-                                         depends=[common_page])
-admin_list_layout_models = make_resource('admin-list-layout-models.js',
-                                         depends=[common_page])
-
-admin_show_layout_model = make_resource('admin-show-layout-model.js',
-                                        depends=[common_page])
-
-admin_list_webviews = make_resource('admin-list-webviews.js',
-                                    depends=[common_page])
-
-admin_show_webview = make_resource('admin-show-webview.js',
-                                   depends=[common_page])
-
-initialize_webview_layout = make_resource('initialize-webview-layout.js',
-                                   depends=[common_page])
-
 class StaticResources(TrumpetResources):
     main_screen = main_screen
     admin_screen = admin_screen
@@ -181,29 +123,13 @@ class StaticResources(TrumpetResources):
     main_scandoc_view = main_scandoc_view
     
     phone_calendar = phone_calendar
-    admin_list_site_paths = admin_list_site_paths
-    admin_show_path_content = admin_show_path_content
-    admin_list_site_resources = admin_list_site_resources
-    admin_edit_site_resources = admin_edit_site_resources
-    admin_edit_site_template = admin_edit_site_template
-    
     edit_wiki_page = edit_wiki_page
     
     post_to_url = post_to_url
 
     test_backbone = test_backbone
-    admin_content_manager = admin_content_manager
-    admin_user_manager = admin_user_manager
 
 
-    # webview stuff
-    admin_list_layout_fields = admin_list_layout_fields
-    admin_list_layout_models = admin_list_layout_models
-    admin_show_layout_model = admin_show_layout_model
-    admin_list_webviews = admin_list_webviews
-    admin_show_webview = admin_show_webview
-    initialize_webview_layout = initialize_webview_layout
-    
     
 # the acl entries are allow/deny, group, permission
 class RootGroupFactory(object):

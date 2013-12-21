@@ -10,17 +10,7 @@ class WebView(BaseWebView):
         resources.favicon.need()
         resources.fullcalendar.need()
         resources.backbone.need()
-        # ace stuff
-        ace = resources.ace
-        ace.ace.need()
-        ace.keybinding_emacs.need()
-        ace.worker_css.need()
-        ace.worker_javascript.need()
-        ace.worker_coffee.need()
-        ace.mode_css.need()
-        ace.mode_coffee.need()
-        ace.mode_html.need()
-        ace.mode_scss.need()
-        resources.ace_theme_trumpet.need()
+        #resources.require.need()
+        #resources.require.main.need()
         
         

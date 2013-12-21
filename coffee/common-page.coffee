@@ -13,6 +13,51 @@ url_join = () ->
         
     joined = [].slice.call(arguments, 0).join('/')
     return fix_string joined
+
+ace_editor_resource_urls = (prefix) ->
+    resources =
+        ace: url_join prefix, 'ace.js'
+        emacs: url_join prefix, 'keybinding-emacs.js'
+        modes:
+            coffee: url_join prefix, 'mode-coffee.js'
+            css: url_join prefix, 'mode-css.js'
+            html: url_join prefix, 'mode-html.js'
+            scss: url_join prefix, 'mode-scss.js'
+        workers:
+            coffee: url_join prefix, 'worker-coffee.js'
+            css: url_join prefix, 'worker-css.js'
+            javascript: url_join prefix, 'worker-javascript.js'
+    return resources
+    
+
+make_javacript_tag = (url) ->
+    tag = teacup.renderable ->
+        teacup.script type:'text/javascript', src:url
+    return tag()
+    
+    
+load_ace_editor_resources = (mode) ->
+    prefix = '/fanstatic/js.ace'
+    trumpet_theme = '/fanstatic/libs/ace-theme-trumpet.js'
+    
+    rsc = ace_editor_resource_urls prefix
+    #window.rsc = rsc
+    head = $('head')
+    head.append make_javacript_tag rsc.ace
+    head.append make_javacript_tag rsc.emacs
+    head.append make_javacript_tag rsc.workers[mode]
+    head.append make_javacript_tag rsc.modes[mode]
+    head.append make_javacript_tag trumpet_theme
+
+load_fullcalendar_resources = ->
+    prefix = '/fanstatic/js.fullcalendar'
+    main = url_join prefix, 'fullcalendar.js'
+    google = url_join prefix, 'gcal.js'
+    head = $('head')
+    head.prepend make_javacript_tag main
+    head.prepend make_javacript_tag google
+    
+    
     
 
 make_alert_div = (message, priority) ->
@@ -50,6 +95,8 @@ TrumpetApp.make_alert = make_alert
 TrumpetApp.get_template = get_template
 TrumpetApp.functions.url_join = url_join
 TrumpetApp.functions.toggle_ace_keybinding = toggle_ace_keybinding
+TrumpetApp.functions.load_ace_editor_resources = load_ace_editor_resources
+TrumpetApp.functions.load_fullcalendar_resources = load_fullcalendar_resources
 
 
 $(document).ready ->

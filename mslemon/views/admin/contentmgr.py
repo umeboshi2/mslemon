@@ -114,7 +114,7 @@ class MainViewer(AdminViewer):
 
             
     def list_paths(self):
-        template = 'mslemon:templates/admin-list-site-paths.mako'
+        template = 'trumpet:templates/admin-list-site-paths.mako'
         paths = self.content_mgr.ordered_path_list()
         env = dict(paths=paths)
         self.layout.content = self.render(template, env)
@@ -151,7 +151,7 @@ class MainViewer(AdminViewer):
         elif self.context == 'listjs':
             ctype = 'js'
             rlist = self.content_mgr.js_query().all()
-        template = 'mslemon:templates/admin-list-site-resources.mako'
+        template = 'trumpet:templates/admin-list-site-resources.mako'
         env = dict(ctype=ctype, rlist=rlist)
         self.layout.content = self.render(template, env)
         self.layout.resources.admin_list_site_resources.need()
@@ -198,7 +198,7 @@ class MainViewer(AdminViewer):
         csslist = self.content_mgr.get_css_for_path(path_id)
         jslist = self.content_mgr.get_js_for_path(path_id)
         env = dict(csslist=csslist, jslist=jslist, path=path)
-        template = 'mslemon:templates/admin-show-site-path-content.mako'
+        template = 'trumpet:templates/admin-show-site-path-content.mako'
         self.layout.content = self.render(template, env)
 
     def _edit_content_submitted(self, ctype):
@@ -224,7 +224,7 @@ class MainViewer(AdminViewer):
             ace.worker_css.need()
             ace.mode_css.need()
             self.layout.resources.ace_theme_trumpet.need()
-            template = 'mslemon:templates/admin-edit-sitecontent.mako'
+            template = 'trumpet:templates/admin-edit-sitecontent.mako'
             env = dict(content=css.content, name=css.name, ctype='css')
             self.layout.content = self.render(template, env)
         
@@ -239,7 +239,7 @@ class MainViewer(AdminViewer):
             ace.worker_coffee.need()
             ace.mode_coffee.need()
             self.layout.resources.ace_theme_trumpet.need()
-            template = 'mslemon:templates/admin-edit-sitecontent.mako'
+            template = 'trumpet:templates/admin-edit-sitecontent.mako'
             env = dict(content=js.content, name=js.name, ctype='js')
             self.layout.content = self.render(template, env)
         

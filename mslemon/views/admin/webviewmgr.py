@@ -215,7 +215,7 @@ class MainViewer(AdminViewer):
 
             
     def list_paths(self):
-        template = 'mslemon:templates/admin-list-webviews.mako'
+        template = 'trumpet:templates/admin-list-webviews.mako'
         paths = self.mgr.session.query(self.mgr.dbwebview).all()
         env = dict(paths=paths)
         self.layout.content = self.render(template, env)
@@ -252,7 +252,7 @@ class MainViewer(AdminViewer):
         elif self.context == 'listjs':
             ctype = 'js'
             rlist = self.content_mgr.js_query().all()
-        template = 'mslemon:templates/admin-list-webview-resources.mako'
+        template = 'trumpet:templates/admin-list-webview-resources.mako'
         env = dict(ctype=ctype, rlist=rlist)
         self.layout.content = self.render(template, env)
         self.layout.resources.admin_list_site_resources.need()
@@ -301,7 +301,7 @@ class MainViewer(AdminViewer):
         csslist = self.content_mgr.get_css_for_path(path_id)
         jslist = self.content_mgr.get_js_for_path(path_id)
         env = dict(csslist=csslist, jslist=jslist, path=path)
-        template = 'mslemon:templates/admin-show-webview-content.mako'
+        template = 'trumpet:templates/admin-show-webview-content.mako'
         self.layout.content = self.render(template, env)
 
     def _edit_content_submitted(self, ctype):
@@ -328,7 +328,7 @@ class MainViewer(AdminViewer):
             ace.mode_css.need()
             ace.theme_twilight.need()
             ace.theme_cobalt.need()
-            template = 'mslemon:templates/admin-edit-webview-content.mako'
+            template = 'trumpet:templates/admin-edit-webview-content.mako'
             env = dict(content=css.content, name=css.name, ctype='css')
             self.layout.content = self.render(template, env)
         
@@ -344,7 +344,7 @@ class MainViewer(AdminViewer):
             ace.mode_javascript.need()
             ace.theme_twilight.need()
             ace.theme_cobalt.need()
-            template = 'mslemon:templates/admin-edit-webview-content.mako'
+            template = 'trumpet:templates/admin-edit-webview-content.mako'
             env = dict(content=js.content, name=js.name, ctype='js')
             self.layout.content = self.render(template, env)
         
@@ -431,7 +431,7 @@ class MainViewer(AdminViewer):
             self._update_field()
             return
         fields = self.mgr.list_fields()
-        template = 'mslemon:templates/admin-list-layout-fields.mako'
+        template = 'trumpet:templates/admin-list-layout-fields.mako'
         env = dict(fields=fields)
         self.layout.content = self.render(template, env)
         self.layout.resources.admin_list_layout_fields.need()
@@ -456,7 +456,7 @@ class MainViewer(AdminViewer):
             self._update_model()
             return
         models = self.mgr.list_models()
-        template = 'mslemon:templates/admin-list-layout-models.mako'
+        template = 'trumpet:templates/admin-list-layout-models.mako'
         env = dict(models=models)
         self.layout.content = self.render(template, env)
         self.layout.resources.admin_list_layout_fields.need()
@@ -516,7 +516,7 @@ class MainViewer(AdminViewer):
     def view_model(self):
         id = int(self.request.matchdict['id'])
         model = self.mgr.model_query().get(id)
-        template = 'mslemon:templates/admin-show-layout-model.mako'
+        template = 'trumpet:templates/admin-show-layout-model.mako'
         env = dict(model=model)
         self.layout.content = self.render(template, env)
         #self.layout.resources.admin_list_layout_fields.need()
@@ -524,7 +524,7 @@ class MainViewer(AdminViewer):
         
 
     def list_webviews(self):
-        template = 'mslemon:templates/admin-list-webviews.mako'
+        template = 'trumpet:templates/admin-list-webviews.mako'
         webviews = self.mgr.session.query(self.mgr.dbwebview).all()
         env = dict(webviews=webviews)
         self.layout.content = self.render(template, env)
@@ -533,7 +533,7 @@ class MainViewer(AdminViewer):
 
     def show_webview(self):
         id = int(self.request.matchdict['id'])
-        template = 'mslemon:templates/admin-show-webview-content.mako'
+        template = 'trumpet:templates/admin-show-webview-content.mako'
         webview = self.mgr.webview_query().get(id)
 
         schema = CSSSchema()
