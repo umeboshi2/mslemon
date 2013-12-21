@@ -178,7 +178,7 @@ def main(global_config, **settings):
     config.add_route(route_name, '/views/webviews/{id}')
     config.add_view('mslemon.views.webview.WebView',
                     route_name=route_name,
-                    renderer='mslemon:templates/webview-main.mako')
+                    renderer='trumpet:templates/webview-main.mako')
     
                     
                      
