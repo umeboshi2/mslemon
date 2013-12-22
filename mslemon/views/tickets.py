@@ -344,7 +344,6 @@ class BaseTicketViewer(BaseViewer):
         schema['handler'].widget = make_select_widget(choices)
         form = deform.Form(schema, buttons=('submit',))
         self.layout.resources.deform_auto_need(form)
-        self.layout.resources.azure3.need()
         if 'submit' in self.request.POST:
             self._open_ticket_form_submitted(form)
         else:

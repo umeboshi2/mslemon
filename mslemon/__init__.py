@@ -50,27 +50,6 @@ def main(global_config, **settings):
         from mslemon.models.initialize import IntegrityError
         initialize_database(settings)
     
-        #vmgr = PyramidConfigManager(DBSession)
-        #try:
-        #    vmgr.add_route('view_wiki', '/foowiki')
-        #    vmgr.add_route('list_pages', '/foowiki/listpages')
-        #    vmgr.add_route('view_page', '/foowiki/{pagename}')
-        #    vmgr.add_route('add_page', '/foowiki/add_page/{pagename}')
-        #    vmgr.add_route('edit_page', '/foowiki/{pagename}/edit_page')
-        #    
-        #    wikiview = 'mslemon.views.wiki.WikiViewer'
-        #    vmgr.add_view(vmgr.get_route_id('view_wiki'), wikiview)
-        #    vmgr.add_view(vmgr.get_route_id('list_pages'), wikiview)
-        #    vmgr.add_view(vmgr.get_route_id('view_page'), wikiview)
-        #    vmgr.add_view(vmgr.get_route_id('add_page'), wikiview,
-        #                  permission='wiki_add')
-        #    vmgr.add_view(vmgr.get_route_id('edit_page'), wikiview,
-        #                  permission='wiki_edit')
-        #except IntegrityError:
-        #    import transaction
-        #    transaction.abort()
-        #    
-        
         
     # setup authn and authz
     secret = settings['%s.authn.secret' % appname]
@@ -95,8 +74,6 @@ def main(global_config, **settings):
 
     config.include(configure_base_layout)
     config.include(configure_admin)
-    #vmgr = PyramidConfigManager(DBSession)
-    #vmgr.configure(config)
     config.include(configure_consultant)
     config.include(configure_mslemon_cases)
     config.include(configure_mslemon_docs)
@@ -173,12 +150,7 @@ def main(global_config, **settings):
                     permission='user',
                     **view_defaults)
     ##################################
-
-    route_name = 'webviews'
-    config.add_route(route_name, '/views/webviews/{id}')
-    config.add_view('mslemon.views.webview.WebView',
-                    route_name=route_name,
-                    renderer='trumpet:templates/webview-main.mako')
+    config.add_view('mslemon.views.webview.WebView', name='webviews')
     
                     
                      

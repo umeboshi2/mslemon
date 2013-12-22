@@ -189,6 +189,21 @@ class Root(Resource):
         self.add_resource('users2', User)
         self['main2'] = dict()
         #self['admin'] = dict(main='foobar')
+        self['views'] = Resource('webviews', self)
+        #self['views']['webviews'] = Resource('app', self['views'])
+        #v = self['views']
+        #import pdb ; pdb.set_trace()
+        
+        
+        
+
+    #def __getitem__(self, key):
+    #    if key == 'webviews':
+    #        print self.request.subpath
+    #    else:
+    #        return super(Root, self).__getitem__(key)
+    
+        
         
     
     
