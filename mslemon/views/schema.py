@@ -3,35 +3,12 @@ import deform
 
 from trumpet.resources import MemoryTmpStore
 
+from trumpet.views.schema import deferred_choices, make_select_widget
+from trumpet.views.schema import AddUserSchema
+from trumpet.views.schema import NameSelectSchema
+from trumpet.views.schema import UploadFileSchema
+
+
 tmpstore = MemoryTmpStore()
 
-def deferred_choices(node, kw):
-    choices = kw['choices']
-    return deform.widget.SelectWidget(values=choices)
 
-def make_select_widget(choices):
-    return deform.widget.SelectWidget(values=choices)
-
-
-class AddUserSchema(colander.Schema):
-    user = colander.SchemaNode(
-        colander.Integer(),
-        title="User",
-        widget=deferred_choices,
-        description="User to add",
-        )
-    
-    
-class NameSelectSchema(colander.Schema):
-    name = colander.SchemaNode(
-        colander.Integer(),
-        title="Name",
-        widget=deferred_choices,
-        )
-    
-class UploadFileSchema(colander.Schema):
-    upload = colander.SchemaNode(
-        deform.FileData(),
-        widget=deform.widget.FileUploadWidget(tmpstore),
-        )
-    

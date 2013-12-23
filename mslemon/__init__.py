@@ -5,7 +5,6 @@ from pyramid_beaker import session_factory_from_settings
 
 from trumpet.config.base import basetemplate, configure_base_layout
 from trumpet.models.sitecontent import SitePath
-from trumpet.managers.admin.siteviews import PyramidConfigManager
 
 from mslemon.security import make_authn_authz_policies, authenticate
 from mslemon.models.base import DBSession, Base

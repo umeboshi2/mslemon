@@ -49,6 +49,10 @@ load_ace_editor_resources = (mode) ->
     head.append make_javacript_tag rsc.modes[mode]
     head.append make_javacript_tag trumpet_theme
 
+# the calendar doesn't render correctly
+# when these resources are loaded in this
+# manner.
+
 load_fullcalendar_resources = ->
     prefix = '/fanstatic/js.fullcalendar'
     main = url_join prefix, 'fullcalendar.js'
